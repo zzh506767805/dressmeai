@@ -1,77 +1,57 @@
-const fs = require('fs')
-const prettier = require('prettier')
+import { writeFileSync } from 'fs';
+import prettier from 'prettier';
 
 interface StaticPage {
-  url: string
-  changefreq: 'daily' | 'weekly' | 'monthly'
-  priority: number
+  url: string;
+  changefreq: string;
+  priority: number;
 }
 
 async function generate() {
-  const currentDate = new Date().toISOString()
-
-  // 静态页面配置
   const staticPages: StaticPage[] = [
     {
-      url: '',
+      url: '/',
       changefreq: 'daily',
       priority: 1.0,
     },
     {
-      url: 'try-on',
+      url: '/try-on',
       changefreq: 'weekly',
       priority: 0.8,
     },
     {
-      url: 'demo',
+      url: '/demo',
       changefreq: 'weekly',
-      priority: 0.8,
+      priority: 0.7,
     },
-    {
-      url: 'privacy',
-      changefreq: 'monthly',
-      priority: 0.5,
-    },
-    {
-      url: 'terms',
-      changefreq: 'monthly',
-      priority: 0.5,
-    },
-    {
-      url: 'contact',
-      changefreq: 'monthly',
-      priority: 0.5,
-    },
-  ]
+  ];
 
-  const sitemap = `
-    <?xml version="1.0" encoding="UTF-8"?>
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       ${staticPages
         .map(
           (page) => `
             <url>
-              <loc>https://dressmeai.com/${page.url}</loc>
-              <lastmod>${currentDate}</lastmod>
+              <loc>https://dressmeai.com${page.url}</loc>
               <changefreq>${page.changefreq}</changefreq>
               <priority>${page.priority}</priority>
+              <lastmod>${new Date().toISOString()}</lastmod>
             </url>
           `
         )
         .join('')}
-    </urlset>
-  `
+    </urlset>`;
 
   const formatted = await prettier.format(sitemap, {
     parser: 'html',
-  })
+  });
 
-  fs.writeFileSync('public/sitemap.xml', formatted)
-  console.log('Sitemap generated successfully!')
+  writeFileSync('public/sitemap.xml', formatted);
+  console.log('Sitemap generated successfully!');
 }
 
 // 执行生成函数
 generate().catch((err) => {
-  console.error('Error generating sitemap:', err)
-  process.exit(1)
-}) 
+  console.error('Error generating sitemap:', err);
+  process.exit(1);
+}); 
