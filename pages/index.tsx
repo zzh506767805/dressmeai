@@ -124,7 +124,24 @@ export default function Home() {
         <meta name="description" content="Transform your fashion experience with DressMeAI. Try on clothes virtually, get AI-generated outfits, and receive personalized style recommendations. Start your fashion journey today!" />
         <meta name="keywords" content="AI virtual try-on, AI outfit generator, virtual fitting room, fashion AI, style recommendations, personal stylist AI, virtual clothes fitting, fashion technology, AI fashion assistant, digital wardrobe" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        
+        {/* Favicon and App Icons */}
+        <link rel="icon" href="/icons/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
+        
+        {/* PWA Settings */}
+        <meta name="application-name" content="DressMeAI" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="DressMeAI" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="msapplication-TileColor" content="#4F46E5" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="theme-color" content="#4F46E5" />
+
         <link rel="canonical" href="https://dressmeai.com" />
         
         {/* Language and Region */}
@@ -150,13 +167,6 @@ export default function Home() {
         {/* Additional SEO Meta Tags */}
         <meta name="robots" content="index, follow" />
         <meta name="author" content="DressMeAI Team" />
-        <meta name="theme-color" content="#4F46E5" />
-        <meta name="application-name" content="DressMeAI" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="DressMeAI" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="mobile-web-app-capable" content="yes" />
       </Head>
 
       {/* 添加结构化数据 */}

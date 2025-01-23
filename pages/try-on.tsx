@@ -6,8 +6,23 @@ export default function TryOn() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Head>
-        <title>Virtual Try-On Experience | DressMeAI</title>
-        <meta name="description" content="Try on clothes virtually with our advanced AI technology. Experience how different outfits look on you before making a purchase." />
+        <title>Virtual Try-On | DressMeAI</title>
+        <meta name="description" content="Try on clothes virtually with our AI-powered technology. See exactly how outfits will look on you before you buy." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        {/* Favicon and App Icons */}
+        <link rel="icon" href="/icons/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
+        
+        {/* PWA Settings */}
+        <meta name="application-name" content="DressMeAI" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="DressMeAI" />
+        <meta name="theme-color" content="#4F46E5" />
       </Head>
 
       <main>
