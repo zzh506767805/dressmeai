@@ -1,24 +1,13 @@
-import { writeFileSync } from 'fs'
-import { globby } from 'globby'
-import prettier from 'prettier'
+const fs = require('fs')
+const prettier = require('prettier')
 
-type StaticPage = {
+interface StaticPage {
   url: string
   changefreq: 'daily' | 'weekly' | 'monthly'
   priority: number
 }
 
 async function generate() {
-  const prettierConfig = await prettier.resolveConfig('./.prettierrc')
-  const pages = await globby([
-    'pages/**/*.tsx',
-    'pages/**/*.ts',
-    'pages/**/*.js',
-    'pages/**/*.jsx',
-    '!pages/_*.tsx',
-    '!pages/api',
-  ])
-
   const currentDate = new Date().toISOString()
 
   // 静态页面配置
@@ -74,11 +63,10 @@ async function generate() {
   `
 
   const formatted = await prettier.format(sitemap, {
-    ...prettierConfig,
     parser: 'html',
   })
 
-  writeFileSync('public/sitemap.xml', formatted)
+  fs.writeFileSync('public/sitemap.xml', formatted)
   console.log('Sitemap generated successfully!')
 }
 
