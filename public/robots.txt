@@ -1,0 +1,14 @@
+# DressMeAI Robots.txt
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://dressmeai.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 10
+
+# Disallow paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/ 
