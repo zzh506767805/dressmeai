@@ -9,7 +9,10 @@ export const config = {
   },
 };
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+const stripeKey = process.env.STRIPE_SECRET_KEY!;
+console.log('Webhook using Stripe key:', stripeKey.startsWith('sk_live_') ? 'Production Mode' : 'Test Mode');
+
+const stripe = new Stripe(stripeKey, {
   apiVersion: '2025-01-27.acacia',
 });
 
@@ -27,6 +30,8 @@ export default async function handler(
     const buf = await buffer(req);
     const sig = req.headers['stripe-signature']!;
 
+    console.log('Processing webhook with mode:', stripeKey.startsWith('sk_live_') ? 'Production' : 'Test');
+
     // 验证 webhook 签名
     const event = stripe.webhooks.constructEvent(
       buf,
@@ -37,17 +42,19 @@ export default async function handler(
     // 处理支付成功事件
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object as Stripe.Checkout.Session;
-      
-      // TODO: 在这里触发图片生成流程
-      // 1. 获取用户上传的图片
-      // 2. 调用生成 API
-      // 3. 更新数据库中的支付状态
+      console.log('Payment completed in mode:', stripeKey.startsWith('sk_live_') ? 'Production' : 'Test');
       console.log('支付成功，会话ID:', session.id);
     }
 
-    res.status(200).json({ received: true });
+    res.status(200).json({ 
+      received: true,
+      mode: stripeKey.startsWith('sk_live_') ? 'production' : 'test'
+    });
   } catch (error) {
     console.error('Webhook 错误:', error);
-    res.status(400).json({ message: '验证失败' });
+    res.status(400).json({ 
+      message: '验证失败',
+      mode: stripeKey.startsWith('sk_live_') ? 'production' : 'test'
+    });
   }
 } 

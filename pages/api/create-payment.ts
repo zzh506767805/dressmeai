@@ -1,8 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 
-// 初始化 Stripe 客户端
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+// Initialize Stripe client
+const stripeKey = process.env.STRIPE_SECRET_KEY!;
+console.log('Stripe Key:', stripeKey);
+console.log('Key prefix:', stripeKey.substring(0, 7));
+console.log('Using Stripe key:', stripeKey.startsWith('sk_live_') ? 'Production Mode' : 'Test Mode');
+
+const stripe = new Stripe(stripeKey, {
   apiVersion: '2025-01-27.acacia',
 });
 
@@ -15,7 +20,9 @@ export default async function handler(
   }
 
   try {
-    // 创建支付会话
+    console.log('Creating payment session with mode:', stripeKey.startsWith('sk_live_') ? 'Production' : 'Test');
+    
+    // Create payment session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
@@ -23,10 +30,10 @@ export default async function handler(
           price_data: {
             currency: 'usd',
             product_data: {
-              name: '虚拟试衣服务',
-              description: '生成您的虚拟试衣效果图',
+              name: 'Virtual Try-On Service',
+              description: 'Generate your virtual try-on effect images',
             },
-            unit_amount: 100, // 金额为 1 美元 (金额以分为单位)
+            unit_amount: 100, // Amount in cents (1 USD)
           },
           quantity: 1,
         },
@@ -36,10 +43,18 @@ export default async function handler(
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel`,
     });
 
-    // 返回支付会话 URL
-    res.status(200).json({ url: session.url });
+    // Return session URL
+    res.status(200).json({ 
+      url: session.url,
+      mode: stripeKey.startsWith('sk_live_') ? 'production' : 'test',
+      keyPrefix: stripeKey.substring(0, 7)
+    });
   } catch (error) {
-    console.error('创建支付会话失败:', error);
-    res.status(500).json({ message: '创建支付会话失败' });
+    console.error('Payment session creation failed:', error);
+    res.status(500).json({ 
+      message: 'Failed to create payment session',
+      mode: stripeKey.startsWith('sk_live_') ? 'production' : 'test',
+      keyPrefix: stripeKey.substring(0, 7)
+    });
   }
 } 
