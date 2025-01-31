@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import Script from 'next/script'
 import { 
   SparklesIcon, 
@@ -8,6 +8,9 @@ import {
   LightBulbIcon,
   StarIcon 
 } from '@heroicons/react/24/solid'
+import Image from 'next/image'
+import ImageUpload from '../components/ImageUpload'
+import Link from 'next/link'
 
 const features = [
   {
@@ -59,6 +62,11 @@ export default function Home() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<SubscriptionStatus>('idle')
   const [message, setMessage] = useState('')
+  const [modelImage, setModelImage] = useState<File | null>(null)
+  const [clothingImage, setClothingImage] = useState<File | null>(null)
+  const [resultImage, setResultImage] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -90,7 +98,65 @@ export default function Home() {
     }
   }
 
-  // 结构化数据
+  const handleGenerate = useCallback(async () => {
+    if (!modelImage || !clothingImage) {
+      setError('Please upload a model photo and a clothing photo');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      // 创建支付会话
+      const paymentResponse = await fetch('/api/create-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      if (!paymentResponse.ok) {
+        throw new Error('Failed to create payment session');
+      }
+
+      const { url: paymentUrl } = await paymentResponse.json();
+      
+      // 将图片数据存储在 localStorage 中
+      const modelBase64 = await fileToBase64(modelImage);
+      const clothingBase64 = await fileToBase64(clothingImage);
+      
+      // 使用 try-catch 包装 localStorage 操作
+      try {
+        localStorage.setItem('modelImage', modelBase64);
+        localStorage.setItem('clothingImage', clothingBase64);
+      } catch (storageError) {
+        console.error('Storage error:', storageError);
+        // 继续执行，即使存储失败
+      }
+      
+      // 重定向到支付页面
+      window.location.href = paymentUrl;
+
+    } catch (err) {
+      console.error('Payment error:', err);
+      setError(err instanceof Error ? err.message : 'Payment failed, please try again');
+    } finally {
+      setLoading(false);
+    }
+  }, [modelImage, clothingImage]);
+
+  // 将 fileToBase64 移到组件外部
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => resolve(reader.result as string)
+      reader.onerror = error => reject(error)
+    })
+  }
+
+  // 将结构化数据移到组件外部
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -118,7 +184,21 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="container mx-auto px-4">
+      <div className="flex justify-between items-center py-4 mb-8">
+        <h1 className="text-4xl font-bold">AI FASHION</h1>
+        <nav>
+          <Link 
+            href="/history" 
+            className="text-blue-600 hover:text-blue-800 transition-colors"
+          >
+            History
+          </Link>
+        </nav>
+      </div>
+      
+      <h2 className="text-3xl font-bold mb-8 text-center">Virtual Try-On</h2>
+      
       <Head>
         <title>AI Virtual Try-On & Style Generator | DressMeAI - Your Personal Fashion Assistant</title>
         <meta name="description" content="Transform your fashion experience with DressMeAI. Try on clothes virtually, get AI-generated outfits, and receive personalized style recommendations. Start your fashion journey today!" />
@@ -190,13 +270,13 @@ export default function Home() {
               </p>
               <div className="mt-12 flex items-center justify-center gap-x-8">
                 <a
-                  href="/try-on"
+                  href="#ai-fashion"
                   className="rounded-lg bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors duration-200"
                 >
-                  Try Clothes Now
+                  Try On Now
                 </a>
                 <a href="#features" className="text-base font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors duration-200">
-                  See How It Works <span aria-hidden="true">→</span>
+                  Learn More <span aria-hidden="true">→</span>
                 </a>
               </div>
             </div>
@@ -338,6 +418,68 @@ export default function Home() {
                   </p>
                 )}
               </form>
+            </div>
+          </div>
+        </section>
+
+        <section id="ai-fashion" className="py-20 sm:py-28 bg-gray-50">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-3xl text-center">
+              <h2 className="text-lg font-semibold leading-8 tracking-wide text-indigo-600 uppercase">AI Fashion</h2>
+              <h3 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+                Virtual Try-On
+              </h3>
+            </div>
+            <div className="mx-auto mt-16 sm:mt-20">
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
+                  <h4 className="text-xl font-semibold mb-4">Upload Model Photo</h4>
+                  <ImageUpload
+                    label="Upload a full body photo"
+                    onImageSelect={(file) => setModelImage(file)}
+                  />
+                </div>
+                
+                <div>
+                  <h4 className="text-xl font-semibold mb-4">Upload Clothing Photo</h4>
+                  <ImageUpload
+                    label="Upload a clothing photo"
+                    onImageSelect={(file) => setClothingImage(file)}
+                  />
+                </div>
+              </div>
+
+              <div className="text-center">
+                <button
+                  onClick={handleGenerate}
+                  disabled={loading || !modelImage || !clothingImage}
+                  className={`px-6 py-3 rounded-lg text-white font-medium
+                    ${loading || !modelImage || !clothingImage
+                      ? 'bg-gray-400 cursor-not-allowed'
+                      : 'bg-blue-600 hover:bg-blue-700'
+                    }`}
+                >
+                  {loading ? 'Generating...' : 'Generate'}
+                </button>
+
+                {error && (
+                  <p className="mt-4 text-red-500">{error}</p>
+                )}
+              </div>
+
+              {resultImage && (
+                <div className="mt-8">
+                  <h4 className="text-xl font-semibold mb-4">Result</h4>
+                  <div className="relative w-full h-96">
+                    <Image
+                      src={resultImage}
+                      alt="Try-on Result"
+                      fill
+                      className="object-contain rounded-lg"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </section>
