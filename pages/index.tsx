@@ -188,12 +188,20 @@ export default function Home() {
       <div className="flex justify-between items-center py-4 mb-8">
         <h1 className="text-4xl font-bold">AI FASHION</h1>
         <nav>
-          <Link 
-            href="/history" 
-            className="text-blue-600 hover:text-blue-800 transition-colors"
-          >
-            History
-          </Link>
+          <div className="space-x-6">
+            <Link 
+              href="/history" 
+              className="text-blue-600 hover:text-blue-800 transition-colors"
+            >
+              History
+            </Link>
+            <Link 
+              href="/blog" 
+              className="text-blue-600 hover:text-blue-800 transition-colors"
+            >
+              Blog
+            </Link>
+          </div>
         </nav>
       </div>
       
@@ -486,4 +494,4 @@ export default function Home() {
       </main>
     </div>
   )
-} 
+}

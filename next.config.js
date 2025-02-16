@@ -4,10 +4,11 @@ const nextConfig = {
   images: {
     domains: [
       'res.cloudinary.com',
-      'dashscope-result-hz.oss-cn-hangzhou.aliyuncs.com'
+      'dashscope-result-hz.oss-cn-hangzhou.aliyuncs.com',
+      'images.unsplash.com'
     ],
     unoptimized: true
   }
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig
