@@ -1,0 +1,56 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# DressMeAI 项目概览
+
+## 项目简介
+DressMeAI 是一个AI驱动的虚拟试衣平台，用户可以通过先进的AI技术预览服装在自己身上的效果。
+
+## 核心功能
+- 虚拟试衣：精确展示服装穿着效果
+- 图片处理：自动压缩和优化图片
+- 安全支付：可靠的支付处理系统
+- 历史记录：追踪所有试衣结果
+
+## 技术架构
+- **前端**: Next.js + TypeScript + Tailwind CSS
+- **后端**: Next.js API Routes
+- **AI服务**: 阿里云AI虚拟试衣API
+- **图片存储**: Cloudinary
+- **支付处理**: Stripe
+
+## 项目结构
+```
+dressmeai/
+├── [app/](mdc:app)              # App Router目录
+│   ├── [layout.tsx](mdc:app/layout.tsx)     # 全局布局
+│   └── [sitemap.ts](mdc:app/sitemap.ts)     # SEO站点地图
+├── [components/](mdc:components)     # React组件
+│   ├── [ImageUpload.tsx](mdc:components/ImageUpload.tsx) # 图片上传组件
+│   └── shared/                # 共享组件
+├── [pages/](mdc:pages)              # 页面和API
+│   ├── [api/](mdc:pages/api)        # API路由
+│   ├── [index.tsx](mdc:pages/index.tsx)     # 主页面
+│   ├── [try-on.tsx](mdc:pages/try-on.tsx)   # 试衣页面  
+│   ├── [history.tsx](mdc:pages/history.tsx) # 历史记录
+│   └── [success.tsx](mdc:pages/success.tsx) # 支付成功页
+├── [styles/](mdc:styles/')            # 样式文件
+├── [utils/](mdc:utils)              # 工具函数
+└── [public/](mdc:public)            # 静态资源
+```
+
+## 环境配置
+项目需要以下环境变量：
+- `ALIYUN_API_KEY`: 阿里云API密钥
+- `CLOUDINARY_*`: Cloudinary配置
+- `STRIPE_*`: Stripe支付配置
+
+## SEO优化关键词
+- AI clothes changer
+- Virtual try-on  
+- AI fashion assistant
+- Digital wardrobe
+- Virtual fitting room
+

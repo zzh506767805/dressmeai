@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import Script from 'next/script'
 import { 
   SparklesIcon, 
@@ -11,6 +11,7 @@ import {
 import Image from 'next/image'
 import ImageUpload from '../components/ImageUpload'
 import Link from 'next/link'
+import { analytics, trackConversion, setUserProperties } from '../utils/analytics'
 
 const features = [
   {
@@ -68,11 +69,23 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  // 页面加载时记录访问
+  useEffect(() => {
+    analytics.seo.organic_landing('home')
+    setUserProperties({
+      page_type: 'landing_page',
+      user_segment: 'new_visitor'
+    })
+  }, [])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('loading')
     setMessage('')
 
+    // 跟踪邮箱订阅尝试
+    analytics.user.signup()
+    
     try {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
@@ -88,22 +101,37 @@ export default function Home() {
         setEmail('')
         setStatus('success')
         setMessage(data.message)
+        
+        // 跟踪成功的邮箱订阅
+        trackConversion('email_signup')
+        analytics.content.tutorial_view('email_signup_success')
       } else {
         setStatus('error')
         setMessage(data.error || 'Something went wrong')
+        
+        // 跟踪订阅失败
+        analytics.performance.error_occurred('email_signup_failed', 'home')
       }
     } catch (error) {
       setStatus('error')
       setMessage('Failed to subscribe. Please try again.')
+      
+      // 跟踪网络错误
+      analytics.performance.error_occurred('email_signup_network_error', 'home')
     }
   }
 
   const handleGenerate = useCallback(async () => {
     if (!modelImage || !clothingImage) {
       setError('Please upload a model photo and a clothing photo');
+      analytics.performance.error_occurred('missing_images', 'virtual_tryon')
       return;
     }
 
+    // 跟踪虚拟试衣开始
+    analytics.virtualTryOn.start()
+    analytics.virtualTryOn.generate_start()
+    
     setLoading(true);
     setError(null);
 
@@ -132,19 +160,43 @@ export default function Home() {
         localStorage.setItem('clothingImage', clothingBase64);
       } catch (storageError) {
         console.error('Storage error:', storageError);
-        // 继续执行，即使存储失败
+        analytics.performance.error_occurred('localStorage_error', 'virtual_tryon')
       }
+      
+      // 跟踪支付页面跳转
+      trackConversion('payment_redirect')
+      analytics.user.upgrade('virtual_tryon_service')
       
       // 重定向到支付页面
       window.location.href = paymentUrl;
 
     } catch (err) {
       console.error('Payment error:', err);
-      setError(err instanceof Error ? err.message : 'Payment failed, please try again');
+      const errorMessage = err instanceof Error ? err.message : 'Payment failed, please try again'
+      setError(errorMessage);
+      
+      // 跟踪支付错误
+      analytics.virtualTryOn.generate_error(errorMessage)
+      analytics.user.payment_failed(errorMessage)
     } finally {
       setLoading(false);
     }
   }, [modelImage, clothingImage]);
+
+  // 处理图片上传的分析跟踪
+  const handleModelImageUpload = (file: File | null) => {
+    setModelImage(file)
+    if (file) {
+      analytics.virtualTryOn.upload_person()
+    }
+  }
+
+  const handleClothingImageUpload = (file: File | null) => {
+    setClothingImage(file)
+    if (file) {
+      analytics.virtualTryOn.upload_clothes()
+    }
+  }
 
   // 将 fileToBase64 移到组件外部
   const fileToBase64 = (file: File): Promise<string> => {
@@ -192,12 +244,14 @@ export default function Home() {
             <Link 
               href="/history" 
               className="text-blue-600 hover:text-blue-800 transition-colors"
+              onClick={() => analytics.navigation.internal_link_click('/history')}
             >
               History
             </Link>
             <Link 
               href="/blog" 
               className="text-blue-600 hover:text-blue-800 transition-colors"
+              onClick={() => analytics.navigation.internal_link_click('/blog')}
             >
               Blog
             </Link>
@@ -444,7 +498,7 @@ export default function Home() {
                   <h4 className="text-xl font-semibold mb-4">Upload Model Photo</h4>
                   <ImageUpload
                     label="Upload a full body photo"
-                    onImageSelect={(file) => setModelImage(file)}
+                    onImageSelect={handleModelImageUpload}
                   />
                 </div>
                 
@@ -452,7 +506,7 @@ export default function Home() {
                   <h4 className="text-xl font-semibold mb-4">Upload Clothing Photo</h4>
                   <ImageUpload
                     label="Upload a clothing photo"
-                    onImageSelect={(file) => setClothingImage(file)}
+                    onImageSelect={handleClothingImageUpload}
                   />
                 </div>
               </div>
