@@ -394,47 +394,50 @@ export default function BlogPost({ post }: BlogPostProps) {
         <meta name="author" content={post.author} />
         
         {/* Article Schema */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            "headline": post.title,
-            "description": post.description,
-            "image": {
-              "@type": "ImageObject",
-              "url": `https://dressmeai.com/images/blog/${post.slug}-og.jpg`,
-              "width": 1200,
-              "height": 630
-            },
-            "url": `https://dressmeai.com/blog/${post.slug}`,
-            "datePublished": `${post.publishDate}T09:00:00+00:00`,
-            "dateModified": `${post.publishDate}T09:00:00+00:00`,
-            "author": {
-              "@type": "Organization",
-              "name": post.author,
-              "url": "https://dressmeai.com"
-            },
-            "publisher": {
-              "@type": "Organization",
-              "name": "DressMeAI",
-              "url": "https://dressmeai.com",
-              "logo": {
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              "headline": post.title,
+              "description": post.description,
+              "image": {
                 "@type": "ImageObject",
-                "url": "https://dressmeai.com/logo.png",
-                "width": 600,
-                "height": 60
-              }
-            },
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": `https://dressmeai.com/blog/${post.slug}`
-            },
-            "keywords": post.keywords.split(', '),
-            "articleSection": "Technology",
-            "wordCount": post.content.split(' ').length,
-            "inLanguage": "en-US"
-          })}
-        </script>
+                "url": `https://dressmeai.com/images/blog/${post.slug}-og.jpg`,
+                "width": 1200,
+                "height": 630
+              },
+              "url": `https://dressmeai.com/blog/${post.slug}`,
+              "datePublished": `${post.publishDate}T09:00:00+00:00`,
+              "dateModified": `${post.publishDate}T09:00:00+00:00`,
+              "author": {
+                "@type": "Organization",
+                "name": post.author,
+                "url": "https://dressmeai.com"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "DressMeAI",
+                "url": "https://dressmeai.com",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://dressmeai.com/logo.png",
+                  "width": 600,
+                  "height": 60
+                }
+              },
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `https://dressmeai.com/blog/${post.slug}`
+              },
+              "keywords": post.keywords.split(', '),
+              "articleSection": "Technology",
+              "wordCount": post.content.split(' ').length,
+              "inLanguage": "en-US"
+            })
+          }}
+        />
       </Head>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">

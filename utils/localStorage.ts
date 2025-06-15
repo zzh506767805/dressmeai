@@ -3,15 +3,30 @@
 export const safeGetItem = (key: string): string | null => {
   try {
     if (typeof window === 'undefined') return null
-    const value = localStorage.getItem(key)
-    if (value === 'undefined' || value === 'null' || value === '') {
+    let value = localStorage.getItem(key)
+    
+    // 如果localStorage中没有数据，尝试从sessionStorage获取
+    if (!value || value === 'undefined' || value === 'null' || value === '') {
+      value = sessionStorage.getItem(key)
+      if (value && value !== 'undefined' && value !== 'null' && value !== '') {
+        // 如果从sessionStorage找到数据，恢复到localStorage
+        localStorage.setItem(key, value)
+        return value
+      }
       localStorage.removeItem(key)
+      sessionStorage.removeItem(key)
       return null
     }
     return value
   } catch (error) {
     console.error(`Error getting localStorage item ${key}:`, error)
-    return null
+    // 尝试从sessionStorage获取
+    try {
+      return sessionStorage.getItem(key)
+    } catch (sessionError) {
+      console.error(`Error getting sessionStorage item ${key}:`, sessionError)
+      return null
+    }
   }
 }
 
@@ -19,6 +34,8 @@ export const safeSetItem = (key: string, value: string): boolean => {
   try {
     if (typeof window === 'undefined') return false
     localStorage.setItem(key, value)
+    // 同时保存到sessionStorage作为备份
+    sessionStorage.setItem(key, value)
     return true
   } catch (error) {
     console.error(`Error setting localStorage item ${key}:`, error)

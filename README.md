@@ -41,12 +41,26 @@ npm run dev
 
 ## Environment Variables
 
-Create a `.env.local` file with the following variables:
+Create a `.env.local` file in the root directory with the following variables:
 
-- `ALIYUN_API_KEY`: Your Aliyun API key
-- `CLOUDINARY_*`: Cloudinary configuration
-- `STRIPE_*`: Stripe API keys
-- See `.env.example` for all required variables
+```bash
+# Aliyun AI Service
+ALIYUN_API_KEY=your_aliyun_api_key
+
+# Cloudinary Image Storage
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# Stripe Payment (Production Mode)
+STRIPE_SECRET_KEY=sk_live_your_live_secret_key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_your_live_publishable_key
+
+# Base URL (Production)
+NEXT_PUBLIC_BASE_URL=https://dressmeai.com
+```
+
+**Note**: The project is currently configured to use Stripe in **production mode**. Real payments will be processed and charged.
 
 ## Deployment
 

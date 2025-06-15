@@ -110,12 +110,26 @@ export default function Home() {
       const clothingBase64 = await fileToBase64(clothingImage);
       
       // 使用安全的 localStorage 操作
+      console.log('Saving images to storage...');
+      console.log('Model image size:', modelBase64.length, 'chars');
+      console.log('Clothing image size:', clothingBase64.length, 'chars');
+      
       const modelSaved = safeSetItem('modelImage', modelBase64);
       const clothingSaved = safeSetItem('clothingImage', clothingBase64);
       
+      console.log('Save results - Model:', modelSaved, 'Clothing:', clothingSaved);
+      
       if (!modelSaved || !clothingSaved) {
+        console.error('Failed to save images to localStorage');
         analytics.performance.error_occurred('localStorage_error', 'virtual_tryon')
+      } else {
+        console.log('Images successfully saved to storage');
       }
+      
+      // 保存时间戳，用于验证数据新鲜度
+      const timestamp = Date.now().toString();
+      safeSetItem('imageUploadTimestamp', timestamp);
+      console.log('Saved timestamp:', timestamp);
       
       // 跟踪支付页面跳转
       trackConversion('payment_redirect')

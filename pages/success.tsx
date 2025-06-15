@@ -64,15 +64,41 @@ export default function Success() {
 
         // 从 localStorage 获取图片数据
         setStep('Retrieving image data...');
+        console.log('Checking for image data in storage...');
+        
         const modelImage = safeGetItem('modelImage');
         const clothingImage = safeGetItem('clothingImage');
+        
+        console.log('Model image found:', !!modelImage, modelImage ? `${modelImage.length} chars` : 'null');
+        console.log('Clothing image found:', !!clothingImage, clothingImage ? `${clothingImage.length} chars` : 'null');
+        
+        // 检查时间戳
+        const timestamp = safeGetItem('imageUploadTimestamp');
+        console.log('Image upload timestamp:', timestamp);
+        if (timestamp) {
+          const uploadTime = new Date(parseInt(timestamp));
+          const now = new Date();
+          const timeDiff = now.getTime() - uploadTime.getTime();
+          console.log('Time since upload:', Math.round(timeDiff / 1000), 'seconds');
+        }
+        
+        // 检查localStorage和sessionStorage的状态
+        if (typeof window !== 'undefined') {
+          console.log('localStorage keys:', Object.keys(localStorage));
+          console.log('sessionStorage keys:', Object.keys(sessionStorage));
+        }
 
         if (!modelImage || !clothingImage) {
-          throw new Error('Image data not found, please upload again');
+          const errorMsg = `Image data not found. Model: ${!!modelImage}, Clothing: ${!!clothingImage}. Please upload again.`;
+          console.error(errorMsg);
+          throw new Error(errorMsg);
         }
 
         // 上传模特图片
         setStep('Uploading model image...');
+        console.log('Starting model image upload...');
+        console.log('Model image data length:', modelImage.length);
+        
         const modelResponse = await fetch('/api/upload', {
           method: 'POST',
           headers: {
@@ -83,14 +109,22 @@ export default function Success() {
           }),
         });
 
+        console.log('Model upload response status:', modelResponse.status);
+        
         if (!modelResponse.ok) {
-          throw new Error('Failed to upload model image');
+          const errorText = await modelResponse.text();
+          console.error('Model upload failed:', errorText);
+          throw new Error(`Failed to upload model image: ${errorText}`);
         }
 
         const modelData = await modelResponse.json();
+        console.log('Model upload successful:', modelData.url);
 
         // 上传服装图片
         setStep('Uploading clothing image...');
+        console.log('Starting clothing image upload...');
+        console.log('Clothing image data length:', clothingImage.length);
+        
         const clothingResponse = await fetch('/api/upload', {
           method: 'POST',
           headers: {
@@ -101,11 +135,16 @@ export default function Success() {
           }),
         });
 
+        console.log('Clothing upload response status:', clothingResponse.status);
+        
         if (!clothingResponse.ok) {
-          throw new Error('Failed to upload clothing image');
+          const errorText = await clothingResponse.text();
+          console.error('Clothing upload failed:', errorText);
+          throw new Error(`Failed to upload clothing image: ${errorText}`);
         }
 
         const clothingData = await clothingResponse.json();
+        console.log('Clothing upload successful:', clothingData.url);
 
         // 开始生成过程
         setStep('Initializing virtual try-on...');
