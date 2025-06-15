@@ -213,12 +213,12 @@ export default function Home() {
         </nav>
       </div>
       
-      <h2 className="text-3xl font-bold mb-8 text-center">Virtual Try-On</h2>
+      <h2 className="text-3xl font-bold mb-8 text-center">Virtual Try-On Technology - See How Clothes Look on Your Body</h2>
       
       <Head>
-        <title>AI Virtual Try-On & Style Generator | DressMeAI - Your Personal Fashion Assistant</title>
-        <meta name="description" content="Transform your fashion experience with DressMeAI. Try on clothes virtually, get AI-generated outfits, and receive personalized style recommendations. Start your fashion journey today!" />
-        <meta name="keywords" content="AI virtual try-on, AI outfit generator, virtual fitting room, fashion AI, style recommendations, personal stylist AI, virtual clothes fitting, fashion technology, AI fashion assistant, digital wardrobe" />
+        <title>Virtual Try-On AI Fashion App | DressMeAI - See How Clothes Look on You</title>
+        <meta name="description" content="Try on clothes virtually with DressMeAI's AI-powered fashion app. See how outfits look on you instantly, get personalized style recommendations, and shop with confidence. Virtual fitting room - start now!" />
+        <meta name="keywords" content="virtual try-on, try on clothes online, AI fashion app, virtual fitting room, outfit generator, fashion styling app, virtual wardrobe, AI style assistant, clothes simulator, fashion technology, virtual clothes fitting, AI virtual try-on, personal stylist AI, digital wardrobe" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
         {/* Favicon and App Icons */}
@@ -247,8 +247,8 @@ export default function Home() {
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="DressMeAI" />
-        <meta property="og:title" content="DressMeAI - AI Virtual Try-On & Style Generator" />
-        <meta property="og:description" content="Experience the future of fashion with AI virtual try-on and personalized style recommendations." />
+        <meta property="og:title" content="Virtual Try-On AI Fashion App | DressMeAI - See How Clothes Look on You" />
+        <meta property="og:description" content="Try on clothes virtually with DressMeAI's AI-powered fashion app. See how outfits look on you instantly, get personalized style recommendations, and shop with confidence." />
         <meta property="og:image" content="https://dressmeai.com/images/og-banner.jpg" />
         <meta property="og:url" content="https://dressmeai.com" />
         
@@ -256,8 +256,8 @@ export default function Home() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@dressmeai" />
         <meta name="twitter:creator" content="@dressmeai" />
-        <meta name="twitter:title" content="DressMeAI - AI Virtual Try-On & Style Generator" />
-        <meta name="twitter:description" content="Experience the future of fashion with AI virtual try-on and personalized style recommendations." />
+        <meta name="twitter:title" content="Virtual Try-On AI Fashion App | DressMeAI - See How Clothes Look on You" />
+        <meta name="twitter:description" content="Try on clothes virtually with DressMeAI's AI-powered fashion app. See how outfits look on you instantly, get personalized style recommendations, and shop with confidence." />
         <meta name="twitter:image" content="https://dressmeai.com/images/og-banner.jpg" />
         
         {/* Additional SEO Meta Tags */}
@@ -303,9 +303,9 @@ export default function Home() {
         <section id="features" className="py-20 sm:py-28 bg-white">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-lg font-semibold leading-8 tracking-wide text-indigo-600 uppercase">Core Features</h2>
+              <h2 className="text-lg font-semibold leading-8 tracking-wide text-indigo-600 uppercase">AI Fashion Features That Transform Your Shopping Experience</h2>
               <h3 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                Your Complete AI Fashion Assistant
+                Your Complete AI Fashion Assistant - Try On, Style & Shop Smarter
               </h3>
               <p className="mt-6 text-xl leading-relaxed text-gray-600">
                 From virtual try-ons to personalized style recommendations, our AI technology revolutionizes how you discover and create your perfect look.
@@ -333,9 +333,9 @@ export default function Home() {
         <section id="how-it-works" className="py-20 sm:py-28 bg-gray-50">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-lg font-semibold leading-8 tracking-wide text-indigo-600 uppercase">How It Works</h2>
+              <h2 className="text-lg font-semibold leading-8 tracking-wide text-indigo-600 uppercase">How Our AI Virtual Fitting Room Works in 3 Simple Steps</h2>
               <h3 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                Start Your AI Fashion Journey
+                Begin Your AI Fashion Journey - Upload Photo & Try On Instantly
               </h3>
             </div>
             <div className="mx-auto mt-16 sm:mt-20">
@@ -370,9 +370,9 @@ export default function Home() {
         <section id="testimonials" className="py-20 sm:py-28 bg-white">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-lg font-semibold leading-8 tracking-wide text-indigo-600 uppercase">Testimonials</h2>
+              <h2 className="text-lg font-semibold leading-8 tracking-wide text-indigo-600 uppercase">What Fashion Lovers Say About DressMeAI Virtual Try-On</h2>
               <h3 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                What Our Users Say
+                Real Users Share Their Virtual Try-On Success Stories
               </h3>
             </div>
             <div className="mx-auto mt-16 sm:mt-20 grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -399,7 +399,7 @@ export default function Home() {
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-                Ready to Try AI Fashion?
+                Start Your Virtual Try-On Experience Today
               </h2>
               <p className="mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-indigo-100">
                 Experience the future of fashion with our AI-powered virtual try-on technology.
@@ -423,9 +423,9 @@ export default function Home() {
         <section id="ai-fashion" className="py-20 sm:py-28 bg-gray-50">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-lg font-semibold leading-8 tracking-wide text-indigo-600 uppercase">AI Fashion</h2>
+              <h2 className="text-lg font-semibold leading-8 tracking-wide text-indigo-600 uppercase">Experience AI-Powered Fashion Styling Now</h2>
               <h3 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                Virtual Try-On
+                Virtual Try-On Demo - See the Magic Yourself
               </h3>
             </div>
             <div className="mx-auto mt-16 sm:mt-20">

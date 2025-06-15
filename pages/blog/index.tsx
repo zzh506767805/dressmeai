@@ -1,191 +1,225 @@
-import { GetStaticProps } from 'next';
-import Link from 'next/link';
-import Head from 'next/head';
+import Head from 'next/head'
+import Link from 'next/link'
+import { GetStaticProps } from 'next'
 
 interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
+  slug: string
+  title: string
+  description: string
+  keywords: string
+  publishDate: string
+  readTime: string
+  excerpt: string
 }
 
-interface BlogPageProps {
-  posts: BlogPost[];
+interface BlogIndexProps {
+  posts: BlogPost[]
 }
 
-// 模拟博客文章数据
 const blogPosts: BlogPost[] = [
   {
-    slug: 'accessory-styling',
-    title: 'The Art of Accessorizing: Complete Guide to Fashion Accessories',
-    excerpt: 'Learn how to elevate any outfit with the right accessories. From jewelry to bags, discover how these finishing touches can transform your look.',
-    category: 'Style Guides',
-    date: '2024-02-17'
+    slug: 'ai-virtual-try-on-technology-revolutionizing-fashion',
+    title: 'AI Virtual Try-On Technology: Revolutionizing Online Fashion Shopping',
+    description: 'Discover how AI virtual try-on technology is transforming online fashion shopping. Try clothes virtually before buying with cutting-edge AI software.',
+    keywords: 'AI virtual try-on, virtual try-on technology, online fashion shopping',
+    publishDate: '2025-06-15',
+    readTime: '8 min read',
+    excerpt: 'The fashion industry is experiencing a digital revolution, and AI virtual try-on technology is at the forefront of this transformation. Learn how this cutting-edge technology is changing the way we shop for clothes online.'
   },
   {
-    slug: 'color-coordination',
-    title: 'Master the Art of Color Coordination in Fashion',
-    excerpt: 'Discover how to use color theory to create harmonious and eye-catching outfits that complement your personal style.',
-    category: 'Style Guides',
-    date: '2024-02-16'
+    slug: 'best-ai-clothing-try-on-apps-software-2025',
+    title: 'Best AI Clothing Try-On Apps and Software in 2025',
+    description: 'Compare the top AI clothing try-on apps and software in 2025. Find the perfect virtual fitting room solution for your fashion business.',
+    keywords: 'AI clothing try-on app, virtual fitting room software, best try-on apps',
+    publishDate: '2025-06-12',
+    readTime: '10 min read',
+    excerpt: 'The virtual fitting room market has exploded with innovative AI-powered solutions. Discover the leading platforms and apps that are making online clothes shopping more accurate and enjoyable.'
   },
   {
-    slug: 'body-type-dressing',
-    title: 'Dress for Your Body Type: A Comprehensive Guide',
-    excerpt: 'Learn how to identify your body type and choose clothing that enhances your natural features.',
-    category: 'Style Guides',
-    date: '2024-02-15'
+    slug: 'virtual-try-on-technology-reduces-return-rates',
+    title: 'How Virtual Try-On Technology Reduces Return Rates in Fashion E-commerce',
+    description: 'Learn how virtual try-on technology significantly reduces return rates in fashion e-commerce, saving costs and improving customer satisfaction.',
+    keywords: 'reduce return rates, virtual try-on ROI, fashion e-commerce solutions',
+    publishDate: '2025-06-10',
+    readTime: '7 min read',
+    excerpt: 'Fashion e-commerce faces a persistent challenge: high return rates. Discover how virtual try-on technology offers a powerful solution that addresses these challenges while delivering measurable business benefits.'
   },
   {
-    slug: 'fashion-trends-2024',
-    title: 'Fashion Trends 2024: What\'s Hot and How to Wear It',
-    excerpt: 'Explore the most influential trends of 2024 and learn how to incorporate them into your wardrobe.',
-    category: 'Trends',
-    date: '2024-02-14'
-  },
-  {
-    slug: 'capsule-wardrobe',
-    title: 'Creating a Capsule Wardrobe: The Ultimate Guide',
-    excerpt: 'Discover the art of building a versatile, minimal wardrobe that maximizes your style options while minimizing clutter.',
-    category: 'Style Guides',
-    date: '2024-02-13'
-  },
-  {
-    slug: 'casual-style-guide',
-    title: 'The Ultimate Guide to Casual Style: Effortless Fashion Tips',
-    excerpt: 'Master the art of casual dressing with our comprehensive guide to creating stylish, comfortable outfits for any occasion.',
-    category: 'Style Guides',
-    date: '2024-02-25'
-  },
-  {
-    slug: 'business-attire-essentials',
-    title: 'Business Attire Essentials: Professional Wardrobe Must-Haves',
-    excerpt: 'Discover the key pieces every professional needs in their wardrobe to create polished, office-appropriate looks.',
-    category: 'Professional Style',
-    date: '2024-02-24'
-  },
-  {
-    slug: 'street-fashion-trends',
-    title: 'Street Fashion Trends: Urban Style Guide for 2024',
-    excerpt: 'Stay ahead of the curve with our guide to the latest street fashion trends and how to incorporate them into your wardrobe.',
-    category: 'Trends',
-    date: '2024-02-23'
-  },
-  {
-    slug: 'minimalist-wardrobe',
-    title: 'Building a Minimalist Wardrobe: Less is More',
-    excerpt: 'Learn how to create a versatile wardrobe with fewer pieces while maximizing your style options.',
-    category: 'Style Guides',
-    date: '2024-02-22'
-  },
-  {
-    slug: 'sustainable-fashion',
-    title: 'Sustainable Fashion: Your Guide to Eco-Friendly Style',
-    excerpt: 'Explore how to make environmentally conscious fashion choices without compromising on style.',
-    category: 'Sustainability',
-    date: '2024-02-21'
-  },
-  {
-    slug: 'office-dress-code',
-    title: 'Office Dress Code: A Complete Guide to Workplace Attire',
-    excerpt: 'Navigating workplace dress codes can be challenging. This comprehensive guide breaks down different dress code categories and helps you dress appropriately.',
-    category: 'Professional Style',
-    date: '2024-02-20'
-  },
-  {
-    slug: 'seasonal-fashion-guide',
-    title: 'Seasonal Fashion Guide: Dressing for Every Season',
-    excerpt: 'Learn how to adapt your wardrobe for each season while maintaining your personal style and comfort. This guide covers essential pieces and layering techniques.',
-    category: 'Style Guides',
-    date: '2024-02-19'
+    slug: 'ai-fashion-technology-future-online-shopping',
+    title: 'AI Fashion Technology: The Future of Online Clothing Shopping',
+    description: 'Explore how AI fashion technology is shaping the future of online clothing shopping with virtual try-ons, personalized recommendations, and smart retail solutions.',
+    keywords: 'AI fashion technology, future of online shopping, smart fashion retail',
+    publishDate: '2025-06-08',
+    readTime: '12 min read',
+    excerpt: 'The intersection of artificial intelligence and fashion retail is creating unprecedented opportunities. Explore how AI is redefining the entire fashion industry and what the future holds.'
   }
-];
+]
+
+export default function BlogIndex({ posts }: BlogIndexProps) {
+  return (
+    <>
+      <Head>
+        <title>AI Virtual Try-On Blog | Fashion Technology Insights | DressMeAI</title>
+        <meta name="description" content="Explore the latest insights on AI virtual try-on technology, fashion e-commerce trends, and digital shopping innovations. Expert articles on virtual fitting rooms and fashion tech." />
+        <meta name="keywords" content="AI virtual try-on blog, fashion technology articles, virtual fitting room insights, fashion e-commerce trends, AI clothing technology, virtual try-on news" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <link rel="canonical" href="https://dressmeai.com/blog" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="DressMeAI" />
+        <meta property="og:title" content="AI Virtual Try-On Blog | Fashion Technology Insights | DressMeAI" />
+        <meta property="og:description" content="Explore the latest insights on AI virtual try-on technology, fashion e-commerce trends, and digital shopping innovations." />
+        <meta property="og:image" content="https://dressmeai.com/images/blog-og-banner.jpg" />
+        <meta property="og:url" content="https://dressmeai.com/blog" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@dressmeai" />
+        <meta name="twitter:title" content="AI Virtual Try-On Blog | Fashion Technology Insights | DressMeAI" />
+        <meta name="twitter:description" content="Explore the latest insights on AI virtual try-on technology, fashion e-commerce trends, and digital shopping innovations." />
+        <meta name="twitter:image" content="https://dressmeai.com/images/blog-og-banner.jpg" />
+        
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="DressMeAI Team" />
+        
+        {/* Blog Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "DressMeAI Blog",
+            "description": "Expert insights on AI virtual try-on technology and fashion e-commerce innovations",
+            "url": "https://dressmeai.com/blog",
+            "publisher": {
+              "@type": "Organization",
+              "name": "DressMeAI",
+              "url": "https://dressmeai.com",
+              "logo": "https://dressmeai.com/logo.png"
+            },
+            "blogPost": posts.map(post => ({
+              "@type": "BlogPosting",
+              "headline": post.title,
+              "description": post.excerpt,
+              "url": `https://dressmeai.com/blog/${post.slug}`,
+              "datePublished": post.publishDate,
+              "author": {
+                "@type": "Organization",
+                "name": "DressMeAI Team"
+              }
+            }))
+          })}
+        </script>
+      </Head>
+
+      <div className="container mx-auto px-4 py-8">
+        {/* Navigation */}
+        <div className="flex justify-between items-center py-4 mb-8">
+          <Link href="/" className="text-4xl font-bold text-indigo-600">
+            AI FASHION
+          </Link>
+          <nav>
+            <div className="space-x-6">
+              <Link href="/" className="text-blue-600 hover:text-blue-800 transition-colors">
+                Home
+              </Link>
+              <Link href="/history" className="text-blue-600 hover:text-blue-800 transition-colors">
+                History
+              </Link>
+              <Link href="/blog" className="text-blue-600 hover:text-blue-800 transition-colors font-semibold">
+                Blog
+              </Link>
+            </div>
+          </nav>
+        </div>
+
+        {/* Blog Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-bold text-gray-900 mb-6">
+            AI Virtual Try-On Blog
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Discover the latest insights on AI virtual try-on technology, fashion e-commerce trends, 
+            and digital shopping innovations that are transforming the fashion industry.
+          </p>
+        </div>
+
+        {/* Blog Posts Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {posts.map((post) => (
+            <article key={post.slug} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="p-8">
+                <div className="flex items-center text-sm text-gray-500 mb-4">
+                  <time dateTime={post.publishDate}>
+                    {new Date(post.publishDate).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                  <span className="mx-2">•</span>
+                  <span>{post.readTime}</span>
+                </div>
+                
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 hover:text-indigo-600 transition-colors">
+                  <Link href={`/blog/${post.slug}`}>
+                    {post.title}
+                  </Link>
+                </h2>
+                
+                <p className="text-gray-600 leading-relaxed mb-6">
+                  {post.excerpt}
+                </p>
+                
+                <div className="flex justify-between items-center">
+                  <Link 
+                    href={`/blog/${post.slug}`}
+                    className="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors"
+                  >
+                    Read More
+                    <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </Link>
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {post.keywords.split(', ').slice(0, 2).map((keyword) => (
+                      <span key={keyword} className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* CTA Section */}
+        <div className="mt-16 text-center bg-indigo-600 rounded-2xl p-12">
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Ready to Experience AI Virtual Try-On?
+          </h2>
+          <p className="text-xl text-indigo-100 mb-8 max-w-2xl mx-auto">
+            See how our cutting-edge AI technology can transform your online shopping experience.
+          </p>
+          <Link 
+            href="/#ai-fashion"
+            className="inline-block bg-white text-indigo-600 font-semibold px-8 py-4 rounded-lg hover:bg-indigo-50 transition-colors"
+          >
+            Try Virtual Try-On Now
+          </Link>
+        </div>
+      </div>
+    </>
+  )
+}
 
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       posts: blogPosts
     }
-  };
-};
-
-export default function BlogIndex({ posts }: BlogPageProps) {
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <Head>
-        <title>Fashion Blog | Style Guides & Tips | DressMeAI</title>
-        <meta
-          name="description"
-          content="Explore fashion tips, style guides, and trend insights on the DressMeAI blog. Learn about casual wear, business attire, street fashion, and more."
-        />
-        <meta
-          name="keywords"
-          content="fashion blog, style guide, fashion tips, casual style, business attire, street fashion, sustainable fashion"
-        />
-        <link rel="canonical" href="https://dressmeai.com/blog" />
-        <link rel="icon" href="/icons/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
-      </Head>
-
-      <div className="flex justify-between items-center py-4 px-4 mb-8 bg-white shadow-sm">
-        <h1 className="text-4xl font-bold">AI FASHION</h1>
-        <nav>
-          <div className="space-x-6">
-            <Link 
-              href="/" 
-              className="text-blue-600 hover:text-blue-800 transition-colors"
-            >
-              Home
-            </Link>
-            <Link 
-              href="/history" 
-              className="text-blue-600 hover:text-blue-800 transition-colors"
-            >
-              History
-            </Link>
-          </div>
-        </nav>
-      </div>
-
-      <main className="container mx-auto px-4 py-12">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-8">Fashion Blog</h2>
-          
-          <div className="space-y-10">
-            {posts.map((post) => (
-              <Link 
-                key={post.slug} 
-                href={`/blog/${post.slug}`}
-                className="block"
-              >
-                <article className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow cursor-pointer">
-                  <div className="text-sm text-indigo-600 mb-2">{post.category}</div>
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                  <div className="flex items-center justify-between">
-                    <time dateTime={post.date} className="text-sm text-gray-500">
-                      {new Date(post.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </time>
-                    <span className="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
-                      Read more →
-                    </span>
-                  </div>
-                </article>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </main>
-    </div>
-  );
-}
+  }
+} 

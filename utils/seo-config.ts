@@ -30,13 +30,7 @@ export const seoConfigs: Record<string, SEOConfig> = {
     image: "/images/og-banner-tryon.jpg"
   },
   
-  // 博客首页
-  blog: {
-    title: "Fashion Blog | Style Guides & AI Fashion Tips | DressMeAI",
-    description: "Discover the latest fashion trends, style guides, and AI fashion tips. Learn about virtual try-on technology, sustainable fashion, business attire, and personal styling advice from our expert team.",
-    keywords: "fashion blog, style guide, fashion tips, AI fashion, virtual try-on guide, fashion trends, styling advice, wardrobe tips, fashion technology blog, sustainable fashion",
-    image: "/images/og-banner-blog.jpg"
-  },
+
   
   // 历史记录页面
   history: {
@@ -55,27 +49,7 @@ export const seoConfigs: Record<string, SEOConfig> = {
   }
 }
 
-// 博客文章SEO模板
-export const generateBlogSEO = (post: {
-  title: string
-  excerpt: string
-  slug: string
-  category: string
-  date: string
-  author?: string
-  tags?: string[]
-}): SEOConfig => ({
-  title: `${post.title} | DressMeAI Fashion Blog`,
-  description: post.excerpt || `${post.title} - Expert fashion advice and style tips from the DressMeAI team. Learn about the latest trends, styling techniques, and AI fashion technology.`,
-  keywords: `${post.title.toLowerCase()}, ${post.category.toLowerCase()}, fashion blog, style guide, fashion tips, ${post.tags?.join(', ') || 'fashion advice, styling tips'}`,
-  image: `/images/blog/${post.slug}-og.jpg`,
-  type: 'article',
-  publishedTime: post.date,
-  modifiedTime: post.date,
-  author: post.author || "DressMeAI Style Team",
-  section: post.category,
-  tags: post.tags || []
-})
+
 
 // 常用关键词库
 export const keywordLibrary = {
@@ -225,22 +199,6 @@ export const generateStructuredData = (page: string, seoConfig: SEOConfig) => {
           "Style Analysis",
           "Fashion Trend Insights"
         ]
-      })
-      break
-      
-    case 'blog':
-      baseStructuredData["@graph"].push({
-        "@type": "Blog",
-        "@id": `${baseUrl}/blog#blog`,
-        "mainEntityOfPage": {
-          "@id": `${baseUrl}/blog#webpage`
-        },
-        "name": "DressMeAI Fashion Blog",
-        "description": seoConfig.description,
-        "publisher": {
-          "@id": `${baseUrl}/#organization`
-        },
-        "inLanguage": "en-US"
       })
       break
   }

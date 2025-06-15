@@ -282,7 +282,6 @@ export default function EnhancedSEO({
       <meta name="twitter:image:alt" content={seoTitle} />
       
       {/* 额外的Social Media标签 */}
-      <meta property="og:see_also" content="https://dressmeai.com/blog" />
       <meta name="pinterest-rich-pin" content="true" />
       
       {/* DNS预解析 */}

@@ -53,8 +53,6 @@ export const analytics = {
 
   // 内容互动事件
   content: {
-    blog_read: (article: string) => trackEvent('blog_read', 'content', article),
-    blog_share: (article: string, platform: string) => trackEvent('blog_share', 'social', `${article}_${platform}`),
     faq_view: (question: string) => trackEvent('faq_view', 'content', question),
     tutorial_view: (step: string) => trackEvent('tutorial_view', 'content', step),
   },
