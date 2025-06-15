@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
+import { safeGetJSONItem } from '../utils/localStorage';
 
 interface HistoryItem {
   imageUrl: string;
@@ -13,10 +14,8 @@ export default function History() {
 
   useEffect(() => {
     // 从 localStorage 获取历史记录
-    const historyData = localStorage.getItem('tryonHistory');
-    if (historyData) {
-      setHistoryItems(JSON.parse(historyData));
-    }
+    const historyData = safeGetJSONItem<HistoryItem[]>('tryonHistory', []);
+    setHistoryItems(historyData);
   }, []);
 
   const handleDownload = async (imageUrl: string, timestamp: number) => {

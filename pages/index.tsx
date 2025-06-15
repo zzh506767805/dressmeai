@@ -12,6 +12,7 @@ import Image from 'next/image'
 import ImageUpload from '../components/ImageUpload'
 import Link from 'next/link'
 import { analytics, trackConversion, setUserProperties } from '../utils/analytics'
+import { safeSetItem } from '../utils/localStorage'
 
 const features = [
   {
@@ -57,12 +58,7 @@ const testimonials = [
   },
 ]
 
-type SubscriptionStatus = 'idle' | 'loading' | 'success' | 'error'
-
 export default function Home() {
-  const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<SubscriptionStatus>('idle')
-  const [message, setMessage] = useState('')
   const [modelImage, setModelImage] = useState<File | null>(null)
   const [clothingImage, setClothingImage] = useState<File | null>(null)
   const [resultImage, setResultImage] = useState<string | null>(null)
@@ -78,48 +74,7 @@ export default function Home() {
     })
   }, [])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus('loading')
-    setMessage('')
 
-    // 跟踪邮箱订阅尝试
-    analytics.user.signup()
-    
-    try {
-      const res = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      })
-
-      const data = await res.json()
-
-      if (res.ok) {
-        setEmail('')
-        setStatus('success')
-        setMessage(data.message)
-        
-        // 跟踪成功的邮箱订阅
-        trackConversion('email_signup')
-        analytics.content.tutorial_view('email_signup_success')
-      } else {
-        setStatus('error')
-        setMessage(data.error || 'Something went wrong')
-        
-        // 跟踪订阅失败
-        analytics.performance.error_occurred('email_signup_failed', 'home')
-      }
-    } catch (error) {
-      setStatus('error')
-      setMessage('Failed to subscribe. Please try again.')
-      
-      // 跟踪网络错误
-      analytics.performance.error_occurred('email_signup_network_error', 'home')
-    }
-  }
 
   const handleGenerate = useCallback(async () => {
     if (!modelImage || !clothingImage) {
@@ -154,12 +109,11 @@ export default function Home() {
       const modelBase64 = await fileToBase64(modelImage);
       const clothingBase64 = await fileToBase64(clothingImage);
       
-      // 使用 try-catch 包装 localStorage 操作
-      try {
-        localStorage.setItem('modelImage', modelBase64);
-        localStorage.setItem('clothingImage', clothingBase64);
-      } catch (storageError) {
-        console.error('Storage error:', storageError);
+      // 使用安全的 localStorage 操作
+      const modelSaved = safeSetItem('modelImage', modelBase64);
+      const clothingSaved = safeSetItem('clothingImage', clothingBase64);
+      
+      if (!modelSaved || !clothingSaved) {
         analytics.performance.error_occurred('localStorage_error', 'virtual_tryon')
       }
       
@@ -448,38 +402,20 @@ export default function Home() {
                 Ready to Try AI Fashion?
               </h2>
               <p className="mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-indigo-100">
-                Leave your email to get early access and exclusive updates about our AI fashion technology.
+                Experience the future of fashion with our AI-powered virtual try-on technology.
               </p>
-              <form onSubmit={handleSubmit} className="mt-10 max-w-md mx-auto">
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <div className="flex-grow">
-                    <label htmlFor="email" className="sr-only">Email address</label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="block w-full rounded-lg border-0 px-4 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                      placeholder="Enter your email"
-                      required
-                      disabled={status === 'loading'}
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={status === 'loading' || !email}
-                    className="flex-none rounded-lg bg-white px-6 py-3 text-base font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {status === 'loading' ? 'Submitting...' : 'Get Started'}
-                  </button>
-                </div>
-                {status === 'success' && (
-                  <p className="mt-2 text-sm text-center text-green-600">
-                    Thank you! We'll keep you updated on our latest progress.
-                  </p>
-                )}
-              </form>
+              <div className="mt-10">
+                <button
+                  onClick={() => {
+                    const tryOnSection = document.getElementById('ai-fashion')
+                    tryOnSection?.scrollIntoView({ behavior: 'smooth' })
+                    analytics.navigation.internal_link_click('try_virtual_tryon')
+                  }}
+                  className="rounded-lg bg-white px-8 py-4 text-lg font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 transition-colors duration-200"
+                >
+                  Try Virtual Try-On
+                </button>
+              </div>
             </div>
           </div>
         </section>

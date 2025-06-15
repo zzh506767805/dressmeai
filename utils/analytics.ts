@@ -45,7 +45,6 @@ export const analytics = {
 
   // 用户互动事件
   user: {
-    signup: () => trackEvent('sign_up', 'engagement', 'user_registration'),
     login: () => trackEvent('login', 'engagement', 'user_authentication'),
     upgrade: (plan: string) => trackEvent('upgrade_click', 'conversion', plan),
     payment_success: (plan: string, amount: number) => trackEvent('purchase', 'ecommerce', plan, amount),

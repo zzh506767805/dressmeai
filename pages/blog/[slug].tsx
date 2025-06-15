@@ -714,7 +714,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = blogPosts[params?.slug as string];
+  const slug = params?.slug as string;
+  const post = blogPosts[slug];
+
+  if (!post) {
+    return {
+      notFound: true
+    };
+  }
 
   return {
     props: {
@@ -730,17 +737,17 @@ export default function BlogPost({ post }: BlogPostProps) {
     return <div>Loading...</div>;
   }
 
-  const pageTitle = `${post.title} | DressMeAI Blog`;
+  const pageTitle = `${post?.title || 'Blog Post'} | DressMeAI Blog`;
 
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": post.title,
-    "datePublished": post.date,
-    "dateModified": post.date,
+    "headline": post?.title || "",
+    "datePublished": post?.date || "",
+    "dateModified": post?.date || "",
     "author": {
       "@type": "Organization",
-      "name": post.author
+      "name": post?.author || "DressMeAI"
     },
     "publisher": {
       "@type": "Organization",
@@ -750,10 +757,10 @@ export default function BlogPost({ post }: BlogPostProps) {
         "url": "https://dressmeai.com/icons/icon-512.png"
       }
     },
-    "description": post.content.substring(0, 200).replace(/<[^>]*>/g, ''),
+    "description": post?.content ? post.content.substring(0, 200).replace(/<[^>]*>/g, '') : "",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://dressmeai.com/blog/${post.slug}`
+      "@id": `https://dressmeai.com/blog/${post?.slug || ""}`
     }
   };
 
@@ -763,28 +770,28 @@ export default function BlogPost({ post }: BlogPostProps) {
         <title>{pageTitle}</title>
         <meta
           name="description"
-          content={post.content.substring(0, 160).replace(/<[^>]*>/g, '')}
+          content={post?.content ? post.content.substring(0, 160).replace(/<[^>]*>/g, '') : ''}
         />
-        <meta name="author" content={post.author} />
+        <meta name="author" content={post?.author || 'DressMeAI'} />
         <meta
           name="keywords"
-          content={`${post.category.toLowerCase()}, fashion tips, style guide, fashion advice, ${post.title.toLowerCase()}`}
+          content={`${post?.category?.toLowerCase() || 'fashion'}, fashion tips, style guide, fashion advice, ${post?.title?.toLowerCase() || 'blog'}`}
         />
-        <link rel="canonical" href={`https://dressmeai.com/blog/${post.slug}`} />
+        <link rel="canonical" href={`https://dressmeai.com/blog/${post?.slug || ''}`} />
         <link rel="icon" href="/icons/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon.ico" />
         <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
 
-        <meta property="og:title" content={`${post.title} | DressMeAI Blog`} />
-        <meta property="og:description" content={post.content.substring(0, 160).replace(/<[^>]*>/g, '')} />
+        <meta property="og:title" content={`${post?.title || 'Blog Post'} | DressMeAI Blog`} />
+        <meta property="og:description" content={post?.content ? post.content.substring(0, 160).replace(/<[^>]*>/g, '') : ''} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://dressmeai.com/blog/${post.slug}`} />
+        <meta property="og:url" content={`https://dressmeai.com/blog/${post?.slug || ''}`} />
         
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post.title} />
-        <meta name="twitter:description" content={post.content.substring(0, 160).replace(/<[^>]*>/g, '')} />
+        <meta name="twitter:title" content={post?.title || 'Blog Post'} />
+        <meta name="twitter:description" content={post?.content ? post.content.substring(0, 160).replace(/<[^>]*>/g, '') : ''} />
       </Head>
 
       <Script
@@ -829,26 +836,26 @@ export default function BlogPost({ post }: BlogPostProps) {
 
           <article className="bg-white rounded-xl shadow-md p-6 lg:p-8 max-w-4xl mx-auto">
             <header className="space-y-3 mb-6">
-              <div className="text-sm font-medium text-indigo-600">{post.category}</div>
-              <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">{post.title}</h1>
+              <div className="text-sm font-medium text-indigo-600">{post?.category || 'Blog'}</div>
+              <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">{post?.title || 'Blog Post'}</h1>
               <div className="flex items-center text-sm text-gray-500 space-x-3">
-                <time dateTime={post.date} className="font-medium">
-                  {new Date(post.date).toLocaleDateString('en-US', {
+                <time dateTime={post?.date || ''} className="font-medium">
+                  {post?.date ? new Date(post.date).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric'
-                  })}
+                  }) : ''}
                 </time>
                 <span>•</span>
-                <span className="font-medium">{post.readTime}</span>
+                <span className="font-medium">{post?.readTime || ''}</span>
                 <span>•</span>
-                <span className="font-medium">{post.author}</span>
+                <span className="font-medium">{post?.author || 'DressMeAI'}</span>
               </div>
             </header>
 
             <div
               className="prose prose-base prose-indigo max-w-none prose-headings:mt-6 prose-headings:mb-4 prose-p:leading-7 prose-p:my-4 prose-ul:my-4 prose-li:my-1 prose-h2:text-2xl prose-h2:font-bold prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-2 prose-h3:text-xl prose-h3:font-semibold prose-h3:text-gray-800 prose-ul:list-disc prose-ul:pl-6 prose-li:text-gray-600 prose-p:text-gray-600"
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{ __html: post?.content || '' }}
             />
           </article>
         </div>

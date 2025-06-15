@@ -48,37 +48,20 @@ export default function TryOn() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                Coming Soon
+                Virtual Try-On
               </h1>
               <p className="mt-6 text-lg leading-8 text-gray-600">
-                We're working hard to bring you the best virtual try-on experience. Leave your email to get notified when we launch.
+                Experience the future of fashion with our AI-powered virtual try-on technology. Upload your photos and see how clothes look on you instantly.
               </p>
               
-              {/* Email Signup Form */}
-              <form className="mt-10 max-w-md mx-auto">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <div className="flex-grow">
-                    <label htmlFor="email" className="sr-only">Email address</label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      className="block w-full rounded-lg border-0 px-4 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                      placeholder="Enter your email"
-                      required
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="flex-none rounded-lg bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors duration-200"
-                  >
-                    Notify Me
-                  </button>
-                </div>
-                <p className="mt-3 text-sm text-gray-500">
-                  We'll notify you when the feature is ready. No spam, we promise!
-                </p>
-              </form>
+              <div className="mt-10">
+                <Link 
+                  href="/"
+                  className="inline-flex items-center rounded-lg bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors duration-200"
+                >
+                  Try Now
+                </Link>
+              </div>
 
               {/* Feature Preview */}
               <div className="mt-20">

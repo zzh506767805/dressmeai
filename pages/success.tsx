@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Head from 'next/head';
+import { safeGetJSONItem, safeSetJSONItem, safeRemoveItem, safeGetItem } from '../utils/localStorage';
 
 type Status = 'loading' | 'success' | 'error' | 'completed' | 'failed';
 
@@ -29,16 +30,15 @@ export default function Success() {
     }
 
     // 检查 localStorage 中是否有未完成的生成结果
-    const savedResult = localStorage.getItem(STORAGE_KEY);
-    if (savedResult) {
-      const result: GenerationResult = JSON.parse(savedResult);
+    const savedResult = safeGetJSONItem<GenerationResult | null>(STORAGE_KEY, null);
+    if (savedResult && savedResult.imageUrl) {
       setStatus('completed');
-      setResultImage(result.imageUrl);
+      setResultImage(savedResult.imageUrl);
       // 更新 URL，但不触发页面刷新
       router.replace(
         {
           pathname: router.pathname,
-          query: { ...router.query, status: 'completed', imageUrl: result.imageUrl }
+          query: { ...router.query, status: 'completed', imageUrl: savedResult.imageUrl }
         },
         undefined,
         { shallow: true }
@@ -64,8 +64,8 @@ export default function Success() {
 
         // 从 localStorage 获取图片数据
         setStep('Retrieving image data...');
-        const modelImage = localStorage.getItem('modelImage');
-        const clothingImage = localStorage.getItem('clothingImage');
+        const modelImage = safeGetItem('modelImage');
+        const clothingImage = safeGetItem('clothingImage');
 
         if (!modelImage || !clothingImage) {
           throw new Error('Image data not found, please upload again');
@@ -135,20 +135,19 @@ export default function Success() {
         const saveToHistory = (imageUrl: string) => {
           try {
             // 保存到历史记录
-            const historyData = localStorage.getItem('tryonHistory');
-            const history = historyData ? JSON.parse(historyData) : [];
+            const history = safeGetJSONItem<any[]>('tryonHistory', []);
             history.unshift({
               imageUrl,
               timestamp: Date.now()
             });
-            localStorage.setItem('tryonHistory', JSON.stringify(history));
+            safeSetJSONItem('tryonHistory', history);
 
             // 保存当前生成结果
             const currentResult: GenerationResult = {
               imageUrl,
               timestamp: Date.now()
             };
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(currentResult));
+            safeSetJSONItem(STORAGE_KEY, currentResult);
 
             // 更新 URL
             router.replace(
@@ -208,8 +207,8 @@ export default function Success() {
         setStatus('error');
       } finally {
         // 清理临时图片数据
-        localStorage.removeItem('modelImage');
-        localStorage.removeItem('clothingImage');
+        safeRemoveItem('modelImage');
+        safeRemoveItem('clothingImage');
       }
     };
 
@@ -219,7 +218,7 @@ export default function Success() {
   // 清理函数：离开页面时清除当前生成结果
   useEffect(() => {
     return () => {
-      localStorage.removeItem(STORAGE_KEY);
+      safeRemoveItem(STORAGE_KEY);
     };
   }, []);
 
