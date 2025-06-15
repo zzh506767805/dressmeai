@@ -92,21 +92,50 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
             "name": "DressMeAI Blog",
             "description": "Expert insights on AI virtual try-on technology and fashion e-commerce innovations",
             "url": "https://dressmeai.com/blog",
+            "inLanguage": "en-US",
             "publisher": {
               "@type": "Organization",
               "name": "DressMeAI",
               "url": "https://dressmeai.com",
-              "logo": "https://dressmeai.com/logo.png"
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://dressmeai.com/logo.png",
+                "width": 600,
+                "height": 60
+              }
             },
             "blogPost": posts.map(post => ({
               "@type": "BlogPosting",
               "headline": post.title,
               "description": post.excerpt,
               "url": `https://dressmeai.com/blog/${post.slug}`,
-              "datePublished": post.publishDate,
+              "datePublished": `${post.publishDate}T09:00:00+00:00`,
+              "dateModified": `${post.publishDate}T09:00:00+00:00`,
               "author": {
                 "@type": "Organization",
-                "name": "DressMeAI Team"
+                "name": "DressMeAI Team",
+                "url": "https://dressmeai.com"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "DressMeAI",
+                "url": "https://dressmeai.com",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://dressmeai.com/logo.png",
+                  "width": 600,
+                  "height": 60
+                }
+              },
+              "image": {
+                "@type": "ImageObject",
+                "url": `https://dressmeai.com/images/blog/${post.slug}-og.jpg`,
+                "width": 1200,
+                "height": 630
+              },
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `https://dressmeai.com/blog/${post.slug}`
               }
             }))
           })}

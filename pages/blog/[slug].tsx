@@ -400,10 +400,15 @@ export default function BlogPost({ post }: BlogPostProps) {
             "@type": "BlogPosting",
             "headline": post.title,
             "description": post.description,
-            "image": `https://dressmeai.com/images/blog/${post.slug}-og.jpg`,
+            "image": {
+              "@type": "ImageObject",
+              "url": `https://dressmeai.com/images/blog/${post.slug}-og.jpg`,
+              "width": 1200,
+              "height": 630
+            },
             "url": `https://dressmeai.com/blog/${post.slug}`,
-            "datePublished": post.publishDate,
-            "dateModified": post.publishDate,
+            "datePublished": `${post.publishDate}T09:00:00+00:00`,
+            "dateModified": `${post.publishDate}T09:00:00+00:00`,
             "author": {
               "@type": "Organization",
               "name": post.author,
@@ -415,16 +420,19 @@ export default function BlogPost({ post }: BlogPostProps) {
               "url": "https://dressmeai.com",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://dressmeai.com/logo.png"
+                "url": "https://dressmeai.com/logo.png",
+                "width": 600,
+                "height": 60
               }
             },
             "mainEntityOfPage": {
               "@type": "WebPage",
               "@id": `https://dressmeai.com/blog/${post.slug}`
             },
-            "keywords": post.keywords,
+            "keywords": post.keywords.split(', '),
             "articleSection": "Technology",
-            "wordCount": post.content.split(' ').length
+            "wordCount": post.content.split(' ').length,
+            "inLanguage": "en-US"
           })}
         </script>
       </Head>
