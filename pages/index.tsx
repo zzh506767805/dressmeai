@@ -157,12 +157,20 @@ export default function Home() {
     if (file) {
       analytics.virtualTryOn.upload_person()
     }
+    // 清除错误信息当用户重新上传时
+    if (error) {
+      setError(null)
+    }
   }
 
   const handleClothingImageUpload = (file: File | null) => {
     setClothingImage(file)
     if (file) {
       analytics.virtualTryOn.upload_clothes()
+    }
+    // 清除错误信息当用户重新上传时
+    if (error) {
+      setError(null)
     }
   }
 
@@ -230,10 +238,13 @@ export default function Home() {
       <h2 className="text-3xl font-bold mb-8 text-center">Virtual Try-On Technology - See How Clothes Look on Your Body</h2>
       
       <Head>
-        <title>Virtual Try-On AI Fashion App | DressMeAI - See How Clothes Look on You</title>
-        <meta name="description" content="Try on clothes virtually with DressMeAI's AI-powered fashion app. See how outfits look on you instantly, get personalized style recommendations, and shop with confidence. Virtual fitting room - start now!" />
-        <meta name="keywords" content="virtual try-on, try on clothes online, AI fashion app, virtual fitting room, outfit generator, fashion styling app, virtual wardrobe, AI style assistant, clothes simulator, fashion technology, virtual clothes fitting, AI virtual try-on, personal stylist AI, digital wardrobe" />
+        <title>AI Virtual Try-On Free Online | DressMeAI - Try Clothes Before Buying</title>
+        <meta name="description" content="Free AI virtual try-on technology! See how clothes look on your body instantly. Upload your photo & clothing image to get realistic virtual fitting results. Try clothes online for free with DressMeAI's advanced AI fashion technology." />
+        <meta name="keywords" content="virtual try-on free, try clothes online free, AI virtual try-on, virtual fitting room, see how clothes look on me, virtual dressing room free, AI fashion app free, virtual clothes fitting, online clothing try-on, fashion AI free, virtual mirror, clothes simulator free, try before you buy online, virtual styling free" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        {/* 新增长尾关键词 */}
+        <meta name="keywords" content="how to try clothes online, virtual try on clothes app, free virtual dressing room, AI clothes fitting, virtual outfit try on, online clothing simulator, virtual fashion assistant, try clothes virtually, virtual wardrobe app, fashion try on technology" />
         
         {/* Favicon and App Icons */}
         <link rel="icon" href="/icons/favicon.ico" />
@@ -261,8 +272,8 @@ export default function Home() {
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="DressMeAI" />
-        <meta property="og:title" content="Virtual Try-On AI Fashion App | DressMeAI - See How Clothes Look on You" />
-        <meta property="og:description" content="Try on clothes virtually with DressMeAI's AI-powered fashion app. See how outfits look on you instantly, get personalized style recommendations, and shop with confidence." />
+        <meta property="og:title" content="AI Virtual Try-On Free Online | DressMeAI - Try Clothes Before Buying" />
+        <meta property="og:description" content="Free AI virtual try-on technology! See how clothes look on your body instantly. Upload your photo & clothing image to get realistic virtual fitting results." />
         <meta property="og:image" content="https://dressmeai.com/images/og-banner.jpg" />
         <meta property="og:url" content="https://dressmeai.com" />
         
@@ -270,13 +281,29 @@ export default function Home() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@dressmeai" />
         <meta name="twitter:creator" content="@dressmeai" />
-        <meta name="twitter:title" content="Virtual Try-On AI Fashion App | DressMeAI - See How Clothes Look on You" />
-        <meta name="twitter:description" content="Try on clothes virtually with DressMeAI's AI-powered fashion app. See how outfits look on you instantly, get personalized style recommendations, and shop with confidence." />
+        <meta name="twitter:title" content="AI Virtual Try-On Free Online | DressMeAI - Try Clothes Before Buying" />
+        <meta name="twitter:description" content="Free AI virtual try-on technology! See how clothes look on your body instantly. Upload your photo & clothing image to get realistic virtual fitting results." />
         <meta name="twitter:image" content="https://dressmeai.com/images/og-banner.jpg" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="robots" content="index, follow" />
         <meta name="author" content="DressMeAI Team" />
+        
+        {/* 地理位置标签 */}
+        <meta name="geo.region" content="US" />
+        <meta name="geo.placename" content="United States" />
+        
+        {/* 内容分类 */}
+        <meta name="category" content="Fashion Technology" />
+        <meta name="coverage" content="Worldwide" />
+        <meta name="distribution" content="Global" />
+        <meta name="rating" content="General" />
+        
+        {/* 加载优化 */}
+        <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//www.google-analytics.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </Head>
 
       {/* 添加结构化数据 */}
@@ -303,6 +330,8 @@ export default function Home() {
                   <ImageUpload
                     label="Upload a full body photo"
                     onImageSelect={handleModelImageUpload}
+                    maxSize={1}
+                    acceptedTypes={['image/jpeg', 'image/png', 'image/webp']}
                   />
                 </div>
                 
@@ -311,6 +340,8 @@ export default function Home() {
                   <ImageUpload
                     label="Upload a clothing photo"
                     onImageSelect={handleClothingImageUpload}
+                    maxSize={1}
+                    acceptedTypes={['image/jpeg', 'image/png', 'image/webp']}
                   />
                 </div>
               </div>
