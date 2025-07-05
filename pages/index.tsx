@@ -287,6 +287,69 @@ export default function Home() {
       />
 
       <main>
+        {/* AI Fashion Section - 虚拟试穿功能 - 放在第一个模块 */}
+        <section id="ai-fashion" className="py-20 sm:py-28 bg-gray-50">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-3xl text-center">
+              <h2 className="text-lg font-semibold leading-8 tracking-wide text-indigo-600 uppercase">Experience AI-Powered Fashion Styling Now</h2>
+              <h3 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+                Virtual Try-On Demo - See the Magic Yourself
+              </h3>
+            </div>
+            <div className="mx-auto mt-16 sm:mt-20">
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
+                  <h4 className="text-xl font-semibold mb-4">Upload Model Photo</h4>
+                  <ImageUpload
+                    label="Upload a full body photo"
+                    onImageSelect={handleModelImageUpload}
+                  />
+                </div>
+                
+                <div>
+                  <h4 className="text-xl font-semibold mb-4">Upload Clothing Photo</h4>
+                  <ImageUpload
+                    label="Upload a clothing photo"
+                    onImageSelect={handleClothingImageUpload}
+                  />
+                </div>
+              </div>
+
+              <div className="text-center">
+                <button
+                  onClick={handleGenerate}
+                  disabled={loading || !modelImage || !clothingImage}
+                  className={`px-6 py-3 rounded-lg text-white font-medium
+                    ${loading || !modelImage || !clothingImage
+                      ? 'bg-gray-400 cursor-not-allowed'
+                      : 'bg-blue-600 hover:bg-blue-700'
+                    }`}
+                >
+                  {loading ? 'Generating...' : 'Generate'}
+                </button>
+
+                {error && (
+                  <p className="mt-4 text-red-500">{error}</p>
+                )}
+              </div>
+
+              {resultImage && (
+                <div className="mt-8">
+                  <h4 className="text-xl font-semibold mb-4">Result</h4>
+                  <div className="relative w-full h-96">
+                    <Image
+                      src={resultImage}
+                      alt="Try-on Result"
+                      fill
+                      className="object-contain rounded-lg"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
         {/* Hero Section */}
         <section className="relative px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
           <div className="mx-auto max-w-5xl">
@@ -312,6 +375,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+
 
         {/* Features Section */}
         <section id="features" className="py-20 sm:py-28 bg-white">
@@ -430,68 +495,6 @@ export default function Home() {
                   Try Virtual Try-On
                 </button>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="ai-fashion" className="py-20 sm:py-28 bg-gray-50">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-lg font-semibold leading-8 tracking-wide text-indigo-600 uppercase">Experience AI-Powered Fashion Styling Now</h2>
-              <h3 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                Virtual Try-On Demo - See the Magic Yourself
-              </h3>
-            </div>
-            <div className="mx-auto mt-16 sm:mt-20">
-              <div className="grid md:grid-cols-2 gap-8 mb-8">
-                <div>
-                  <h4 className="text-xl font-semibold mb-4">Upload Model Photo</h4>
-                  <ImageUpload
-                    label="Upload a full body photo"
-                    onImageSelect={handleModelImageUpload}
-                  />
-                </div>
-                
-                <div>
-                  <h4 className="text-xl font-semibold mb-4">Upload Clothing Photo</h4>
-                  <ImageUpload
-                    label="Upload a clothing photo"
-                    onImageSelect={handleClothingImageUpload}
-                  />
-                </div>
-              </div>
-
-              <div className="text-center">
-                <button
-                  onClick={handleGenerate}
-                  disabled={loading || !modelImage || !clothingImage}
-                  className={`px-6 py-3 rounded-lg text-white font-medium
-                    ${loading || !modelImage || !clothingImage
-                      ? 'bg-gray-400 cursor-not-allowed'
-                      : 'bg-blue-600 hover:bg-blue-700'
-                    }`}
-                >
-                  {loading ? 'Generating...' : 'Generate'}
-                </button>
-
-                {error && (
-                  <p className="mt-4 text-red-500">{error}</p>
-                )}
-              </div>
-
-              {resultImage && (
-                <div className="mt-8">
-                  <h4 className="text-xl font-semibold mb-4">Result</h4>
-                  <div className="relative w-full h-96">
-                    <Image
-                      src={resultImage}
-                      alt="Try-on Result"
-                      fill
-                      className="object-contain rounded-lg"
-                    />
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </section>
