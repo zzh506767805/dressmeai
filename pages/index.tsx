@@ -530,6 +530,29 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      {/* 友情链接区块 */}
+      <footer className="mt-20 py-8 border-t border-gray-200 text-center text-sm text-gray-500">
+        <div className="mb-2 font-semibold text-gray-700">Friend Links</div>
+        <div className="flex flex-wrap justify-center gap-6">
+          <a
+            href="https://chinesenamegenerate.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline transition-colors"
+          >
+            Chinesenamegenerate.com
+          </a>
+          <a
+            href="https://dreamfinityx.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline transition-colors"
+          >
+            Dreamfinityx.com
+          </a>
+        </div>
+      </footer>
     </div>
   )
 }
