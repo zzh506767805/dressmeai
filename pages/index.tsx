@@ -551,6 +551,22 @@ export default function Home() {
           >
             Dreamfinityx.com
           </a>
+          <a
+            href="https://charactereadcanon.pro"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline transition-colors"
+          >
+            Charactereadcanon.pro
+          </a>
+          <a
+            href="https://elfname.pro"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline transition-colors"
+          >
+            Elfname.pro
+          </a>
         </div>
       </footer>
     </div>
