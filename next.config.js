@@ -9,6 +9,21 @@ const nextConfig = {
       'images.unsplash.com'
     ],
     unoptimized: true
+  },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.dressmeai.com'
+          }
+        ],
+        destination: 'https://dressmeai.com/:path*',
+        permanent: true
+      }
+    ]
   }
 }
 
