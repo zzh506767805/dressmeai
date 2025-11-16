@@ -25,11 +25,6 @@ const axiosInstance = axios.create({
   }
 });
 
-// 确保 URL 使用 HTTP
-const ensureHttp = (url: string) => {
-  return url.replace('https://', 'http://');
-};
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<SuccessResponse | ErrorResponse>
@@ -46,16 +41,19 @@ export default async function handler(
       return res.status(400).json({ message: 'Both model and clothing image URLs are required' });
     }
 
-    // 确保图片 URL 使用 HTTP
-    const httpModelImageUrl = ensureHttp(modelImageUrl);
-    const httpClothingImageUrl = ensureHttp(clothingImageUrl);
+    // DashScope 端只需要公网可访问的 URL，这里保持原样（Azure Blob 默认 HTTPS）
+    const sanitizedModelUrl = modelImageUrl.trim();
+    const sanitizedClothingUrl = clothingImageUrl.trim();
 
-    console.log('Calling AI try-on API...');
+    console.log('Calling AI try-on API with URLs:', {
+      model: sanitizedModelUrl,
+      clothing: sanitizedClothingUrl
+    });
     const response = await axiosInstance.post(`${API_HOST}${API_PATH}`, {
       model: "aitryon",
       input: {
-        top_garment_url: httpClothingImageUrl,
-        person_image_url: httpModelImageUrl,
+        top_garment_url: sanitizedClothingUrl,
+        person_image_url: sanitizedModelUrl,
       },
       parameters: {
         resolution: -1,
