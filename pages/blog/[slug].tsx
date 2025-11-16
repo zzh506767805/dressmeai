@@ -23,8 +23,11 @@ type BlogMessages = typeof enBlog
 type DetailPostMap = BlogMessages['detail']['posts']
 type IndexPostMap = BlogMessages['index']['posts']
 
-type BlogDetailPost = DetailPostMap[keyof DetailPostMap] & { slug: string }
-type BlogPostCard = IndexPostMap[keyof IndexPostMap] & { slug: string }
+type DetailPostKey = keyof DetailPostMap
+type IndexPostKey = keyof IndexPostMap
+
+type BlogDetailPost = DetailPostMap[DetailPostKey] & { slug: string }
+type BlogPostCard = IndexPostMap[IndexPostKey] & { slug: string }
 
 interface BlogDetailProps {
   post: BlogDetailPost
@@ -316,15 +319,18 @@ export const getStaticProps: GetStaticProps<BlogDetailProps> = async ({ params, 
   const slug = params?.slug as string
   const currentLocale = (locale as Locale) || defaultLocale
   const blogMessages = getMessages(currentLocale).blog as BlogMessages
-  const postData = blogMessages.detail.posts[slug]
+  const detailPosts = blogMessages.detail.posts as DetailPostMap
 
-  if (!postData) {
+  if (!Object.prototype.hasOwnProperty.call(detailPosts, slug)) {
     return {
       notFound: true
     }
   }
 
-  const relatedPosts = Object.entries(blogMessages.index.posts)
+  const postData = detailPosts[slug as DetailPostKey]
+
+  const indexPosts = blogMessages.index.posts as IndexPostMap
+  const relatedPosts = (Object.entries(indexPosts) as [IndexPostKey, IndexPostMap[IndexPostKey]][])
     .filter(([key]) => key !== slug)
     .slice(0, 2)
     .map(([key, data]) => ({ slug: key, ...data }))

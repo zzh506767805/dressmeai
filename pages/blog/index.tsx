@@ -202,7 +202,8 @@ export default function BlogIndex({ posts, meta, hero, labels, cta }: BlogIndexP
 export const getStaticProps: GetStaticProps<BlogIndexProps> = async ({ locale }) => {
   const currentLocale = (locale as Locale) || defaultLocale
   const blogMessages = getMessages(currentLocale).blog as BlogMessages
-  const posts = Object.entries(blogMessages.index.posts).map(([slug, data]) => ({
+  const postsMap = blogMessages.index.posts as PostMap
+  const posts = (Object.entries(postsMap) as [keyof PostMap, PostMap[keyof PostMap]][]).map(([slug, data]) => ({
     slug,
     ...data
   }))
