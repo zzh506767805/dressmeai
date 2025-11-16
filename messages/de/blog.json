@@ -1,0 +1,137 @@
+{
+  "index": {
+    "meta": {
+      "title": "Blog zu KI-Anproben | Fashion-Tech Insights | DressMeAI",
+      "description": "Fachartikel über virtuelle Anproben, Fashion E-Commerce und digitale Handelsstrategien.",
+      "keywords": "KI Anprobe, virtuelle Umkleide, Fashion Tech, Retouren senken"
+    },
+    "hero": {
+      "eyebrow": "DressMeAI Blog",
+      "title": "Strategien für virtuelle Anproben und digitalen Modehandel",
+      "description": "So setzen Marken KI ein, um Kundenerlebnisse aufzuwerten und Rücksendungen zu reduzieren."
+    },
+    "labels": {
+      "readMore": "Weiterlesen",
+      "publishedOn": "Veröffentlicht am",
+      "tagPrefix": "Themen"
+    },
+    "cta": {
+      "title": "Jetzt KI-Anprobe testen",
+      "description": "Probieren Sie DressMeAI aus und sehen Sie, wie sich Conversion und Retourenquote verändern.",
+      "button": "Virtuelle Anprobe starten"
+    },
+    "posts": {
+      "ai-virtual-try-on-technology-revolutionizing-fashion": {
+        "title": "KI-Anprobe: Die Revolution des Online-Modekaufs",
+        "description": "Wie realistische Simulationen das Einkaufserlebnis im Netz verändern.",
+        "keywords": [
+          "KI Anprobe",
+          "virtuelle Umkleide",
+          "Online-Mode"
+        ],
+        "publishDate": "2025-06-15",
+        "readTime": "8 Min. Lesezeit",
+        "excerpt": "Wir zeigen, wie sich die Umkleidekabine ins Web verlagert und Kunden schneller überzeugt."
+      },
+      "best-ai-clothing-try-on-apps-software-2025": {
+        "title": "Die besten KI-Anprobe-Lösungen 2025",
+        "description": "Vergleich der wichtigsten Apps und Plattformen für unterschiedliche Unternehmensgrößen.",
+        "keywords": [
+          "Anprobe App",
+          "virtuelle Umkleide Software",
+          "Fashion KI"
+        ],
+        "publishDate": "2025-06-12",
+        "readTime": "10 Min. Lesezeit",
+        "excerpt": "Vom Enterprise-Stack bis zum Creator-Tool – hier sind die spannendsten Anbieter."
+      },
+      "virtual-try-on-technology-reduces-return-rates": {
+        "title": "Weniger Retouren dank virtueller Anprobe",
+        "description": "Warum KI-Fitting einer der wirksamsten Hebel für Profitabilität ist.",
+        "keywords": [
+          "Retouren senken",
+          "ROI Anprobe",
+          "Fashion E-Commerce"
+        ],
+        "publishDate": "2025-06-10",
+        "readTime": "7 Min. Lesezeit",
+        "excerpt": "Retouren fressen Marge – eine gute Anprobe spart sofort Kosten."
+      },
+      "ai-fashion-technology-future-online-shopping": {
+        "title": "KI Fashion Tech: Die Zukunft des Online-Shoppings",
+        "description": "Virtuelle Anprobe, Personalisierung und smarter Retail im Überblick.",
+        "keywords": [
+          "KI Fashion",
+          "Zukunft Online-Shopping",
+          "Smart Retail"
+        ],
+        "publishDate": "2025-06-08",
+        "readTime": "12 Min. Lesezeit",
+        "excerpt": "Wie KI den gesamten Modekauf von Inspiration bis Zahlung neu definiert."
+      }
+    }
+  },
+  "detail": {
+    "breadcrumbBlog": "Blog",
+    "relatedTitle": "Weitere Artikel",
+    "cta": {
+      "title": "Technologie aus dem Artikel live testen",
+      "description": "Laden Sie Bilder bei DressMeAI hoch und erhalten Sie wenige Minuten später ein Ergebnis.",
+      "button": "Test starten"
+    },
+    "posts": {
+      "ai-virtual-try-on-technology-revolutionizing-fashion": {
+        "title": "KI-Anprobe: Die Revolution des Online-Modekaufs",
+        "description": "Wie realistische Simulationen das Einkaufserlebnis im Netz verändern.",
+        "keywords": [
+          "KI Anprobe",
+          "virtuelle Umkleide",
+          "Online-Mode"
+        ],
+        "publishDate": "2025-06-15",
+        "readTime": "8 Min. Lesezeit",
+        "author": "DressMeAI Team",
+        "content": "Der Modehandel digitalisiert sich rasant – KI-Anproben sind das verbindende Element zwischen Bildschirm und Spiegel.\n\n## Was ist eine KI-Anprobe?\n\nAlgorithmen analysieren Körpermaße, Haltung und Stoffeigenschaften, um realistische Vorschauen zu erzeugen.\n\n## Mehrwert für Kund:innen\n\nWeniger Retouren, mehr Spaß beim Stöbern, Zeitersparnis und mehr Sicherheit beim Kauf.\n\n## Mehrwert für Marken\n\nHöhere Conversion, geringere Logistikkosten, Differenzierung, bessere Kundendaten.\n\n## Technologie\n\nComputer Vision, Machine Learning, 3D-Simulation, AR.\n\n## Blick nach vorn\n\nNoch präzisere Passform, mehr Körperdiversität, Einbindung in VR-Erlebnisse – jetzt einsteigen lohnt sich."
+      },
+      "best-ai-clothing-try-on-apps-software-2025": {
+        "title": "Die besten KI-Anprobe-Lösungen 2025",
+        "description": "Vergleich der wichtigsten Apps und Plattformen für unterschiedliche Unternehmensgrößen.",
+        "keywords": [
+          "Anprobe App",
+          "virtuelle Umkleide Software",
+          "Fashion KI"
+        ],
+        "publishDate": "2025-06-12",
+        "readTime": "10 Min. Lesezeit",
+        "author": "DressMeAI Team",
+        "content": "Der Markt teilt sich in umfangreiche Enterprise-Suiten und schlanke Tools für SMBs.\n\n## Enterprise\n\nSehr genaue Avatare, digitale Stoffbibliotheken, tiefe API-Integration und Reporting.\n\n## Creator & KMU\n\nSchnelle Templates, Social-ready Exporte, transparente Preise.\n\n## Auswahlkriterien\n\nPassformgenauigkeit, Content-Pipeline, Performance, Analytics, Kosten.\n\n## Mehrwert\n\nHöhere Verweildauer, bessere Bewertungen, innovatives Markenimage."
+      },
+      "virtual-try-on-technology-reduces-return-rates": {
+        "title": "Weniger Retouren dank virtueller Anprobe",
+        "description": "Warum KI-Fitting einer der wirksamsten Hebel für Profitabilität ist.",
+        "keywords": [
+          "Retouren senken",
+          "ROI Anprobe",
+          "Fashion E-Commerce"
+        ],
+        "publishDate": "2025-06-10",
+        "readTime": "7 Min. Lesezeit",
+        "author": "DressMeAI Team",
+        "content": "Retourenquoten von 30–50 % sind in der Modebranche keine Seltenheit. Gründe: Passform, Stil, Farbe.\n\n## Kostenkette\n\nDoppelte Logistik, Neuverpacken, Wertverlust.\n\n## Wie hilft die Anprobe?\n\nPräzise Größenempfehlungen, visuelle Kontrolle, personalisierte Vorschläge.\n\n## Messbare Effekte\n\n25–45 % weniger Retouren bedeuten sofortige Ersparnisse und mehr Gewinn."
+      },
+      "ai-fashion-technology-future-online-shopping": {
+        "title": "KI Fashion Tech: Die Zukunft des Online-Shoppings",
+        "description": "Virtuelle Anprobe, Personalisierung und smarter Retail im Überblick.",
+        "keywords": [
+          "KI Fashion",
+          "Zukunft Online-Shopping",
+          "Smart Retail"
+        ],
+        "publishDate": "2025-06-08",
+        "readTime": "12 Min. Lesezeit",
+        "author": "DressMeAI Team",
+        "content": "KI verändert das Modeökosystem von Grund auf.\n\n## Einsatzfelder\n\nVirtuelle Anprobe, Empfehlungen, Bestandsplanung, Trendanalyse.\n\n## Personalisierung\n\nNutzung von Kaufhistorie, Social Signals, Passformdaten für maßgeschneiderte Vorschläge.\n\n## Omnichannel\n\nSmart Mirrors, AI-Stylisten und konsistente Journeys verbinden Online und Filiale."
+      }
+    }
+  }
+}

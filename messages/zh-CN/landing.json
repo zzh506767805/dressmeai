@@ -1,0 +1,112 @@
+{
+  "pageHeading": "虚拟试衣技术 - 直观看到服装上身效果",
+  "seo": {
+    "title": "AI 虚拟试衣在线体验 | DressMeAI - 先试后买",
+    "description": "免费 AI 虚拟试衣，上传模特照和服装照，即可秒看真实上身效果。DressMeAI 以先进算法帮你在购买前先试穿。",
+    "keywordsPrimary": "虚拟试衣, 在线试衣, AI 试衣间, 虚拟试衣镜, 在线试衣间, AI 时尚助手, 试穿衣服, 虚拟衣橱, 先试后买, AI 试穿",
+    "keywordsSecondary": "如何在线试衣, 虚拟试衣 App, 免费虚拟试衣, AI 服装合成, 虚拟穿搭, 在线衣服模拟器, 虚拟搭配助手, 虚拟衣柜",
+    "ogDescription": "免费 AI 虚拟试衣，即刻看到真实上身效果。",
+    "twitterTitle": "AI 虚拟试衣在线体验 | DressMeAI",
+    "twitterDescription": "上传人物与服装照片，数秒生成拟真试衣效果。",
+    "schemaDescription": "AI 驱动的虚拟试衣与个性化穿搭推荐平台"
+  },
+  "hero": {
+    "headlineMain": "AI 虚拟试衣",
+    "headlineAccent": "你的专属穿搭顾问",
+    "description": "先试后买、AI 智能穿搭、每日灵感推送，DressMeAI 为你量身打造未来穿搭体验。",
+    "primaryCta": "立即试穿",
+    "secondaryCta": "了解更多"
+  },
+  "demo": {
+    "eyebrow": "立即体验 AI 穿搭",
+    "title": "虚拟试衣演示 - 亲眼见证效果",
+    "model": {
+      "title": "上传模特照片",
+      "label": "上传一张全身照"
+    },
+    "clothing": {
+      "title": "上传服装照片",
+      "label": "上传需要试穿的服装"
+    },
+    "generateButton": "开始生成",
+    "generating": "正在生成...",
+    "resultTitle": "生成结果"
+  },
+  "features": {
+    "eyebrow": "AI 功能全面升级你的购物体验",
+    "title": "一站式 AI 穿搭助手 - 试穿、搭配、下单更聪明",
+    "description": "从虚拟试衣到个性化推荐，AI 技术让你随时找到最合适的造型。",
+    "items": [
+      {
+        "name": "虚拟试衣",
+        "description": "借助先进 AI，真实还原服装上身效果，就像在实体试衣间。",
+        "icon": "camera"
+      },
+      {
+        "name": "AI 穿搭生成",
+        "description": "根据你的风格喜好与衣橱，生成完整穿搭方案。",
+        "icon": "sparkles"
+      },
+      {
+        "name": "智能推荐",
+        "description": "每日推送适合场合与天气的个性化穿搭建议。",
+        "icon": "lightBulb"
+      },
+      {
+        "name": "自由混搭",
+        "description": "任意组合衣橱单品，找到不同场合的完美造型。",
+        "icon": "swatch"
+      }
+    ]
+  },
+  "howItWorks": {
+    "eyebrow": "三步搞定 AI 虚拟试衣",
+    "title": "开启 AI 穿搭旅程 - 上传照片即可体验",
+    "steps": [
+      {
+        "title": "1. 创建个人档案",
+        "description": "上传照片并勾勒个人风格，定制专属体验。",
+        "icon": "camera"
+      },
+      {
+        "title": "2. 浏览灵感",
+        "description": "挑选服装或让 AI 推荐搭配组合。",
+        "icon": "sparkles"
+      },
+      {
+        "title": "3. 获取灵感",
+        "description": "每日收到穿搭建议，并能即时虚拟试穿。",
+        "icon": "lightBulb"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "时尚爱好者对 DressMeAI 的真实反馈",
+    "title": "看看大家的虚拟试衣成功经验",
+    "items": [
+      {
+        "content": "AI 试衣非常精准！购买前就能看到真实上身效果。",
+        "author": "Sarah Johnson",
+        "role": "时尚爱好者",
+        "rating": 5
+      },
+      {
+        "content": "AI 生成的穿搭组合太棒了，真的像有私人造型师。",
+        "author": "Michael Chen",
+        "role": "都市白领",
+        "rating": 5
+      },
+      {
+        "content": "每日穿搭提醒特别实用，早晨选衣服不再纠结。",
+        "author": "Emma Williams",
+        "role": "内容创作者",
+        "rating": 5
+      }
+    ]
+  },
+  "cta": {
+    "title": "立刻体验虚拟试衣",
+    "description": "用 AI 驱动的虚拟试衣技术，抢先感受未来穿搭。",
+    "button": "开始虚拟试衣"
+  }
+}

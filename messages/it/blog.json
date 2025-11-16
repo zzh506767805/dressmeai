@@ -1,0 +1,137 @@
+{
+  "index": {
+    "meta": {
+      "title": "Blog sull'AI Try-On | DressMeAI",
+      "description": "Approfondimenti su cabina virtuale, e-commerce moda e retail digitale.",
+      "keywords": "try-on AI, cabina virtuale, moda digitale"
+    },
+    "hero": {
+      "eyebrow": "Blog DressMeAI",
+      "title": "Strategie per il try-on virtuale e il fashion tech",
+      "description": "Suggerimenti pratici per implementare l'IA, migliorare l'esperienza cliente e ridurre i resi."
+    },
+    "labels": {
+      "readMore": "Leggi tutto",
+      "publishedOn": "Pubblicato",
+      "tagPrefix": "Temi"
+    },
+    "cta": {
+      "title": "Prova ora il try-on AI",
+      "description": "Verifica in prima persona come DressMeAI influisce su conversioni e resi.",
+      "button": "Avvia prova virtuale"
+    },
+    "posts": {
+      "ai-virtual-try-on-technology-revolutionizing-fashion": {
+        "title": "Il try-on AI che rivoluziona lo shopping di moda",
+        "description": "Simulazioni realistiche che trasformano l'acquisto online.",
+        "keywords": [
+          "try-on AI",
+          "cabina virtuale",
+          "moda online"
+        ],
+        "publishDate": "2025-06-15",
+        "readTime": "8 min",
+        "excerpt": "Portare la cabina di prova sul web significa dare fiducia immediata al cliente."
+      },
+      "best-ai-clothing-try-on-apps-software-2025": {
+        "title": "Le migliori soluzioni try-on AI del 2025",
+        "description": "Confronto tra app e software per scegliere la piattaforma giusta.",
+        "keywords": [
+          "app try-on",
+          "software cabina",
+          "AI moda"
+        ],
+        "publishDate": "2025-06-12",
+        "readTime": "10 min",
+        "excerpt": "Dalle suite enterprise agli strumenti agili per boutique e creator."
+      },
+      "virtual-try-on-technology-reduces-return-rates": {
+        "title": "Ridurre i resi con il try-on virtuale",
+        "description": "Il modo più efficace per proteggere il margine nel fashion e-commerce.",
+        "keywords": [
+          "ridurre i resi",
+          "ROI try-on",
+          "fashion e-commerce"
+        ],
+        "publishDate": "2025-06-10",
+        "readTime": "7 min",
+        "excerpt": "Quando i resi esplodono, il try-on AI diventa il miglior alleato del P&L."
+      },
+      "ai-fashion-technology-future-online-shopping": {
+        "title": "Tecnologia fashion AI: il futuro dello shopping",
+        "description": "Try-on virtuale, personalizzazione e retail intelligente in un'unica guida.",
+        "keywords": [
+          "AI fashion",
+          "futuro shopping",
+          "retail intelligente"
+        ],
+        "publishDate": "2025-06-08",
+        "readTime": "12 min",
+        "excerpt": "L'IA sta ridisegnando ogni fase del customer journey."
+      }
+    }
+  },
+  "detail": {
+    "breadcrumbBlog": "Blog",
+    "relatedTitle": "Articoli correlati",
+    "cta": {
+      "title": "Metti alla prova ciò che hai letto",
+      "description": "Carica le immagini su DressMeAI e ottieni in pochi minuti un render realistico.",
+      "button": "Inizia ora"
+    },
+    "posts": {
+      "ai-virtual-try-on-technology-revolutionizing-fashion": {
+        "title": "Il try-on AI che rivoluziona lo shopping di moda",
+        "description": "Simulazioni realistiche che trasformano l'acquisto online.",
+        "keywords": [
+          "try-on AI",
+          "cabina virtuale",
+          "moda online"
+        ],
+        "publishDate": "2025-06-15",
+        "readTime": "8 min",
+        "author": "Team DressMeAI",
+        "content": "Il retail moda vive una svolta digitale e il try-on AI è il ponte tra schermo e camerino.\n\n## Cos'è il try-on AI?\n\nAnalizza corpo, postura e tessuti per generare un'immagine fedele.\n\n## Benefici per il cliente\n\nMeno resi, prova divertente da casa, risparmio di tempo, acquisti più sicuri.\n\n## Benefici per il brand\n\nConversioni in crescita, logistica più snella, esperienza distintiva, dati strategici."
+      },
+      "best-ai-clothing-try-on-apps-software-2025": {
+        "title": "Le migliori soluzioni try-on AI del 2025",
+        "description": "Confronto tra app e software per scegliere la piattaforma giusta.",
+        "keywords": [
+          "app try-on",
+          "software cabina",
+          "AI moda"
+        ],
+        "publishDate": "2025-06-12",
+        "readTime": "10 min",
+        "author": "Team DressMeAI",
+        "content": "Il mercato offre sia suite complete per grandi retailer sia strumenti veloci per boutique e creator. Analizziamo precisione del fit, flusso di contenuti, performance, analitiche e pricing."
+      },
+      "virtual-try-on-technology-reduces-return-rates": {
+        "title": "Ridurre i resi con il try-on virtuale",
+        "description": "Il modo più efficace per proteggere il margine nel fashion e-commerce.",
+        "keywords": [
+          "ridurre i resi",
+          "ROI try-on",
+          "fashion e-commerce"
+        ],
+        "publishDate": "2025-06-10",
+        "readTime": "7 min",
+        "author": "Team DressMeAI",
+        "content": "Nel fashion i resi raggiungono il 30-50%. Il try-on virtuale attacca le cause principali: taglia, stile, aspettativa sul tessuto. I brand che lo adottano riportano riduzioni dal 25 al 45% con un ritorno rapido sull'investimento."
+      },
+      "ai-fashion-technology-future-online-shopping": {
+        "title": "Tecnologia fashion AI: il futuro dello shopping",
+        "description": "Try-on virtuale, personalizzazione e retail intelligente in un'unica guida.",
+        "keywords": [
+          "AI fashion",
+          "futuro shopping",
+          "retail intelligente"
+        ],
+        "publishDate": "2025-06-08",
+        "readTime": "12 min",
+        "author": "Team DressMeAI",
+        "content": "L'IA alimenta già probatori virtuali, raccomandazioni personalizzate, pianificazione delle scorte e analisi dei trend. Preparatevi a esperienze AR, assistenti vocali, moda predittiva e design supportato dall'IA."
+      }
+    }
+  }
+}

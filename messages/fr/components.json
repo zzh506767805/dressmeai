@@ -1,0 +1,26 @@
+{
+  "imageUpload": {
+    "processing": "Traitement...",
+    "previewAlt": "Aperçu",
+    "clearButton": "Effacer l'image",
+    "uploadPrompt": "Cliquez ou faites glisser un fichier pour le téléverser",
+    "supportedFormats": "Formats pris en charge : {types}",
+    "sizeLimit": "Limite de taille de fichier : {size}",
+    "autoCompressHint": "Astuce : les gros fichiers sont automatiquement compressés pour rester sous {size}.",
+    "errors": {
+      "canvas": "Impossible de créer le contexte du canevas.",
+      "compress": "Échec de la compression de l'image.",
+      "load": "Échec du chargement de l'image.",
+      "invalidType": "Veuillez téléverser des images {types}.",
+      "tooLarge": "Le fichier est trop volumineux !\nTaille actuelle : {current}\nMaximum : {max}\nChoisissez une image plus petite.",
+      "stillTooLarge": "Même après compression, le fichier reste trop volumineux !\nTaille compressée : {compressed}\nMaximum : {max}\nChoisissez une image de plus faible résolution.",
+      "generic": "Le traitement de l'image a échoué."
+    },
+    "info": {
+      "originalSize": "Fichier d'origine : {size}",
+      "compressing": "Compression de l'image... (origine : {size})",
+      "compressed": "Compressé : {from} → {to}",
+      "fileSize": "Taille du fichier : {size}"
+    }
+  }
+}

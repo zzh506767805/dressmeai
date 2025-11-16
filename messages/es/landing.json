@@ -1,0 +1,112 @@
+{
+  "pageHeading": "Tecnología de probador virtual: mira cómo te queda la ropa",
+  "seo": {
+    "title": "Probador virtual AI gratis | DressMeAI - Prueba antes de comprar",
+    "description": "Probador virtual impulsado por IA. Sube tu foto y la prenda para obtener un resultado realista al instante.",
+    "keywordsPrimary": "probador virtual, IA de moda, probar ropa online, espejo virtual, armario virtual",
+    "keywordsSecondary": "cómo probar ropa online, app de probador virtual, probador gratuito, asistente de moda IA",
+    "ogDescription": "Prueba tus looks con IA y ve el resultado de inmediato.",
+    "twitterTitle": "Probador virtual AI gratis | DressMeAI",
+    "twitterDescription": "Sube una foto y descubre el resultado en segundos.",
+    "schemaDescription": "Plataforma de probador virtual y recomendaciones personalizadas basada en IA"
+  },
+  "hero": {
+    "headlineMain": "Probador virtual con IA",
+    "headlineAccent": "Tu experta personal en estilo",
+    "description": "Prueba tus outfits antes de comprar, recibe combinaciones creadas por IA y sugerencias diarias hechas para ti.",
+    "primaryCta": "Probar ahora",
+    "secondaryCta": "Saber más"
+  },
+  "demo": {
+    "eyebrow": "Vive el styling con IA ahora",
+    "title": "Demo de probador virtual - compruébalo",
+    "model": {
+      "title": "Sube la foto del modelo",
+      "label": "Sube una foto de cuerpo completo"
+    },
+    "clothing": {
+      "title": "Sube la foto de la prenda",
+      "label": "Sube la prenda que quieres probar"
+    },
+    "generateButton": "Generar",
+    "generating": "Generando...",
+    "resultTitle": "Resultado"
+  },
+  "features": {
+    "eyebrow": "Funciones de IA que transforman tus compras",
+    "title": "Tu asistente de moda completo",
+    "description": "Desde la prueba virtual hasta las recomendaciones personalizadas, la IA te ayuda a encontrar el outfit perfecto.",
+    "items": [
+      {
+        "name": "Probador virtual",
+        "description": "Comprueba exactamente cómo se ve la ropa en ti con nuestra IA avanzada.",
+        "icon": "camera"
+      },
+      {
+        "name": "Generación de estilos IA",
+        "description": "Obtén combinaciones completas según tus gustos y armario.",
+        "icon": "sparkles"
+      },
+      {
+        "name": "Recomendaciones inteligentes",
+        "description": "Recibe sugerencias diarias adaptadas a tu estilo, ocasión y clima.",
+        "icon": "lightBulb"
+      },
+      {
+        "name": "Mix & Match",
+        "description": "Experimenta con tu armario y crea looks perfectos para cada momento.",
+        "icon": "swatch"
+      }
+    ]
+  },
+  "howItWorks": {
+    "eyebrow": "Así funciona nuestro probador IA en 3 pasos",
+    "title": "Comienza tu viaje de moda con IA - sube tu foto y listo",
+    "steps": [
+      {
+        "title": "1. Crea tu perfil",
+        "description": "Sube tu foto y preferencias para personalizar la experiencia.",
+        "icon": "camera"
+      },
+      {
+        "title": "2. Explora estilos",
+        "description": "Revisa prendas o deja que la IA genere combinaciones perfectas.",
+        "icon": "sparkles"
+      },
+      {
+        "title": "3. Inspírate",
+        "description": "Recibe ideas diarias y pruébalas virtualmente.",
+        "icon": "lightBulb"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Lo que opinan los amantes de la moda",
+    "title": "Historias reales de éxito con el probador virtual",
+    "items": [
+      {
+        "content": "¡La precisión del probador con IA es increíble! Veo el resultado antes de comprar.",
+        "author": "Sarah Johnson",
+        "role": "Apasionada de la moda",
+        "rating": 5
+      },
+      {
+        "content": "Las combinaciones generadas por IA son increíbles. Es como tener un estilista personal.",
+        "author": "Michael Chen",
+        "role": "Profesional joven",
+        "rating": 5
+      },
+      {
+        "content": "Las recomendaciones diarias me ahorran mucho tiempo cada mañana.",
+        "author": "Emma Williams",
+        "role": "Creadora de contenido",
+        "rating": 5
+      }
+    ]
+  },
+  "cta": {
+    "title": "Empieza hoy tu probador virtual",
+    "description": "Vive el futuro de la moda con nuestra tecnología de probador AI.",
+    "button": "Probar virtualmente"
+  }
+}

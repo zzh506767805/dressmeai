@@ -1,0 +1,18 @@
+{
+  "brand": "AI ファッション",
+  "nav": {
+    "home": "ホーム",
+    "history": "履歴",
+    "blog": "ブログ"
+  },
+  "language": {
+    "label": "言語",
+    "ariaLabel": "サイトの言語を選択"
+  },
+  "footer": {
+    "title": "フレンドリンク"
+  },
+  "errors": {
+    "missingImages": "モデル写真と服の写真をアップロードしてください。"
+  }
+}

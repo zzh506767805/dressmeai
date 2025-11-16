@@ -1,0 +1,18 @@
+{
+  "brand": "AI Mode",
+  "nav": {
+    "home": "Accueil",
+    "history": "Historique",
+    "blog": "Blog"
+  },
+  "language": {
+    "label": "Langue",
+    "ariaLabel": "Choisir la langue du site"
+  },
+  "footer": {
+    "title": "Liens partenaires"
+  },
+  "errors": {
+    "missingImages": "Veuillez téléverser une photo du modèle et une photo du vêtement."
+  }
+}

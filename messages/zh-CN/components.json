@@ -1,0 +1,26 @@
+{
+  "imageUpload": {
+    "processing": "处理中...",
+    "previewAlt": "预览",
+    "clearButton": "清除图片",
+    "uploadPrompt": "点击或拖拽上传图片",
+    "supportedFormats": "支持的格式：{types}",
+    "sizeLimit": "文件大小限制：{size}",
+    "autoCompressHint": "提示：如果图片过大，系统会自动压缩至 {size} 内。",
+    "errors": {
+      "canvas": "无法创建画布上下文。",
+      "compress": "图片压缩失败。",
+      "load": "图片加载失败。",
+      "invalidType": "请上传 {types} 格式的图片。",
+      "tooLarge": "图片文件过大！\n当前大小：{current}\n最大限制：{max}\n请选择更小的图片。",
+      "stillTooLarge": "压缩后文件仍然过大！\n压缩后：{compressed}\n最大限制：{max}\n请选择分辨率更低的图片。",
+      "generic": "图片处理失败。"
+    },
+    "info": {
+      "originalSize": "原始文件：{size}",
+      "compressing": "正在压缩图片...（原始：{size}）",
+      "compressed": "已压缩：{from} → {to}",
+      "fileSize": "文件大小：{size}"
+    }
+  }
+}

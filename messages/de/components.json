@@ -1,0 +1,26 @@
+{
+  "imageUpload": {
+    "processing": "Wird verarbeitet...",
+    "previewAlt": "Vorschau",
+    "clearButton": "Bild löschen",
+    "uploadPrompt": "Zum Hochladen klicken oder Dateien hierher ziehen",
+    "supportedFormats": "Unterstützte Formate: {types}",
+    "sizeLimit": "Dateigrößenlimit: {size}",
+    "autoCompressHint": "Tipp: Große Dateien werden automatisch auf {size} komprimiert.",
+    "errors": {
+      "canvas": "Canvas-Kontext konnte nicht erstellt werden.",
+      "compress": "Bildkomprimierung fehlgeschlagen.",
+      "load": "Bild konnte nicht geladen werden.",
+      "invalidType": "Bitte laden Sie Bilder im Format {types} hoch.",
+      "tooLarge": "Die Bilddatei ist zu groß!\nAktuelle Größe: {current}\nMaximum: {max}\nBitte wählen Sie ein kleineres Bild.",
+      "stillTooLarge": "Auch nach der Komprimierung ist die Datei zu groß!\nKomprimierte Größe: {compressed}\nMaximum: {max}\nBitte wählen Sie ein Bild mit geringerer Auflösung.",
+      "generic": "Bildverarbeitung fehlgeschlagen."
+    },
+    "info": {
+      "originalSize": "Originaldatei: {size}",
+      "compressing": "Bild wird komprimiert... (Original: {size})",
+      "compressed": "Komprimiert: {from} → {to}",
+      "fileSize": "Dateigröße: {size}"
+    }
+  }
+}

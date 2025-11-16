@@ -1,0 +1,137 @@
+{
+  "index": {
+    "meta": {
+      "title": "Blog de probadores virtuales IA | DressMeAI",
+      "description": "Ideas sobre probadores virtuales, e-commerce de moda y retail digital.",
+      "keywords": "probador virtual IA, moda digital, reducir devoluciones"
+    },
+    "hero": {
+      "eyebrow": "Blog DressMeAI",
+      "title": "Guías prácticas de probadores virtuales y retail inteligente",
+      "description": "Aprende a implementar IA para mejorar la experiencia del cliente y cuidar el margen."
+    },
+    "labels": {
+      "readMore": "Leer más",
+      "publishedOn": "Publicado",
+      "tagPrefix": "Temas"
+    },
+    "cta": {
+      "title": "¿Listo para probar la IA de DressMeAI?",
+      "description": "Experimenta la tecnología y mide el impacto en tus páginas de producto.",
+      "button": "Probar probador virtual"
+    },
+    "posts": {
+      "ai-virtual-try-on-technology-revolutionizing-fashion": {
+        "title": "Cómo la IA está revolucionando la moda online",
+        "description": "Simulaciones realistas que cierran la brecha entre ver y comprar.",
+        "keywords": [
+          "IA probador",
+          "probador virtual",
+          "moda online"
+        ],
+        "publishDate": "2025-06-15",
+        "readTime": "8 min de lectura",
+        "excerpt": "Llevar el probador físico al móvil cambia la forma de vender moda." 
+      },
+      "best-ai-clothing-try-on-apps-software-2025": {
+        "title": "Las mejores apps y software de probador virtual en 2025",
+        "description": "Comparativa de plataformas para elegir la que mejor encaja con tu negocio.",
+        "keywords": [
+          "app probador virtual",
+          "software probador",
+          "IA moda"
+        ],
+        "publishDate": "2025-06-12",
+        "readTime": "10 min de lectura",
+        "excerpt": "Del stack enterprise a herramientas ligeras para creadores: esto es lo que funciona."
+      },
+      "virtual-try-on-technology-reduces-return-rates": {
+        "title": "Menos devoluciones gracias al probador virtual",
+        "description": "El método más consistente para reducir costes y aumentar la confianza.",
+        "keywords": [
+          "reducir devoluciones",
+          "ROI probador virtual",
+          "fashion ecommerce"
+        ],
+        "publishDate": "2025-06-10",
+        "readTime": "7 min de lectura",
+        "excerpt": "Las devoluciones devoran el margen; la IA ofrece un control real."
+      },
+      "ai-fashion-technology-future-online-shopping": {
+        "title": "Tecnología fashion IA: el futuro del shopping",
+        "description": "Probadores virtuales, personalización y retail inteligente.",
+        "keywords": [
+          "IA moda",
+          "futuro ecommerce",
+          "retail inteligente"
+        ],
+        "publishDate": "2025-06-08",
+        "readTime": "12 min de lectura",
+        "excerpt": "La IA redefine cada paso, desde la inspiración hasta el pago." 
+      }
+    }
+  },
+  "detail": {
+    "breadcrumbBlog": "Blog",
+    "relatedTitle": "Artículos relacionados",
+    "cta": {
+      "title": "Pon en práctica lo que acabas de leer",
+      "description": "Sube tus imágenes a DressMeAI y recibe un render realista en minutos.",
+      "button": "Iniciar prueba"
+    },
+    "posts": {
+      "ai-virtual-try-on-technology-revolutionizing-fashion": {
+        "title": "Cómo la IA está revolucionando la moda online",
+        "description": "Simulaciones realistas que cierran la brecha entre ver y comprar.",
+        "keywords": [
+          "IA probador",
+          "probador virtual",
+          "moda online"
+        ],
+        "publishDate": "2025-06-15",
+        "readTime": "8 min de lectura",
+        "author": "Equipo DressMeAI",
+        "content": "El retail moda vive una transformación digital y la IA de probadores es la protagonista.\n\n## ¿Qué es un probador virtual IA?\n\nAnaliza medidas, postura y tejidos para mostrar un look muy fiel a la realidad.\n\n## Beneficios para el cliente\n\nMenos devoluciones, más diversión al probar estilos, ahorro de tiempo, decisión segura.\n\n## Beneficios para la marca\n\nMayor conversión, costes logísticos más bajos, experiencia diferencial y datos útiles."
+      },
+      "best-ai-clothing-try-on-apps-software-2025": {
+        "title": "Las mejores apps y software de probador virtual en 2025",
+        "description": "Comparativa de plataformas para elegir la que mejor encaja con tu negocio.",
+        "keywords": [
+          "app probador virtual",
+          "software probador",
+          "IA moda"
+        ],
+        "publishDate": "2025-06-12",
+        "readTime": "10 min de lectura",
+        "author": "Equipo DressMeAI",
+        "content": "El mercado se divide entre suites enterprise con APIs potentes y herramientas rápidas para SMB y creadores. Evaluamos precisión, flujo de contenido, rendimiento, analítica y precio."
+      },
+      "virtual-try-on-technology-reduces-return-rates": {
+        "title": "Menos devoluciones gracias al probador virtual",
+        "description": "El método más consistente para reducir costes y aumentar la confianza.",
+        "keywords": [
+          "reducir devoluciones",
+          "ROI probador virtual",
+          "fashion ecommerce"
+        ],
+        "publishDate": "2025-06-10",
+        "readTime": "7 min de lectura",
+        "author": "Equipo DressMeAI",
+        "content": "Las devoluciones en moda alcanzan el 30-50 %. El probador virtual aborda las causas: talla, estilo, textura. Las marcas que lo adoptan reportan caídas del 25-45 % en devoluciones y ahorros inmediatos."
+      },
+      "ai-fashion-technology-future-online-shopping": {
+        "title": "Tecnología fashion IA: el futuro del shopping",
+        "description": "Probadores virtuales, personalización y retail inteligente.",
+        "keywords": [
+          "IA moda",
+          "futuro ecommerce",
+          "retail inteligente"
+        ],
+        "publishDate": "2025-06-08",
+        "readTime": "12 min de lectura",
+        "author": "Equipo DressMeAI",
+        "content": "La IA ya impulsa probadores virtuales, recomendaciones, gestión de inventario y análisis de tendencias. Prepárate para experiencias AR, asistentes de voz, moda predictiva y diseño asistido por IA." 
+      }
+    }
+  }
+}

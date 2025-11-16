@@ -1,0 +1,18 @@
+{
+  "brand": "AI Moda",
+  "nav": {
+    "home": "Inicio",
+    "history": "Historial",
+    "blog": "Blog"
+  },
+  "language": {
+    "label": "Idioma",
+    "ariaLabel": "Seleccionar idioma del sitio"
+  },
+  "footer": {
+    "title": "Enlaces amigos"
+  },
+  "errors": {
+    "missingImages": "Sube una foto del modelo y otra de la prenda."
+  }
+}

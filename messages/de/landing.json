@@ -1,0 +1,112 @@
+{
+  "pageHeading": "Virtuelle Anprobe – so sieht Kleidung an Ihnen aus",
+  "seo": {
+    "title": "Kostenlose AI-Anprobe online | DressMeAI - Vor dem Kauf testen",
+    "description": "Kostenlose virtuelle Anprobe mit KI: Foto von Ihnen und dem Kleidungsstück hochladen und in Sekunden ein realistisches Ergebnis erhalten.",
+    "keywordsPrimary": "virtuelle Anprobe, AI Umkleidekabine, Kleidung online probieren, Fashion AI",
+    "keywordsSecondary": "Kleidung online testen, virtuelle Umkleide App, kostenloses virtuelles Anprobieren, AI Style Assistant",
+    "ogDescription": "Probieren Sie Outfits per KI und sehen Sie sofort das Ergebnis.",
+    "twitterTitle": "Kostenlose AI-Anprobe online | DressMeAI",
+    "twitterDescription": "Foto hochladen und in wenigen Sekunden Ergebnisse erhalten.",
+    "schemaDescription": "KI-gestützte Plattform für virtuelle Anprobe und persönliche Styling-Empfehlungen"
+  },
+  "hero": {
+    "headlineMain": "AI Virtuelle Anprobe",
+    "headlineAccent": "Ihr persönlicher Style-Experte",
+    "description": "Probieren Sie Looks virtuell aus, erhalten Sie KI-Kombinationen und tägliche Outfit-Ideen.",
+    "primaryCta": "Jetzt ausprobieren",
+    "secondaryCta": "Mehr erfahren"
+  },
+  "demo": {
+    "eyebrow": "Erleben Sie jetzt AI-Styling",
+    "title": "Virtuelle Anprobe Demo – überzeugen Sie sich selbst",
+    "model": {
+      "title": "Modellfoto hochladen",
+      "label": "Ganzkörperfoto hochladen"
+    },
+    "clothing": {
+      "title": "Kleidungsfoto hochladen",
+      "label": "Das Kleidungsstück hochladen"
+    },
+    "generateButton": "Generieren",
+    "generating": "Wird erstellt...",
+    "resultTitle": "Ergebnis"
+  },
+  "features": {
+    "eyebrow": "AI-Features, die Ihr Shopping verändern",
+    "title": "Ihr kompletter AI-Modeassistent",
+    "description": "Von virtuellen Anproben bis zu personalisierten Empfehlungen – unsere KI findet Ihren perfekten Look.",
+    "items": [
+      {
+        "name": "Virtuelle Anprobe",
+        "description": "Sehen Sie, wie Kleidung mit präziser KI passend auf Ihrem Körper sitzt.",
+        "icon": "camera"
+      },
+      {
+        "name": "AI Style-Generator",
+        "description": "Komplette Outfits auf Basis Ihres Geschmacks und Kleiderschranks.",
+        "icon": "sparkles"
+      },
+      {
+        "name": "Smarte Empfehlungen",
+        "description": "Personalisierte Vorschläge für Stil, Anlass und Wetter.",
+        "icon": "lightBulb"
+      },
+      {
+        "name": "Mix & Match",
+        "description": "Kombinieren Sie vorhandene Teile zu perfekten Looks für jeden Moment.",
+        "icon": "swatch"
+      }
+    ]
+  },
+  "howItWorks": {
+    "eyebrow": "So funktioniert die AI-Anprobe in 3 Schritten",
+    "title": "Starten Sie Ihre AI-Fashion-Reise – Foto hochladen und loslegen",
+    "steps": [
+      {
+        "title": "1. Profil erstellen",
+        "description": "Foto und Stilvorlieben teilen, um Ihr Erlebnis zu personalisieren.",
+        "icon": "camera"
+      },
+      {
+        "title": "2. Styles entdecken",
+        "description": "Kleidung auswählen oder der KI die perfekte Kombination überlassen.",
+        "icon": "sparkles"
+      },
+      {
+        "title": "3. Inspiration erhalten",
+        "description": "Tägliche Outfit-Ideen erhalten und virtuell anprobieren.",
+        "icon": "lightBulb"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Das sagen Fashion-Fans über DressMeAI",
+    "title": "Echte Erfolgsgeschichten der virtuellen Anprobe",
+    "items": [
+      {
+        "content": "Die AI-Anprobe ist unglaublich genau! Ich sehe das Ergebnis vor dem Kauf.",
+        "author": "Sarah Johnson",
+        "role": "Modefan",
+        "rating": 5
+      },
+      {
+        "content": "Die von der KI erzeugten Outfits sind fantastisch – wie ein persönlicher Stylist.",
+        "author": "Michael Chen",
+        "role": "Junger Profi",
+        "rating": 5
+      },
+      {
+        "content": "Die täglichen Empfehlungen sparen mir morgens viel Zeit.",
+        "author": "Emma Williams",
+        "role": "Content-Creator",
+        "rating": 5
+      }
+    ]
+  },
+  "cta": {
+    "title": "Starten Sie noch heute Ihre virtuelle Anprobe",
+    "description": "Erleben Sie die Zukunft der Mode mit AI-gestützter Anprobe.",
+    "button": "Virtuelle Anprobe starten"
+  }
+}

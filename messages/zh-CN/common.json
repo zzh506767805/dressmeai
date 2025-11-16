@@ -1,0 +1,18 @@
+{
+  "brand": "AI 时尚",
+  "nav": {
+    "home": "首页",
+    "history": "历史记录",
+    "blog": "博客"
+  },
+  "language": {
+    "label": "语言",
+    "ariaLabel": "选择站点语言"
+  },
+  "footer": {
+    "title": "友情链接"
+  },
+  "errors": {
+    "missingImages": "请上传模特照片和服装照片。"
+  }
+}

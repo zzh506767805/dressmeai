@@ -1,0 +1,18 @@
+{
+  "brand": "AI Fashion",
+  "nav": {
+    "home": "Главная",
+    "history": "История",
+    "blog": "Блог"
+  },
+  "language": {
+    "label": "Язык",
+    "ariaLabel": "Выбрать язык сайта"
+  },
+  "footer": {
+    "title": "Друзья проекта"
+  },
+  "errors": {
+    "missingImages": "Загрузите фото модели и изображение одежды."
+  }
+}

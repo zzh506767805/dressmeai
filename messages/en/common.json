@@ -1,0 +1,18 @@
+{
+  "brand": "AI FASHION",
+  "nav": {
+    "home": "Home",
+    "history": "History",
+    "blog": "Blog"
+  },
+  "language": {
+    "label": "Language",
+    "ariaLabel": "Select site language"
+  },
+  "footer": {
+    "title": "Friend Links"
+  },
+  "errors": {
+    "missingImages": "Please upload a model photo and a clothing photo."
+  }
+}

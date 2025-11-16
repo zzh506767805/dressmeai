@@ -1,3 +1,7 @@
+const i18nSettings = require('./i18n/settings.json')
+
+const locales = i18nSettings.locales.map(locale => locale.code)
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -9,6 +13,11 @@ const nextConfig = {
       'images.unsplash.com'
     ],
     unoptimized: true
+  },
+  i18n: {
+    locales,
+    defaultLocale: i18nSettings.defaultLocale,
+    localeDetection: false
   },
   async redirects() {
     return [

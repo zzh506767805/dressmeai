@@ -1,0 +1,18 @@
+{
+  "brand": "AI Fashion",
+  "nav": {
+    "home": "Home",
+    "history": "Cronologia",
+    "blog": "Blog"
+  },
+  "language": {
+    "label": "Lingua",
+    "ariaLabel": "Seleziona la lingua del sito"
+  },
+  "footer": {
+    "title": "Link amici"
+  },
+  "errors": {
+    "missingImages": "Carica una foto del modello e una del capo."
+  }
+}

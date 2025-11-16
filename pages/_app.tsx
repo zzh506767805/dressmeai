@@ -1,12 +1,19 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
+import { NextIntlClientProvider } from 'next-intl'
 import GoogleAnalytics from '../components/Analytics/GoogleAnalytics'
 import { pageview } from '../utils/analytics'
+import { defaultLocale, isSupportedLocale } from '../i18n/config'
+import { getMessages } from '../i18n/messages'
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
+  const locale = isSupportedLocale(router.locale) ? router.locale : defaultLocale
+  const messages = useMemo(() => getMessages(locale), [locale])
+  const defaultTimeZone = 'UTC'
+  const nowValue = useMemo(() => Date.now(), [])
 
   useEffect(() => {
     const handleRouteChange = (url: string) => {
@@ -71,9 +78,9 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <>
+    <NextIntlClientProvider locale={locale} messages={messages} timeZone={defaultTimeZone} now={new Date(nowValue)}>
       <GoogleAnalytics />
       <Component {...pageProps} />
-    </>
+    </NextIntlClientProvider>
   )
-} 
+}

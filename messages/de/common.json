@@ -1,0 +1,18 @@
+{
+  "brand": "AI Fashion",
+  "nav": {
+    "home": "Startseite",
+    "history": "Verlauf",
+    "blog": "Blog"
+  },
+  "language": {
+    "label": "Sprache",
+    "ariaLabel": "Seitensprache wählen"
+  },
+  "footer": {
+    "title": "Partnerlinks"
+  },
+  "errors": {
+    "missingImages": "Bitte laden Sie ein Modellfoto und ein Kleidungsfoto hoch."
+  }
+}

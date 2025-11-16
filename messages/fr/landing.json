@@ -1,0 +1,112 @@
+{
+  "pageHeading": "Technologie d'essayage virtuel - voyez le vêtement sur vous",
+  "seo": {
+    "title": "Essayage virtuel AI gratuit | DressMeAI - Essayez avant d'acheter",
+    "description": "Essayage virtuel gratuit alimenté par l'IA. Téléversez votre photo et celle du vêtement pour obtenir un rendu réaliste en quelques secondes.",
+    "keywordsPrimary": "essayage virtuel, cabine d'essayage AI, essayer des vêtements en ligne, mode AI, miroir virtuel",
+    "keywordsSecondary": "comment essayer des vêtements en ligne, application d'essayage virtuel, dressing virtuel gratuit, assistant de mode AI",
+    "ogDescription": "Essayez vos tenues grâce à l'IA et voyez le résultat immédiatement.",
+    "twitterTitle": "Essayage virtuel AI gratuit | DressMeAI",
+    "twitterDescription": "Téléversez une photo et voyez le rendu instantanément.",
+    "schemaDescription": "Plateforme d'essayage virtuel et de recommandations personnalisées propulsée par l'IA"
+  },
+  "hero": {
+    "headlineMain": "Essayage virtuel IA",
+    "headlineAccent": "Votre expert style personnel",
+    "description": "Essayez virtuellement avant d'acheter, recevez des tenues générées par l'IA et des idées quotidiennes adaptées à votre style.",
+    "primaryCta": "Essayer maintenant",
+    "secondaryCta": "En savoir plus"
+  },
+  "demo": {
+    "eyebrow": "Vivez l'expérience styling IA maintenant",
+    "title": "Démo d'essayage virtuel - voyez par vous-même",
+    "model": {
+      "title": "Téléverser la photo du modèle",
+      "label": "Importez une photo en pied"
+    },
+    "clothing": {
+      "title": "Téléverser la photo du vêtement",
+      "label": "Importez le vêtement à essayer"
+    },
+    "generateButton": "Générer",
+    "generating": "Génération...",
+    "resultTitle": "Résultat"
+  },
+  "features": {
+    "eyebrow": "Des fonctions IA qui transforment votre shopping",
+    "title": "Votre assistant mode tout-en-un : essayage, style et achats",
+    "description": "De l'essayage virtuel aux recommandations personnalisées, l'IA révolutionne votre façon de trouver le look parfait.",
+    "items": [
+      {
+        "name": "Essayage virtuel",
+        "description": "Visualisez précisément comment les vêtements tombent sur vous, comme dans une vraie cabine.",
+        "icon": "camera"
+      },
+      {
+        "name": "Génération de styles IA",
+        "description": "Des idées de tenues complètes créées selon vos goûts et votre garde-robe.",
+        "icon": "sparkles"
+      },
+      {
+        "name": "Recommandations intelligentes",
+        "description": "Recevez chaque jour des suggestions adaptées à votre style, à l'occasion et à la météo.",
+        "icon": "lightBulb"
+      },
+      {
+        "name": "Mix & Match",
+        "description": "Combinez vos pièces pour créer des looks parfaits en toute situation.",
+        "icon": "swatch"
+      }
+    ]
+  },
+  "howItWorks": {
+    "eyebrow": "3 étapes pour profiter de l'essayage IA",
+    "title": "Commencez votre parcours mode AI - téléversez et essayez",
+    "steps": [
+      {
+        "title": "1. Créez votre profil",
+        "description": "Téléversez une photo et vos préférences pour personnaliser l'expérience.",
+        "icon": "camera"
+      },
+      {
+        "title": "2. Explorez les styles",
+        "description": "Parcourez les vêtements ou laissez l'IA créer des combinaisons idéales.",
+        "icon": "sparkles"
+      },
+      {
+        "title": "3. Trouvez l'inspiration",
+        "description": "Recevez des idées quotidiennes et essayez-les virtuellement.",
+        "icon": "lightBulb"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Ils parlent de DressMeAI",
+    "title": "Histoires vraies de réussites en essayage virtuel",
+    "items": [
+      {
+        "content": "La précision de l'essayage IA est incroyable ! Je vois exactement le rendu avant d'acheter.",
+        "author": "Sarah Johnson",
+        "role": "Passionnée de mode",
+        "rating": 5
+      },
+      {
+        "content": "Les tenues générées par l'IA sont dingues. C'est comme un styliste perso qui connaît mes goûts.",
+        "author": "Michael Chen",
+        "role": "Jeune professionnel",
+        "rating": 5
+      },
+      {
+        "content": "Les suggestions quotidiennes me font gagner un temps fou chaque matin.",
+        "author": "Emma Williams",
+        "role": "Créatrice de contenu",
+        "rating": 5
+      }
+    ]
+  },
+  "cta": {
+    "title": "Commencez votre expérience d'essayage virtuel",
+    "description": "Découvrez le futur de la mode grâce à notre technologie d'essayage IA.",
+    "button": "Lancer l'essayage virtuel"
+  }
+}

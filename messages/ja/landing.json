@@ -1,0 +1,112 @@
+{
+  "pageHeading": "バーチャル試着テクノロジー - 体に合わせた見え方をチェック",
+  "seo": {
+    "title": "AI バーチャル試着を無料体験 | DressMeAI - 買う前に着てみよう",
+    "description": "無料の AI バーチャル試着で、服がどのように見えるかを即座に確認。写真と服の画像をアップロードするだけでリアルな結果を得られます。",
+    "keywordsPrimary": "バーチャル試着, AI 試着室, オンライン試着, ファッション AI, 仮想クローゼット, 買う前に試す",
+    "keywordsSecondary": "オンラインで服を試す方法, バーチャル試着アプリ, 無料ドレッシングルーム, AI コーディネート",
+    "ogDescription": "無料の AI バーチャル試着でリアルな着用イメージを体験しよう。",
+    "twitterTitle": "AI バーチャル試着を無料体験 | DressMeAI",
+    "twitterDescription": "人物写真と服をアップロードして数秒で結果を確認。",
+    "schemaDescription": "AI 駆動のバーチャル試着とパーソナルスタイリングプラットフォーム"
+  },
+  "hero": {
+    "headlineMain": "AI バーチャル試着",
+    "headlineAccent": "あなたの専属スタイリスト",
+    "description": "購入前に仮想で試着し、AI が提案するコーデや毎日のスタイル提案を受け取りましょう。",
+    "primaryCta": "今すぐ試す",
+    "secondaryCta": "詳しく見る"
+  },
+  "demo": {
+    "eyebrow": "AI スタイリングを今すぐ体験",
+    "title": "バーチャル試着デモ - 効果を自分の目で",
+    "model": {
+      "title": "モデル写真をアップロード",
+      "label": "全身写真をアップロード"
+    },
+    "clothing": {
+      "title": "服の写真をアップロード",
+      "label": "試着したい服をアップロード"
+    },
+    "generateButton": "生成する",
+    "generating": "生成中...",
+    "resultTitle": "結果"
+  },
+  "features": {
+    "eyebrow": "ショッピング体験を変える AI ファッション機能",
+    "title": "試着・スタイリング・購入を支えるオールインワン AI",
+    "description": "バーチャル試着からパーソナル提案まで、AI が理想のスタイル探しをサポートします。",
+    "items": [
+      {
+        "name": "バーチャル試着",
+        "description": "高度な AI で実際の試着室のように正確な着用イメージを再現します。",
+        "icon": "camera"
+      },
+      {
+        "name": "AI コーデ生成",
+        "description": "好みとワードローブに基づいて完璧なコーディネートを作成します。",
+        "icon": "sparkles"
+      },
+      {
+        "name": "スマート提案",
+        "description": "天気やシーンに合わせた毎日のスタイル提案を受け取れます。",
+        "icon": "lightBulb"
+      },
+      {
+        "name": "ミックス & マッチ",
+        "description": "ワードローブを自由に組み合わせて、あらゆるシーンに合うルックを発見。",
+        "icon": "swatch"
+      }
+    ]
+  },
+  "howItWorks": {
+    "eyebrow": "3 ステップで完成する AI バーチャル試着",
+    "title": "写真をアップロードしてすぐに AI ファッション体験",
+    "steps": [
+      {
+        "title": "1. プロフィール作成",
+        "description": "写真と好みを登録して、パーソナライズを行います。",
+        "icon": "camera"
+      },
+      {
+        "title": "2. スタイル探索",
+        "description": "服を選ぶか、AI に理想のコーデ作りを任せましょう。",
+        "icon": "sparkles"
+      },
+      {
+        "title": "3. インスピレーション",
+        "description": "毎日のコーデ提案とバーチャル試着で新しい着こなしを発見。",
+        "icon": "lightBulb"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "DressMeAI に寄せられたリアルな声",
+    "title": "バーチャル試着で成功したユーザーの体験談",
+    "items": [
+      {
+        "content": "AI 試着の精度が本当に高いです！購入前に仕上がりを確認できます。",
+        "author": "Sarah Johnson",
+        "role": "ファッション好き",
+        "rating": 5
+      },
+      {
+        "content": "AI が作るコーデが素晴らしく、私の好みを完璧に理解しています。",
+        "author": "Michael Chen",
+        "role": "若手プロフェッショナル",
+        "rating": 5
+      },
+      {
+        "content": "毎朝のスタイル提案のおかげで、服選びに悩まなくなりました。",
+        "author": "Emma Williams",
+        "role": "コンテンツクリエイター",
+        "rating": 5
+      }
+    ]
+  },
+  "cta": {
+    "title": "今すぐバーチャル試着を始めよう",
+    "description": "AI パワーのバーチャル試着でファッションの未来を体験してください。",
+    "button": "バーチャル試着を体験"
+  }
+}

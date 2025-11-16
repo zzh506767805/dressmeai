@@ -1,0 +1,112 @@
+{
+  "pageHeading": "Tecnologia di prova virtuale - guarda come ti sta",
+  "seo": {
+    "title": "Prova virtuale AI gratuita | DressMeAI - Prova prima di acquistare",
+    "description": "Prova virtuale alimentata da IA: carica la tua foto e quella del capo per ottenere un risultato realistico in pochi secondi.",
+    "keywordsPrimary": "prova virtuale, cabina AI, provare vestiti online, specchio virtuale, guardaroba virtuale",
+    "keywordsSecondary": "come provare vestiti online, app di prova virtuale, prova virtuale gratuita, assistente di stile IA",
+    "ogDescription": "Prova i tuoi outfit con l'IA e guarda il risultato immediatamente.",
+    "twitterTitle": "Prova virtuale AI gratuita | DressMeAI",
+    "twitterDescription": "Carica le immagini e ottieni il risultato in pochi secondi.",
+    "schemaDescription": "Piattaforma di prova virtuale e raccomandazioni personalizzate basata su IA"
+  },
+  "hero": {
+    "headlineMain": "Prova virtuale con IA",
+    "headlineAccent": "La tua esperta di stile personale",
+    "description": "Prova virtualmente prima di acquistare, ricevi outfit curati dall'IA e suggerimenti quotidiani su misura.",
+    "primaryCta": "Prova ora",
+    "secondaryCta": "Scopri di più"
+  },
+  "demo": {
+    "eyebrow": "Vivi ora lo styling AI",
+    "title": "Demo di prova virtuale - guarda il risultato",
+    "model": {
+      "title": "Carica la foto del modello",
+      "label": "Carica una foto a figura intera"
+    },
+    "clothing": {
+      "title": "Carica la foto del capo",
+      "label": "Carica il capo da provare"
+    },
+    "generateButton": "Genera",
+    "generating": "Generazione...",
+    "resultTitle": "Risultato"
+  },
+  "features": {
+    "eyebrow": "Funzioni AI che trasformano lo shopping",
+    "title": "Il tuo assistente di moda completo",
+    "description": "Dalla prova virtuale alle raccomandazioni personalizzate, l'IA rivoluziona il modo di trovare il look perfetto.",
+    "items": [
+      {
+        "name": "Prova virtuale",
+        "description": "Guarda con precisione come ti stanno i capi grazie alla nostra IA avanzata.",
+        "icon": "camera"
+      },
+      {
+        "name": "Generazione di outfit IA",
+        "description": "Outfit completi creati in base ai tuoi gusti e al tuo guardaroba.",
+        "icon": "sparkles"
+      },
+      {
+        "name": "Raccomandazioni intelligenti",
+        "description": "Suggerimenti quotidiani personalizzati per stile, occasione e meteo.",
+        "icon": "lightBulb"
+      },
+      {
+        "name": "Mix & Match",
+        "description": "Combina liberamente il tuo guardaroba per ogni occasione.",
+        "icon": "swatch"
+      }
+    ]
+  },
+  "howItWorks": {
+    "eyebrow": "Così funziona il nostro camerino IA in 3 passi",
+    "title": "Inizia il tuo viaggio fashion con IA - basta una foto",
+    "steps": [
+      {
+        "title": "1. Crea il tuo profilo",
+        "description": "Carica una foto e le tue preferenze per personalizzare l'esperienza.",
+        "icon": "camera"
+      },
+      {
+        "title": "2. Esplora gli stili",
+        "description": "Scegli capi o lascia che l'IA costruisca la combinazione perfetta.",
+        "icon": "sparkles"
+      },
+      {
+        "title": "3. Ispirati",
+        "description": "Ricevi idee quotidiane e provale virtualmente.",
+        "icon": "lightBulb"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Cosa dicono gli appassionati di moda",
+    "title": "Storie reali di successo con la prova virtuale",
+    "items": [
+      {
+        "content": "La funzione di prova con IA è super precisa! Vedo il risultato prima di acquistare.",
+        "author": "Sarah Johnson",
+        "role": "Appassionata di moda",
+        "rating": 5
+      },
+      {
+        "content": "Le combinazioni create dall'IA sono incredibili, è come avere una stylist personale.",
+        "author": "Michael Chen",
+        "role": "Giovane professionista",
+        "rating": 5
+      },
+      {
+        "content": "I suggerimenti quotidiani mi fanno risparmiare tempo ogni mattina.",
+        "author": "Emma Williams",
+        "role": "Content creator",
+        "rating": 5
+      }
+    ]
+  },
+  "cta": {
+    "title": "Inizia oggi la tua prova virtuale",
+    "description": "Scopri il futuro della moda con la nostra tecnologia di prova AI.",
+    "button": "Avvia prova virtuale"
+  }
+}

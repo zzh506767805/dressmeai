@@ -1,0 +1,26 @@
+{
+  "imageUpload": {
+    "processing": "Elaborazione...",
+    "previewAlt": "Anteprima",
+    "clearButton": "Rimuovi immagine",
+    "uploadPrompt": "Fai clic o trascina i file per caricarli",
+    "supportedFormats": "Formati supportati: {types}",
+    "sizeLimit": "Limite di dimensione: {size}",
+    "autoCompressHint": "Suggerimento: I file grandi vengono compressi automaticamente entro {size}.",
+    "errors": {
+      "canvas": "Impossibile creare il contesto canvas.",
+      "compress": "Compressione dell'immagine non riuscita.",
+      "load": "Caricamento dell'immagine non riuscito.",
+      "invalidType": "Carica immagini in formato {types}.",
+      "tooLarge": "Il file immagine è troppo grande!\nDimensione attuale: {current}\nMassimo: {max}\nScegli un'immagine più piccola.",
+      "stillTooLarge": "Dopo la compressione è ancora troppo grande!\nDimensione compressa: {compressed}\nMassimo: {max}\nScegli un'immagine con risoluzione inferiore.",
+      "generic": "Elaborazione dell'immagine non riuscita."
+    },
+    "info": {
+      "originalSize": "File originale: {size}",
+      "compressing": "Compressione dell'immagine... (originale: {size})",
+      "compressed": "Compresso: {from} → {to}",
+      "fileSize": "Dimensione del file: {size}"
+    }
+  }
+}

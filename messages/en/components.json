@@ -1,0 +1,26 @@
+{
+  "imageUpload": {
+    "processing": "Processing...",
+    "previewAlt": "Preview",
+    "clearButton": "Clear image",
+    "uploadPrompt": "Click or drag files to upload",
+    "supportedFormats": "Supported formats: {types}",
+    "sizeLimit": "File size limit: {size}",
+    "autoCompressHint": "Tip: Large files are automatically compressed to stay within {size}.",
+    "errors": {
+      "canvas": "Failed to create canvas context.",
+      "compress": "Image compression failed.",
+      "load": "Image loading failed.",
+      "invalidType": "Please upload {types} images.",
+      "tooLarge": "Image file is too large!\nCurrent size: {current}\nMaximum: {max}\nPlease choose a smaller image.",
+      "stillTooLarge": "Compressed image is still too large!\nCompressed size: {compressed}\nMaximum: {max}\nPlease choose an image with a lower resolution.",
+      "generic": "Image processing failed."
+    },
+    "info": {
+      "originalSize": "Original file: {size}",
+      "compressing": "Compressing image... (original: {size})",
+      "compressed": "Compressed: {from} → {to}",
+      "fileSize": "File size: {size}"
+    }
+  }
+}

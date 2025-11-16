@@ -1,0 +1,26 @@
+{
+  "imageUpload": {
+    "processing": "처리 중...",
+    "previewAlt": "미리보기",
+    "clearButton": "이미지 지우기",
+    "uploadPrompt": "이미지를 클릭하거나 끌어다 놓아 업로드하세요",
+    "supportedFormats": "지원 형식: {types}",
+    "sizeLimit": "파일 크기 제한: {size}",
+    "autoCompressHint": "팁: 큰 파일은 자동으로 압축되어 {size} 이내로 맞춰집니다.",
+    "errors": {
+      "canvas": "캔버스 컨텍스트를 만들 수 없습니다.",
+      "compress": "이미지 압축에 실패했습니다.",
+      "load": "이미지를 불러오지 못했습니다.",
+      "invalidType": "{types} 형식의 이미지를 업로드해 주세요.",
+      "tooLarge": "이미지 파일이 너무 큽니다!\n현재 크기: {current}\n최대 크기: {max}\n더 작은 이미지를 선택해 주세요.",
+      "stillTooLarge": "압축 후에도 파일이 너무 큽니다!\n압축 크기: {compressed}\n최대 크기: {max}\n해상도가 낮은 이미지를 선택해 주세요.",
+      "generic": "이미지 처리에 실패했습니다."
+    },
+    "info": {
+      "originalSize": "원본 파일: {size}",
+      "compressing": "이미지 압축 중... (원본: {size})",
+      "compressed": "압축됨: {from} → {to}",
+      "fileSize": "파일 크기: {size}"
+    }
+  }
+}

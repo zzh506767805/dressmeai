@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import GoogleAnalytics from '../components/Analytics/GoogleAnalytics'
+import { defaultLocale } from '../i18n/config'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dressmeai.com'),
@@ -75,7 +76,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang={defaultLocale}>
       <body>
         <GoogleAnalytics />
         {children}
