@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Head from 'next/head';
@@ -9,6 +9,7 @@ type Status = 'loading' | 'success' | 'error' | 'completed' | 'failed';
 interface GenerationResult {
   imageUrl: string;
   timestamp: number;
+  sessionId?: string;
 }
 
 const STORAGE_KEY = 'currentGeneration';
@@ -16,29 +17,43 @@ const STORAGE_KEY = 'currentGeneration';
 export default function Success() {
   const router = useRouter();
   const { session_id, status: urlStatus, imageUrl: urlImageUrl } = router.query;
+  const sessionId = useMemo(() => {
+    if (Array.isArray(session_id)) return session_id[0];
+    return typeof session_id === 'string' ? session_id : undefined;
+  }, [session_id]);
+  const statusParam = useMemo(() => {
+    if (Array.isArray(urlStatus)) return urlStatus[0];
+    return typeof urlStatus === 'string' ? urlStatus : undefined;
+  }, [urlStatus]);
+  const imageUrlParam = useMemo(() => {
+    if (Array.isArray(urlImageUrl)) return urlImageUrl[0];
+    return typeof urlImageUrl === 'string' ? urlImageUrl : undefined;
+  }, [urlImageUrl]);
   const [status, setStatus] = useState<Status>('loading');
   const [step, setStep] = useState<string>('Checking generation status...');
   const [resultImage, setResultImage] = useState<string>('');
   const [error, setError] = useState<string>('');
 
   useEffect(() => {
+    if (!router.isReady) return;
+
     // 如果 URL 已经包含完成状态和图片 URL，直接显示结果
-    if (urlStatus === 'completed' && urlImageUrl) {
+    if (statusParam === 'completed' && imageUrlParam) {
       setStatus('completed');
-      setResultImage(urlImageUrl as string);
+      setResultImage(imageUrlParam);
       return;
     }
 
     // 检查 localStorage 中是否有未完成的生成结果
     const savedResult = safeGetJSONItem<GenerationResult | null>(STORAGE_KEY, null);
-    if (savedResult && savedResult.imageUrl) {
+    if (savedResult && savedResult.imageUrl && sessionId && savedResult.sessionId === sessionId) {
       setStatus('completed');
       setResultImage(savedResult.imageUrl);
       // 更新 URL，但不触发页面刷新
       router.replace(
         {
           pathname: router.pathname,
-          query: { ...router.query, status: 'completed', imageUrl: savedResult.imageUrl }
+          query: { ...router.query, session_id: sessionId, status: 'completed', imageUrl: savedResult.imageUrl }
         },
         undefined,
         { shallow: true }
@@ -46,13 +61,13 @@ export default function Success() {
       return;
     }
 
-    if (!session_id) return;
+    if (!sessionId) return;
 
     const startGeneration = async () => {
       try {
         // 验证支付状态
         setStep('Verifying payment status...');
-        const verifyResponse = await fetch(`/api/verify-payment?session_id=${session_id}`);
+        const verifyResponse = await fetch(`/api/verify-payment?session_id=${sessionId}`);
         if (!verifyResponse.ok) {
           throw new Error('Payment verification failed');
         }
@@ -184,7 +199,8 @@ export default function Success() {
             // 保存当前生成结果
             const currentResult: GenerationResult = {
               imageUrl,
-              timestamp: Date.now()
+              timestamp: Date.now(),
+              sessionId
             };
             safeSetJSONItem(STORAGE_KEY, currentResult);
 
@@ -192,7 +208,7 @@ export default function Success() {
             router.replace(
               {
                 pathname: router.pathname,
-                query: { ...router.query, status: 'completed', imageUrl }
+                query: { ...router.query, session_id: sessionId, status: 'completed', imageUrl }
               },
               undefined,
               { shallow: true }
@@ -252,7 +268,7 @@ export default function Success() {
     };
 
     startGeneration();
-  }, [session_id, urlStatus, urlImageUrl, router]);
+  }, [router.isReady, sessionId, statusParam, imageUrlParam, router]);
 
   // 清理函数：离开页面时清除当前生成结果
   useEffect(() => {

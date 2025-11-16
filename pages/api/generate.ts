@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import fetch from 'node-fetch';
 import sharp from 'sharp';
 
 interface ErrorResponse {

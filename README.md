@@ -14,7 +14,7 @@ DressMeAI is an AI-powered virtual try-on platform that allows users to visualiz
 - Frontend: Next.js, TypeScript, Tailwind CSS
 - APIs: 
   - Aliyun AI for virtual try-on
-  - Cloudinary for image storage
+  - Azure Blob Storage for image hosting
   - Stripe for payment processing
 
 ## Getting Started
@@ -47,10 +47,10 @@ Create a `.env.local` file in the root directory with the following variables:
 # Aliyun AI Service
 ALIYUN_API_KEY=your_aliyun_api_key
 
-# Cloudinary Image Storage
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
+# Azure Blob Storage
+AZURE_STORAGE_ACCOUNT=your_storage_account
+AZURE_STORAGE_KEY=your_storage_key
+AZURE_STORAGE_CONTAINER=your_container_name
 
 # Stripe Payment (Production Mode)
 STRIPE_SECRET_KEY=sk_live_your_live_secret_key
@@ -93,8 +93,7 @@ dressmeai/
 ├── components/     # React组件
 │   └── ImageUpload.tsx    # 图片上传组件
 ├── pages/          # 页面文件
-│   ├── api/        # API路由
-│   │   └── generate.ts    # 换装API处理
+│   ├── api/        # API路由（上传/试穿/状态/支付等）
 │   └── index.tsx   # 主页面
 ├── public/         # 静态资源
 ├── styles/         # 样式文件

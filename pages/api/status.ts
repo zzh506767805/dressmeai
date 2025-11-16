@@ -23,11 +23,6 @@ const axiosInstance = axios.create({
   }
 });
 
-// 确保 URL 使用 HTTP
-const ensureHttp = (url: string) => {
-  return url ? url.replace('https://', 'http://') : url;
-};
-
 // 重试函数
 async function retryOperation<T>(
   operation: () => Promise<T>,
@@ -95,8 +90,7 @@ export default async function handler(
     };
 
     if (data.output.task_status === 'SUCCEEDED' && data.output.image_url) {
-      // 确保返回的图片 URL 使用 HTTP
-      result.imageUrl = ensureHttp(data.output.image_url);
+      result.imageUrl = data.output.image_url;
     }
 
     return res.status(200).json(result);
