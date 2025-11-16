@@ -330,7 +330,7 @@ export default function Home() {
                   <ImageUpload
                     label="Upload a full body photo"
                     onImageSelect={handleModelImageUpload}
-                    maxSize={1}
+                    maxSize={5}
                     acceptedTypes={['image/jpeg', 'image/png', 'image/webp']}
                   />
                 </div>
@@ -340,7 +340,7 @@ export default function Home() {
                   <ImageUpload
                     label="Upload a clothing photo"
                     onImageSelect={handleClothingImageUpload}
-                    maxSize={1}
+                    maxSize={5}
                     acceptedTypes={['image/jpeg', 'image/png', 'image/webp']}
                   />
                 </div>

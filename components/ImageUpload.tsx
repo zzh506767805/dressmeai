@@ -92,7 +92,7 @@ export default function ImageUpload({
   label, 
   onImageSelect, 
   acceptedTypes = ['image/jpeg', 'image/png', 'image/webp'],
-  maxSize = 1 // 默认最大1MB
+  maxSize = 5 // 默认最大5MB
 }: ImageUploadProps) {
   const [preview, setPreview] = useState<string>('');
   const [error, setError] = useState<string>('');
