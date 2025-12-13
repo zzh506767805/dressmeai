@@ -19,7 +19,14 @@ class MyDocument extends Document<CustomDocumentProps> {
 
     return (
       <Html lang={locale}>
-        <Head />
+        <Head>
+          {/* Google AdSense */}
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8366783560808157"
+            crossOrigin="anonymous"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
