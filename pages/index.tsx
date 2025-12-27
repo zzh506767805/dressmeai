@@ -34,7 +34,7 @@ type Feature = {
 type UseCase = {
   title: string
   description: string
-  icon: UseCaseIconKey
+  image: string
 }
 
 type TimelineStep = {
