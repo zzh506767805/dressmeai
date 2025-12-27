@@ -14,7 +14,7 @@ os.environ['NO_PROXY'] = '*'
 import google.genai as genai
 from google.genai import types
 
-API_KEY = "AIzaSyDGsTP-ZInMPtIiPXVibpwVkGmXp_2AbMI"
+API_KEY = os.environ.get("GOOGLE_API_KEY", "")
 MODEL_ID = "gemini-3-pro-image-preview"
 
 def generate_image(prompt: str, output_filename: str = None):
