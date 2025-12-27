@@ -3,7 +3,8 @@ import { defaultLocale, locales, type Locale } from '../i18n/config'
 import enBlog from '../messages/en/blog.json'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = (process.env.NEXT_PUBLIC_BASE_URL || 'https://dressmeai.com').replace(/\/$/, '')
+  // 硬编码生产域名，确保 sitemap 中使用正确的 URL
+  const baseUrl = 'https://dressmeai.com'
 
   const staticRoutes: Array<{
     path: string
