@@ -68,6 +68,134 @@
         "publishDate": "2025-06-08",
         "readTime": "Lecture 12 min",
         "excerpt": "L'IA redessine chaque étape du parcours mode, de l'inspiration au paiement."
+      },
+      "how-to-take-perfect-photo-virtual-try-on": {
+        "title": "Comment prendre la photo parfaite pour l'essayage virtuel",
+        "description": "Les meilleures pratiques pour capturer des photos optimales pour l'essayage IA.",
+        "keywords": ["photo essayage virtuel", "conseils photo IA", "guide photo fitting"],
+        "publishDate": "2025-06-05",
+        "readTime": "Lecture 6 min",
+        "excerpt": "La qualité de votre photo d'entrée détermine la précision du résultat virtuel."
+      },
+      "psychology-virtual-try-on-consumer-behavior": {
+        "title": "Psychologie de l'essayage virtuel : voir c'est croire",
+        "description": "Pourquoi la visualisation est si efficace pour le shopping en ligne selon la psychologie.",
+        "keywords": ["psychologie consommateur", "efficacité essayage", "comportement d'achat"],
+        "publishDate": "2025-06-03",
+        "readTime": "Lecture 9 min",
+        "excerpt": "Comprendre pourquoi les clients font confiance à la confirmation visuelle améliore l'expérience."
+      },
+      "virtual-try-on-inclusive-body-types": {
+        "title": "Essayage virtuel pour tous les morphotypes",
+        "description": "Comment l'IA devient plus inclusive et précise pour diverses silhouettes.",
+        "keywords": ["mode inclusive", "diversité morphologique IA", "essayage grande taille"],
+        "publishDate": "2025-05-30",
+        "readTime": "Lecture 8 min",
+        "excerpt": "L'essayage IA moderne dépasse les modèles uniques pour représenter chaque client fidèlement."
+      },
+      "mobile-vs-desktop-virtual-try-on-experience": {
+        "title": "Mobile vs desktop : optimiser l'essayage virtuel sur chaque appareil",
+        "description": "Comparaison de l'expérience d'essayage selon le device et conseils d'optimisation mobile.",
+        "keywords": ["essayage mobile", "design responsive", "cross-device"],
+        "publishDate": "2025-05-28",
+        "readTime": "Lecture 7 min",
+        "excerpt": "Plus de 70% du trafic vient du mobile. L'optimisation smartphone est incontournable."
+      },
+      "virtual-try-on-social-media-shopping": {
+        "title": "Intégrer l'essayage virtuel au social commerce",
+        "description": "Comment tirer parti de l'essayage virtuel sur Instagram, TikTok et autres plateformes.",
+        "keywords": ["social commerce", "essayage réseaux sociaux", "contenu shoppable"],
+        "publishDate": "2025-05-25",
+        "readTime": "Lecture 8 min",
+        "excerpt": "Réseaux sociaux et essayage virtuel forment un duo parfait pour l'engagement et la conversion."
+      },
+      "sustainable-fashion-virtual-try-on": {
+        "title": "L'essayage virtuel au service de la mode durable",
+        "description": "Comment la technologie IA réduit le gaspillage et soutient l'éco-responsabilité.",
+        "keywords": ["mode durable", "shopping éco-responsable", "réduction déchets mode"],
+        "publishDate": "2025-05-22",
+        "readTime": "Lecture 7 min",
+        "excerpt": "En réduisant les retours et la surproduction, l'essayage virtuel rend la mode plus durable."
+      },
+      "ar-augmented-reality-fashion-ecommerce": {
+        "title": "Le rôle de la RA dans le e-commerce mode",
+        "description": "Comment la réalité augmentée transforme l'expérience d'achat pour les marques de mode.",
+        "keywords": ["RA mode", "réalité augmentée shopping", "retail immersif"],
+        "publishDate": "2025-05-20",
+        "readTime": "Lecture 10 min",
+        "excerpt": "La RA apporte l'expérience de la cabine d'essayage directement chez le client."
+      },
+      "ai-size-recommendation-beyond-measurements": {
+        "title": "Recommandations de taille IA : au-delà des mesures",
+        "description": "Comment l'IA avancée intègre de multiples facteurs pour des conseils de taille précis.",
+        "keywords": ["IA recommandation taille", "sizing intelligent", "prédiction coupe"],
+        "publishDate": "2025-05-18",
+        "readTime": "Lecture 8 min",
+        "excerpt": "L'IA moderne considère l'élasticité du tissu, les préférences de style et les variations de marque."
+      },
+      "virtual-try-on-accessories-jewelry-glasses": {
+        "title": "Essayage virtuel d'accessoires : au-delà des vêtements",
+        "description": "Comment la technologie d'essayage s'étend aux bijoux, lunettes et montres.",
+        "keywords": ["essayage accessoires", "bijoux virtuels", "lunettes IA"],
+        "publishDate": "2025-05-15",
+        "readTime": "Lecture 7 min",
+        "excerpt": "L'essayage virtuel révolutionne aussi la façon dont nous achetons les accessoires."
+      },
+      "privacy-security-ai-fashion-apps": {
+        "title": "Confidentialité et sécurité dans les apps mode IA",
+        "description": "Comment les applications mode IA protègent vos données tout en offrant la personnalisation.",
+        "keywords": ["confidentialité app mode", "sécurité données IA", "protection photos"],
+        "publishDate": "2025-05-12",
+        "readTime": "Lecture 6 min",
+        "excerpt": "Que devient votre photo quand vous utilisez l'essayage virtuel ?"
+      },
+      "how-fashion-brands-use-ai-predict-trends": {
+        "title": "Comment les marques de mode utilisent l'IA pour prédire les tendances",
+        "description": "L'intelligence artificielle au service de la prévision des tendances et de la planification.",
+        "keywords": ["IA prévision tendances", "prédiction mode", "mode data-driven"],
+        "publishDate": "2025-05-10",
+        "readTime": "Lecture 9 min",
+        "excerpt": "L'IA analyse réseaux sociaux, défilés et données d'achat pour anticiper les désirs des clients."
+      },
+      "customer-journey-virtual-fitting-rooms": {
+        "title": "Le parcours client dans les cabines d'essayage virtuelles",
+        "description": "Cartographie complète de l'expérience client de la découverte à l'achat.",
+        "keywords": ["parcours client", "UX cabine virtuelle", "design expérience"],
+        "publishDate": "2025-05-08",
+        "readTime": "Lecture 8 min",
+        "excerpt": "Comprendre comment les clients interagissent avec l'essayage permet d'optimiser chaque étape."
+      },
+      "2d-vs-3d-virtual-try-on-technology": {
+        "title": "2D vs 3D : quelle technologie d'essayage virtuel choisir ?",
+        "description": "Comparaison des approches 2D et 3D selon vos cas d'usage.",
+        "keywords": ["essayage 2D", "fitting 3D", "comparaison technologies"],
+        "publishDate": "2025-05-05",
+        "readTime": "Lecture 10 min",
+        "excerpt": "Chaque approche a ses avantages. Découvrez celle qui correspond le mieux à vos besoins."
+      },
+      "virtual-try-on-case-studies-success-stories": {
+        "title": "Success stories de l'essayage virtuel : résultats concrets",
+        "description": "Études de cas de marques mode ayant obtenu des résultats remarquables.",
+        "keywords": ["études de cas essayage", "succès fashion tech", "exemples ROI"],
+        "publishDate": "2025-05-03",
+        "readTime": "Lecture 11 min",
+        "excerpt": "Découvrez comment des marques leaders ont augmenté leur conversion grâce à l'IA."
+      },
+      "building-customer-trust-ai-fashion-technology": {
+        "title": "Construire la confiance client grâce à la technologie mode IA",
+        "description": "Comment la transparence IA et des résultats précis créent des relations durables.",
+        "keywords": ["confiance client", "transparence IA", "crédibilité fashion tech"],
+        "publishDate": "2025-05-01",
+        "readTime": "Lecture 7 min",
+        "excerpt": "La confiance est le socle de l'adoption de l'essayage virtuel. Voici comment la construire."
+      },
+      "economics-virtual-try-on-implementation": {
+        "title": "Économie de l'essayage virtuel : ROI et coûts d'implémentation",
+        "description": "Analyse détaillée des coûts, bénéfices et retour sur investissement de la technologie.",
+        "keywords": ["ROI essayage", "coûts implémentation", "investissement fashion tech"],
+        "publishDate": "2025-04-28",
+        "readTime": "Lecture 12 min",
+        "excerpt": "L'essayage virtuel vaut-il l'investissement ? Analyse complète des coûts et retours attendus."
       }
     }
   },

@@ -1,0 +1,211 @@
+{
+  "about": {
+    "meta": {
+      "title": "Chi siamo | DressMeAI - Tecnologia di prova virtuale IA",
+      "description": "Scopri DressMeAI, il team dietro l'innovativa tecnologia di prova virtuale IA che sta rivoluzionando lo shopping di moda online."
+    },
+    "hero": {
+      "title": "Chi è DressMeAI",
+      "subtitle": "Rivoluzionare la moda online con la tecnologia IA"
+    },
+    "mission": {
+      "title": "La nostra missione",
+      "content": "In DressMeAI, crediamo che tutti meritino di fare acquisti con fiducia. La nostra missione è colmare il divario tra lo shopping online e l'esperienza in negozio fornendo tecnologia di prova virtuale IA all'avanguardia che aiuta i clienti a visualizzare come staranno i vestiti prima dell'acquisto."
+    },
+    "story": {
+      "title": "La nostra storia",
+      "content": "DressMeAI è stata fondata con una visione semplice ma potente: eliminare le congetture dallo shopping di moda online. Abbiamo riconosciuto che una delle maggiori sfide dell'e-commerce è l'impossibilità di provare i vestiti prima dell'acquisto, il che porta a tassi di reso elevati e frustrazione dei clienti. Il nostro team di ricercatori IA, tecnologi della moda ed esperti di e-commerce si è unito per creare una soluzione che trasforma il modo in cui le persone acquistano vestiti online."
+    },
+    "technology": {
+      "title": "La nostra tecnologia",
+      "content": "La nostra tecnologia IA proprietaria utilizza algoritmi avanzati di visione artificiale e machine learning per creare esperienze di prova virtuale realistiche. Analizzando le forme del corpo, le proprietà dei capi e i modelli di vestibilità, generiamo visualizzazioni accurate che aiutano i clienti a prendere decisioni di acquisto informate.",
+      "features": [
+        "Rilevamento corporeo avanzato e stima della posa",
+        "Simulazione realistica dei capi e drappeggio",
+        "Supporto per varie categorie di abbigliamento",
+        "Elaborazione rapida con risultati in tempo reale",
+        "Elaborazione delle immagini orientata alla privacy"
+      ]
+    },
+    "values": {
+      "title": "I nostri valori",
+      "items": [
+        {
+          "title": "Innovazione",
+          "description": "Spingiamo continuamente i confini della tecnologia IA per offrire la migliore esperienza di prova virtuale."
+        },
+        {
+          "title": "Privacy degli utenti",
+          "description": "Diamo priorità alla sicurezza e alla privacy dei dati degli utenti con misure di protezione leader del settore."
+        },
+        {
+          "title": "Sostenibilità",
+          "description": "Riducendo i resi, aiutiamo a minimizzare l'impatto ambientale dell'e-commerce di moda."
+        },
+        {
+          "title": "Accessibilità",
+          "description": "Ci impegniamo a rendere la nostra tecnologia accessibile alle aziende e ai consumatori di tutto il mondo."
+        }
+      ]
+    },
+    "stats": {
+      "title": "DressMeAI in numeri",
+      "items": [
+        { "value": "1M+", "label": "Prove virtuali" },
+        { "value": "40%", "label": "Riduzione dei resi" },
+        { "value": "9", "label": "Lingue supportate" },
+        { "value": "24/7", "label": "Disponibilità IA" }
+      ]
+    },
+    "cta": {
+      "title": "Pronto a trasformare la tua esperienza di shopping?",
+      "description": "Prova la nostra tecnologia di prova virtuale IA oggi e scopri la differenza tu stesso.",
+      "button": "Prova ora"
+    }
+  },
+  "faq": {
+    "meta": {
+      "title": "FAQ | DressMeAI - Domande sulla prova virtuale IA",
+      "description": "Trova le risposte alle domande frequenti sulla tecnologia di prova virtuale IA di DressMeAI."
+    },
+    "hero": {
+      "title": "Domande frequenti",
+      "subtitle": "Tutto quello che devi sapere sulla prova virtuale IA"
+    },
+    "categories": {
+      "general": {
+        "title": "Domande generali",
+        "items": [
+          {
+            "question": "Cos'è la tecnologia di prova virtuale IA?",
+            "answer": "La tecnologia di prova virtuale IA utilizza l'intelligenza artificiale e la visione artificiale per creare simulazioni realistiche di come ti staranno i vestiti. Carica semplicemente una foto e un'immagine del capo, e la nostra IA genererà una visualizzazione di te che indossi quell'articolo."
+          },
+          {
+            "question": "Quanto è precisa la prova virtuale?",
+            "answer": "La nostra tecnologia IA fornisce risultati altamente realistici che rappresentano accuratamente come ti staranno i vestiti. Sebbene le prove virtuali siano approssimazioni e la vestibilità effettiva possa variare leggermente, la nostra tecnologia ti aiuta a prendere decisioni di acquisto più informate e riduce significativamente la probabilità di resi."
+          },
+          {
+            "question": "DressMeAI è gratuito?",
+            "answer": "DressMeAI offre opzioni gratuite e premium. Puoi provare gratuitamente le nostre funzionalità di prova virtuale di base, con funzionalità premium disponibili per utenti avanzati e aziende."
+          }
+        ]
+      },
+      "howItWorks": {
+        "title": "Come funziona",
+        "items": [
+          {
+            "question": "Come uso la funzione di prova virtuale?",
+            "answer": "Usare DressMeAI è semplice: 1) Carica una foto di te stesso o di un modello, 2) Carica un'immagine del capo che vuoi provare, 3) Clicca su 'Genera' e attendi qualche secondo per il risultato della prova virtuale."
+          },
+          {
+            "question": "Quali foto funzionano meglio?",
+            "answer": "Per risultati migliori, usa foto chiare e ben illuminate dove la persona è in piedi dritta e guarda la fotocamera. L'abbigliamento che indossi nella foto dovrebbe essere relativamente aderente per aiutare l'IA a capire la tua forma corporea."
+          },
+          {
+            "question": "Quali tipi di vestiti posso provare?",
+            "answer": "La nostra IA supporta un'ampia gamma di capi tra cui top, camicie, vestiti, giacche e capispalla. Espandiamo continuamente le nostre capacità per supportare più categorie di abbigliamento."
+          }
+        ]
+      },
+      "privacy": {
+        "title": "Privacy e sicurezza",
+        "items": [
+          {
+            "question": "Cosa succede alle mie foto dopo il caricamento?",
+            "answer": "Le tue foto vengono elaborate in modo sicuro dal nostro sistema IA per generare i risultati della prova. Non memorizziamo permanentemente le foto caricate a meno che non le salvi esplicitamente nella cronologia. I nostri sistemi sono progettati pensando alla privacy."
+          },
+          {
+            "question": "I miei dati personali sono al sicuro?",
+            "answer": "Sì, prendiamo molto seriamente la sicurezza dei dati. Utilizziamo crittografia e misure di sicurezza standard del settore per proteggere le tue informazioni. Consulta la nostra Informativa sulla Privacy per maggiori dettagli."
+          },
+          {
+            "question": "Condividete le mie foto con terze parti?",
+            "answer": "No, non condividiamo, vendiamo o distribuiamo le tue foto a terze parti. Le tue immagini vengono utilizzate solo per generare i risultati della tua prova virtuale."
+          }
+        ]
+      },
+      "technical": {
+        "title": "Domande tecniche",
+        "items": [
+          {
+            "question": "Quali formati di immagine sono supportati?",
+            "answer": "Supportiamo formati di immagine comuni tra cui JPEG, PNG e WebP. Per risultati migliori, usa immagini di almeno 512x512 pixel."
+          },
+          {
+            "question": "Quanto tempo ci vuole per generare un risultato di prova?",
+            "answer": "La maggior parte dei risultati di prova viene generata in 10-30 secondi, a seconda della complessità dell'immagine e del carico attuale del server."
+          },
+          {
+            "question": "Posso usare DressMeAI su dispositivi mobili?",
+            "answer": "Sì, DressMeAI è completamente responsive e funziona su smartphone e tablet. Puoi caricare foto direttamente dalla fotocamera o dalla libreria foto del tuo dispositivo."
+          }
+        ]
+      },
+      "business": {
+        "title": "Per le aziende",
+        "items": [
+          {
+            "question": "Posso integrare DressMeAI nel mio negozio e-commerce?",
+            "answer": "Sì, offriamo opzioni di integrazione API per le aziende che desiderano aggiungere funzionalità di prova virtuale ai loro negozi online. Contattaci per maggiori informazioni sulle nostre soluzioni aziendali."
+          },
+          {
+            "question": "Quali sono i vantaggi per i rivenditori?",
+            "answer": "I rivenditori che utilizzano la tecnologia di prova virtuale vedono tipicamente tassi di conversione aumentati, tassi di reso ridotti, maggiore coinvolgimento sul sito e maggiore soddisfazione del cliente."
+          }
+        ]
+      }
+    },
+    "cta": {
+      "title": "Hai ancora domande?",
+      "description": "Non riesci a trovare la risposta che cerchi? Contatta il nostro team di supporto.",
+      "button": "Contattaci"
+    }
+  },
+  "contact": {
+    "meta": {
+      "title": "Contatti | DressMeAI - Mettiti in contatto",
+      "description": "Contatta DressMeAI per supporto, richieste commerciali o opportunità di partnership."
+    },
+    "hero": {
+      "title": "Contattaci",
+      "subtitle": "Ci piacerebbe sentirti"
+    },
+    "intro": {
+      "content": "Hai una domanda, feedback o richiesta commerciale? Il nostro team è qui per aiutarti. Scegli il modo migliore per contattarci qui sotto."
+    },
+    "channels": {
+      "general": {
+        "title": "Richieste generali",
+        "description": "Domande generali su DressMeAI e la nostra tecnologia di prova virtuale.",
+        "email": "hello@dressmeai.com"
+      },
+      "support": {
+        "title": "Supporto tecnico",
+        "description": "Hai bisogno di aiuto con la funzione di prova virtuale o stai riscontrando problemi?",
+        "email": "support@dressmeai.com"
+      },
+      "business": {
+        "title": "Business e partnership",
+        "description": "Interessato a integrare DressMeAI nel tuo business o diventare partner?",
+        "email": "business@dressmeai.com"
+      },
+      "press": {
+        "title": "Stampa e media",
+        "description": "Richieste dei media e domande relative alla stampa.",
+        "email": "press@dressmeai.com"
+      }
+    },
+    "social": {
+      "title": "Seguici",
+      "description": "Rimani aggiornato con le ultime notizie e aggiornamenti da DressMeAI.",
+      "platforms": [
+        { "name": "Twitter", "handle": "@dressmeai" },
+        { "name": "LinkedIn", "handle": "DressMeAI" }
+      ]
+    },
+    "response": {
+      "title": "Tempo di risposta",
+      "content": "Rispondiamo generalmente alle richieste entro 24-48 ore nei giorni lavorativi. Per problemi tecnici urgenti, includi 'URGENTE' nell'oggetto della tua email."
+    }
+  }
+}

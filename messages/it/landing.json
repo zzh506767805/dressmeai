@@ -33,29 +33,33 @@
     "resultTitle": "Risultato"
   },
   "features": {
-    "eyebrow": "Funzioni AI che trasformano lo shopping",
-    "title": "Il tuo assistente di moda completo",
-    "description": "Dalla prova virtuale alle raccomandazioni personalizzate, l'IA rivoluziona il modo di trovare il look perfetto.",
+    "eyebrow": "Funzionalità",
+    "title": "Tutto ciò che serve",
+    "description": "",
     "items": [
       {
         "name": "Prova virtuale",
-        "description": "Guarda con precisione come ti stanno i capi grazie alla nostra IA avanzata.",
-        "icon": "camera"
+        "description": "Guarda come ti stanno",
+        "icon": "camera",
+        "image": "/images/landing/feature-tryon.jpg"
       },
       {
-        "name": "Generazione di outfit IA",
-        "description": "Outfit completi creati in base ai tuoi gusti e al tuo guardaroba.",
-        "icon": "sparkles"
+        "name": "Generazione AI",
+        "description": "Idee outfit con AI",
+        "icon": "sparkles",
+        "image": "/images/landing/feature-style-ai.jpg"
       },
       {
-        "name": "Raccomandazioni intelligenti",
-        "description": "Suggerimenti quotidiani personalizzati per stile, occasione e meteo.",
-        "icon": "lightBulb"
+        "name": "Raccomandazioni",
+        "description": "Suggerimenti giornalieri",
+        "icon": "lightBulb",
+        "image": "/images/landing/feature-recommendations.jpg"
       },
       {
         "name": "Mix & Match",
-        "description": "Combina liberamente il tuo guardaroba per ogni occasione.",
-        "icon": "swatch"
+        "description": "Crea combinazioni",
+        "icon": "swatch",
+        "image": "/images/landing/feature-mixmatch.jpg"
       }
     ]
   },
@@ -104,9 +108,136 @@
       }
     ]
   },
+  "stats": {
+    "eyebrow": "La fiducia degli appassionati di moda in tutto il mondo",
+    "title": "DressMeAI in numeri",
+    "items": [
+      {
+        "value": "1M+",
+        "label": "Prove virtuali"
+      },
+      {
+        "value": "40%",
+        "label": "Resi ridotti"
+      },
+      {
+        "value": "9",
+        "label": "Lingue supportate"
+      },
+      {
+        "value": "24/7",
+        "label": "IA disponibile"
+      }
+    ]
+  },
+  "showcase": {
+    "eyebrow": "Showcase",
+    "title": "Vedi la differenza in pochi secondi",
+    "description": "Confronti prima/dopo e ispirazioni outfit (per ora placeholder demo).",
+    "note": "Esempi solo illustrativi. Il risultato dipende dalla qualita dell’immagine, dalla posa e dal tipo di capo.",
+    "primaryCta": "Prova con le tue foto",
+    "secondaryCta": "Leggi le guide",
+    "beforeAfter": {
+      "title": "Prima / Dopo",
+      "description": "Confronto affiancato per capire subito il risultato.",
+      "beforeLabel": "Prima",
+      "afterLabel": "Dopo",
+      "items": [
+        { "title": "Casual → Professionale", "description": "Da un look casual a uno piu curato." },
+        { "title": "Basic → Vestibilita perfetta", "description": "Valuta visivamente proporzioni e fit." },
+        { "title": "Originale → Makeover IA", "description": "Aggiorna il look con un render IA realistico." }
+      ]
+    },
+    "gallery": {
+      "title": "Ispirazione outfit",
+      "description": "Alcuni stili pronti da provare.",
+      "items": [
+        { "title": "Business casual", "description": "Pulito e moderno per lavoro e meeting." },
+        { "title": "Weekend chic", "description": "Rilassato ma sempre elegante." },
+        { "title": "Eleganza serale", "description": "Piu raffinato per serate ed eventi." }
+      ]
+    }
+  },
+  "faq": {
+    "eyebrow": "Domande frequenti",
+    "title": "Tutto sulla prova virtuale con IA",
+    "items": [
+      {
+        "question": "Cos'e la tecnologia di prova virtuale con IA?",
+        "answer": "La prova virtuale con IA utilizza l'intelligenza artificiale e la visione artificiale per creare simulazioni realistiche di come i vestiti apparirebbero sul tuo corpo. Carica semplicemente una foto di te stesso e un'immagine di abbigliamento, e la nostra IA genera una visualizzazione di te che indossi quell'outfit."
+      },
+      {
+        "question": "Quanto e precisa la prova virtuale?",
+        "answer": "La nostra tecnologia IA fornisce risultati altamente realistici che rappresentano accuratamente come i vestiti appariranno su di te. Sebbene le prove virtuali siano approssimazioni e la vestibilita effettiva possa variare leggermente, la nostra tecnologia ti aiuta a prendere decisioni di acquisto piu informate e riduce significativamente la probabilita di resi."
+      },
+      {
+        "question": "DressMeAI e gratuito?",
+        "answer": "DressMeAI offre sia opzioni gratuite che premium. Puoi provare gratuitamente le nostre funzionalita base di prova virtuale, con funzionalita premium disponibili per utenti avanzati e aziende."
+      },
+      {
+        "question": "Quali tipi di foto funzionano meglio?",
+        "answer": "Per ottenere i migliori risultati, usa foto chiare e ben illuminate in cui la persona sta dritta e guarda la fotocamera. I vestiti nella foto dovrebbero essere relativamente aderenti per aiutare l'IA a capire la forma del tuo corpo."
+      },
+      {
+        "question": "I miei dati e le mie foto sono al sicuro?",
+        "answer": "Si, prendiamo molto seriamente la sicurezza dei dati. Le tue foto vengono elaborate in modo sicuro dal nostro sistema IA e non vengono memorizzate permanentemente a meno che tu non le salvi esplicitamente nella cronologia. Il nostro sistema e progettato con la privacy al centro."
+      }
+    ]
+  },
+  "latestBlog": {
+    "eyebrow": "Dal nostro Blog",
+    "title": "Ultime Novità Fashion Tech",
+    "description": "Rimani aggiornato sulle ultime tendenze nella tecnologia di moda IA e innovazioni di prova virtuale.",
+    "readMore": "Leggi di più",
+    "viewAll": "Vedi tutti gli articoli"
+  },
   "cta": {
     "title": "Inizia oggi la tua prova virtuale",
     "description": "Scopri il futuro della moda con la nostra tecnologia di prova AI.",
     "button": "Avvia prova virtuale"
+  },
+  "beforeAfter": {
+    "eyebrow": "Guarda la trasformazione",
+    "title": "Risultati reali",
+    "items": [
+      {
+        "label": "Da casual a chic",
+        "image": "/images/landing/before-after-casual.jpg"
+      },
+      {
+        "label": "Business ready",
+        "image": "/images/landing/before-after-business.jpg"
+      },
+      {
+        "label": "Eleganza serale",
+        "image": "/images/landing/before-after-evening.jpg"
+      }
+    ]
+  },
+  "useCases": {
+    "eyebrow": "Per tutti",
+    "title": "Come usare DressMeAI",
+    "items": [
+      {
+        "title": "Shopping online",
+        "description": "Prova prima di acquistare",
+        "image": "/images/landing/usecase-shopping.jpg"
+      },
+      {
+        "title": "Creazione contenuti",
+        "description": "Crea look straordinari",
+        "image": "/images/landing/usecase-blogger.jpg"
+      },
+      {
+        "title": "Brand e-commerce",
+        "description": "Aumenta le conversioni",
+        "image": "/images/landing/usecase-brand.jpg"
+      },
+      {
+        "title": "Stile personale",
+        "description": "Costruisci il guardaroba",
+        "image": "/images/landing/usecase-styling.jpg"
+      }
+    ]
   }
 }

@@ -1,0 +1,153 @@
+{
+  "privacy": {
+    "meta": {
+      "title": "Datenschutzrichtlinie | DressMeAI - KI Virtuelle Anprobe",
+      "description": "Erfahren Sie, wie DressMeAI Ihre Privatsphäre schützt und Ihre personenbezogenen Daten bei der Nutzung unseres KI-Anprobedienstes verarbeitet."
+    },
+    "title": "Datenschutzrichtlinie",
+    "lastUpdated": "Letzte Aktualisierung: Januar 2025",
+    "sections": {
+      "introduction": {
+        "title": "Einleitung",
+        "content": "Willkommen bei DressMeAI. Wir respektieren Ihre Privatsphäre und verpflichten uns zum Schutz Ihrer personenbezogenen Daten. Diese Datenschutzrichtlinie erklärt, wie wir Ihre Informationen bei der Nutzung unseres KI-Anprobedienstes erfassen, verwenden und schützen."
+      },
+      "dataCollection": {
+        "title": "Erfasste Informationen",
+        "content": "Wir erfassen Informationen, die Sie uns direkt zur Verfügung stellen:",
+        "items": [
+          "Für die virtuelle Anprobe hochgeladene Fotos (Modellfotos und Kleidungsbilder)",
+          "Nutzungsdaten und Analysen zur Verbesserung unseres Dienstes",
+          "Geräteinformationen und Browsertyp",
+          "IP-Adresse und allgemeine Standortdaten"
+        ]
+      },
+      "dataUsage": {
+        "title": "Verwendung Ihrer Informationen",
+        "content": "Wir verwenden die erfassten Informationen für folgende Zwecke:",
+        "items": [
+          "Bereitstellung und Wartung unseres KI-Anprobedienstes",
+          "Verarbeitung Ihrer hochgeladenen Bilder und Generierung von Anprobeergebnissen",
+          "Verbesserung und Optimierung unserer KI-Algorithmen und Benutzererfahrung",
+          "Kommunikation über Service-Updates und neue Funktionen",
+          "Erkennung und Verhinderung von Betrug oder technischen Problemen"
+        ]
+      },
+      "imageProcessing": {
+        "title": "Bildverarbeitung und -speicherung",
+        "content": "Ihre hochgeladenen Bilder werden von unserem KI-System verarbeitet, um virtuelle Anprobeergebnisse zu generieren. Wir speichern Ihre hochgeladenen Fotos nicht dauerhaft, es sei denn, Sie speichern sie ausdrücklich in Ihrem Verlauf. Generierte Ergebnisse können zur Leistungsverbesserung temporär zwischengespeichert werden."
+      },
+      "dataSharing": {
+        "title": "Datenweitergabe",
+        "content": "Wir verkaufen, handeln oder vermieten Ihre personenbezogenen Daten nicht an Dritte. Wir können Daten teilen mit:",
+        "items": [
+          "Dienstleistern, die beim Betrieb unserer Plattform helfen (Cloud-Hosting, Analysen)",
+          "Rechtlichen Behörden, wenn gesetzlich vorgeschrieben oder zum Schutz unserer Rechte",
+          "Geschäftspartnern mit Ihrer ausdrücklichen Zustimmung"
+        ]
+      },
+      "cookies": {
+        "title": "Cookies und Tracking",
+        "content": "Wir verwenden Cookies und ähnliche Tracking-Technologien, um Ihre Erfahrung zu verbessern, den Website-Verkehr zu analysieren und das Nutzerverhalten zu verstehen. Sie können Cookie-Einstellungen über Ihre Browsereinstellungen steuern."
+      },
+      "security": {
+        "title": "Datensicherheit",
+        "content": "Wir implementieren branchenübliche Sicherheitsmaßnahmen zum Schutz Ihrer personenbezogenen Daten, einschließlich Verschlüsselung, sicherer Server und regelmäßiger Sicherheitsaudits. Keine Übertragungsmethode über das Internet ist jedoch zu 100% sicher."
+      },
+      "rights": {
+        "title": "Ihre Rechte",
+        "content": "Sie haben das Recht:",
+        "items": [
+          "Auf Ihre personenbezogenen Daten zuzugreifen",
+          "Die Berichtigung ungenauer Daten zu verlangen",
+          "Die Löschung Ihrer Daten zu verlangen",
+          "Der Verarbeitung Ihrer Daten zu widersprechen",
+          "Datenübertragbarkeit"
+        ]
+      },
+      "children": {
+        "title": "Datenschutz für Kinder",
+        "content": "Unser Dienst ist nicht für Kinder unter 13 Jahren bestimmt. Wir erfassen wissentlich keine personenbezogenen Daten von Kindern unter 13 Jahren."
+      },
+      "changes": {
+        "title": "Änderungen der Richtlinie",
+        "content": "Wir können diese Datenschutzrichtlinie von Zeit zu Zeit aktualisieren. Wir werden Sie über Änderungen informieren, indem wir die neue Richtlinie auf dieser Seite veröffentlichen und das Datum der Letzten Aktualisierung aktualisieren."
+      },
+      "contact": {
+        "title": "Kontakt",
+        "content": "Bei Fragen zu dieser Datenschutzrichtlinie kontaktieren Sie uns unter:",
+        "email": "privacy@dressmeai.com"
+      }
+    }
+  },
+  "terms": {
+    "meta": {
+      "title": "Nutzungsbedingungen | DressMeAI - KI Virtuelle Anprobe",
+      "description": "Lesen Sie die Nutzungsbedingungen für den KI-Anprobedienst von DressMeAI."
+    },
+    "title": "Nutzungsbedingungen",
+    "lastUpdated": "Letzte Aktualisierung: Januar 2025",
+    "sections": {
+      "acceptance": {
+        "title": "Annahme der Bedingungen",
+        "content": "Durch den Zugriff auf oder die Nutzung des KI-Anprobedienstes von DressMeAI erklären Sie sich mit diesen Nutzungsbedingungen einverstanden. Wenn Sie diesen Bedingungen nicht zustimmen, nutzen Sie unseren Dienst bitte nicht."
+      },
+      "serviceDescription": {
+        "title": "Dienstbeschreibung",
+        "content": "DressMeAI bietet einen KI-gestützten virtuellen Anprobedienst, der es Benutzern ermöglicht, zu visualisieren, wie Kleidungsstücke an ihnen aussehen würden. Unser Dienst verwendet fortschrittliche maschinelle Lernalgorithmen, um hochgeladene Bilder zu verarbeiten und realistische Anprobeergebnisse zu generieren."
+      },
+      "userAccounts": {
+        "title": "Benutzerkonten",
+        "content": "Einige Funktionen erfordern möglicherweise die Erstellung eines Kontos. Sie sind für die Wahrung der Vertraulichkeit Ihrer Kontodaten und für alle Aktivitäten unter Ihrem Konto verantwortlich."
+      },
+      "acceptableUse": {
+        "title": "Zulässige Nutzung",
+        "content": "Bei der Nutzung unseres Dienstes erklären Sie sich damit einverstanden:",
+        "items": [
+          "Keine unangemessenen, illegalen oder schädlichen Inhalte hochzuladen",
+          "Den Dienst nicht für rechtswidrige Zwecke zu nutzen",
+          "Keine Reverse-Engineering-Versuche oder Hackerangriffe auf unsere KI-Systeme durchzuführen",
+          "Keine Bilder ohne entsprechende Rechte oder Zustimmung hochzuladen",
+          "Keine automatisierten Systeme ohne Erlaubnis zum Zugriff auf den Dienst zu verwenden",
+          "Den Dienst oder die Server nicht zu stören oder zu unterbrechen"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "Geistiges Eigentum",
+        "content": "Der DressMeAI-Dienst, einschließlich seiner KI-Technologie, seines Designs und seiner Inhalte, ist durch Gesetze zum Schutz des geistigen Eigentums geschützt. Sie behalten das Eigentum an hochgeladenen Bildern, gewähren uns jedoch eine Lizenz zur Verarbeitung für die Diensterbringung."
+      },
+      "generatedContent": {
+        "title": "Generierte Inhalte",
+        "content": "Von unserer KI generierte virtuelle Anprobeergebnisse werden für den persönlichen, nicht-kommerziellen Gebrauch bereitgestellt. Sie können Ihre Ergebnisse speichern und teilen, aber die kommerzielle Nutzung erfordert unsere schriftliche Genehmigung."
+      },
+      "disclaimer": {
+        "title": "Haftungsausschluss",
+        "content": "Unser Dienst wird wie besehen ohne jegliche Garantien bereitgestellt. Wir garantieren nicht, dass Ergebnisse perfekt genau sind oder dass der Dienst ununterbrochen verfügbar ist. Virtuelle Anprobeergebnisse sind Näherungswerte und die tatsächliche Passform kann variieren."
+      },
+      "limitation": {
+        "title": "Haftungsbeschränkung",
+        "content": "Im größtmöglichen gesetzlich zulässigen Umfang haftet DressMeAI nicht für indirekte, zufällige, besondere oder Folgeschäden, die aus Ihrer Nutzung des Dienstes entstehen."
+      },
+      "indemnification": {
+        "title": "Freistellung",
+        "content": "Sie erklären sich damit einverstanden, DressMeAI von allen Ansprüchen, Schäden oder Kosten freizustellen, die aus Ihrer Verletzung dieser Bedingungen oder Ihrer Nutzung des Dienstes entstehen."
+      },
+      "termination": {
+        "title": "Kündigung",
+        "content": "Wir behalten uns das Recht vor, Ihren Zugang zum Dienst jederzeit mit oder ohne Grund und mit oder ohne Vorankündigung auszusetzen oder zu beenden."
+      },
+      "changes": {
+        "title": "Änderungen der Bedingungen",
+        "content": "Wir können diese Bedingungen jederzeit ändern. Die fortgesetzte Nutzung des Dienstes nach Änderungen gilt als Annahme der neuen Bedingungen."
+      },
+      "governing": {
+        "title": "Anwendbares Recht",
+        "content": "Diese Bedingungen unterliegen dem anwendbaren Recht und werden entsprechend ausgelegt, ohne Berücksichtigung von Kollisionsnormen."
+      },
+      "contact": {
+        "title": "Kontakt",
+        "content": "Bei Fragen zu diesen Nutzungsbedingungen kontaktieren Sie uns unter:",
+        "email": "legal@dressmeai.com"
+      }
+    }
+  }
+}

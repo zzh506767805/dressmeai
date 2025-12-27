@@ -40,6 +40,7 @@ export default function History() {
     <div className="min-h-screen bg-gray-50">
       <Head>
         <title>History | DressMeAI</title>
+        <meta name="robots" content="noindex, nofollow, noarchive" />
       </Head>
 
       <div className="container mx-auto px-4 py-8">

@@ -33,29 +33,33 @@
     "resultTitle": "生成结果"
   },
   "features": {
-    "eyebrow": "AI 功能全面升级你的购物体验",
-    "title": "一站式 AI 穿搭助手 - 试穿、搭配、下单更聪明",
-    "description": "从虚拟试衣到个性化推荐，AI 技术让你随时找到最合适的造型。",
+    "eyebrow": "强大功能",
+    "title": "你需要的一切",
+    "description": "",
     "items": [
       {
         "name": "虚拟试衣",
-        "description": "借助先进 AI，真实还原服装上身效果，就像在实体试衣间。",
-        "icon": "camera"
+        "description": "看看衣服穿在你身上的效果",
+        "icon": "camera",
+        "image": "/images/landing/feature-tryon.jpg"
       },
       {
         "name": "AI 穿搭生成",
-        "description": "根据你的风格喜好与衣橱，生成完整穿搭方案。",
-        "icon": "sparkles"
+        "description": "获取 AI 搭配方案",
+        "icon": "sparkles",
+        "image": "/images/landing/feature-style-ai.jpg"
       },
       {
         "name": "智能推荐",
-        "description": "每日推送适合场合与天气的个性化穿搭建议。",
-        "icon": "lightBulb"
+        "description": "每日个性化建议",
+        "icon": "lightBulb",
+        "image": "/images/landing/feature-recommendations.jpg"
       },
       {
         "name": "自由混搭",
-        "description": "任意组合衣橱单品，找到不同场合的完美造型。",
-        "icon": "swatch"
+        "description": "创造完美组合",
+        "icon": "swatch",
+        "image": "/images/landing/feature-mixmatch.jpg"
       }
     ]
   },
@@ -104,9 +108,136 @@
       }
     ]
   },
+  "stats": {
+    "eyebrow": "全球时尚爱好者的选择",
+    "title": "DressMeAI 数据一览",
+    "items": [
+      {
+        "value": "100万+",
+        "label": "虚拟试穿次数"
+      },
+      {
+        "value": "40%",
+        "label": "退货率降低"
+      },
+      {
+        "value": "9",
+        "label": "支持语言"
+      },
+      {
+        "value": "24/7",
+        "label": "AI全天候服务"
+      }
+    ]
+  },
+  "showcase": {
+    "eyebrow": "案例展示",
+    "title": "几秒钟看出差别",
+    "description": "快速浏览前后对比与穿搭灵感（当前为演示占位图）。",
+    "note": "示例仅用于演示。最终效果受图片清晰度、姿势与服装类型影响。",
+    "primaryCta": "用你的照片试试看",
+    "secondaryCta": "阅读更多教程",
+    "beforeAfter": {
+      "title": "前 / 后 对比",
+      "description": "左右对比预览上身效果，帮助你快速做决定。",
+      "beforeLabel": "试穿前",
+      "afterLabel": "试穿后",
+      "items": [
+        { "title": "休闲 → 通勤", "description": "从休闲风过渡到更利落的职场感。" },
+        { "title": "基础 → 更合身", "description": "直观感受版型与比例的变化。" },
+        { "title": "原始 → AI 改造", "description": "通过 AI 生成更贴近真实的试穿效果。" }
+      ]
+    },
+    "gallery": {
+      "title": "穿搭灵感",
+      "description": "挑几个风格，马上开始试穿。",
+      "items": [
+        { "title": "商务休闲", "description": "适合通勤与会议的干净利落。" },
+        { "title": "周末松弛感", "description": "舒适但不随意的周末穿搭。" },
+        { "title": "夜晚优雅", "description": "聚会与约会更出彩的选择。" }
+      ]
+    }
+  },
+  "faq": {
+    "eyebrow": "常见问题",
+    "title": "关于AI虚拟试衣的一切",
+    "items": [
+      {
+        "question": "什么是AI虚拟试衣技术？",
+        "answer": "AI虚拟试衣使用人工智能和计算机视觉技术，创建服装穿在您身上的逼真模拟效果。只需上传一张您的照片和一件服装图片，我们的AI就会生成您穿着该服装的可视化效果。"
+      },
+      {
+        "question": "虚拟试衣的准确度如何？",
+        "answer": "我们的AI技术提供高度逼真的结果，准确呈现服装穿在您身上的效果。虽然虚拟试衣是近似值，实际合身度可能略有不同，但我们的技术帮助您做出更明智的购买决定，显著降低退货率。"
+      },
+      {
+        "question": "DressMeAI是免费的吗？",
+        "answer": "DressMeAI提供免费和高级选项。您可以免费试用我们的基本虚拟试衣功能，高级功能面向高级用户和企业开放。"
+      },
+      {
+        "question": "什么样的照片效果最好？",
+        "answer": "为获得最佳效果，请使用清晰、光线充足的照片，人物站直并面向镜头。照片中穿的衣服应该相对合身，以帮助AI理解您的体型。"
+      },
+      {
+        "question": "我的数据和照片安全吗？",
+        "answer": "是的，我们非常重视数据安全。您的照片由我们的AI系统安全处理，除非您明确将它们保存到历史记录中，否则不会永久存储。我们的系统以隐私为核心设计。"
+      }
+    ]
+  },
+  "latestBlog": {
+    "eyebrow": "博客精选",
+    "title": "最新时尚科技资讯",
+    "description": "了解AI时尚科技和虚拟试衣创新的最新趋势。",
+    "readMore": "阅读更多",
+    "viewAll": "查看全部文章"
+  },
   "cta": {
     "title": "立刻体验虚拟试衣",
     "description": "用 AI 驱动的虚拟试衣技术，抢先感受未来穿搭。",
     "button": "开始虚拟试衣"
+  },
+  "beforeAfter": {
+    "eyebrow": "效果展示",
+    "title": "真实效果，立竿见影",
+    "items": [
+      {
+        "label": "休闲变时尚",
+        "image": "/images/landing/before-after-casual.jpg"
+      },
+      {
+        "label": "商务穿搭",
+        "image": "/images/landing/before-after-business.jpg"
+      },
+      {
+        "label": "晚宴优雅",
+        "image": "/images/landing/before-after-evening.jpg"
+      }
+    ]
+  },
+  "useCases": {
+    "eyebrow": "适用场景",
+    "title": "人人都能用",
+    "items": [
+      {
+        "title": "网购试衣",
+        "description": "先试后买",
+        "image": "/images/landing/usecase-shopping.jpg"
+      },
+      {
+        "title": "内容创作",
+        "description": "打造精彩造型",
+        "image": "/images/landing/usecase-blogger.jpg"
+      },
+      {
+        "title": "电商品牌",
+        "description": "提升转化率",
+        "image": "/images/landing/usecase-brand.jpg"
+      },
+      {
+        "title": "个人穿搭",
+        "description": "打造你的衣橱",
+        "image": "/images/landing/usecase-styling.jpg"
+      }
+    ]
   }
 }

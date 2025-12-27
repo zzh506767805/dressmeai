@@ -1,16 +1,26 @@
 {
-  "brand": "AI ファッション",
+  "brand": "DressMeAI",
   "nav": {
     "home": "ホーム",
     "history": "履歴",
-    "blog": "ブログ"
+    "blog": "ブログ",
+    "about": "会社概要",
+    "faq": "よくある質問",
+    "contact": "お問い合わせ"
   },
   "language": {
     "label": "言語",
     "ariaLabel": "サイトの言語を選択"
   },
   "footer": {
-    "title": "フレンドリンク"
+    "title": "フレンドリンク",
+    "links": {
+      "privacy": "プライバシーポリシー",
+      "terms": "利用規約",
+      "about": "会社概要",
+      "faq": "よくある質問",
+      "contact": "お問い合わせ"
+    }
   },
   "errors": {
     "missingImages": "モデル写真と服の写真をアップロードしてください。"

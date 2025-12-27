@@ -1,16 +1,26 @@
 {
-  "brand": "AI Fashion",
+  "brand": "DressMeAI",
   "nav": {
     "home": "Главная",
     "history": "История",
-    "blog": "Блог"
+    "blog": "Блог",
+    "about": "О нас",
+    "faq": "FAQ",
+    "contact": "Контакты"
   },
   "language": {
     "label": "Язык",
     "ariaLabel": "Выбрать язык сайта"
   },
   "footer": {
-    "title": "Друзья проекта"
+    "title": "Друзья проекта",
+    "links": {
+      "privacy": "Политика конфиденциальности",
+      "terms": "Условия использования",
+      "about": "О нас",
+      "faq": "FAQ",
+      "contact": "Контакты"
+    }
   },
   "errors": {
     "missingImages": "Загрузите фото модели и изображение одежды."

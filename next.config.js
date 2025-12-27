@@ -1,6 +1,7 @@
 const i18nSettings = require('./i18n/settings.json')
 
 const locales = i18nSettings.locales.map(locale => locale.code)
+const defaultLocale = i18nSettings.defaultLocale
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -16,10 +17,14 @@ const nextConfig = {
   },
   i18n: {
     locales,
-    defaultLocale: i18nSettings.defaultLocale,
+    defaultLocale,
     localeDetection: false
   },
   async redirects() {
+    if (process.env.NODE_ENV !== 'production') {
+      return []
+    }
+
     return [
       {
         source: '/:path*',

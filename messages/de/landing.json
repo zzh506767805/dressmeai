@@ -33,29 +33,33 @@
     "resultTitle": "Ergebnis"
   },
   "features": {
-    "eyebrow": "AI-Features, die Ihr Shopping verändern",
-    "title": "Ihr kompletter AI-Modeassistent",
-    "description": "Von virtuellen Anproben bis zu personalisierten Empfehlungen – unsere KI findet Ihren perfekten Look.",
+    "eyebrow": "Funktionen",
+    "title": "Alles was Sie brauchen",
+    "description": "",
     "items": [
       {
         "name": "Virtuelle Anprobe",
-        "description": "Sehen Sie, wie Kleidung mit präziser KI passend auf Ihrem Körper sitzt.",
-        "icon": "camera"
+        "description": "Sehen Sie wie Kleidung aussieht",
+        "icon": "camera",
+        "image": "/images/landing/feature-tryon.jpg"
       },
       {
-        "name": "AI Style-Generator",
-        "description": "Komplette Outfits auf Basis Ihres Geschmacks und Kleiderschranks.",
-        "icon": "sparkles"
+        "name": "KI-Stil-Generierung",
+        "description": "KI-kuratierte Outfit-Ideen",
+        "icon": "sparkles",
+        "image": "/images/landing/feature-style-ai.jpg"
       },
       {
-        "name": "Smarte Empfehlungen",
-        "description": "Personalisierte Vorschläge für Stil, Anlass und Wetter.",
-        "icon": "lightBulb"
+        "name": "Empfehlungen",
+        "description": "Tägliche Vorschläge",
+        "icon": "lightBulb",
+        "image": "/images/landing/feature-recommendations.jpg"
       },
       {
         "name": "Mix & Match",
-        "description": "Kombinieren Sie vorhandene Teile zu perfekten Looks für jeden Moment.",
-        "icon": "swatch"
+        "description": "Perfekte Kombinationen",
+        "icon": "swatch",
+        "image": "/images/landing/feature-mixmatch.jpg"
       }
     ]
   },
@@ -104,9 +108,136 @@
       }
     ]
   },
+  "stats": {
+    "eyebrow": "Von Modefans weltweit vertraut",
+    "title": "DressMeAI in Zahlen",
+    "items": [
+      {
+        "value": "1M+",
+        "label": "Virtuelle Anproben"
+      },
+      {
+        "value": "40%",
+        "label": "Weniger Retouren"
+      },
+      {
+        "value": "9",
+        "label": "Unterstuetzte Sprachen"
+      },
+      {
+        "value": "24/7",
+        "label": "KI verfuegbar"
+      }
+    ]
+  },
+  "showcase": {
+    "eyebrow": "Showcase",
+    "title": "Den Unterschied in Sekunden sehen",
+    "description": "Vorher/Nachher-Vergleiche und Outfit-Inspiration (aktuell Demo-Platzhalter).",
+    "note": "Beispiele dienen nur zur Illustration. Ergebnisse haengen von Bildqualitaet, Pose und Kleidungsart ab.",
+    "primaryCta": "Mit deinen Fotos testen",
+    "secondaryCta": "Mehr Guides lesen",
+    "beforeAfter": {
+      "title": "Vorher / Nachher",
+      "description": "Direkter Vergleich, um den Look schnell einzuschaetzen.",
+      "beforeLabel": "Vorher",
+      "afterLabel": "Nachher",
+      "items": [
+        { "title": "Casual → Professionell", "description": "Vom laessigen Look zu einem gepflegten Stil." },
+        { "title": "Basic → Perfekte Passform", "description": "Proportionen und Sitz visuell vergleichen." },
+        { "title": "Original → KI-Makeover", "description": "Mit realistischem KI-Try-on ein frischer Look." }
+      ]
+    },
+    "gallery": {
+      "title": "Outfit-Inspiration",
+      "description": "Ein paar Styles, die du sofort ausprobieren kannst.",
+      "items": [
+        { "title": "Business Casual", "description": "Clean und modern fuer Arbeit und Meetings." },
+        { "title": "Weekend Chic", "description": "Entspannt, aber trotzdem stylisch." },
+        { "title": "Evening Elegance", "description": "Eleganter fuer Abende und Events." }
+      ]
+    }
+  },
+  "faq": {
+    "eyebrow": "Haeufig gestellte Fragen",
+    "title": "Alles ueber KI-virtuelle Anprobe",
+    "items": [
+      {
+        "question": "Was ist KI-virtuelle Anprobetechnologie?",
+        "answer": "KI-virtuelle Anprobe nutzt kuenstliche Intelligenz und Computer Vision, um realistische Simulationen zu erstellen, wie Kleidung an Ihrem Koerper aussehen wuerde. Laden Sie einfach ein Foto von sich und ein Kleidungsbild hoch, und unsere KI generiert eine Visualisierung von Ihnen in diesem Outfit."
+      },
+      {
+        "question": "Wie genau ist die virtuelle Anprobe?",
+        "answer": "Unsere KI-Technologie liefert hochrealistische Ergebnisse, die genau darstellen, wie Kleidung an Ihnen aussehen wird. Obwohl virtuelle Anproben Annaeherungen sind und die tatsaechliche Passform leicht variieren kann, hilft unsere Technologie Ihnen, fundiertere Kaufentscheidungen zu treffen und reduziert die Wahrscheinlichkeit von Retouren erheblich."
+      },
+      {
+        "question": "Ist DressMeAI kostenlos?",
+        "answer": "DressMeAI bietet sowohl kostenlose als auch Premium-Optionen. Sie koennen unsere grundlegenden virtuellen Anprobefunktionen kostenlos testen, mit Premium-Funktionen fuer fortgeschrittene Benutzer und Unternehmen."
+      },
+      {
+        "question": "Welche Art von Fotos funktionieren am besten?",
+        "answer": "Fuer beste Ergebnisse verwenden Sie klare, gut beleuchtete Fotos, auf denen die Person gerade steht und in die Kamera schaut. Die Kleidung auf dem Foto sollte relativ koerpernah sein, damit die KI Ihre Koerperform verstehen kann."
+      },
+      {
+        "question": "Sind meine Daten und Fotos sicher?",
+        "answer": "Ja, wir nehmen Datensicherheit sehr ernst. Ihre Fotos werden von unserem KI-System sicher verarbeitet und nicht dauerhaft gespeichert, es sei denn, Sie speichern sie ausdruecklich in Ihrem Verlauf. Unser System ist mit Datenschutz als Kernprinzip entwickelt."
+      }
+    ]
+  },
+  "latestBlog": {
+    "eyebrow": "Aus unserem Blog",
+    "title": "Neueste Fashion-Tech Einblicke",
+    "description": "Bleiben Sie auf dem Laufenden über die neuesten Trends in KI-Mode-Technologie und virtueller Anprobe.",
+    "readMore": "Mehr lesen",
+    "viewAll": "Alle Artikel anzeigen"
+  },
   "cta": {
     "title": "Starten Sie noch heute Ihre virtuelle Anprobe",
     "description": "Erleben Sie die Zukunft der Mode mit AI-gestützter Anprobe.",
     "button": "Virtuelle Anprobe starten"
+  },
+  "beforeAfter": {
+    "eyebrow": "Sehen Sie die Verwandlung",
+    "title": "Echte Ergebnisse",
+    "items": [
+      {
+        "label": "Casual zu Chic",
+        "image": "/images/landing/before-after-casual.jpg"
+      },
+      {
+        "label": "Business Ready",
+        "image": "/images/landing/before-after-business.jpg"
+      },
+      {
+        "label": "Abendeleganz",
+        "image": "/images/landing/before-after-evening.jpg"
+      }
+    ]
+  },
+  "useCases": {
+    "eyebrow": "Für alle",
+    "title": "So nutzen Sie DressMeAI",
+    "items": [
+      {
+        "title": "Online-Shopping",
+        "description": "Vor dem Kauf anprobieren",
+        "image": "/images/landing/usecase-shopping.jpg"
+      },
+      {
+        "title": "Content-Erstellung",
+        "description": "Looks erstellen",
+        "image": "/images/landing/usecase-blogger.jpg"
+      },
+      {
+        "title": "E-Commerce-Marken",
+        "description": "Conversions steigern",
+        "image": "/images/landing/usecase-brand.jpg"
+      },
+      {
+        "title": "Personal Styling",
+        "description": "Garderobe aufbauen",
+        "image": "/images/landing/usecase-styling.jpg"
+      }
+    ]
   }
 }

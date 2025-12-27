@@ -1,16 +1,26 @@
 {
-  "brand": "AI 패션",
+  "brand": "DressMeAI",
   "nav": {
     "home": "홈",
     "history": "히스토리",
-    "blog": "블로그"
+    "blog": "블로그",
+    "about": "회사 소개",
+    "faq": "자주 묻는 질문",
+    "contact": "문의하기"
   },
   "language": {
     "label": "언어",
     "ariaLabel": "사이트 언어 선택"
   },
   "footer": {
-    "title": "파트너 링크"
+    "title": "파트너 링크",
+    "links": {
+      "privacy": "개인정보 처리방침",
+      "terms": "이용약관",
+      "about": "회사 소개",
+      "faq": "자주 묻는 질문",
+      "contact": "문의하기"
+    }
   },
   "errors": {
     "missingImages": "모델 사진과 의류 사진을 업로드해주세요."

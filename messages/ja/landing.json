@@ -33,29 +33,33 @@
     "resultTitle": "結果"
   },
   "features": {
-    "eyebrow": "ショッピング体験を変える AI ファッション機能",
-    "title": "試着・スタイリング・購入を支えるオールインワン AI",
-    "description": "バーチャル試着からパーソナル提案まで、AI が理想のスタイル探しをサポートします。",
+    "eyebrow": "強力な機能",
+    "title": "必要なものすべて",
+    "description": "",
     "items": [
       {
         "name": "バーチャル試着",
-        "description": "高度な AI で実際の試着室のように正確な着用イメージを再現します。",
-        "icon": "camera"
+        "description": "服の着用イメージを確認",
+        "icon": "camera",
+        "image": "/images/landing/feature-tryon.jpg"
       },
       {
-        "name": "AI コーデ生成",
-        "description": "好みとワードローブに基づいて完璧なコーディネートを作成します。",
-        "icon": "sparkles"
+        "name": "AIスタイル生成",
+        "description": "AIがコーデを提案",
+        "icon": "sparkles",
+        "image": "/images/landing/feature-style-ai.jpg"
       },
       {
-        "name": "スマート提案",
-        "description": "天気やシーンに合わせた毎日のスタイル提案を受け取れます。",
-        "icon": "lightBulb"
+        "name": "スマート推薦",
+        "description": "毎日のパーソナル提案",
+        "icon": "lightBulb",
+        "image": "/images/landing/feature-recommendations.jpg"
       },
       {
-        "name": "ミックス & マッチ",
-        "description": "ワードローブを自由に組み合わせて、あらゆるシーンに合うルックを発見。",
-        "icon": "swatch"
+        "name": "ミックス＆マッチ",
+        "description": "完璧な組み合わせを作成",
+        "icon": "swatch",
+        "image": "/images/landing/feature-mixmatch.jpg"
       }
     ]
   },
@@ -104,9 +108,136 @@
       }
     ]
   },
+  "stats": {
+    "eyebrow": "世界中のファッション愛好家に信頼されています",
+    "title": "数字で見るDressMeAI",
+    "items": [
+      {
+        "value": "100万+",
+        "label": "バーチャル試着回数"
+      },
+      {
+        "value": "40%",
+        "label": "返品率削減"
+      },
+      {
+        "value": "9",
+        "label": "対応言語"
+      },
+      {
+        "value": "24/7",
+        "label": "AI稼働中"
+      }
+    ]
+  },
+  "showcase": {
+    "eyebrow": "ショーケース",
+    "title": "数秒で違いがわかる",
+    "description": "Before/After 比較とコーデ例をサクッとチェック（現在はデモ用プレースホルダー）。",
+    "note": "例はイメージです。結果は画像の品質・ポーズ・衣服の種類によって変わります。",
+    "primaryCta": "自分の写真で試す",
+    "secondaryCta": "ガイドを読む",
+    "beforeAfter": {
+      "title": "Before / After",
+      "description": "左右比較で着用イメージを確認できます。",
+      "beforeLabel": "Before",
+      "afterLabel": "After",
+      "items": [
+        { "title": "カジュアル → きれいめ", "description": "カジュアルからより洗練されたスタイルへ。" },
+        { "title": "ベーシック → ぴったりフィット", "description": "フィット感とバランスの変化を視覚的に確認。" },
+        { "title": "オリジナル → AI メイクオーバー", "description": "リアルな AI 試着レンダリングでアップデート。" }
+      ]
+    },
+    "gallery": {
+      "title": "コーデのヒント",
+      "description": "いくつかのスタイルからすぐ試着。",
+      "items": [
+        { "title": "ビジネスカジュアル", "description": "仕事や打ち合わせに合うクリーンな印象。" },
+        { "title": "週末シック", "description": "リラックスしつつきちんと見える。" },
+        { "title": "イブニングエレガンス", "description": "夜のお出かけやイベント向け。" }
+      ]
+    }
+  },
+  "faq": {
+    "eyebrow": "よくある質問",
+    "title": "AIバーチャル試着について知っておくべきこと",
+    "items": [
+      {
+        "question": "AIバーチャル試着技術とは何ですか？",
+        "answer": "AIバーチャル試着は、人工知能とコンピュータービジョンを使用して、服があなたの体にどのように見えるかをリアルにシミュレーションします。自分の写真と服の画像をアップロードするだけで、AIがその服を着た姿を生成します。"
+      },
+      {
+        "question": "バーチャル試着の精度はどのくらいですか？",
+        "answer": "当社のAI技術は、服があなたに似合うかどうかを正確に表現する非常にリアルな結果を提供します。バーチャル試着は近似値であり、実際のフィット感は若干異なる場合がありますが、より賢い購入決定を下し、返品の可能性を大幅に減らすのに役立ちます。"
+      },
+      {
+        "question": "DressMeAIは無料で使えますか？",
+        "answer": "DressMeAIは無料とプレミアムの両方のオプションを提供しています。基本的なバーチャル試着機能は無料でお試しいただけ、プレミアム機能は上級ユーザーや企業向けにご利用いただけます。"
+      },
+      {
+        "question": "どのような写真が最適ですか？",
+        "answer": "最良の結果を得るには、人物が真っすぐ立ってカメラに向かっている、明るく鮮明な写真を使用してください。写真の服は比較的体にフィットしているものが、AIが体型を理解するのに役立ちます。"
+      },
+      {
+        "question": "データと写真は安全ですか？",
+        "answer": "はい、データセキュリティを非常に重視しています。写真はAIシステムで安全に処理され、履歴に明示的に保存しない限り、永続的に保存されることはありません。プライバシーを核として設計されています。"
+      }
+    ]
+  },
+  "latestBlog": {
+    "eyebrow": "ブログより",
+    "title": "最新ファッションテック情報",
+    "description": "AIファッション技術とバーチャル試着イノベーションの最新トレンドをチェック。",
+    "readMore": "続きを読む",
+    "viewAll": "すべての記事を見る"
+  },
   "cta": {
     "title": "今すぐバーチャル試着を始めよう",
     "description": "AI パワーのバーチャル試着でファッションの未来を体験してください。",
     "button": "バーチャル試着を体験"
+  },
+  "beforeAfter": {
+    "eyebrow": "変化をご覧ください",
+    "title": "リアルな結果、確かな効果",
+    "items": [
+      {
+        "label": "カジュアルからシック",
+        "image": "/images/landing/before-after-casual.jpg"
+      },
+      {
+        "label": "ビジネスレディ",
+        "image": "/images/landing/before-after-business.jpg"
+      },
+      {
+        "label": "イブニングエレガンス",
+        "image": "/images/landing/before-after-evening.jpg"
+      }
+    ]
+  },
+  "useCases": {
+    "eyebrow": "活用シーン",
+    "title": "誰でも使える",
+    "items": [
+      {
+        "title": "オンラインショッピング",
+        "description": "試着してから購入",
+        "image": "/images/landing/usecase-shopping.jpg"
+      },
+      {
+        "title": "コンテンツ制作",
+        "description": "素敵なルックを作成",
+        "image": "/images/landing/usecase-blogger.jpg"
+      },
+      {
+        "title": "ECブランド",
+        "description": "コンバージョン向上",
+        "image": "/images/landing/usecase-brand.jpg"
+      },
+      {
+        "title": "パーソナルスタイリング",
+        "description": "ワードローブを構築",
+        "image": "/images/landing/usecase-styling.jpg"
+      }
+    ]
   }
 }

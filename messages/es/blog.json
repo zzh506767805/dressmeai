@@ -67,7 +67,135 @@
         ],
         "publishDate": "2025-06-08",
         "readTime": "12 min de lectura",
-        "excerpt": "La IA redefine cada paso, desde la inspiración hasta el pago." 
+        "excerpt": "La IA redefine cada paso, desde la inspiración hasta el pago."
+      },
+      "how-to-take-perfect-photo-virtual-try-on": {
+        "title": "Cómo tomar la foto perfecta para el probador virtual",
+        "description": "Consejos de iluminación, pose y fondo para mejores resultados de IA.",
+        "keywords": ["foto probador", "calidad imagen", "subir foto IA"],
+        "publishDate": "2025-06-05",
+        "readTime": "6 min de lectura",
+        "excerpt": "Mejor entrada = mejor resultado. Así maximizas el potencial del probador virtual."
+      },
+      "psychology-virtual-try-on-consumer-behavior": {
+        "title": "Psicología del probador virtual y comportamiento del consumidor",
+        "description": "Cómo verse a uno mismo con la prenda influye en la decisión de compra.",
+        "keywords": ["psicología consumidor", "comportamiento compra", "probador virtual"],
+        "publishDate": "2025-06-03",
+        "readTime": "9 min de lectura",
+        "excerpt": "Las emociones y la autoimagen impulsan la conversión; el probador virtual conecta con ambas."
+      },
+      "virtual-try-on-inclusive-body-types": {
+        "title": "Probador virtual para todos los cuerpos",
+        "description": "Inclusividad en la moda con tallas diversas y representación real.",
+        "keywords": ["inclusión corporal", "tallas diversas", "moda para todos"],
+        "publishDate": "2025-06-01",
+        "readTime": "7 min de lectura",
+        "excerpt": "La moda debe ser accesible para cada cuerpo; la IA lo hace posible."
+      },
+      "mobile-vs-desktop-virtual-try-on-experience": {
+        "title": "Móvil vs. escritorio: experiencia de probador virtual",
+        "description": "Diferencias de UX y mejores prácticas según el dispositivo.",
+        "keywords": ["compra móvil", "UX escritorio", "probador virtual"],
+        "publishDate": "2025-05-28",
+        "readTime": "8 min de lectura",
+        "excerpt": "El diseño responsive es obligatorio, pero cada plataforma tiene sus fortalezas."
+      },
+      "virtual-try-on-social-media-shopping": {
+        "title": "Probador virtual y compras en redes sociales",
+        "description": "Cómo los filtros AR y las compras in-app transforman el fashion commerce.",
+        "keywords": ["social commerce", "filtros AR", "compras Instagram"],
+        "publishDate": "2025-05-25",
+        "readTime": "7 min de lectura",
+        "excerpt": "Desliza, toca, prueba, compra: el nuevo camino de la Gen Z."
+      },
+      "sustainable-fashion-virtual-try-on": {
+        "title": "Moda sostenible gracias al probador virtual",
+        "description": "Menos devoluciones, menor huella de carbono y consumo más consciente.",
+        "keywords": ["sostenibilidad", "slow fashion", "reducción CO2"],
+        "publishDate": "2025-05-22",
+        "readTime": "8 min de lectura",
+        "excerpt": "Menos envíos de retorno significa menos emisiones: bueno para el planeta y el margen."
+      },
+      "ar-augmented-reality-fashion-ecommerce": {
+        "title": "AR en fashion e-commerce: estado en 2025",
+        "description": "La realidad aumentada va más allá de los filtros faciales.",
+        "keywords": ["AR ecommerce", "realidad aumentada", "fashion tech"],
+        "publishDate": "2025-05-19",
+        "readTime": "10 min de lectura",
+        "excerpt": "De previews de zapatillas a outfits completos: AR se convierte en estándar."
+      },
+      "ai-size-recommendation-beyond-measurements": {
+        "title": "Recomendación de talla IA: más allá de las medidas",
+        "description": "Algoritmos de fit, feedback de clientes y consejos personalizados.",
+        "keywords": ["guía de tallas", "fit tech", "recomendación personalizada"],
+        "publishDate": "2025-05-16",
+        "readTime": "7 min de lectura",
+        "excerpt": "Datos + machine learning = la mejor recomendación de talla."
+      },
+      "virtual-try-on-accessories-jewelry-glasses": {
+        "title": "Probador virtual para accesorios: joyería, gafas y más",
+        "description": "La ropa es solo el comienzo; los accesorios también se benefician del AR.",
+        "keywords": ["accesorios AR", "probador gafas", "joyería virtual"],
+        "publishDate": "2025-05-13",
+        "readTime": "6 min de lectura",
+        "excerpt": "Pendientes, gafas de sol, relojes: todo se prueba antes de comprar."
+      },
+      "privacy-security-ai-fashion-apps": {
+        "title": "Privacidad y seguridad en apps de moda IA",
+        "description": "Cómo usuarios y marcas gestionan responsablemente los datos de imagen.",
+        "keywords": ["privacidad", "GDPR", "seguridad IA"],
+        "publishDate": "2025-05-10",
+        "readTime": "9 min de lectura",
+        "excerpt": "Las imágenes son datos personales; así manejan los proveedores serios esta información."
+      },
+      "how-fashion-brands-use-ai-predict-trends": {
+        "title": "Cómo las marcas de moda usan IA para predecir tendencias",
+        "description": "Colecciones basadas en datos y time-to-market más rápido.",
+        "keywords": ["predicción tendencias", "analytics moda", "colección IA"],
+        "publishDate": "2025-05-07",
+        "readTime": "8 min de lectura",
+        "excerpt": "Detectar tendencias pronto ahorra en diseño, producción y sobrestock."
+      },
+      "customer-journey-virtual-fitting-rooms": {
+        "title": "El customer journey con probadores virtuales",
+        "description": "Del primer clic a la recompra: así enriquece la IA cada fase.",
+        "keywords": ["customer journey", "touchpoints", "conversión moda"],
+        "publishDate": "2025-05-04",
+        "readTime": "10 min de lectura",
+        "excerpt": "Los probadores virtuales acortan la decisión y aumentan la lealtad."
+      },
+      "2d-vs-3d-virtual-try-on-technology": {
+        "title": "2D vs. 3D virtual try-on: ¿qué tecnología elegir?",
+        "description": "Overlays basados en imagen vs. modelos 3D complejos.",
+        "keywords": ["2D try-on", "3D try-on", "renderizado"],
+        "publishDate": "2025-05-01",
+        "readTime": "9 min de lectura",
+        "excerpt": "2D es fácil de integrar, 3D ofrece profundidad; la elección depende del objetivo."
+      },
+      "virtual-try-on-case-studies-success-stories": {
+        "title": "Casos de éxito con probador virtual",
+        "description": "Cómo retailers de moda aumentan conversión y reducen devoluciones.",
+        "keywords": ["caso de éxito", "historias de éxito", "ROI moda"],
+        "publishDate": "2025-04-28",
+        "readTime": "11 min de lectura",
+        "excerpt": "Cifras concretas muestran lo que el probador virtual puede lograr."
+      },
+      "building-customer-trust-ai-fashion-technology": {
+        "title": "Construir confianza: transparencia en tecnología de moda IA",
+        "description": "Por qué la comunicación abierta sobre algoritmos es clave.",
+        "keywords": ["confianza cliente", "transparencia", "ética IA"],
+        "publishDate": "2025-04-25",
+        "readTime": "7 min de lectura",
+        "excerpt": "La confianza nace cuando los clientes saben cómo se usan sus datos."
+      },
+      "economics-virtual-try-on-implementation": {
+        "title": "Economía de implementar un probador virtual",
+        "description": "Costes, ROI y escalabilidad para decisores de e-commerce.",
+        "keywords": ["ROI probador virtual", "coste-beneficio", "inversión ecommerce"],
+        "publishDate": "2025-04-22",
+        "readTime": "10 min de lectura",
+        "excerpt": "Un análisis de inversión muestra cuándo la tecnología se amortiza."
       }
     }
   },

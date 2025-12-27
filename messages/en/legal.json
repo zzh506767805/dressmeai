@@ -1,0 +1,153 @@
+{
+  "privacy": {
+    "meta": {
+      "title": "Privacy Policy | DressMeAI - AI Virtual Try-On",
+      "description": "Learn how DressMeAI protects your privacy and handles your personal data when using our AI virtual try-on service."
+    },
+    "title": "Privacy Policy",
+    "lastUpdated": "Last Updated: January 2025",
+    "sections": {
+      "introduction": {
+        "title": "Introduction",
+        "content": "Welcome to DressMeAI. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our AI virtual try-on service."
+      },
+      "dataCollection": {
+        "title": "Information We Collect",
+        "content": "We collect information that you provide directly to us:",
+        "items": [
+          "Photos you upload for virtual try-on (model photos and clothing images)",
+          "Usage data and analytics to improve our service",
+          "Device information and browser type",
+          "IP address and general location data"
+        ]
+      },
+      "dataUsage": {
+        "title": "How We Use Your Information",
+        "content": "We use the collected information for the following purposes:",
+        "items": [
+          "To provide and maintain our AI virtual try-on service",
+          "To process your uploaded images and generate try-on results",
+          "To improve and optimize our AI algorithms and user experience",
+          "To communicate with you about service updates and new features",
+          "To detect and prevent fraud or technical issues"
+        ]
+      },
+      "imageProcessing": {
+        "title": "Image Processing and Storage",
+        "content": "Your uploaded images are processed by our AI system to generate virtual try-on results. We do not permanently store your uploaded photos unless you explicitly save them to your history. Generated results may be temporarily cached to improve performance."
+      },
+      "dataSharing": {
+        "title": "Data Sharing",
+        "content": "We do not sell, trade, or rent your personal information to third parties. We may share data with:",
+        "items": [
+          "Service providers who assist in operating our platform (cloud hosting, analytics)",
+          "Legal authorities when required by law or to protect our rights",
+          "Business partners with your explicit consent"
+        ]
+      },
+      "cookies": {
+        "title": "Cookies and Tracking",
+        "content": "We use cookies and similar tracking technologies to enhance your experience, analyze site traffic, and understand user behavior. You can control cookie preferences through your browser settings."
+      },
+      "security": {
+        "title": "Data Security",
+        "content": "We implement industry-standard security measures to protect your personal information, including encryption, secure servers, and regular security audits. However, no method of transmission over the Internet is 100% secure."
+      },
+      "rights": {
+        "title": "Your Rights",
+        "content": "You have the right to:",
+        "items": [
+          "Access your personal data",
+          "Request correction of inaccurate data",
+          "Request deletion of your data",
+          "Object to processing of your data",
+          "Data portability"
+        ]
+      },
+      "children": {
+        "title": "Children's Privacy",
+        "content": "Our service is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13."
+      },
+      "changes": {
+        "title": "Changes to This Policy",
+        "content": "We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the 'Last Updated' date."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "content": "If you have any questions about this Privacy Policy, please contact us at:",
+        "email": "privacy@dressmeai.com"
+      }
+    }
+  },
+  "terms": {
+    "meta": {
+      "title": "Terms of Service | DressMeAI - AI Virtual Try-On",
+      "description": "Read the terms and conditions for using DressMeAI's AI virtual try-on service."
+    },
+    "title": "Terms of Service",
+    "lastUpdated": "Last Updated: January 2025",
+    "sections": {
+      "acceptance": {
+        "title": "Acceptance of Terms",
+        "content": "By accessing or using DressMeAI's AI virtual try-on service, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service."
+      },
+      "serviceDescription": {
+        "title": "Service Description",
+        "content": "DressMeAI provides an AI-powered virtual try-on service that allows users to visualize how clothing items would look on them. Our service uses advanced machine learning algorithms to process uploaded images and generate realistic try-on results."
+      },
+      "userAccounts": {
+        "title": "User Accounts",
+        "content": "Some features may require you to create an account. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account."
+      },
+      "acceptableUse": {
+        "title": "Acceptable Use",
+        "content": "When using our service, you agree not to:",
+        "items": [
+          "Upload inappropriate, illegal, or harmful content",
+          "Use the service for any unlawful purpose",
+          "Attempt to reverse engineer or hack our AI systems",
+          "Upload images without proper rights or consent",
+          "Use automated systems to access the service without permission",
+          "Interfere with or disrupt the service or servers"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "Intellectual Property",
+        "content": "The DressMeAI service, including its AI technology, design, and content, is protected by intellectual property laws. You retain ownership of images you upload, but grant us a license to process them for providing the service."
+      },
+      "generatedContent": {
+        "title": "Generated Content",
+        "content": "Virtual try-on results generated by our AI are provided for personal, non-commercial use. You may save and share your results, but commercial use requires our written permission."
+      },
+      "disclaimer": {
+        "title": "Disclaimer of Warranties",
+        "content": "Our service is provided 'as is' without warranties of any kind. We do not guarantee that results will be perfectly accurate or that the service will be uninterrupted. Virtual try-on results are approximations and actual fit may vary."
+      },
+      "limitation": {
+        "title": "Limitation of Liability",
+        "content": "To the maximum extent permitted by law, DressMeAI shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the service."
+      },
+      "indemnification": {
+        "title": "Indemnification",
+        "content": "You agree to indemnify and hold DressMeAI harmless from any claims, damages, or expenses arising from your violation of these terms or your use of the service."
+      },
+      "termination": {
+        "title": "Termination",
+        "content": "We reserve the right to suspend or terminate your access to the service at any time, with or without cause, and with or without notice."
+      },
+      "changes": {
+        "title": "Changes to Terms",
+        "content": "We may modify these terms at any time. Continued use of the service after changes constitutes acceptance of the new terms."
+      },
+      "governing": {
+        "title": "Governing Law",
+        "content": "These terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles."
+      },
+      "contact": {
+        "title": "Contact",
+        "content": "For questions about these Terms of Service, contact us at:",
+        "email": "legal@dressmeai.com"
+      }
+    }
+  }
+}

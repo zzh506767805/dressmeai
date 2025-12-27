@@ -1,0 +1,211 @@
+{
+  "about": {
+    "meta": {
+      "title": "Über uns | DressMeAI - KI Virtuelle Anprobe-Technologie",
+      "description": "Erfahren Sie mehr über DressMeAI, das Team hinter der innovativen KI-Anprobetechnologie, die das Online-Mode-Shopping revolutioniert."
+    },
+    "hero": {
+      "title": "Über DressMeAI",
+      "subtitle": "Revolutionierung der Online-Mode mit KI-Technologie"
+    },
+    "mission": {
+      "title": "Unsere Mission",
+      "content": "Bei DressMeAI glauben wir, dass jeder das Recht hat, mit Vertrauen einzukaufen. Unsere Mission ist es, die Lücke zwischen Online-Shopping und dem Erlebnis im Geschäft zu schließen, indem wir modernste KI-Anprobetechnologie bereitstellen, die Kunden hilft, vor dem Kauf zu visualisieren, wie Kleidung an ihnen aussehen wird."
+    },
+    "story": {
+      "title": "Unsere Geschichte",
+      "content": "DressMeAI wurde mit einer einfachen, aber kraftvollen Vision gegründet: das Rätselraten beim Online-Mode-Shopping zu eliminieren. Wir haben erkannt, dass eine der größten Herausforderungen im E-Commerce die Unmöglichkeit ist, Kleidung vor dem Kauf anzuprobieren, was zu hohen Rückgabequoten und Kundenfrustration führt. Unser Team aus KI-Forschern, Modetechnologen und E-Commerce-Experten kam zusammen, um eine Lösung zu schaffen, die die Art und Weise, wie Menschen online Kleidung kaufen, transformiert."
+    },
+    "technology": {
+      "title": "Unsere Technologie",
+      "content": "Unsere proprietäre KI-Technologie nutzt fortschrittliche Computer Vision und Machine-Learning-Algorithmen, um realistische virtuelle Anprobe-Erlebnisse zu schaffen. Durch die Analyse von Körperformen, Kleidungseigenschaften und Passformmustern generieren wir genaue Visualisierungen, die Kunden helfen, fundierte Kaufentscheidungen zu treffen.",
+      "features": [
+        "Fortschrittliche Körpererkennung und Posenschätzung",
+        "Realistische Kleidungssimulation und Faltenwurf",
+        "Unterstützung für verschiedene Kleidungskategorien",
+        "Schnelle Verarbeitung mit Echtzeit-Ergebnissen",
+        "Datenschutzorientierte Bildverarbeitung"
+      ]
+    },
+    "values": {
+      "title": "Unsere Werte",
+      "items": [
+        {
+          "title": "Innovation",
+          "description": "Wir erweitern kontinuierlich die Grenzen der KI-Technologie, um das beste virtuelle Anprobe-Erlebnis zu bieten."
+        },
+        {
+          "title": "Benutzerdatenschutz",
+          "description": "Wir priorisieren die Sicherheit und Privatsphäre der Benutzerdaten mit branchenführenden Schutzmaßnahmen."
+        },
+        {
+          "title": "Nachhaltigkeit",
+          "description": "Durch die Reduzierung von Rücksendungen helfen wir, die Umweltauswirkungen des Mode-E-Commerce zu minimieren."
+        },
+        {
+          "title": "Zugänglichkeit",
+          "description": "Wir streben danach, unsere Technologie für Unternehmen und Verbraucher weltweit zugänglich zu machen."
+        }
+      ]
+    },
+    "stats": {
+      "title": "DressMeAI in Zahlen",
+      "items": [
+        { "value": "1M+", "label": "Virtuelle Anproben" },
+        { "value": "40%", "label": "Reduzierte Rücksendungen" },
+        { "value": "9", "label": "Unterstützte Sprachen" },
+        { "value": "24/7", "label": "KI-Verfügbarkeit" }
+      ]
+    },
+    "cta": {
+      "title": "Bereit, Ihr Shopping-Erlebnis zu transformieren?",
+      "description": "Probieren Sie unsere KI-Anprobetechnologie heute aus und erleben Sie den Unterschied selbst.",
+      "button": "Jetzt ausprobieren"
+    }
+  },
+  "faq": {
+    "meta": {
+      "title": "FAQ | DressMeAI - Fragen zur virtuellen KI-Anprobe beantwortet",
+      "description": "Finden Sie Antworten auf häufig gestellte Fragen zur KI-Anprobetechnologie von DressMeAI."
+    },
+    "hero": {
+      "title": "Häufig gestellte Fragen",
+      "subtitle": "Alles, was Sie über virtuelle KI-Anprobe wissen müssen"
+    },
+    "categories": {
+      "general": {
+        "title": "Allgemeine Fragen",
+        "items": [
+          {
+            "question": "Was ist virtuelle KI-Anprobetechnologie?",
+            "answer": "Die virtuelle KI-Anprobetechnologie nutzt künstliche Intelligenz und Computer Vision, um realistische Simulationen zu erstellen, wie Kleidungsstücke an Ihnen aussehen werden. Laden Sie einfach ein Foto und ein Kleidungsbild hoch, und unsere KI generiert eine Visualisierung von Ihnen in diesem Artikel."
+          },
+          {
+            "question": "Wie genau ist die virtuelle Anprobe?",
+            "answer": "Unsere KI-Technologie liefert hochrealistische Ergebnisse, die genau darstellen, wie Kleidung an Ihnen aussehen wird. Während virtuelle Anproben Annäherungen sind und die tatsächliche Passform leicht variieren kann, hilft Ihnen unsere Technologie, fundiertere Kaufentscheidungen zu treffen und reduziert die Wahrscheinlichkeit von Rücksendungen erheblich."
+          },
+          {
+            "question": "Ist DressMeAI kostenlos?",
+            "answer": "DressMeAI bietet sowohl kostenlose als auch Premium-Optionen. Sie können unsere grundlegenden virtuellen Anprobe-Funktionen kostenlos ausprobieren, Premium-Funktionen sind für Power-User und Unternehmen verfügbar."
+          }
+        ]
+      },
+      "howItWorks": {
+        "title": "Wie es funktioniert",
+        "items": [
+          {
+            "question": "Wie benutze ich die virtuelle Anprobe-Funktion?",
+            "answer": "Die Nutzung von DressMeAI ist einfach: 1) Laden Sie ein Foto von sich oder einem Model hoch, 2) Laden Sie ein Bild des Kleidungsstücks hoch, das Sie anprobieren möchten, 3) Klicken Sie auf 'Generieren' und warten Sie einige Sekunden auf Ihr virtuelles Anprobeergebnis."
+          },
+          {
+            "question": "Welche Fotos funktionieren am besten?",
+            "answer": "Für beste Ergebnisse verwenden Sie klare, gut beleuchtete Fotos, auf denen die Person gerade steht und in die Kamera schaut. Die Kleidung auf dem Foto sollte relativ eng anliegen, um der KI zu helfen, Ihre Körperform zu verstehen."
+          },
+          {
+            "question": "Welche Arten von Kleidung kann ich anprobieren?",
+            "answer": "Unsere KI unterstützt eine breite Palette von Kleidungsstücken, darunter Oberteile, Hemden, Kleider, Jacken und Oberbekleidung. Wir erweitern kontinuierlich unsere Fähigkeiten, um mehr Kleidungskategorien zu unterstützen."
+          }
+        ]
+      },
+      "privacy": {
+        "title": "Datenschutz & Sicherheit",
+        "items": [
+          {
+            "question": "Was passiert mit meinen Fotos nach dem Hochladen?",
+            "answer": "Ihre Fotos werden sicher von unserem KI-System verarbeitet, um Anprobeergebnisse zu generieren. Wir speichern Ihre hochgeladenen Fotos nicht dauerhaft, es sei denn, Sie speichern sie ausdrücklich in Ihrem Verlauf. Unsere Systeme sind mit Blick auf den Datenschutz konzipiert."
+          },
+          {
+            "question": "Sind meine persönlichen Daten sicher?",
+            "answer": "Ja, wir nehmen Datensicherheit sehr ernst. Wir verwenden branchenübliche Verschlüsselung und Sicherheitsmaßnahmen zum Schutz Ihrer Informationen. Weitere Details finden Sie in unserer Datenschutzerklärung."
+          },
+          {
+            "question": "Teilen Sie meine Fotos mit Dritten?",
+            "answer": "Nein, wir teilen, verkaufen oder verbreiten Ihre Fotos nicht an Dritte. Ihre Bilder werden ausschließlich zur Generierung Ihrer virtuellen Anprobeergebnisse verwendet."
+          }
+        ]
+      },
+      "technical": {
+        "title": "Technische Fragen",
+        "items": [
+          {
+            "question": "Welche Bildformate werden unterstützt?",
+            "answer": "Wir unterstützen gängige Bildformate einschließlich JPEG, PNG und WebP. Für beste Ergebnisse verwenden Sie Bilder mit mindestens 512x512 Pixeln."
+          },
+          {
+            "question": "Wie lange dauert die Generierung eines Anprobeergebnisses?",
+            "answer": "Die meisten Anprobeergebnisse werden innerhalb von 10-30 Sekunden generiert, abhängig von der Bildkomplexität und der aktuellen Serverlast."
+          },
+          {
+            "question": "Kann ich DressMeAI auf Mobilgeräten nutzen?",
+            "answer": "Ja, DressMeAI ist vollständig responsiv und funktioniert auf Smartphones und Tablets. Sie können Fotos direkt von der Kamera oder Fotobibliothek Ihres Geräts hochladen."
+          }
+        ]
+      },
+      "business": {
+        "title": "Für Unternehmen",
+        "items": [
+          {
+            "question": "Kann ich DressMeAI in meinen E-Commerce-Shop integrieren?",
+            "answer": "Ja, wir bieten API-Integrationsoptionen für Unternehmen, die virtuelle Anprobe-Funktionen in ihre Online-Shops integrieren möchten. Kontaktieren Sie uns für weitere Informationen zu unseren Enterprise-Lösungen."
+          },
+          {
+            "question": "Welche Vorteile haben Einzelhändler?",
+            "answer": "Einzelhändler, die virtuelle Anprobetechnologie nutzen, sehen typischerweise erhöhte Konversionsraten, reduzierte Rücksendequoten, längere Website-Verweildauer und verbesserte Kundenzufriedenheit."
+          }
+        ]
+      }
+    },
+    "cta": {
+      "title": "Noch Fragen?",
+      "description": "Können Sie die gesuchte Antwort nicht finden? Kontaktieren Sie gerne unser Support-Team.",
+      "button": "Kontaktieren Sie uns"
+    }
+  },
+  "contact": {
+    "meta": {
+      "title": "Kontakt | DressMeAI - Kontaktieren Sie uns",
+      "description": "Kontaktieren Sie DressMeAI für Support, Geschäftsanfragen oder Partnerschaftsmöglichkeiten."
+    },
+    "hero": {
+      "title": "Kontaktieren Sie uns",
+      "subtitle": "Wir freuen uns von Ihnen zu hören"
+    },
+    "intro": {
+      "content": "Haben Sie eine Frage, Feedback oder eine Geschäftsanfrage? Unser Team ist hier, um zu helfen. Wählen Sie unten den besten Weg, uns zu erreichen."
+    },
+    "channels": {
+      "general": {
+        "title": "Allgemeine Anfragen",
+        "description": "Allgemeine Fragen zu DressMeAI und unserer virtuellen Anprobetechnologie.",
+        "email": "hello@dressmeai.com"
+      },
+      "support": {
+        "title": "Technischer Support",
+        "description": "Benötigen Sie Hilfe mit der virtuellen Anprobe-Funktion oder haben Sie Probleme?",
+        "email": "support@dressmeai.com"
+      },
+      "business": {
+        "title": "Business & Partnerschaften",
+        "description": "Interessiert an der Integration von DressMeAI in Ihr Unternehmen oder möchten Sie Partner werden?",
+        "email": "business@dressmeai.com"
+      },
+      "press": {
+        "title": "Presse & Medien",
+        "description": "Medienanfragen und pressebezogene Fragen.",
+        "email": "press@dressmeai.com"
+      }
+    },
+    "social": {
+      "title": "Folgen Sie uns",
+      "description": "Bleiben Sie über die neuesten Nachrichten und Updates von DressMeAI informiert.",
+      "platforms": [
+        { "name": "Twitter", "handle": "@dressmeai" },
+        { "name": "LinkedIn", "handle": "DressMeAI" }
+      ]
+    },
+    "response": {
+      "title": "Antwortzeit",
+      "content": "Wir antworten in der Regel innerhalb von 24-48 Stunden an Werktagen auf Anfragen. Bei dringenden technischen Problemen fügen Sie bitte 'DRINGEND' in die Betreffzeile Ihrer E-Mail ein."
+    }
+  }
+}

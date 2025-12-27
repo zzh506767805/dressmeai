@@ -1,14 +1,78 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
+import { defaultLocale, locales as supportedLocales, type Locale } from '../i18n/config'
+
+const ogLocaleMap: Record<string, string> = {
+  en: 'en_US',
+  'zh-CN': 'zh_CN',
+  ko: 'ko_KR',
+  ja: 'ja_JP',
+  ru: 'ru_RU',
+  fr: 'fr_FR',
+  de: 'de_DE',
+  es: 'es_ES',
+  it: 'it_IT'
+}
 
 export default function TryOn() {
+  const router = useRouter()
+  const locale = router.locale ?? defaultLocale
+  const baseUrl = (process.env.NEXT_PUBLIC_BASE_URL || 'https://dressmeai.com').replace(/\/$/, '')
+  const pathWithoutLocale = '/try-on'
+  const canonicalPath = locale === defaultLocale ? pathWithoutLocale : `/${locale}${pathWithoutLocale}`
+  const canonicalUrl = `${baseUrl}${canonicalPath}`
+  const ogLocale = ogLocaleMap[locale] || ogLocaleMap[defaultLocale]
+  const alternateRefs = supportedLocales.map(code => {
+    const localizedPath = code === defaultLocale ? pathWithoutLocale : `/${code}${pathWithoutLocale}`
+    return {
+      locale: code,
+      href: `${baseUrl}${localizedPath}`
+    }
+  })
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Head>
         <title>Virtual Try-On | DressMeAI</title>
         <meta name="description" content="Try on clothes virtually with our AI-powered technology. See exactly how outfits will look on you before you buy." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="canonical" href={canonicalUrl} />
+        {alternateRefs.map(ref => (
+          <link key={ref.locale} rel="alternate" hrefLang={ref.locale} href={ref.href} />
+        ))}
+        <link rel="alternate" hrefLang="x-default" href={`${baseUrl}${pathWithoutLocale}`} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="DressMeAI" />
+        <meta property="og:title" content="Virtual Try-On | DressMeAI" />
+        <meta
+          property="og:description"
+          content="Try on clothes virtually with our AI-powered technology. See exactly how outfits will look on you before you buy."
+        />
+        <meta property="og:image" content="https://dressmeai.com/images/og-banner.jpg" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:locale" content={ogLocale} />
+        {supportedLocales
+          .filter(code => code !== locale)
+          .map(code => (
+            <meta
+              key={`og-alt-${code}`}
+              property="og:locale:alternate"
+              content={(ogLocaleMap[code] || ogLocaleMap[defaultLocale]).replace('-', '_')}
+            />
+          ))}
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@dressmeai" />
+        <meta name="twitter:title" content="Virtual Try-On | DressMeAI" />
+        <meta
+          name="twitter:description"
+          content="Try on clothes virtually with our AI-powered technology. See exactly how outfits will look on you before you buy."
+        />
+        <meta name="twitter:image" content="https://dressmeai.com/images/og-banner.jpg" />
         
         {/* Favicon and App Icons */}
         <link rel="icon" href="/icons/favicon.ico" />

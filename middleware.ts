@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(req: NextRequest) {
+  if (process.env.NODE_ENV !== 'production') {
+    return NextResponse.next()
+  }
+
   const rawHost = req.headers.get('host') || ''
   const host = rawHost.replace(/:\d+$/, '').toLowerCase()
 
@@ -16,5 +20,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: '/:path*'
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|feed.xml).*)']
 }

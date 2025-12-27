@@ -33,29 +33,33 @@
     "resultTitle": "Résultat"
   },
   "features": {
-    "eyebrow": "Des fonctions IA qui transforment votre shopping",
-    "title": "Votre assistant mode tout-en-un : essayage, style et achats",
-    "description": "De l'essayage virtuel aux recommandations personnalisées, l'IA révolutionne votre façon de trouver le look parfait.",
+    "eyebrow": "Fonctionnalités",
+    "title": "Tout ce dont vous avez besoin",
+    "description": "",
     "items": [
       {
         "name": "Essayage virtuel",
-        "description": "Visualisez précisément comment les vêtements tombent sur vous, comme dans une vraie cabine.",
-        "icon": "camera"
+        "description": "Voyez le rendu sur vous",
+        "icon": "camera",
+        "image": "/images/landing/feature-tryon.jpg"
       },
       {
-        "name": "Génération de styles IA",
-        "description": "Des idées de tenues complètes créées selon vos goûts et votre garde-robe.",
-        "icon": "sparkles"
+        "name": "Génération AI",
+        "description": "Idées de tenues AI",
+        "icon": "sparkles",
+        "image": "/images/landing/feature-style-ai.jpg"
       },
       {
-        "name": "Recommandations intelligentes",
-        "description": "Recevez chaque jour des suggestions adaptées à votre style, à l'occasion et à la météo.",
-        "icon": "lightBulb"
+        "name": "Recommandations",
+        "description": "Suggestions quotidiennes",
+        "icon": "lightBulb",
+        "image": "/images/landing/feature-recommendations.jpg"
       },
       {
         "name": "Mix & Match",
-        "description": "Combinez vos pièces pour créer des looks parfaits en toute situation.",
-        "icon": "swatch"
+        "description": "Créez des combinaisons",
+        "icon": "swatch",
+        "image": "/images/landing/feature-mixmatch.jpg"
       }
     ]
   },
@@ -104,9 +108,136 @@
       }
     ]
   },
+  "stats": {
+    "eyebrow": "La confiance des passionnes de mode du monde entier",
+    "title": "DressMeAI en chiffres",
+    "items": [
+      {
+        "value": "1M+",
+        "label": "Essayages virtuels"
+      },
+      {
+        "value": "40%",
+        "label": "Retours reduits"
+      },
+      {
+        "value": "9",
+        "label": "Langues supportees"
+      },
+      {
+        "value": "24/7",
+        "label": "IA disponible"
+      }
+    ]
+  },
+  "showcase": {
+    "eyebrow": "Exemples",
+    "title": "Voyez la difference en quelques secondes",
+    "description": "Comparaisons avant/apres et inspirations de tenues (placeholders de demo pour l’instant).",
+    "note": "Exemples a titre indicatif. Le resultat depend de la qualite de l’image, de la pose et du type de vetement.",
+    "primaryCta": "Essayer avec vos photos",
+    "secondaryCta": "Lire des guides",
+    "beforeAfter": {
+      "title": "Avant / Apres",
+      "description": "Des comparaisons cote a cote pour visualiser le rendu.",
+      "beforeLabel": "Avant",
+      "afterLabel": "Apres",
+      "items": [
+        { "title": "Decontracte → Pro", "description": "Passez d’un look casual a un style plus soigne." },
+        { "title": "Basique → Coupe parfaite", "description": "Voyez la difference de proportions et d’ajustement." },
+        { "title": "Original → Relooking IA", "description": "Actualisez le rendu avec un essayage IA realiste." }
+      ]
+    },
+    "gallery": {
+      "title": "Inspiration tenues",
+      "description": "Quelques styles prets a essayer.",
+      "items": [
+        { "title": "Business casual", "description": "Des tenues clean pour le travail et les rendez-vous." },
+        { "title": "Chic du week-end", "description": "Confortable, mais toujours elegant." },
+        { "title": "Elegance du soir", "description": "Plus habille pour sortir et les evenements." }
+      ]
+    }
+  },
+  "faq": {
+    "eyebrow": "Questions frequentes",
+    "title": "Tout savoir sur l'essayage virtuel par IA",
+    "items": [
+      {
+        "question": "Qu'est-ce que la technologie d'essayage virtuel par IA ?",
+        "answer": "L'essayage virtuel par IA utilise l'intelligence artificielle et la vision par ordinateur pour creer des simulations realistes de l'apparence des vetements sur votre corps. Telechargez simplement une photo de vous et une image de vetement, et notre IA genere une visualisation de vous portant cette tenue."
+      },
+      {
+        "question": "Quelle est la precision de l'essayage virtuel ?",
+        "answer": "Notre technologie IA fournit des resultats tres realistes qui representent avec precision l'apparence des vetements sur vous. Bien que les essayages virtuels soient des approximations et que l'ajustement reel puisse varier legerement, notre technologie vous aide a prendre des decisions d'achat plus eclairees et reduit considerablement la probabilite de retours."
+      },
+      {
+        "question": "DressMeAI est-il gratuit ?",
+        "answer": "DressMeAI propose des options gratuites et premium. Vous pouvez essayer gratuitement nos fonctionnalites de base d'essayage virtuel, avec des fonctionnalites premium disponibles pour les utilisateurs avances et les entreprises."
+      },
+      {
+        "question": "Quels types de photos fonctionnent le mieux ?",
+        "answer": "Pour de meilleurs resultats, utilisez des photos claires et bien eclairees ou la personne se tient droite face a la camera. Les vetements sur la photo doivent etre relativement ajustes pour aider l'IA a comprendre la morphologie."
+      },
+      {
+        "question": "Mes donnees et photos sont-elles securisees ?",
+        "answer": "Oui, nous prenons la securite des donnees tres au serieux. Vos photos sont traitees en toute securite par notre systeme IA et ne sont pas stockees de facon permanente sauf si vous les enregistrez explicitement dans votre historique. Notre systeme est concu avec la confidentialite au coeur."
+      }
+    ]
+  },
+  "latestBlog": {
+    "eyebrow": "Notre Blog",
+    "title": "Dernières Actualités Fashion Tech",
+    "description": "Restez informé des dernières tendances en technologie de mode IA et innovations d'essayage virtuel.",
+    "readMore": "Lire la suite",
+    "viewAll": "Voir tous les articles"
+  },
   "cta": {
     "title": "Commencez votre expérience d'essayage virtuel",
     "description": "Découvrez le futur de la mode grâce à notre technologie d'essayage IA.",
     "button": "Lancer l'essayage virtuel"
+  },
+  "beforeAfter": {
+    "eyebrow": "Voyez la transformation",
+    "title": "Résultats réels, impact réel",
+    "items": [
+      {
+        "label": "Décontracté vers chic",
+        "image": "/images/landing/before-after-casual.jpg"
+      },
+      {
+        "label": "Prêt pour les affaires",
+        "image": "/images/landing/before-after-business.jpg"
+      },
+      {
+        "label": "Élégance du soir",
+        "image": "/images/landing/before-after-evening.jpg"
+      }
+    ]
+  },
+  "useCases": {
+    "eyebrow": "Pour tous",
+    "title": "Comment utiliser DressMeAI",
+    "items": [
+      {
+        "title": "Shopping en ligne",
+        "description": "Essayez avant d'acheter",
+        "image": "/images/landing/usecase-shopping.jpg"
+      },
+      {
+        "title": "Création de contenu",
+        "description": "Créez des looks",
+        "image": "/images/landing/usecase-blogger.jpg"
+      },
+      {
+        "title": "Marques e-commerce",
+        "description": "Boostez les conversions",
+        "image": "/images/landing/usecase-brand.jpg"
+      },
+      {
+        "title": "Style personnel",
+        "description": "Construisez votre garde-robe",
+        "image": "/images/landing/usecase-styling.jpg"
+      }
+    ]
   }
 }

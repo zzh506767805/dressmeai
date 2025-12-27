@@ -1,0 +1,211 @@
+{
+  "about": {
+    "meta": {
+      "title": "À propos | DressMeAI - Technologie d'essayage virtuel IA",
+      "description": "Découvrez DressMeAI, l'équipe derrière la technologie innovante d'essayage virtuel IA qui révolutionne le shopping de mode en ligne."
+    },
+    "hero": {
+      "title": "À propos de DressMeAI",
+      "subtitle": "Révolutionner la mode en ligne avec la technologie IA"
+    },
+    "mission": {
+      "title": "Notre mission",
+      "content": "Chez DressMeAI, nous croyons que tout le monde mérite de faire ses achats en toute confiance. Notre mission est de combler le fossé entre le shopping en ligne et l'expérience en magasin en fournissant une technologie d'essayage virtuel IA de pointe qui aide les clients à visualiser comment les vêtements leur iront avant l'achat."
+    },
+    "story": {
+      "title": "Notre histoire",
+      "content": "DressMeAI a été fondée avec une vision simple mais puissante : éliminer les suppositions du shopping de mode en ligne. Nous avons reconnu que l'un des plus grands défis du e-commerce est l'impossibilité d'essayer les vêtements avant l'achat, ce qui entraîne des taux de retour élevés et la frustration des clients. Notre équipe de chercheurs en IA, de technologues de la mode et d'experts en e-commerce s'est réunie pour créer une solution qui transforme la façon dont les gens achètent des vêtements en ligne."
+    },
+    "technology": {
+      "title": "Notre technologie",
+      "content": "Notre technologie IA propriétaire utilise des algorithmes avancés de vision par ordinateur et d'apprentissage automatique pour créer des expériences d'essayage virtuel réalistes. En analysant les formes corporelles, les propriétés des vêtements et les modèles d'ajustement, nous générons des visualisations précises qui aident les clients à prendre des décisions d'achat éclairées.",
+      "features": [
+        "Détection corporelle avancée et estimation de la pose",
+        "Simulation réaliste des vêtements et du drapé",
+        "Prise en charge de diverses catégories de vêtements",
+        "Traitement rapide avec résultats en temps réel",
+        "Traitement d'image axé sur la confidentialité"
+      ]
+    },
+    "values": {
+      "title": "Nos valeurs",
+      "items": [
+        {
+          "title": "Innovation",
+          "description": "Nous repoussons continuellement les limites de la technologie IA pour offrir la meilleure expérience d'essayage virtuel."
+        },
+        {
+          "title": "Confidentialité des utilisateurs",
+          "description": "Nous donnons la priorité à la sécurité et à la confidentialité des données de nos utilisateurs avec des mesures de protection de premier plan."
+        },
+        {
+          "title": "Durabilité",
+          "description": "En réduisant les retours, nous aidons à minimiser l'impact environnemental du e-commerce de mode."
+        },
+        {
+          "title": "Accessibilité",
+          "description": "Nous nous efforçons de rendre notre technologie accessible aux entreprises et aux consommateurs du monde entier."
+        }
+      ]
+    },
+    "stats": {
+      "title": "DressMeAI en chiffres",
+      "items": [
+        { "value": "1M+", "label": "Essayages virtuels" },
+        { "value": "40%", "label": "Réduction des retours" },
+        { "value": "9", "label": "Langues supportées" },
+        { "value": "24/7", "label": "Disponibilité IA" }
+      ]
+    },
+    "cta": {
+      "title": "Prêt à transformer votre expérience shopping ?",
+      "description": "Essayez notre technologie d'essayage virtuel IA aujourd'hui et constatez la différence par vous-même.",
+      "button": "Essayer maintenant"
+    }
+  },
+  "faq": {
+    "meta": {
+      "title": "FAQ | DressMeAI - Questions sur l'essayage virtuel IA",
+      "description": "Trouvez les réponses aux questions fréquemment posées sur la technologie d'essayage virtuel IA de DressMeAI."
+    },
+    "hero": {
+      "title": "Questions fréquentes",
+      "subtitle": "Tout ce que vous devez savoir sur l'essayage virtuel IA"
+    },
+    "categories": {
+      "general": {
+        "title": "Questions générales",
+        "items": [
+          {
+            "question": "Qu'est-ce que la technologie d'essayage virtuel IA ?",
+            "answer": "La technologie d'essayage virtuel IA utilise l'intelligence artificielle et la vision par ordinateur pour créer des simulations réalistes de l'apparence des vêtements sur vous. Il suffit de télécharger une photo et une image de vêtement, et notre IA génère une visualisation de vous portant cet article."
+          },
+          {
+            "question": "Quelle est la précision de l'essayage virtuel ?",
+            "answer": "Notre technologie IA fournit des résultats très réalistes qui représentent avec précision l'apparence des vêtements sur vous. Bien que les essayages virtuels soient des approximations et que l'ajustement réel puisse légèrement varier, notre technologie vous aide à prendre des décisions d'achat plus éclairées et réduit considérablement la probabilité de retours."
+          },
+          {
+            "question": "DressMeAI est-il gratuit ?",
+            "answer": "DressMeAI propose des options gratuites et premium. Vous pouvez essayer gratuitement nos fonctionnalités d'essayage virtuel de base, les fonctionnalités premium étant disponibles pour les utilisateurs avancés et les entreprises."
+          }
+        ]
+      },
+      "howItWorks": {
+        "title": "Comment ça marche",
+        "items": [
+          {
+            "question": "Comment utiliser la fonction d'essayage virtuel ?",
+            "answer": "L'utilisation de DressMeAI est simple : 1) Téléchargez une photo de vous ou d'un modèle, 2) Téléchargez une image du vêtement que vous souhaitez essayer, 3) Cliquez sur 'Générer' et attendez quelques secondes pour votre résultat d'essayage virtuel."
+          },
+          {
+            "question": "Quelles photos fonctionnent le mieux ?",
+            "answer": "Pour de meilleurs résultats, utilisez des photos claires et bien éclairées où la personne est debout, droite et face à la caméra. Les vêtements portés sur la photo doivent être relativement ajustés pour aider l'IA à comprendre votre morphologie."
+          },
+          {
+            "question": "Quels types de vêtements puis-je essayer ?",
+            "answer": "Notre IA prend en charge une large gamme de vêtements, y compris les hauts, chemises, robes, vestes et manteaux. Nous élargissons continuellement nos capacités pour prendre en charge plus de catégories de vêtements."
+          }
+        ]
+      },
+      "privacy": {
+        "title": "Confidentialité et sécurité",
+        "items": [
+          {
+            "question": "Qu'advient-il de mes photos après téléchargement ?",
+            "answer": "Vos photos sont traitées de manière sécurisée par notre système IA pour générer les résultats d'essayage. Nous ne stockons pas vos photos de manière permanente à moins que vous ne les enregistriez explicitement dans votre historique. Nos systèmes sont conçus dans le respect de la vie privée."
+          },
+          {
+            "question": "Mes données personnelles sont-elles en sécurité ?",
+            "answer": "Oui, nous prenons la sécurité des données très au sérieux. Nous utilisons un cryptage et des mesures de sécurité standard de l'industrie pour protéger vos informations. Veuillez consulter notre Politique de confidentialité pour plus de détails."
+          },
+          {
+            "question": "Partagez-vous mes photos avec des tiers ?",
+            "answer": "Non, nous ne partageons, ne vendons ni ne distribuons vos photos à des tiers. Vos images sont uniquement utilisées pour générer vos résultats d'essayage virtuel."
+          }
+        ]
+      },
+      "technical": {
+        "title": "Questions techniques",
+        "items": [
+          {
+            "question": "Quels formats d'image sont pris en charge ?",
+            "answer": "Nous prenons en charge les formats d'image courants, notamment JPEG, PNG et WebP. Pour de meilleurs résultats, utilisez des images d'au moins 512x512 pixels."
+          },
+          {
+            "question": "Combien de temps faut-il pour générer un résultat d'essayage ?",
+            "answer": "La plupart des résultats d'essayage sont générés en 10-30 secondes, selon la complexité de l'image et la charge actuelle du serveur."
+          },
+          {
+            "question": "Puis-je utiliser DressMeAI sur mobile ?",
+            "answer": "Oui, DressMeAI est entièrement responsive et fonctionne sur smartphones et tablettes. Vous pouvez télécharger des photos directement depuis la caméra ou la photothèque de votre appareil."
+          }
+        ]
+      },
+      "business": {
+        "title": "Pour les entreprises",
+        "items": [
+          {
+            "question": "Puis-je intégrer DressMeAI dans ma boutique e-commerce ?",
+            "answer": "Oui, nous proposons des options d'intégration API pour les entreprises souhaitant ajouter des capacités d'essayage virtuel à leurs boutiques en ligne. Contactez-nous pour plus d'informations sur nos solutions entreprise."
+          },
+          {
+            "question": "Quels sont les avantages pour les détaillants ?",
+            "answer": "Les détaillants utilisant la technologie d'essayage virtuel constatent généralement une augmentation des taux de conversion, une réduction des retours, un engagement plus long sur le site et une amélioration de la satisfaction client."
+          }
+        ]
+      }
+    },
+    "cta": {
+      "title": "Encore des questions ?",
+      "description": "Vous ne trouvez pas la réponse que vous cherchez ? N'hésitez pas à contacter notre équipe de support.",
+      "button": "Nous contacter"
+    }
+  },
+  "contact": {
+    "meta": {
+      "title": "Contact | DressMeAI - Contactez-nous",
+      "description": "Contactez DressMeAI pour le support, les demandes commerciales ou les opportunités de partenariat."
+    },
+    "hero": {
+      "title": "Contactez-nous",
+      "subtitle": "Nous serions ravis de vous entendre"
+    },
+    "intro": {
+      "content": "Vous avez une question, un commentaire ou une demande commerciale ? Notre équipe est là pour vous aider. Choisissez le meilleur moyen de nous contacter ci-dessous."
+    },
+    "channels": {
+      "general": {
+        "title": "Demandes générales",
+        "description": "Questions générales sur DressMeAI et notre technologie d'essayage virtuel.",
+        "email": "hello@dressmeai.com"
+      },
+      "support": {
+        "title": "Support technique",
+        "description": "Besoin d'aide avec la fonction d'essayage virtuel ou rencontrez-vous des problèmes ?",
+        "email": "support@dressmeai.com"
+      },
+      "business": {
+        "title": "Business et partenariats",
+        "description": "Intéressé par l'intégration de DressMeAI dans votre entreprise ou devenir partenaire ?",
+        "email": "business@dressmeai.com"
+      },
+      "press": {
+        "title": "Presse et médias",
+        "description": "Demandes médias et questions liées à la presse.",
+        "email": "press@dressmeai.com"
+      }
+    },
+    "social": {
+      "title": "Suivez-nous",
+      "description": "Restez informé des dernières nouvelles et mises à jour de DressMeAI.",
+      "platforms": [
+        { "name": "Twitter", "handle": "@dressmeai" },
+        { "name": "LinkedIn", "handle": "DressMeAI" }
+      ]
+    },
+    "response": {
+      "title": "Délai de réponse",
+      "content": "Nous répondons généralement aux demandes sous 24-48 heures les jours ouvrables. Pour les problèmes techniques urgents, veuillez inclure 'URGENT' dans l'objet de votre email."
+    }
+  }
+}

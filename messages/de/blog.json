@@ -68,6 +68,134 @@
         "publishDate": "2025-06-08",
         "readTime": "12 Min. Lesezeit",
         "excerpt": "Wie KI den gesamten Modekauf von Inspiration bis Zahlung neu definiert."
+      },
+      "how-to-take-perfect-photo-virtual-try-on": {
+        "title": "So gelingt das perfekte Foto für die virtuelle Anprobe",
+        "description": "Tipps zu Beleuchtung, Pose und Hintergrund für optimale KI-Ergebnisse.",
+        "keywords": ["Anprobe Foto", "Bildqualität", "KI Upload"],
+        "publishDate": "2025-06-05",
+        "readTime": "6 Min. Lesezeit",
+        "excerpt": "Bessere Eingabe = besseres Ergebnis – so holen Sie das Maximum aus der virtuellen Anprobe."
+      },
+      "psychology-virtual-try-on-consumer-behavior": {
+        "title": "Psychologie der virtuellen Anprobe: Kaufverhalten verstehen",
+        "description": "Wie das Sehen des eigenen Ich im Outfit die Kaufentscheidung beeinflusst.",
+        "keywords": ["Konsumentenpsychologie", "Kaufverhalten", "Virtual Try-On"],
+        "publishDate": "2025-06-03",
+        "readTime": "9 Min. Lesezeit",
+        "excerpt": "Emotionen und Selbstbild prägen die Conversion – virtuelle Anproben setzen genau dort an."
+      },
+      "virtual-try-on-inclusive-body-types": {
+        "title": "Virtuelle Anprobe für alle Körpertypen",
+        "description": "Inklusivität in der Mode dank diverser Größen und realistischer Darstellung.",
+        "keywords": ["Body Inclusivity", "diverse Größen", "Mode für alle"],
+        "publishDate": "2025-06-01",
+        "readTime": "7 Min. Lesezeit",
+        "excerpt": "Mode sollte für jeden Körper zugänglich sein – KI macht's möglich."
+      },
+      "mobile-vs-desktop-virtual-try-on-experience": {
+        "title": "Mobil vs. Desktop: Virtuelle Anprobe im Vergleich",
+        "description": "UX-Unterschiede und Best Practices für unterschiedliche Endgeräte.",
+        "keywords": ["Mobile Shopping", "Desktop UX", "virtuelle Anprobe"],
+        "publishDate": "2025-05-28",
+        "readTime": "8 Min. Lesezeit",
+        "excerpt": "Responsive Design ist Pflicht – doch jede Plattform hat ihre eigenen Stärken."
+      },
+      "virtual-try-on-social-media-shopping": {
+        "title": "Virtuelle Anprobe trifft Social Media Shopping",
+        "description": "Wie AR-Filter und In-App-Käufe den Fashion-Commerce verändern.",
+        "keywords": ["Social Commerce", "AR-Filter", "Instagram Shopping"],
+        "publishDate": "2025-05-25",
+        "readTime": "7 Min. Lesezeit",
+        "excerpt": "Scroll, tippe, probiere, kaufe – der neue Einkaufsweg der Gen Z."
+      },
+      "sustainable-fashion-virtual-try-on": {
+        "title": "Nachhaltige Mode dank virtueller Anprobe",
+        "description": "Weniger Retouren, geringere CO₂-Bilanz und bewussterer Konsum.",
+        "keywords": ["Nachhaltigkeit", "Slow Fashion", "CO2-Reduktion"],
+        "publishDate": "2025-05-22",
+        "readTime": "8 Min. Lesezeit",
+        "excerpt": "Weniger Rücksendungen heißt weniger Emissionen – gut fürs Klima und den Gewinn."
+      },
+      "ar-augmented-reality-fashion-ecommerce": {
+        "title": "AR in Fashion E-Commerce: Stand 2025",
+        "description": "Augmented Reality geht über Gesichtsfilter hinaus – ein Rundblick.",
+        "keywords": ["AR E-Commerce", "Augmented Reality", "Fashion Tech"],
+        "publishDate": "2025-05-19",
+        "readTime": "10 Min. Lesezeit",
+        "excerpt": "Von Sneaker-Previews bis zu kompletten Outfits: AR wird zur Standardfunktion."
+      },
+      "ai-size-recommendation-beyond-measurements": {
+        "title": "KI-Größenempfehlung: Mehr als nur Maße",
+        "description": "Fit-Algorithmen, Kundenfeedback und personalisierte Passform-Tipps.",
+        "keywords": ["Größenberatung", "Fit-Tech", "personalisierte Empfehlung"],
+        "publishDate": "2025-05-16",
+        "readTime": "7 Min. Lesezeit",
+        "excerpt": "Ein Mix aus Daten und Machine Learning liefert die beste Größenempfehlung."
+      },
+      "virtual-try-on-accessories-jewelry-glasses": {
+        "title": "Virtuelle Anprobe für Accessoires: Schmuck, Brillen & Co.",
+        "description": "Kleidung ist nur der Anfang – auch Accessoires profitieren vom AR-Trend.",
+        "keywords": ["Accessoires AR", "Brillen Anprobe", "Schmuck virtuell"],
+        "publishDate": "2025-05-13",
+        "readTime": "6 Min. Lesezeit",
+        "excerpt": "Ohrringe, Sonnenbrillen, Uhren – alles wird vor dem Kauf ausprobiert."
+      },
+      "privacy-security-ai-fashion-apps": {
+        "title": "Datenschutz und Sicherheit bei KI-Fashion-Apps",
+        "description": "Wie Nutzer:innen und Marken verantwortungsvoll mit Bilddaten umgehen.",
+        "keywords": ["Datenschutz", "DSGVO", "AI Sicherheit"],
+        "publishDate": "2025-05-10",
+        "readTime": "9 Min. Lesezeit",
+        "excerpt": "Bilder sind persönliche Daten – hier erfahren Sie, wie seriöse Anbieter damit umgehen."
+      },
+      "how-fashion-brands-use-ai-predict-trends": {
+        "title": "Wie Modemarken KI nutzen, um Trends vorherzusagen",
+        "description": "Datengestützte Kollektionen und schnellere Time-to-Market.",
+        "keywords": ["Trendprognose", "Fashion Analytics", "KI Kollektion"],
+        "publishDate": "2025-05-07",
+        "readTime": "8 Min. Lesezeit",
+        "excerpt": "Wer Trends früh erkennt, spart bei Design, Produktion und Überbestand."
+      },
+      "customer-journey-virtual-fitting-rooms": {
+        "title": "Die Customer Journey mit virtuellen Umkleidekabinen",
+        "description": "Vom ersten Klick bis zum Wiederholungskauf – so bereichert KI jede Phase.",
+        "keywords": ["Customer Journey", "Touchpoints", "Fashion Conversion"],
+        "publishDate": "2025-05-04",
+        "readTime": "10 Min. Lesezeit",
+        "excerpt": "Virtuelle Anproben verkürzen die Entscheidungswege und erhöhen die Loyalität."
+      },
+      "2d-vs-3d-virtual-try-on-technology": {
+        "title": "2D vs. 3D Virtual Try-On: Welche Technik passt?",
+        "description": "Bildbasierte Overlays oder aufwendige 3D-Modelle? Ein Vergleich.",
+        "keywords": ["2D Try-On", "3D Try-On", "Rendering"],
+        "publishDate": "2025-05-01",
+        "readTime": "9 Min. Lesezeit",
+        "excerpt": "2D ist leicht integrierbar, 3D bietet Tiefe – die Wahl hängt vom Ziel ab."
+      },
+      "virtual-try-on-case-studies-success-stories": {
+        "title": "Case Studies: Erfolgsgeschichten mit virtueller Anprobe",
+        "description": "Wie Modehändler Conversion steigern und Retouren senken.",
+        "keywords": ["Case Study", "Erfolgsgeschichten", "Fashion ROI"],
+        "publishDate": "2025-04-28",
+        "readTime": "11 Min. Lesezeit",
+        "excerpt": "Konkrete Zahlen zeigen, was virtuelle Anprobe bewirken kann."
+      },
+      "building-customer-trust-ai-fashion-technology": {
+        "title": "Vertrauen aufbauen: Transparenz in der KI-Mode-Technologie",
+        "description": "Warum offene Kommunikation über Algorithmen entscheidend ist.",
+        "keywords": ["Kundenvertrauen", "Transparenz", "AI Ethics"],
+        "publishDate": "2025-04-25",
+        "readTime": "7 Min. Lesezeit",
+        "excerpt": "Vertrauen entsteht, wenn Kunden wissen, wie ihre Daten genutzt werden."
+      },
+      "economics-virtual-try-on-implementation": {
+        "title": "Wirtschaftlichkeit einer Virtual-Try-On-Implementierung",
+        "description": "Kosten, ROI und Skalierung für E-Commerce-Entscheider.",
+        "keywords": ["ROI Virtual Try-On", "Kosten-Nutzen", "E-Commerce Invest"],
+        "publishDate": "2025-04-22",
+        "readTime": "10 Min. Lesezeit",
+        "excerpt": "Eine Investitionsrechnung zeigt, ab wann sich die Technologie amortisiert."
       }
     }
   },

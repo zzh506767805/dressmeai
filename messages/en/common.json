@@ -1,16 +1,26 @@
 {
-  "brand": "AI FASHION",
+  "brand": "DressMeAI",
   "nav": {
     "home": "Home",
     "history": "History",
-    "blog": "Blog"
+    "blog": "Blog",
+    "about": "About",
+    "faq": "FAQ",
+    "contact": "Contact"
   },
   "language": {
     "label": "Language",
     "ariaLabel": "Select site language"
   },
   "footer": {
-    "title": "Friend Links"
+    "title": "Friend Links",
+    "links": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "about": "About Us",
+      "faq": "FAQ",
+      "contact": "Contact"
+    }
   },
   "errors": {
     "missingImages": "Please upload a model photo and a clothing photo."

@@ -68,6 +68,134 @@
         "publishDate": "2025-06-08",
         "readTime": "約12分",
         "excerpt": "AIはどのようにファッションの発見・試着・購入体験を再構築しているのでしょうか。"
+      },
+      "how-to-take-perfect-photo-virtual-try-on": {
+        "title": "バーチャル試着で最高の結果を得る写真撮影のコツ",
+        "description": "AIバーチャル試着で最適な結果を得るための撮影テクニックを解説。",
+        "keywords": ["試着写真撮影", "AI試着のコツ", "バーチャル試着ガイド"],
+        "publishDate": "2025-06-05",
+        "readTime": "約6分",
+        "excerpt": "入力写真の質が試着結果を左右します。ベストな仕上がりを得るためのポイントをご紹介。"
+      },
+      "psychology-virtual-try-on-consumer-behavior": {
+        "title": "バーチャル試着の心理学：見ることは信じること",
+        "description": "なぜ視覚化体験が購買行動に強い影響を与えるのか、心理学的視点で解説。",
+        "keywords": ["消費者心理", "バーチャル試着効果", "オンライン購買行動"],
+        "publishDate": "2025-06-03",
+        "readTime": "約9分",
+        "excerpt": "顧客が視覚的確認を信頼する理由を理解すれば、より効果的な試着体験を設計できます。"
+      },
+      "virtual-try-on-inclusive-body-types": {
+        "title": "あらゆる体型に対応：インクルーシブなバーチャル試着",
+        "description": "AI試着技術が多様な体型に正確でリアルな試着体験を提供する方法。",
+        "keywords": ["インクルーシブファッション", "多様な体型AI", "プラスサイズ試着"],
+        "publishDate": "2025-05-30",
+        "readTime": "約8分",
+        "excerpt": "現代のAI試着は単一の体型テンプレートを超え、すべての顧客に真のフィット感を提供します。"
+      },
+      "mobile-vs-desktop-virtual-try-on-experience": {
+        "title": "モバイルvsデスクトップ：デバイス別バーチャル試着最適化",
+        "description": "異なるデバイスでの試着体験を比較し、モバイルユーザー向けの最適化方法を解説。",
+        "keywords": ["モバイル試着", "レスポンシブ対応", "クロスデバイス"],
+        "publishDate": "2025-05-28",
+        "readTime": "約7分",
+        "excerpt": "トラフィックの70%以上がモバイルから。スマホ対応は必須要件です。"
+      },
+      "virtual-try-on-social-media-shopping": {
+        "title": "バーチャル試着とソーシャルコマースの融合",
+        "description": "Instagram、TikTokなどでバーチャル試着を活用してコンバージョンを高める方法。",
+        "keywords": ["ソーシャルコマース", "SNS試着", "ショッパブルコンテンツ"],
+        "publishDate": "2025-05-25",
+        "readTime": "約8分",
+        "excerpt": "ソーシャルメディアとバーチャル試着の相性は抜群。ブランドはこの組み合わせで成長を加速させています。"
+      },
+      "sustainable-fashion-virtual-try-on": {
+        "title": "バーチャル試着が推進するサステナブルファッション",
+        "description": "AI試着技術が廃棄削減と環境負荷低減にどう貢献するか。",
+        "keywords": ["サステナブルファッション", "エコ購買", "ファッション廃棄削減"],
+        "publishDate": "2025-05-22",
+        "readTime": "約7分",
+        "excerpt": "返品と過剰生産を減らすことで、バーチャル試着はファッションをより持続可能にしています。"
+      },
+      "ar-augmented-reality-fashion-ecommerce": {
+        "title": "ファッションECにおけるARの役割",
+        "description": "拡張現実がファッションブランドに没入型ショッピング体験をもたらす方法。",
+        "keywords": ["ARファッション", "拡張現実ショッピング", "没入型リテール"],
+        "publishDate": "2025-05-20",
+        "readTime": "約10分",
+        "excerpt": "AR技術で、どこにいても試着室体験を顧客に届けられます。"
+      },
+      "ai-size-recommendation-beyond-measurements": {
+        "title": "AIサイズ推奨：基本寸法を超えて",
+        "description": "高度なAIが複数の要素を考慮して正確なサイズを提案する仕組み。",
+        "keywords": ["AIサイズ推奨", "スマートサイジング", "フィット予測"],
+        "publishDate": "2025-05-18",
+        "readTime": "約8分",
+        "excerpt": "現代AIは生地の伸縮、スタイル嗜好、ブランド差を考慮し最適サイズを提案します。"
+      },
+      "virtual-try-on-accessories-jewelry-glasses": {
+        "title": "アクセサリー試着：服だけじゃない",
+        "description": "ジュエリー、メガネ、時計などへのバーチャル試着技術の拡大。",
+        "keywords": ["アクセサリー試着", "バーチャルジュエリー", "メガネAI試着"],
+        "publishDate": "2025-05-15",
+        "readTime": "約7分",
+        "excerpt": "バーチャル試着は衣服だけでなく、アクセサリーの買い物も変えています。"
+      },
+      "privacy-security-ai-fashion-apps": {
+        "title": "AIファッションアプリのプライバシーとセキュリティ",
+        "description": "AIファッションアプリがパーソナライズを提供しながらデータを保護する仕組み。",
+        "keywords": ["ファッションアプリプライバシー", "AIデータセキュリティ", "写真保護"],
+        "publishDate": "2025-05-12",
+        "readTime": "約6分",
+        "excerpt": "バーチャル試着を使うとき、あなたの写真やデータはどうなるのか？"
+      },
+      "how-fashion-brands-use-ai-predict-trends": {
+        "title": "ファッションブランドがAIでトレンドを予測する方法",
+        "description": "人工知能がブランドのトレンド予測とコレクション計画をどう支援するか。",
+        "keywords": ["AIトレンド予測", "ファッション予測", "データドリブン"],
+        "publishDate": "2025-05-10",
+        "readTime": "約9分",
+        "excerpt": "AIがSNS、ランウェイ、購買データを分析し、次に何が求められるかを予測します。"
+      },
+      "customer-journey-virtual-fitting-rooms": {
+        "title": "バーチャル試着室のカスタマージャーニー",
+        "description": "発見から購入まで、バーチャル試着を活用した顧客体験の全体像。",
+        "keywords": ["カスタマージャーニー", "試着室UX", "購買体験設計"],
+        "publishDate": "2025-05-08",
+        "readTime": "約8分",
+        "excerpt": "顧客がバーチャル試着とどう関わるか理解すれば、各ステップの転換を最適化できます。"
+      },
+      "2d-vs-3d-virtual-try-on-technology": {
+        "title": "2D vs 3Dバーチャル試着：どちらが最適？",
+        "description": "2D画像ベースと3Dモデルベースの試着技術を比較し、ユースケース別に解説。",
+        "keywords": ["2D試着", "3D試着", "試着技術比較"],
+        "publishDate": "2025-05-05",
+        "readTime": "約10分",
+        "excerpt": "それぞれに長所があります。自社に最適な技術を選ぶポイントを紹介。"
+      },
+      "virtual-try-on-case-studies-success-stories": {
+        "title": "バーチャル試着成功事例：ブランドの実績",
+        "description": "バーチャル試着で成果を上げたファッションブランドの実例紹介。",
+        "keywords": ["試着事例", "ファッションテック成功", "ROI事例"],
+        "publishDate": "2025-05-03",
+        "readTime": "約11分",
+        "excerpt": "先進ブランドがAI試着で転換率向上と返品率削減をどう実現したか。"
+      },
+      "building-customer-trust-ai-fashion-technology": {
+        "title": "AIファッション技術で顧客の信頼を築く",
+        "description": "透明性のあるAI運用と正確な結果が長期的な顧客関係をどう構築するか。",
+        "keywords": ["顧客信頼", "AI透明性", "ファッションテック信頼性"],
+        "publishDate": "2025-05-01",
+        "readTime": "約7分",
+        "excerpt": "信頼はバーチャル試着普及の基盤。顧客の信頼を獲得し維持する方法を解説。"
+      },
+      "economics-virtual-try-on-implementation": {
+        "title": "バーチャル試着の経済学：ROIと導入コスト",
+        "description": "バーチャル試着技術のコスト、メリット、投資対効果を詳細に分析。",
+        "keywords": ["試着ROI", "導入コスト", "ファッションテック投資"],
+        "publishDate": "2025-04-28",
+        "readTime": "約12分",
+        "excerpt": "バーチャル試着は投資に見合うか？コストと期待リターンの完全ガイド。"
       }
     }
   },

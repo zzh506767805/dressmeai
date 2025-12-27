@@ -1,16 +1,26 @@
 {
-  "brand": "AI 时尚",
+  "brand": "DressMeAI",
   "nav": {
     "home": "首页",
     "history": "历史记录",
-    "blog": "博客"
+    "blog": "博客",
+    "about": "关于我们",
+    "faq": "常见问题",
+    "contact": "联系我们"
   },
   "language": {
     "label": "语言",
     "ariaLabel": "选择站点语言"
   },
   "footer": {
-    "title": "友情链接"
+    "title": "友情链接",
+    "links": {
+      "privacy": "隐私政策",
+      "terms": "服务条款",
+      "about": "关于我们",
+      "faq": "常见问题",
+      "contact": "联系我们"
+    }
   },
   "errors": {
     "missingImages": "请上传模特照片和服装照片。"

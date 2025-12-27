@@ -1,0 +1,153 @@
+{
+  "privacy": {
+    "meta": {
+      "title": "Politique de confidentialité | DressMeAI - Essayage virtuel IA",
+      "description": "Découvrez comment DressMeAI protège votre vie privée et traite vos données personnelles lors de l'utilisation de notre service d'essayage virtuel IA."
+    },
+    "title": "Politique de confidentialité",
+    "lastUpdated": "Dernière mise à jour : janvier 2025",
+    "sections": {
+      "introduction": {
+        "title": "Introduction",
+        "content": "Bienvenue sur DressMeAI. Nous respectons votre vie privée et nous nous engageons à protéger vos données personnelles. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations lorsque vous utilisez notre service d'essayage virtuel IA."
+      },
+      "dataCollection": {
+        "title": "Informations collectées",
+        "content": "Nous collectons les informations que vous nous fournissez directement :",
+        "items": [
+          "Photos téléchargées pour l'essayage virtuel (photos de modèle et images de vêtements)",
+          "Données d'utilisation et analyses pour améliorer notre service",
+          "Informations sur l'appareil et le type de navigateur",
+          "Adresse IP et données de localisation générales"
+        ]
+      },
+      "dataUsage": {
+        "title": "Utilisation de vos informations",
+        "content": "Nous utilisons les informations collectées aux fins suivantes :",
+        "items": [
+          "Fournir et maintenir notre service d'essayage virtuel IA",
+          "Traiter vos images téléchargées et générer des résultats d'essayage",
+          "Améliorer et optimiser nos algorithmes IA et l'expérience utilisateur",
+          "Communiquer avec vous concernant les mises à jour et nouvelles fonctionnalités",
+          "Détecter et prévenir la fraude ou les problèmes techniques"
+        ]
+      },
+      "imageProcessing": {
+        "title": "Traitement et stockage des images",
+        "content": "Vos images téléchargées sont traitées par notre système IA pour générer des résultats d'essayage virtuel. Nous ne stockons pas définitivement vos photos téléchargées, sauf si vous les enregistrez explicitement dans votre historique. Les résultats générés peuvent être temporairement mis en cache pour améliorer les performances."
+      },
+      "dataSharing": {
+        "title": "Partage des données",
+        "content": "Nous ne vendons, n'échangeons ni ne louons vos informations personnelles à des tiers. Nous pouvons partager des données avec :",
+        "items": [
+          "Prestataires de services assistant à l'exploitation de notre plateforme (hébergement cloud, analyses)",
+          "Autorités légales lorsque requis par la loi ou pour protéger nos droits",
+          "Partenaires commerciaux avec votre consentement explicite"
+        ]
+      },
+      "cookies": {
+        "title": "Cookies et suivi",
+        "content": "Nous utilisons des cookies et des technologies de suivi similaires pour améliorer votre expérience, analyser le trafic du site et comprendre le comportement des utilisateurs. Vous pouvez contrôler les préférences de cookies via les paramètres de votre navigateur."
+      },
+      "security": {
+        "title": "Sécurité des données",
+        "content": "Nous mettons en œuvre des mesures de sécurité conformes aux normes de l'industrie pour protéger vos informations personnelles, notamment le chiffrement, les serveurs sécurisés et les audits de sécurité réguliers. Cependant, aucune méthode de transmission sur Internet n'est 100% sécurisée."
+      },
+      "rights": {
+        "title": "Vos droits",
+        "content": "Vous avez le droit de :",
+        "items": [
+          "Accéder à vos données personnelles",
+          "Demander la correction des données inexactes",
+          "Demander la suppression de vos données",
+          "Vous opposer au traitement de vos données",
+          "Portabilité des données"
+        ]
+      },
+      "children": {
+        "title": "Confidentialité des enfants",
+        "content": "Notre service n'est pas destiné aux enfants de moins de 13 ans. Nous ne collectons pas sciemment des informations personnelles d'enfants de moins de 13 ans."
+      },
+      "changes": {
+        "title": "Modifications de la politique",
+        "content": "Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle politique sur cette page et en mettant à jour la date de « Dernière mise à jour »."
+      },
+      "contact": {
+        "title": "Nous contacter",
+        "content": "Si vous avez des questions concernant cette Politique de confidentialité, contactez-nous à :",
+        "email": "privacy@dressmeai.com"
+      }
+    }
+  },
+  "terms": {
+    "meta": {
+      "title": "Conditions d'utilisation | DressMeAI - Essayage virtuel IA",
+      "description": "Lisez les conditions générales d'utilisation du service d'essayage virtuel IA de DressMeAI."
+    },
+    "title": "Conditions d'utilisation",
+    "lastUpdated": "Dernière mise à jour : janvier 2025",
+    "sections": {
+      "acceptance": {
+        "title": "Acceptation des conditions",
+        "content": "En accédant ou en utilisant le service d'essayage virtuel IA de DressMeAI, vous acceptez d'être lié par ces Conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre service."
+      },
+      "serviceDescription": {
+        "title": "Description du service",
+        "content": "DressMeAI fournit un service d'essayage virtuel alimenté par l'IA qui permet aux utilisateurs de visualiser comment les vêtements leur iraient. Notre service utilise des algorithmes avancés d'apprentissage automatique pour traiter les images téléchargées et générer des résultats d'essayage réalistes."
+      },
+      "userAccounts": {
+        "title": "Comptes utilisateurs",
+        "content": "Certaines fonctionnalités peuvent nécessiter la création d'un compte. Vous êtes responsable du maintien de la confidentialité de vos identifiants de compte et de toutes les activités qui se produisent sous votre compte."
+      },
+      "acceptableUse": {
+        "title": "Utilisation acceptable",
+        "content": "En utilisant notre service, vous acceptez de ne pas :",
+        "items": [
+          "Télécharger du contenu inapproprié, illégal ou nuisible",
+          "Utiliser le service à des fins illégales",
+          "Tenter de faire de l'ingénierie inverse ou de pirater nos systèmes IA",
+          "Télécharger des images sans droits ou consentement appropriés",
+          "Utiliser des systèmes automatisés pour accéder au service sans permission",
+          "Interférer avec ou perturber le service ou les serveurs"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "Propriété intellectuelle",
+        "content": "Le service DressMeAI, y compris sa technologie IA, son design et son contenu, est protégé par les lois sur la propriété intellectuelle. Vous conservez la propriété des images que vous téléchargez, mais nous accordez une licence pour les traiter afin de fournir le service."
+      },
+      "generatedContent": {
+        "title": "Contenu généré",
+        "content": "Les résultats d'essayage virtuel générés par notre IA sont fournis pour un usage personnel et non commercial. Vous pouvez sauvegarder et partager vos résultats, mais l'utilisation commerciale nécessite notre autorisation écrite."
+      },
+      "disclaimer": {
+        "title": "Clause de non-responsabilité",
+        "content": "Notre service est fourni « tel quel » sans aucune garantie. Nous ne garantissons pas que les résultats seront parfaitement précis ou que le service sera ininterrompu. Les résultats d'essayage virtuel sont des approximations et l'ajustement réel peut varier."
+      },
+      "limitation": {
+        "title": "Limitation de responsabilité",
+        "content": "Dans toute la mesure permise par la loi, DressMeAI ne sera pas responsable des dommages indirects, accessoires, spéciaux ou consécutifs découlant de votre utilisation du service."
+      },
+      "indemnification": {
+        "title": "Indemnisation",
+        "content": "Vous acceptez d'indemniser et de dégager DressMeAI de toute responsabilité en cas de réclamations, dommages ou dépenses découlant de votre violation de ces conditions ou de votre utilisation du service."
+      },
+      "termination": {
+        "title": "Résiliation",
+        "content": "Nous nous réservons le droit de suspendre ou de résilier votre accès au service à tout moment, avec ou sans motif, et avec ou sans préavis."
+      },
+      "changes": {
+        "title": "Modifications des conditions",
+        "content": "Nous pouvons modifier ces conditions à tout moment. L'utilisation continue du service après les modifications constitue l'acceptation des nouvelles conditions."
+      },
+      "governing": {
+        "title": "Droit applicable",
+        "content": "Ces conditions seront régies et interprétées conformément aux lois applicables, sans tenir compte des principes de conflit de lois."
+      },
+      "contact": {
+        "title": "Contact",
+        "content": "Pour toute question concernant ces Conditions d'utilisation, contactez-nous à :",
+        "email": "legal@dressmeai.com"
+      }
+    }
+  }
+}

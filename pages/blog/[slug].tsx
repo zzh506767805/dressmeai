@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
 import { useTranslations } from 'next-intl'
@@ -32,6 +33,7 @@ type BlogPostCard = IndexPostMap[IndexPostKey] & { slug: string }
 interface BlogDetailProps {
   post: BlogDetailPost
   relatedPosts: BlogPostCard[]
+  ogImagePath: string
   meta: {
     breadcrumb: string
     relatedTitle: string
@@ -39,11 +41,11 @@ interface BlogDetailProps {
   }
 }
 
-export default function BlogPost({ post, relatedPosts, meta }: BlogDetailProps) {
+export default function BlogPost({ post, relatedPosts, ogImagePath, meta }: BlogDetailProps) {
   const router = useRouter()
   const locale = router.locale ?? defaultLocale
   const commonT = useTranslations('common')
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://dressmeai.com'
+  const baseUrl = (process.env.NEXT_PUBLIC_BASE_URL || 'https://dressmeai.com').replace(/\/$/, '')
   const asPath = router?.asPath || `/blog/${post.slug}`
   const path = asPath.split('?')[0] || `/blog/${post.slug}`
   const segments = path.split('/')
@@ -67,6 +69,9 @@ export default function BlogPost({ post, relatedPosts, meta }: BlogDetailProps) 
     }
   })
   const ogLocale = ogLocaleMap[locale] || ogLocaleMap[defaultLocale]
+  const ogImageUrl = `${baseUrl}${ogImagePath}`
+  const rssPath = locale === defaultLocale ? '/feed.xml' : `/${locale}/feed.xml`
+  const rssUrl = `${baseUrl}${rssPath}`
 
   const formatDate = (dateString: string) => {
     try {
@@ -89,6 +94,10 @@ export default function BlogPost({ post, relatedPosts, meta }: BlogDetailProps) 
         <meta name="description" content={post.description} />
         <meta name="keywords" content={keywordString} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* noindex for non-English locales to avoid duplicate content issues */}
+        {locale !== defaultLocale && (
+          <meta name="robots" content="noindex, follow" />
+        )}
 
         <link rel="canonical" href={canonicalUrl} />
         {alternateRefs.map(ref => (
@@ -100,7 +109,7 @@ export default function BlogPost({ post, relatedPosts, meta }: BlogDetailProps) 
         <meta property="og:site_name" content="DressMeAI" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.description} />
-        <meta property="og:image" content={`https://dressmeai.com/images/blog/${post.slug}-og.jpg`} />
+        <meta property="og:image" content={ogImageUrl} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:locale" content={ogLocale} />
         {supportedLocales
@@ -120,7 +129,9 @@ export default function BlogPost({ post, relatedPosts, meta }: BlogDetailProps) 
         <meta name="twitter:site" content="@dressmeai" />
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.description} />
-        <meta name="twitter:image" content={`https://dressmeai.com/images/blog/${post.slug}-og.jpg`} />
+        <meta name="twitter:image" content={ogImageUrl} />
+
+        <link rel="alternate" type="application/rss+xml" title="DressMeAI Blog" href={rssUrl} />
 
         <script
           type="application/ld+json"
@@ -132,7 +143,7 @@ export default function BlogPost({ post, relatedPosts, meta }: BlogDetailProps) 
               description: post.description,
               image: {
                 '@type': 'ImageObject',
-                url: `https://dressmeai.com/images/blog/${post.slug}-og.jpg`,
+                url: ogImageUrl,
                 width: 1200,
                 height: 630
               },
@@ -147,12 +158,12 @@ export default function BlogPost({ post, relatedPosts, meta }: BlogDetailProps) 
               publisher: {
                 '@type': 'Organization',
                 name: 'DressMeAI',
-                url: 'https://dressmeai.com',
+                url: baseUrl,
                 logo: {
                   '@type': 'ImageObject',
-                  url: 'https://dressmeai.com/logo.png',
-                  width: 600,
-                  height: 60
+                  url: `${baseUrl}/icons/icon-512.png`,
+                  width: 512,
+                  height: 512
                 }
               },
               keywords: post.keywords,
@@ -173,8 +184,14 @@ export default function BlogPost({ post, relatedPosts, meta }: BlogDetailProps) 
               <Link href="/" className="text-blue-600 hover:text-blue-800 transition-colors">
                 {commonT('nav.home')}
               </Link>
-              <Link href="/history" className="text-blue-600 hover:text-blue-800 transition-colors">
-                {commonT('nav.history')}
+              <Link href="/about" className="text-blue-600 hover:text-blue-800 transition-colors">
+                {commonT('nav.about')}
+              </Link>
+              <Link href="/faq" className="text-blue-600 hover:text-blue-800 transition-colors">
+                {commonT('nav.faq')}
+              </Link>
+              <Link href="/contact" className="text-blue-600 hover:text-blue-800 transition-colors">
+                {commonT('nav.contact')}
               </Link>
               <Link href="/blog" className="text-blue-600 hover:text-blue-800 transition-colors">
                 {commonT('nav.blog')}
@@ -237,6 +254,17 @@ export default function BlogPost({ post, relatedPosts, meta }: BlogDetailProps) 
             ))}
           </div>
         </header>
+
+        {/* Blog Cover Image */}
+        <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-12 shadow-lg">
+          <Image
+            src={`/images/blog/${post.slug}.png`}
+            alt={post.title}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
 
         <article className="prose prose-lg prose-indigo max-w-none">
           <div
@@ -328,6 +356,17 @@ export const getStaticProps: GetStaticProps<BlogDetailProps> = async ({ params, 
   }
 
   const postData = detailPosts[slug as DetailPostKey]
+  let ogImagePath = '/images/og-banner.jpg'
+  try {
+    const { existsSync } = await import('fs')
+    const pathModule = await import('path')
+    const ogImageFilePath = pathModule.join(process.cwd(), 'public', 'images', 'blog', `${slug}-og.jpg`)
+    if (existsSync(ogImageFilePath)) {
+      ogImagePath = `/images/blog/${slug}-og.jpg`
+    }
+  } catch {
+    ogImagePath = '/images/og-banner.jpg'
+  }
 
   const indexPosts = blogMessages.index.posts as IndexPostMap
   const relatedPosts = (Object.entries(indexPosts) as [IndexPostKey, IndexPostMap[IndexPostKey]][])
@@ -342,6 +381,7 @@ export const getStaticProps: GetStaticProps<BlogDetailProps> = async ({ params, 
         ...postData
       },
       relatedPosts,
+      ogImagePath,
       meta: {
         breadcrumb: blogMessages.detail.breadcrumbBlog,
         relatedTitle: blogMessages.detail.relatedTitle,

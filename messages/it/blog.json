@@ -68,6 +68,134 @@
         "publishDate": "2025-06-08",
         "readTime": "12 min",
         "excerpt": "L'IA sta ridisegnando ogni fase del customer journey."
+      },
+      "how-to-take-perfect-photo-virtual-try-on": {
+        "title": "Come scattare la foto perfetta per il try-on virtuale",
+        "description": "Consigli su luce, posa e sfondo per risultati AI ottimali.",
+        "keywords": ["foto try-on", "qualità immagine", "upload AI"],
+        "publishDate": "2025-06-05",
+        "readTime": "6 min",
+        "excerpt": "Input migliore = output migliore. Così sfrutti al massimo il try-on virtuale."
+      },
+      "psychology-virtual-try-on-consumer-behavior": {
+        "title": "Psicologia del try-on virtuale e comportamento d'acquisto",
+        "description": "Come vedersi con un capo influenza la decisione di acquisto.",
+        "keywords": ["psicologia consumatore", "comportamento acquisto", "try-on virtuale"],
+        "publishDate": "2025-06-03",
+        "readTime": "9 min",
+        "excerpt": "Emozioni e immagine di sé guidano la conversione; il try-on virtuale le intercetta."
+      },
+      "virtual-try-on-inclusive-body-types": {
+        "title": "Try-on virtuale per ogni tipo di corpo",
+        "description": "Inclusività nella moda con taglie diverse e rappresentazione reale.",
+        "keywords": ["body inclusivity", "taglie diverse", "moda per tutti"],
+        "publishDate": "2025-06-01",
+        "readTime": "7 min",
+        "excerpt": "La moda deve essere accessibile a ogni corpo; l'IA lo rende possibile."
+      },
+      "mobile-vs-desktop-virtual-try-on-experience": {
+        "title": "Mobile vs. desktop: esperienza di try-on virtuale",
+        "description": "Differenze UX e best practice a seconda del dispositivo.",
+        "keywords": ["shopping mobile", "UX desktop", "try-on virtuale"],
+        "publishDate": "2025-05-28",
+        "readTime": "8 min",
+        "excerpt": "Il design responsive è d'obbligo, ma ogni piattaforma ha i suoi punti di forza."
+      },
+      "virtual-try-on-social-media-shopping": {
+        "title": "Try-on virtuale e social media shopping",
+        "description": "Come filtri AR e acquisti in-app trasformano il fashion commerce.",
+        "keywords": ["social commerce", "filtri AR", "shopping Instagram"],
+        "publishDate": "2025-05-25",
+        "readTime": "7 min",
+        "excerpt": "Scorri, tocca, prova, compra: il nuovo percorso della Gen Z."
+      },
+      "sustainable-fashion-virtual-try-on": {
+        "title": "Moda sostenibile grazie al try-on virtuale",
+        "description": "Meno resi, minore impronta di carbonio e consumo più consapevole.",
+        "keywords": ["sostenibilità", "slow fashion", "riduzione CO2"],
+        "publishDate": "2025-05-22",
+        "readTime": "8 min",
+        "excerpt": "Meno spedizioni di ritorno significa meno emissioni: bene per il pianeta e il margine."
+      },
+      "ar-augmented-reality-fashion-ecommerce": {
+        "title": "AR nel fashion e-commerce: stato dell'arte 2025",
+        "description": "La realtà aumentata va oltre i filtri facciali.",
+        "keywords": ["AR e-commerce", "realtà aumentata", "fashion tech"],
+        "publishDate": "2025-05-19",
+        "readTime": "10 min",
+        "excerpt": "Dalle anteprime di sneaker a outfit completi: l'AR diventa standard."
+      },
+      "ai-size-recommendation-beyond-measurements": {
+        "title": "Raccomandazione taglia AI: oltre le misure",
+        "description": "Algoritmi di fit, feedback clienti e consigli personalizzati.",
+        "keywords": ["guida taglie", "fit tech", "raccomandazione personalizzata"],
+        "publishDate": "2025-05-16",
+        "readTime": "7 min",
+        "excerpt": "Dati + machine learning = la migliore raccomandazione di taglia."
+      },
+      "virtual-try-on-accessories-jewelry-glasses": {
+        "title": "Try-on virtuale per accessori: gioielli, occhiali e altro",
+        "description": "L'abbigliamento è solo l'inizio; anche gli accessori beneficiano dell'AR.",
+        "keywords": ["accessori AR", "prova occhiali", "gioielli virtuali"],
+        "publishDate": "2025-05-13",
+        "readTime": "6 min",
+        "excerpt": "Orecchini, occhiali da sole, orologi: tutto si prova prima dell'acquisto."
+      },
+      "privacy-security-ai-fashion-apps": {
+        "title": "Privacy e sicurezza nelle app moda AI",
+        "description": "Come utenti e brand gestiscono responsabilmente i dati delle immagini.",
+        "keywords": ["privacy", "GDPR", "sicurezza AI"],
+        "publishDate": "2025-05-10",
+        "readTime": "9 min",
+        "excerpt": "Le immagini sono dati personali; ecco come i provider seri li gestiscono."
+      },
+      "how-fashion-brands-use-ai-predict-trends": {
+        "title": "Come i brand di moda usano l'AI per prevedere i trend",
+        "description": "Collezioni data-driven e time-to-market più veloce.",
+        "keywords": ["previsione trend", "analytics moda", "collezione AI"],
+        "publishDate": "2025-05-07",
+        "readTime": "8 min",
+        "excerpt": "Identificare i trend in anticipo fa risparmiare su design, produzione e overstock."
+      },
+      "customer-journey-virtual-fitting-rooms": {
+        "title": "Il customer journey con le cabine virtuali",
+        "description": "Dal primo clic al riacquisto: così l'AI arricchisce ogni fase.",
+        "keywords": ["customer journey", "touchpoint", "conversione moda"],
+        "publishDate": "2025-05-04",
+        "readTime": "10 min",
+        "excerpt": "Il try-on virtuale accorcia il processo decisionale e aumenta la fedeltà."
+      },
+      "2d-vs-3d-virtual-try-on-technology": {
+        "title": "2D vs. 3D virtual try-on: quale tecnologia scegliere?",
+        "description": "Overlay basati su immagine vs. modelli 3D complessi.",
+        "keywords": ["2D try-on", "3D try-on", "rendering"],
+        "publishDate": "2025-05-01",
+        "readTime": "9 min",
+        "excerpt": "2D è facile da integrare, 3D offre profondità; la scelta dipende dall'obiettivo."
+      },
+      "virtual-try-on-case-studies-success-stories": {
+        "title": "Case study: storie di successo con il try-on virtuale",
+        "description": "Come i retailer di moda aumentano la conversione e riducono i resi.",
+        "keywords": ["case study", "storie di successo", "ROI moda"],
+        "publishDate": "2025-04-28",
+        "readTime": "11 min",
+        "excerpt": "Dati concreti mostrano cosa può ottenere il try-on virtuale."
+      },
+      "building-customer-trust-ai-fashion-technology": {
+        "title": "Costruire fiducia: trasparenza nella tecnologia moda AI",
+        "description": "Perché la comunicazione aperta sugli algoritmi è fondamentale.",
+        "keywords": ["fiducia cliente", "trasparenza", "etica AI"],
+        "publishDate": "2025-04-25",
+        "readTime": "7 min",
+        "excerpt": "La fiducia nasce quando i clienti sanno come vengono usati i loro dati."
+      },
+      "economics-virtual-try-on-implementation": {
+        "title": "Economia dell'implementazione di un try-on virtuale",
+        "description": "Costi, ROI e scalabilità per i decisori e-commerce.",
+        "keywords": ["ROI try-on virtuale", "costo-beneficio", "investimento e-commerce"],
+        "publishDate": "2025-04-22",
+        "readTime": "10 min",
+        "excerpt": "Un'analisi dell'investimento mostra quando la tecnologia si ripaga."
       }
     }
   },

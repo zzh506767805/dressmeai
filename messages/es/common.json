@@ -1,16 +1,26 @@
 {
-  "brand": "AI Moda",
+  "brand": "DressMeAI",
   "nav": {
     "home": "Inicio",
     "history": "Historial",
-    "blog": "Blog"
+    "blog": "Blog",
+    "about": "Sobre nosotros",
+    "faq": "Preguntas frecuentes",
+    "contact": "Contacto"
   },
   "language": {
     "label": "Idioma",
     "ariaLabel": "Seleccionar idioma del sitio"
   },
   "footer": {
-    "title": "Enlaces amigos"
+    "title": "Enlaces amigos",
+    "links": {
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio",
+      "about": "Sobre nosotros",
+      "faq": "Preguntas frecuentes",
+      "contact": "Contacto"
+    }
   },
   "errors": {
     "missingImages": "Sube una foto del modelo y otra de la prenda."

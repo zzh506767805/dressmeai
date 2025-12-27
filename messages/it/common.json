@@ -1,16 +1,26 @@
 {
-  "brand": "AI Fashion",
+  "brand": "DressMeAI",
   "nav": {
     "home": "Home",
     "history": "Cronologia",
-    "blog": "Blog"
+    "blog": "Blog",
+    "about": "Chi siamo",
+    "faq": "FAQ",
+    "contact": "Contatti"
   },
   "language": {
     "label": "Lingua",
     "ariaLabel": "Seleziona la lingua del sito"
   },
   "footer": {
-    "title": "Link amici"
+    "title": "Link amici",
+    "links": {
+      "privacy": "Informativa sulla Privacy",
+      "terms": "Termini di Servizio",
+      "about": "Chi siamo",
+      "faq": "FAQ",
+      "contact": "Contatti"
+    }
   },
   "errors": {
     "missingImages": "Carica una foto del modello e una del capo."

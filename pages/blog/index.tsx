@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { useTranslations } from 'next-intl'
@@ -37,7 +38,7 @@ export default function BlogIndex({ posts, meta, hero, labels, cta }: BlogIndexP
   const locale = router.locale ?? defaultLocale
   const commonT = useTranslations('common')
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://dressmeai.com'
+  const baseUrl = (process.env.NEXT_PUBLIC_BASE_URL || 'https://dressmeai.com').replace(/\/$/, '')
   const asPath = router?.asPath || '/blog'
   const path = asPath.split('?')[0] || '/blog'
   const segments = path.split('/')
@@ -61,6 +62,9 @@ export default function BlogIndex({ posts, meta, hero, labels, cta }: BlogIndexP
     }
   })
   const ogLocale = ogLocaleMap[locale] || ogLocaleMap[defaultLocale]
+  const ogImageUrl = `${baseUrl}/images/og-banner.jpg`
+  const rssPath = locale === defaultLocale ? '/feed.xml' : `/${locale}/feed.xml`
+  const rssUrl = `${baseUrl}${rssPath}`
 
   const formatDate = (dateString: string) => {
     try {
@@ -81,6 +85,10 @@ export default function BlogIndex({ posts, meta, hero, labels, cta }: BlogIndexP
         <meta name="description" content={meta.description} />
         <meta name="keywords" content={meta.keywords} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* noindex for non-English locales to avoid duplicate content issues */}
+        {locale !== defaultLocale && (
+          <meta name="robots" content="noindex, follow" />
+        )}
 
         <link rel="canonical" href={canonicalUrl} />
         {alternateRefs.map(ref => (
@@ -92,7 +100,7 @@ export default function BlogIndex({ posts, meta, hero, labels, cta }: BlogIndexP
         <meta property="og:site_name" content="DressMeAI" />
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
-        <meta property="og:image" content="https://dressmeai.com/images/blog-og-banner.jpg" />
+        <meta property="og:image" content={ogImageUrl} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:locale" content={ogLocale} />
         {supportedLocales
@@ -109,7 +117,9 @@ export default function BlogIndex({ posts, meta, hero, labels, cta }: BlogIndexP
         <meta name="twitter:site" content="@dressmeai" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content="https://dressmeai.com/images/blog-og-banner.jpg" />
+        <meta name="twitter:image" content={ogImageUrl} />
+
+        <link rel="alternate" type="application/rss+xml" title="DressMeAI Blog" href={rssUrl} />
       </Head>
 
       <div className="container mx-auto px-4 py-8">
@@ -122,8 +132,14 @@ export default function BlogIndex({ posts, meta, hero, labels, cta }: BlogIndexP
               <Link href="/" className="text-blue-600 hover:text-blue-800 transition-colors">
                 {commonT('nav.home')}
               </Link>
-              <Link href="/history" className="text-blue-600 hover:text-blue-800 transition-colors">
-                {commonT('nav.history')}
+              <Link href="/about" className="text-blue-600 hover:text-blue-800 transition-colors">
+                {commonT('nav.about')}
+              </Link>
+              <Link href="/faq" className="text-blue-600 hover:text-blue-800 transition-colors">
+                {commonT('nav.faq')}
+              </Link>
+              <Link href="/contact" className="text-blue-600 hover:text-blue-800 transition-colors">
+                {commonT('nav.contact')}
               </Link>
               <Link href="/blog" className="text-blue-600 hover:text-blue-800 transition-colors">
                 {commonT('nav.blog')}
@@ -142,42 +158,54 @@ export default function BlogIndex({ posts, meta, hero, labels, cta }: BlogIndexP
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {posts.map(post => (
-            <article key={post.slug} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 flex flex-col">
-              <div className="text-sm text-gray-500 mb-4">
-                <time dateTime={post.publishDate}>{formatDate(post.publishDate)}</time>
-                <span className="mx-2">•</span>
-                <span>{post.readTime}</span>
-              </div>
+            <article key={post.slug} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
+              {/* Blog Cover Image */}
+              <Link href={`/blog/${post.slug}`} className="relative aspect-[16/9] overflow-hidden">
+                <Image
+                  src={`/images/blog/${post.slug}.png`}
+                  alt={post.title}
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </Link>
 
-              <div className="flex-grow">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                  <Link href={`/blog/${post.slug}`} className="hover:text-indigo-600">
-                    {post.title}
+              <div className="p-8 flex flex-col flex-grow">
+                <div className="text-sm text-gray-500 mb-4">
+                  <time dateTime={post.publishDate}>{formatDate(post.publishDate)}</time>
+                  <span className="mx-2">•</span>
+                  <span>{post.readTime}</span>
+                </div>
+
+                <div className="flex-grow">
+                  <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                    <Link href={`/blog/${post.slug}`} className="hover:text-indigo-600">
+                      {post.title}
+                    </Link>
+                  </h2>
+                  <p className="text-gray-600 leading-relaxed mb-6">{post.excerpt}</p>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors"
+                  >
+                    {labels.readMore}
+                    <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
                   </Link>
-                </h2>
-                <p className="text-gray-600 leading-relaxed mb-6">{post.excerpt}</p>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors"
-                >
-                  {labels.readMore}
-                  <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </Link>
-                <div className="flex flex-wrap gap-2">
-                  {post.keywords.slice(0, 2).map(keyword => (
-                    <span key={keyword} className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">
-                      {keyword}
-                    </span>
-                  ))}
+                  <div className="flex flex-wrap gap-2">
+                    {post.keywords.slice(0, 2).map(keyword => (
+                      <span key={keyword} className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </article>

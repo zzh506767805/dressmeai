@@ -1,0 +1,211 @@
+{
+  "about": {
+    "meta": {
+      "title": "About Us | DressMeAI - AI Virtual Try-On Technology",
+      "description": "Learn about DressMeAI, the team behind the innovative AI virtual try-on technology revolutionizing online fashion shopping."
+    },
+    "hero": {
+      "title": "About DressMeAI",
+      "subtitle": "Revolutionizing Online Fashion with AI Technology"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "content": "At DressMeAI, we believe everyone deserves to shop with confidence. Our mission is to bridge the gap between online shopping and the in-store experience by providing cutting-edge AI virtual try-on technology that helps customers visualize how clothes will look on them before making a purchase."
+    },
+    "story": {
+      "title": "Our Story",
+      "content": "DressMeAI was founded with a simple yet powerful vision: to eliminate the guesswork from online fashion shopping. We recognized that one of the biggest challenges in e-commerce is the inability to try on clothes before buying, leading to high return rates and customer frustration. Our team of AI researchers, fashion technologists, and e-commerce experts came together to create a solution that transforms how people shop for clothes online."
+    },
+    "technology": {
+      "title": "Our Technology",
+      "content": "Our proprietary AI technology uses advanced computer vision and machine learning algorithms to create realistic virtual try-on experiences. By analyzing body shapes, garment properties, and fit patterns, we generate accurate visualizations that help customers make informed purchasing decisions.",
+      "features": [
+        "Advanced body detection and pose estimation",
+        "Realistic garment simulation and draping",
+        "Support for various clothing categories",
+        "Fast processing with real-time results",
+        "Privacy-focused image processing"
+      ]
+    },
+    "values": {
+      "title": "Our Values",
+      "items": [
+        {
+          "title": "Innovation",
+          "description": "We continuously push the boundaries of AI technology to deliver the best virtual try-on experience."
+        },
+        {
+          "title": "User Privacy",
+          "description": "We prioritize the security and privacy of our users' data with industry-leading protection measures."
+        },
+        {
+          "title": "Sustainability",
+          "description": "By reducing returns, we help minimize the environmental impact of fashion e-commerce."
+        },
+        {
+          "title": "Accessibility",
+          "description": "We strive to make our technology accessible to businesses and consumers worldwide."
+        }
+      ]
+    },
+    "stats": {
+      "title": "DressMeAI by the Numbers",
+      "items": [
+        { "value": "1M+", "label": "Virtual Try-Ons" },
+        { "value": "40%", "label": "Reduced Returns" },
+        { "value": "9", "label": "Languages Supported" },
+        { "value": "24/7", "label": "AI Availability" }
+      ]
+    },
+    "cta": {
+      "title": "Ready to Transform Your Shopping Experience?",
+      "description": "Try our AI virtual try-on technology today and see the difference for yourself.",
+      "button": "Try Now"
+    }
+  },
+  "faq": {
+    "meta": {
+      "title": "FAQ | DressMeAI - AI Virtual Try-On Questions Answered",
+      "description": "Find answers to frequently asked questions about DressMeAI's AI virtual try-on technology, how it works, and how to get started."
+    },
+    "hero": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Everything you need to know about AI virtual try-on"
+    },
+    "categories": {
+      "general": {
+        "title": "General Questions",
+        "items": [
+          {
+            "question": "What is AI virtual try-on technology?",
+            "answer": "AI virtual try-on technology uses artificial intelligence and computer vision to create realistic simulations of how clothing items will look on you. Simply upload a photo and a garment image, and our AI generates a visualization of you wearing that item."
+          },
+          {
+            "question": "How accurate is the virtual try-on?",
+            "answer": "Our AI technology provides highly realistic results that accurately represent how clothes will look on you. While virtual try-ons are approximations and actual fit may vary slightly, our technology helps you make more informed purchasing decisions and significantly reduces the likelihood of returns."
+          },
+          {
+            "question": "Is DressMeAI free to use?",
+            "answer": "DressMeAI offers both free and premium options. You can try our basic virtual try-on features for free, with premium features available for power users and businesses."
+          }
+        ]
+      },
+      "howItWorks": {
+        "title": "How It Works",
+        "items": [
+          {
+            "question": "How do I use the virtual try-on feature?",
+            "answer": "Using DressMeAI is simple: 1) Upload a photo of yourself or a model, 2) Upload an image of the clothing item you want to try on, 3) Click 'Generate' and wait a few seconds for your virtual try-on result."
+          },
+          {
+            "question": "What kind of photos work best?",
+            "answer": "For best results, use clear, well-lit photos where the person is standing straight and facing the camera. The clothing you're wearing in the photo should be relatively fitted to help the AI understand your body shape."
+          },
+          {
+            "question": "What types of clothing can I try on?",
+            "answer": "Our AI supports a wide range of clothing items including tops, shirts, dresses, jackets, and outerwear. We're continuously expanding our capabilities to support more clothing categories."
+          }
+        ]
+      },
+      "privacy": {
+        "title": "Privacy & Security",
+        "items": [
+          {
+            "question": "What happens to my photos after I upload them?",
+            "answer": "Your photos are processed securely by our AI system to generate try-on results. We do not permanently store your photos unless you explicitly save them to your history. Our systems are designed with privacy in mind."
+          },
+          {
+            "question": "Is my personal data safe?",
+            "answer": "Yes, we take data security very seriously. We use industry-standard encryption and security measures to protect your information. Please see our Privacy Policy for more details."
+          },
+          {
+            "question": "Do you share my photos with third parties?",
+            "answer": "No, we do not share, sell, or distribute your photos to any third parties. Your images are only used to generate your virtual try-on results."
+          }
+        ]
+      },
+      "technical": {
+        "title": "Technical Questions",
+        "items": [
+          {
+            "question": "What image formats are supported?",
+            "answer": "We support common image formats including JPEG, PNG, and WebP. For best results, use images that are at least 512x512 pixels."
+          },
+          {
+            "question": "How long does it take to generate a try-on result?",
+            "answer": "Most try-on results are generated within 10-30 seconds, depending on image complexity and current server load."
+          },
+          {
+            "question": "Can I use DressMeAI on mobile devices?",
+            "answer": "Yes, DressMeAI is fully responsive and works on smartphones and tablets. You can upload photos directly from your device's camera or photo library."
+          }
+        ]
+      },
+      "business": {
+        "title": "For Businesses",
+        "items": [
+          {
+            "question": "Can I integrate DressMeAI into my e-commerce store?",
+            "answer": "Yes, we offer API integration options for businesses looking to add virtual try-on capabilities to their online stores. Contact us for more information about our enterprise solutions."
+          },
+          {
+            "question": "What are the benefits for retailers?",
+            "answer": "Retailers using virtual try-on technology typically see increased conversion rates, reduced return rates, longer site engagement, and improved customer satisfaction."
+          }
+        ]
+      }
+    },
+    "cta": {
+      "title": "Still have questions?",
+      "description": "Can't find the answer you're looking for? Feel free to reach out to our support team.",
+      "button": "Contact Us"
+    }
+  },
+  "contact": {
+    "meta": {
+      "title": "Contact Us | DressMeAI - Get in Touch",
+      "description": "Contact DressMeAI for support, business inquiries, or partnership opportunities. We're here to help with your AI virtual try-on needs."
+    },
+    "hero": {
+      "title": "Contact Us",
+      "subtitle": "We'd love to hear from you"
+    },
+    "intro": {
+      "content": "Have a question, feedback, or business inquiry? Our team is here to help. Choose the best way to reach us below."
+    },
+    "channels": {
+      "general": {
+        "title": "General Inquiries",
+        "description": "For general questions about DressMeAI and our virtual try-on technology.",
+        "email": "hello@dressmeai.com"
+      },
+      "support": {
+        "title": "Technical Support",
+        "description": "Need help with the virtual try-on feature or experiencing issues?",
+        "email": "support@dressmeai.com"
+      },
+      "business": {
+        "title": "Business & Partnerships",
+        "description": "Interested in integrating DressMeAI into your business or becoming a partner?",
+        "email": "business@dressmeai.com"
+      },
+      "press": {
+        "title": "Press & Media",
+        "description": "Media inquiries and press-related questions.",
+        "email": "press@dressmeai.com"
+      }
+    },
+    "social": {
+      "title": "Follow Us",
+      "description": "Stay updated with the latest news and updates from DressMeAI.",
+      "platforms": [
+        { "name": "Twitter", "handle": "@dressmeai" },
+        { "name": "LinkedIn", "handle": "DressMeAI" }
+      ]
+    },
+    "response": {
+      "title": "Response Time",
+      "content": "We typically respond to inquiries within 24-48 hours during business days. For urgent technical issues, please include 'URGENT' in your email subject line."
+    }
+  }
+}

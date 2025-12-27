@@ -5,10 +5,10 @@ Allow: /
 # Sitemaps
 Sitemap: https://dressmeai.com/sitemap.xml
 
-# Crawl-delay
-Crawl-delay: 10
-
 # Disallow paths
 Disallow: /api/
 Disallow: /_next/
 Disallow: /static/ 
+Disallow: /success
+Disallow: /cancel
+Disallow: /history
