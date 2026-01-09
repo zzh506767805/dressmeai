@@ -44,7 +44,8 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/" # App source code path
           api_location: "" # Api source code path - optional
-          output_location: ".next/standalone" # Built app content directory - standalone mode
+          # Use Next.js build output so Azure SWA can keep SSR/Head intact
+          output_location: ".next"
           skip_app_build: true # We already built the app above
           ###### End of Repository/Build Configurations ######
 
