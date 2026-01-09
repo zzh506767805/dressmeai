@@ -85,6 +85,13 @@ export default function BlogIndex({ posts, meta, hero, labels, cta }: BlogIndexP
         <meta name="description" content={meta.description} />
         <meta name="keywords" content={meta.keywords} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* Favicon */}
+        <link rel="icon" href="/icons/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
+
         {/* noindex for non-English locales to avoid duplicate content issues */}
         {locale !== defaultLocale && (
           <meta name="robots" content="noindex, follow" />

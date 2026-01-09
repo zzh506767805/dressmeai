@@ -51,6 +51,12 @@ export default function About({ content }: AboutProps) {
         <meta name="description" content={content.meta.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        {/* Favicon */}
+        <link rel="icon" href="/icons/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
+
         <link rel="canonical" href={canonicalUrl} />
         {alternateRefs.map(ref => (
           <link key={ref.locale} rel="alternate" hrefLang={ref.locale} href={ref.href} />
