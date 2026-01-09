@@ -6,6 +6,7 @@ const defaultLocale = i18nSettings.defaultLocale
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: 'standalone',
   images: {
     domains: [
       'dressmeaiupload.blob.core.windows.net',
