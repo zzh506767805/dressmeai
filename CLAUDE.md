@@ -203,6 +203,4 @@ AZURE_STORAGE_CONNECTION_STRING=xxx
 
 ## Contact
 
-- General: hello@dressmeai.com
-- Support: support@dressmeai.com
-- Business: business@dressmeai.com
+- Email: zeta@myowncoach.online

@@ -177,22 +177,22 @@
       "general": {
         "title": "일반 문의",
         "description": "DressMeAI와 가상 피팅 기술에 대한 일반적인 질문.",
-        "email": "hello@dressmeai.com"
+        "email": "zeta@myowncoach.online"
       },
       "support": {
         "title": "기술 지원",
         "description": "가상 피팅 기능에 대한 도움이 필요하거나 문제가 발생했나요?",
-        "email": "support@dressmeai.com"
+        "email": "zeta@myowncoach.online"
       },
       "business": {
         "title": "비즈니스 및 파트너십",
         "description": "DressMeAI를 비즈니스에 통합하거나 파트너가 되고 싶으신가요?",
-        "email": "business@dressmeai.com"
+        "email": "zeta@myowncoach.online"
       },
       "press": {
         "title": "언론 및 미디어",
         "description": "미디어 문의 및 보도 관련 질문.",
-        "email": "press@dressmeai.com"
+        "email": "zeta@myowncoach.online"
       }
     },
     "social": {

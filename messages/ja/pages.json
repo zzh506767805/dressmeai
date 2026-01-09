@@ -177,22 +177,22 @@
       "general": {
         "title": "一般的なお問い合わせ",
         "description": "DressMeAIとバーチャル試着技術に関する一般的なご質問。",
-        "email": "hello@dressmeai.com"
+        "email": "zeta@myowncoach.online"
       },
       "support": {
         "title": "テクニカルサポート",
         "description": "バーチャル試着機能についてのヘルプや問題が発生した場合。",
-        "email": "support@dressmeai.com"
+        "email": "zeta@myowncoach.online"
       },
       "business": {
         "title": "ビジネス・パートナーシップ",
         "description": "DressMeAIをビジネスに統合したい、またはパートナーになりたい方。",
-        "email": "business@dressmeai.com"
+        "email": "zeta@myowncoach.online"
       },
       "press": {
         "title": "プレス・メディア",
         "description": "メディアからのお問い合わせや報道関連のご質問。",
-        "email": "press@dressmeai.com"
+        "email": "zeta@myowncoach.online"
       }
     },
     "social": {
