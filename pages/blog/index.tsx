@@ -231,10 +231,15 @@ export const getStaticProps: GetStaticProps<BlogIndexProps> = async ({ locale })
   const currentLocale = (locale as Locale) || defaultLocale
   const blogMessages = getMessages(currentLocale).blog as BlogMessages
   const postsMap = blogMessages.index.posts as PostMap
-  const posts = (Object.entries(postsMap) as [keyof PostMap, PostMap[keyof PostMap]][]).map(([slug, data]) => ({
-    slug,
-    ...data
-  }))
+
+  // Only show posts that have detail page translations
+  const detailPostSlugs = new Set(Object.keys(blogMessages.detail?.posts || {}))
+  const posts = (Object.entries(postsMap) as [keyof PostMap, PostMap[keyof PostMap]][])
+    .filter(([slug]) => detailPostSlugs.has(slug as string))
+    .map(([slug, data]) => ({
+      slug,
+      ...data
+    }))
 
   return {
     props: {

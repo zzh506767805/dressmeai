@@ -1,95 +1,69 @@
 import { MetadataRoute } from 'next'
-import { defaultLocale, locales, type Locale } from '../i18n/config'
 import enBlog from '../messages/en/blog.json'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // 硬编码生产域名，确保 sitemap 中使用正确的 URL
   const baseUrl = 'https://dressmeai.com'
 
-  const staticRoutes: Array<{
-    path: string
-    lastModified: Date
-    changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']
-    priority: number
-  }> = [
+  // Only include English (indexable) pages in sitemap
+  // Non-English pages are noindex, so they should not be in sitemap
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
-      path: '/',
+      url: `${baseUrl}/`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1
     },
     {
-      path: '/blog',
+      url: `${baseUrl}/blog`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8
     },
     {
-      path: '/try-on',
+      url: `${baseUrl}/try-on`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9
     },
     {
-      path: '/about',
+      url: `${baseUrl}/about`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.6
     },
     {
-      path: '/faq',
+      url: `${baseUrl}/faq`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.5
     },
     {
-      path: '/contact',
+      url: `${baseUrl}/contact`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.5
     },
     {
-      path: '/privacy',
+      url: `${baseUrl}/privacy`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.3
     },
     {
-      path: '/terms',
+      url: `${baseUrl}/terms`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.3
     }
   ]
 
-  const blogPostRoutes: Array<{
-    path: string
-    lastModified: Date
-    changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']
-    priority: number
-  }> = Object.entries(enBlog.index.posts).map(([slug, post]) => ({
-    path: `/blog/${slug}`,
+  const blogPostRoutes: MetadataRoute.Sitemap = Object.entries(enBlog.index.posts).map(([slug, post]) => ({
+    url: `${baseUrl}/blog/${slug}`,
     lastModified: new Date(post.publishDate),
     changeFrequency: 'monthly',
     priority: 0.7
   }))
 
-  const buildLocalizedPath = (path: string, locale: Locale) => {
-    if (locale === defaultLocale) {
-      return path
-    }
-    if (path === '/') {
-      return `/${locale}`
-    }
-    return `/${locale}${path}`
-  }
-
-  return [...staticRoutes, ...blogPostRoutes].flatMap(route =>
-    locales.map((localeCode: Locale) => ({
-      url: `${baseUrl}${buildLocalizedPath(route.path, localeCode)}`,
-      lastModified: route.lastModified,
-      changeFrequency: route.changeFrequency,
-      priority: route.priority
-    }))
-  )
+  return [...staticRoutes, ...blogPostRoutes]
 }

@@ -328,14 +328,17 @@ export default function BlogPost({ post, relatedPosts, ogImagePath, meta }: Blog
 }
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const slugs = Object.keys(enBlog.detail.posts)
   const pathLocales = locales ?? supportedLocales
-  const paths = slugs.flatMap(slug =>
-    pathLocales.map(locale => ({
+
+  // Generate paths only for blog posts that have translations in each language
+  const paths = pathLocales.flatMap(locale => {
+    const blogMessages = getMessages(locale as Locale).blog as BlogMessages
+    const detailPosts = blogMessages.detail?.posts || {}
+    return Object.keys(detailPosts).map(slug => ({
       params: { slug },
       locale
     }))
-  )
+  })
 
   return {
     paths,
