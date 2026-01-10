@@ -34,6 +34,7 @@ interface BlogDetailProps {
   post: BlogDetailPost
   relatedPosts: BlogPostCard[]
   ogImagePath: string
+  availableLocales: string[]
   meta: {
     breadcrumb: string
     relatedTitle: string
@@ -41,7 +42,7 @@ interface BlogDetailProps {
   }
 }
 
-export default function BlogPost({ post, relatedPosts, ogImagePath, meta }: BlogDetailProps) {
+export default function BlogPost({ post, relatedPosts, ogImagePath, availableLocales, meta }: BlogDetailProps) {
   const router = useRouter()
   const locale = router.locale ?? defaultLocale
   const commonT = useTranslations('common')
@@ -58,7 +59,8 @@ export default function BlogPost({ post, relatedPosts, ogImagePath, meta }: Blog
       ? pathWithoutLocale
       : `/${locale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`
   const canonicalUrl = `${baseUrl}${canonicalPath}`
-  const alternateRefs = supportedLocales.map(code => {
+  // Only generate hreflang for locales that have this article translated
+  const alternateRefs = availableLocales.map(code => {
     const localizedPath =
       code === defaultLocale
         ? pathWithoutLocale
@@ -119,7 +121,7 @@ export default function BlogPost({ post, relatedPosts, ogImagePath, meta }: Blog
         <meta property="og:image" content={ogImageUrl} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:locale" content={ogLocale} />
-        {supportedLocales
+        {availableLocales
           .filter(code => code !== locale)
           .map(code => (
             <meta
@@ -378,6 +380,13 @@ export const getStaticProps: GetStaticProps<BlogDetailProps> = async ({ params, 
     ogImagePath = '/images/og-banner.jpg'
   }
 
+  // Check which locales have this article translated
+  const availableLocales = supportedLocales.filter(loc => {
+    const locBlogMessages = getMessages(loc).blog as BlogMessages
+    const locDetailPosts = locBlogMessages.detail?.posts || {}
+    return Object.prototype.hasOwnProperty.call(locDetailPosts, slug)
+  })
+
   const indexPosts = blogMessages.index.posts as IndexPostMap
   const relatedPosts = (Object.entries(indexPosts) as [IndexPostKey, IndexPostMap[IndexPostKey]][])
     .filter(([key]) => key !== slug)
@@ -392,6 +401,7 @@ export const getStaticProps: GetStaticProps<BlogDetailProps> = async ({ params, 
       },
       relatedPosts,
       ogImagePath,
+      availableLocales,
       meta: {
         breadcrumb: blogMessages.detail.breadcrumbBlog,
         relatedTitle: blogMessages.detail.relatedTitle,
