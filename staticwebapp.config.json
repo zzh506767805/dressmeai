@@ -1,5 +1,12 @@
 {
   "platform": {
     "apiRuntime": "node:18"
-  }
+  },
+  "routes": [
+    {
+      "route": "/ads.txt",
+      "redirect": "https://srv.adstxtmanager.com/19390/dressmeai.com",
+      "statusCode": 301
+    }
+  ]
 }

@@ -14,6 +14,8 @@ import {
 } from '@heroicons/react/24/solid'
 import Image from 'next/image'
 import ImageUpload from '../components/ImageUpload'
+import EzoicAd from '../components/EzoicAd'
+import EzoicAdsInit from '../components/EzoicAdsInit'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useLocale, useTranslations } from 'next-intl'
@@ -510,6 +512,9 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
+      {/* Initialize Ezoic Ad Placements */}
+      <EzoicAdsInit placementIds={[101, 102, 103]} />
+
       <main>
         {/* Hero Section with Try-On Feature */}
         <section id="ai-fashion" className="relative px-4 sm:px-6 lg:px-8 py-8 sm:py-12 bg-gradient-to-br from-indigo-50 via-white to-purple-50">
@@ -599,6 +604,11 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Ezoic Ad Placement 101 */}
+        <div className="py-4 flex justify-center">
+          <EzoicAd placementId={101} />
+        </div>
 
         {/* Stats Section */}
         <section id="stats" className="py-20 sm:py-28 bg-gray-50">
@@ -821,6 +831,11 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Ezoic Ad Placement 102 */}
+        <div className="py-4 flex justify-center bg-gray-50">
+          <EzoicAd placementId={102} />
+        </div>
+
         {/* How It Works Section */}
         <section id="how-it-works" className="py-20 sm:py-28 bg-gray-50">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -998,6 +1013,10 @@ export default function Home() {
             </div>
           </div>
         </section>
+        {/* Ezoic Ad Placement 103 */}
+        <div className="py-4 flex justify-center">
+          <EzoicAd placementId={103} />
+        </div>
       </main>
 
       {/* 友情链接区块 */}

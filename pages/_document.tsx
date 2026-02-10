@@ -20,11 +20,19 @@ class MyDocument extends Document<CustomDocumentProps> {
     return (
       <Html lang={locale}>
         <Head>
-          {/* Google AdSense */}
+          {/* Ezoic Privacy Scripts - must load first */}
+          <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js" />
+          <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js" />
+
+          {/* Ezoic Header Script */}
+          <script async src="//www.ezojs.com/ezoic/sa.min.js" />
           <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8366783560808157"
-            crossOrigin="anonymous"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.ezstandalone = window.ezstandalone || {};
+                ezstandalone.cmd = ezstandalone.cmd || [];
+              `,
+            }}
           />
         </Head>
         <body>
