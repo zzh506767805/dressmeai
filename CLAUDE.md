@@ -11,9 +11,11 @@ DressMeAI is an AI-powered virtual try-on platform that allows users to visualiz
 - **Framework**: Next.js 14.1.0 (Pages Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
+- **Auth**: NextAuth v4 + Google OAuth + PrismaAdapter (database sessions)
+- **Database**: Prisma v6 + Azure PostgreSQL Flexible Server (`dressmeai-db.postgres.database.azure.com`)
+- **Payment**: Stripe (subscriptions + single $1 payments, no webhook — uses verify-payment polling)
 - **Internationalization**: next-intl (9 languages)
-- **Deployment**: Azure Static Web Apps
-- **Payment**: Stripe
+- **Deployment**: Azure Static Web Apps (auto-deploy via GitHub Actions on push to main)
 - **Analytics**: Custom analytics implementation
 - **AI Backend**: Alibaba Cloud DashScope (virtual try-on API)
 
@@ -38,38 +40,47 @@ dressmeai/
 ├── app/                    # App router (sitemap only)
 │   └── sitemap.ts
 ├── pages/                  # Pages router
-│   ├── index.tsx          # Homepage with virtual try-on
-│   ├── try-on.tsx         # Dedicated try-on page
-│   ├── history.tsx        # User try-on history
+│   ├── index.tsx          # Homepage with virtual try-on (all generation happens here)
+│   ├── pricing.tsx        # Subscription pricing page (Basic/Pro/Unlimited, monthly/annual)
+│   ├── account.tsx        # User account, subscription status, history
+│   ├── success.tsx        # Payment verification + redirect (subscriptions → account, single → homepage)
+│   ├── try-on.tsx         # Dedicated try-on page (legacy)
+│   ├── history.tsx        # User try-on history (localStorage-based, legacy)
 │   ├── blog/              # Blog pages
-│   │   ├── index.tsx      # Blog list
-│   │   └── [slug].tsx     # Blog detail
-│   ├── about.tsx          # About page
-│   ├── faq.tsx            # FAQ page
-│   ├── contact.tsx        # Contact page
-│   ├── privacy.tsx        # Privacy policy
-│   ├── terms.tsx          # Terms of service
+│   ├── about.tsx, faq.tsx, contact.tsx, privacy.tsx, terms.tsx
 │   ├── feed.xml.tsx       # RSS feed
-│   ├── success.tsx        # Payment success
-│   └── cancel.tsx         # Payment cancel
-├── components/            # React components
-├── messages/              # i18n translations
-│   ├── en/               # English translations
-│   │   ├── common.json   # Common UI strings
-│   │   ├── landing.json  # Landing page content
-│   │   ├── blog.json     # Blog content (20 articles)
-│   │   ├── pages.json    # Static pages content
-│   │   └── legal.json    # Legal pages content
-│   └── [locale]/         # Other language translations
-├── public/
-│   ├── images/
-│   │   ├── blog/         # Blog cover images (20)
-│   │   └── landing/      # Landing page images (12)
-│   ├── icons/            # App icons
-│   └── robots.txt
-├── i18n/                 # i18n configuration
-├── utils/                # Utility functions
-└── styles/               # Global styles
+│   ├── cancel.tsx         # Payment cancel
+│   └── api/
+│       ├── auth/[...nextauth].ts  # NextAuth Google OAuth
+│       ├── create-payment.ts      # Stripe single $1 payment
+│       ├── create-subscription.ts # Stripe subscription checkout
+│       ├── verify-payment.ts      # Verify + activate payment (replaces webhook)
+│       ├── check-credits.ts       # Check user credits + expire subscriptions
+│       ├── use-credit.ts          # Deduct 1 credit atomically + create TryOnJob
+│       ├── update-job.ts          # Update TryOnJob status/result
+│       ├── upload.ts              # Upload image to Azure Blob (10MB limit)
+│       ├── tryon.ts               # Call DashScope AI try-on API
+│       ├── status.ts              # Poll DashScope task status
+│       ├── webhook.ts             # Stripe webhook (backup, not primary)
+│       ├── stripe/portal.ts       # Stripe billing portal (unused)
+│       └── user/history.ts        # User try-on history from DB
+├── components/
+│   ├── UserMenu.tsx       # Login/user dropdown (Google sign-in + avatar menu)
+│   └── ...                # ImageUpload, EzoicAd, LanguageSwitcher, etc.
+├── lib/
+│   ├── auth.ts            # NextAuth config (Google Provider + PrismaAdapter)
+│   ├── db.ts              # Prisma client singleton
+│   ├── stripe.ts          # Stripe client singleton
+│   └── pricing.ts         # Plan definitions + pricing helpers
+├── prisma/
+│   └── schema.prisma      # DB schema (User, Account, Session, Payment, TryOnJob, VerificationToken)
+├── types/
+│   └── next-auth.d.ts     # Session type augmentation (id, credits, subscriptionStatus)
+├── messages/              # i18n translations (9 languages)
+├── public/                # Static assets
+├── i18n/                  # i18n configuration
+├── utils/                 # Utility functions
+└── styles/                # Global styles
 ```
 
 ## Key Features
@@ -77,19 +88,35 @@ dressmeai/
 ### 1. Virtual Try-On
 - Upload model photo + clothing photo
 - AI generates realistic try-on result
-- Integrated on homepage first screen
+- All generation happens on homepage (unified flow)
 
-### 2. Multi-language Support
+### 2. Auth & Subscription
+- Google OAuth login (required to generate)
+- 3 paid plans: Basic ($5.90/mo), Pro ($12.90/mo), Unlimited ($29.90/mo)
+- Annual billing with ~17% discount (e.g. $4.90/mo billed $58.80/yr)
+- Annual plans get 12x monthly credits upfront; Unlimited = 999999
+- Single $1 per try-on payment (adds 1 credit, then consumed immediately)
+- No webhook dependency — verify-payment API polls Stripe and updates DB
+- Subscription expiry checked on each credit check; expired → credits cleared to 0
+
+### 3. Generation Flow
+- **Not logged in** → Click Generate → Google sign-in → back to homepage
+- **Logged in with credits** → Click Generate → direct generation on homepage
+- **Logged in, no credits** → Click Generate → redirect to /pricing → subscribe or $1 single pay
+- **After $1 payment** → Stripe → /success (verify + add 1 credit) → redirect to homepage → auto-generate from localStorage images
+- **After subscription** → Stripe → /success (verify + activate plan) → redirect to /account
+
+### 4. Multi-language Support
 - 9 languages with full translations
 - Locale-based routing
 - SEO-optimized for each language
 
-### 3. Blog System
+### 5. Blog System
 - 20 SEO-optimized articles
 - Topics: AI fashion, virtual try-on technology
 - Multilingual content
 
-### 4. SEO Optimization
+### 6. SEO Optimization
 - SSG (Static Site Generation) - 305+ pages
 - Proper TDK structure (Title/Description/Keywords)
 - Canonical URLs with hreflang
@@ -162,11 +189,29 @@ The project deploys automatically to Azure Static Web Apps via GitHub Actions wh
 ## Environment Variables
 
 ```env
+# Base
 NEXT_PUBLIC_BASE_URL=https://dressmeai.com
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_xxx
+
+# Database (Azure PostgreSQL Flexible Server)
+DATABASE_URL=postgresql://user:pass@dressmeai-db.postgres.database.azure.com:5432/dressmeai?sslmode=require
+
+# Auth (NextAuth + Google OAuth)
+GOOGLE_CLIENT_ID=xxx
+GOOGLE_CLIENT_SECRET=xxx
+NEXTAUTH_SECRET=xxx
+NEXTAUTH_URL=https://dressmeai.com
+
+# Stripe
 STRIPE_SECRET_KEY=sk_live_xxx
-DASHSCOPE_API_KEY=xxx
-AZURE_STORAGE_CONNECTION_STRING=xxx
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_xxx
+
+# AI (DashScope)
+ALIYUN_API_KEY=xxx
+
+# Azure Blob Storage (image upload)
+AZURE_STORAGE_ACCOUNT=dressmeaiupload
+AZURE_STORAGE_KEY=xxx
+AZURE_STORAGE_CONTAINER=tryon-images
 ```
 
 ## SEO Checklist
@@ -183,23 +228,38 @@ AZURE_STORAGE_CONNECTION_STRING=xxx
 - [x] Blog with keyword-rich content
 - [ ] Keywords meta on all pages (partial)
 
+## Database Schema (Prisma)
+
+- **User** — id, email, name, image, subscriptionStatus (FREE/BASIC/PRO), subscriptionExpiry, credits
+- **Account** — NextAuth OAuth account linking (Google)
+- **Session** — NextAuth database sessions
+- **Payment** — Stripe payment records (stripeSessionId unique, mode: subscription/payment)
+- **TryOnJob** — Generation history (status: PENDING/PROCESSING/COMPLETED/FAILED, resultImageUrl)
+- **VerificationToken** — NextAuth verification tokens
+
 ## Recent Updates
+
+### 2026-03-23
+- Added Google OAuth login (NextAuth v4 + PrismaAdapter)
+- Added Azure PostgreSQL database (Prisma v6)
+- Added subscription system: Basic/Pro/Unlimited with monthly and annual billing
+- Added single $1 try-on payment
+- Unified generation flow — all try-ons on homepage
+- Added pricing page, account page, user menu
+- Payment verification via polling (no webhook dependency)
+- TryOnJob tracking in database with status updates
 
 ### 2024-12-28
 - Major homepage redesign
-  - Virtual try-on on first screen
-  - Simplified navigation
-  - Added blog cover images
-  - Fixed Showcase section images
 - Added new pages: about, faq, contact, privacy, terms, feed.xml
 - Expanded blog to 20 articles
-- Generated 32 images (20 blog + 12 landing)
 - Full multilingual content for all new pages
 
 ## Known Issues
 
 - Some pages missing keywords meta tag (about, faq, contact, try-on)
 - Non-English locales have `noindex` to avoid duplicate content issues
+- `pages/api/stripe/portal.ts` exists but is unused (Manage Billing removed from UI)
 
 ## Contact
 
