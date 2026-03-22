@@ -23,9 +23,13 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
 .env.development
 .env.production
+
+# playwright mcp
+.playwright-mcp/
 
 # vercel
 .vercel
@@ -35,3 +39,4 @@ yarn-error.log*
 next-env.d.ts *.backup
 
 /doc
+/generated/prisma

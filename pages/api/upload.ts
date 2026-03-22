@@ -2,6 +2,14 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import sharp from 'sharp';
 import { BlobServiceClient } from '@azure/storage-blob';
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
+};
+
 interface ErrorResponse {
   message: string;
 }

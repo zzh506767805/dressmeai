@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import Script from 'next/script'
 import {
   SparklesIcon,
@@ -20,8 +20,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useLocale, useTranslations } from 'next-intl'
 import LanguageSwitcher from '../components/shared/LanguageSwitcher'
+import UserMenu from '../components/UserMenu'
+import { useSession, signIn } from 'next-auth/react'
 import { analytics, trackConversion, setUserProperties } from '../utils/analytics'
-import { safeSetItem } from '../utils/localStorage'
+import { safeSetItem, safeGetItem, safeRemoveItem } from '../utils/localStorage'
 import { defaultLocale, locales as supportedLocales, type Locale } from '../i18n/config'
 
 type IconKey = 'camera' | 'sparkles' | 'lightBulb' | 'swatch'
@@ -71,7 +73,10 @@ export default function Home() {
   const [clothingImage, setClothingImage] = useState<File | null>(null)
   const [resultImage, setResultImage] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const [generationStep, setGenerationStep] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
+  const { data: session } = useSession()
+  const abortRef = useRef(false)
   const router = useRouter()
   const locale = useLocale()
   const landingT = useTranslations('landing')
@@ -269,7 +274,117 @@ export default function Home() {
     })
   }, [])
 
+  // Core generation flow: upload base64 images, call AI, poll result
+  const runGenerationFromBase64 = useCallback(async (modelB64: string, clothingB64: string, skipCredit?: boolean) => {
+    abortRef.current = false;
+    let jobId: string | null = null;
 
+    const updateJob = (data: Record<string, string>) => {
+      if (jobId) fetch('/api/update-job', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jobId, ...data }),
+      }).catch(() => {});
+    };
+
+    if (!skipCredit) {
+      setGenerationStep('Checking credits...');
+      const creditRes = await fetch('/api/use-credit', { method: 'POST' });
+      if (!creditRes.ok) {
+        const data = await creditRes.json();
+        throw new Error(data.message || 'Failed to use credit');
+      }
+      const creditData = await creditRes.json();
+      jobId = creditData.jobId;
+    }
+
+    setGenerationStep('Uploading model image...');
+    const modelUpRes = await fetch('/api/upload', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image: modelB64 }),
+    });
+    if (!modelUpRes.ok) throw new Error('Failed to upload model image');
+    const { url: modelUrl } = await modelUpRes.json();
+
+    if (abortRef.current) return;
+
+    setGenerationStep('Uploading clothing image...');
+    const clothUpRes = await fetch('/api/upload', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image: clothingB64 }),
+    });
+    if (!clothUpRes.ok) throw new Error('Failed to upload clothing image');
+    const { url: clothingUrl } = await clothUpRes.json();
+
+    if (abortRef.current) return;
+
+    updateJob({ status: 'PROCESSING', modelImageUrl: modelUrl, clothImageUrl: clothingUrl });
+
+    setGenerationStep('Initializing virtual try-on...');
+    const tryonRes = await fetch('/api/tryon', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ modelImageUrl: modelUrl, clothingImageUrl: clothingUrl }),
+    });
+    if (!tryonRes.ok) throw new Error('Failed to start try-on process');
+    const { taskId } = await tryonRes.json();
+
+    updateJob({ taskId });
+
+    let retryCount = 0;
+    const maxRetries = 20;
+    while (retryCount < maxRetries && !abortRef.current) {
+      setGenerationStep('Generating try-on result...');
+      await new Promise(r => setTimeout(r, 5000));
+      const statusRes = await fetch(`/api/status?taskId=${taskId}`);
+      const statusData = await statusRes.json();
+
+      if (statusData.status === 'SUCCEEDED' && statusData.imageUrl) {
+        setResultImage(statusData.imageUrl);
+        updateJob({ status: 'COMPLETED', resultImageUrl: statusData.imageUrl });
+        analytics.virtualTryOn.generate_success();
+        return;
+      } else if (statusData.status === 'FAILED') {
+        updateJob({ status: 'FAILED', errorMessage: 'AI generation failed' });
+        throw new Error('Try-on generation failed');
+      }
+      retryCount++;
+    }
+    if (!abortRef.current) {
+      updateJob({ status: 'FAILED', errorMessage: 'Generation timed out' });
+      throw new Error('Generation timed out');
+    }
+  }, []);
+
+  // Auto-generate after single payment redirect
+  useEffect(() => {
+    const pending = typeof window !== 'undefined' && localStorage.getItem('pendingGeneration');
+    if (!pending) return;
+    localStorage.removeItem('pendingGeneration');
+
+    const mB64 = safeGetItem('modelImage');
+    const cB64 = safeGetItem('clothingImage');
+    if (!mB64 || !cB64) return;
+
+    setLoading(true);
+    setError(null);
+    setResultImage(null);
+    runGenerationFromBase64(mB64, cB64)
+      .then(() => {
+        safeRemoveItem('modelImage');
+        safeRemoveItem('clothingImage');
+        safeRemoveItem('imageUploadTimestamp');
+      })
+      .catch((err: Error) => {
+        setError(err.message || 'Generation failed');
+      })
+      .finally(() => {
+        setLoading(false);
+        setGenerationStep('');
+      });
+  }, [runGenerationFromBase64]);
 
   const handleGenerate = useCallback(async () => {
     if (!modelImage || !clothingImage) {
@@ -278,73 +393,57 @@ export default function Home() {
       return;
     }
 
-    // 跟踪虚拟试衣开始
-    analytics.virtualTryOn.start()
-    analytics.virtualTryOn.generate_start()
-    
-    setLoading(true);
-    setError(null);
-
-    try {
-      // 创建支付会话
-      const paymentResponse = await fetch('/api/create-payment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-
-      if (!paymentResponse.ok) {
-        throw new Error('Failed to create payment session');
-      }
-
-      const { url: paymentUrl } = await paymentResponse.json();
-      
-      // 将图片数据存储在 localStorage 中
+    // Must be logged in
+    if (!session?.user) {
+      // Save images before redirect so they persist after login
       const modelBase64 = await fileToBase64(modelImage);
       const clothingBase64 = await fileToBase64(clothingImage);
-      
-      // 使用安全的 localStorage 操作
-      console.log('Saving images to storage...');
-      console.log('Model image size:', modelBase64.length, 'chars');
-      console.log('Clothing image size:', clothingBase64.length, 'chars');
-      
-      const modelSaved = safeSetItem('modelImage', modelBase64);
-      const clothingSaved = safeSetItem('clothingImage', clothingBase64);
-      
-      console.log('Save results - Model:', modelSaved, 'Clothing:', clothingSaved);
-      
-      if (!modelSaved || !clothingSaved) {
-        console.error('Failed to save images to localStorage');
-        analytics.performance.error_occurred('localStorage_error', 'virtual_tryon')
-      } else {
-        console.log('Images successfully saved to storage');
-      }
-      
-      // 保存时间戳，用于验证数据新鲜度
-      const timestamp = Date.now().toString();
-      safeSetItem('imageUploadTimestamp', timestamp);
-      console.log('Saved timestamp:', timestamp);
-      
-      // 跟踪支付页面跳转
-      trackConversion('payment_redirect')
-      analytics.user.upgrade('virtual_tryon_service')
-      
-      // 重定向到支付页面
-      window.location.href = paymentUrl;
+      safeSetItem('modelImage', modelBase64);
+      safeSetItem('clothingImage', clothingBase64);
+      safeSetItem('imageUploadTimestamp', Date.now().toString());
+      signIn('google');
+      return;
+    }
 
+    analytics.virtualTryOn.start()
+    analytics.virtualTryOn.generate_start()
+    setLoading(true);
+    setError(null);
+    setResultImage(null);
+
+    try {
+      // Convert images to base64 once
+      const mB64 = await fileToBase64(modelImage);
+      const cB64 = await fileToBase64(clothingImage);
+
+      // Check credits
+      const creditCheck = await fetch('/api/check-credits');
+      const creditData = await creditCheck.json();
+
+      if (creditData.hasCredits) {
+        // Has credits: generate directly (no localStorage needed)
+        await runGenerationFromBase64(mB64, cB64);
+        // Clean up any stale localStorage images
+        safeRemoveItem('modelImage');
+        safeRemoveItem('clothingImage');
+        safeRemoveItem('imageUploadTimestamp');
+      } else {
+        // No credits: save images to localStorage for after payment, then go to pricing
+        safeSetItem('modelImage', mB64);
+        safeSetItem('clothingImage', cB64);
+        safeSetItem('imageUploadTimestamp', Date.now().toString());
+        router.push('/pricing');
+      }
     } catch (err) {
-      console.error('Payment error:', err);
-      const errorMessage = err instanceof Error ? err.message : 'Payment failed, please try again'
+      console.error('Generation error:', err);
+      const errorMessage = err instanceof Error ? err.message : 'Generation failed, please try again';
       setError(errorMessage);
-      
-      // 跟踪支付错误
       analytics.virtualTryOn.generate_error(errorMessage)
-      analytics.user.payment_failed(errorMessage)
     } finally {
       setLoading(false);
+      setGenerationStep('');
     }
-  }, [commonT, modelImage, clothingImage]);
+  }, [commonT, modelImage, clothingImage, session, router, runGenerationFromBase64]);
 
   // 处理图片上传的分析跟踪
   const handleModelImageUpload = (file: File | null) => {
@@ -428,6 +527,7 @@ export default function Home() {
             {commonT('nav.history')}
           </Link>
           <LanguageSwitcher />
+          <UserMenu />
         </nav>
 	      </div>
 
@@ -598,10 +698,52 @@ export default function Home() {
               >
                 {loading ? demoContent.generating : demoContent.generateButton}
               </button>
+              {!loading && modelImage && clothingImage && (
+                <p className="mt-2 text-sm text-gray-500">
+                  {!session
+                    ? 'Sign in to generate'
+                    : session.user.credits > 0
+                    ? `${session.user.credits} credits remaining`
+                    : <Link href="/pricing" className="text-indigo-600 hover:underline">Get more credits</Link>
+                  }
+                </p>
+              )}
+              {loading && generationStep && (
+                <div className="mt-4">
+                  <div className="flex justify-center items-center space-x-2 mb-2">
+                    <div className="w-3 h-3 bg-indigo-600 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                    <div className="w-3 h-3 bg-indigo-600 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                    <div className="w-3 h-3 bg-indigo-600 rounded-full animate-bounce"></div>
+                  </div>
+                  <p className="text-sm text-gray-600">{generationStep}</p>
+                </div>
+              )}
               {error && (
                 <p className="mt-4 text-red-500">{error}</p>
               )}
             </div>
+
+            {/* Result Display (for logged-in users generating inline) */}
+            {resultImage && (
+              <div className="mt-8 text-center">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">{demoContent.resultTitle}</h3>
+                <div className="relative w-full max-w-md mx-auto aspect-[3/4] rounded-xl overflow-hidden shadow-lg">
+                  <Image
+                    src={resultImage}
+                    alt="Try-on Result"
+                    fill
+                    className="object-contain"
+                    unoptimized
+                  />
+                </div>
+                <button
+                  onClick={() => { setResultImage(null); setModelImage(null); setClothingImage(null); }}
+                  className="mt-4 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                >
+                  Try Another
+                </button>
+              </div>
+            )}
           </div>
         </section>
 

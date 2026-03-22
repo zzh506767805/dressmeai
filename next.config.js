@@ -12,7 +12,8 @@ const nextConfig = {
       'dressmeaiupload.blob.core.windows.net',
       'dashscope-result-hz.oss-cn-hangzhou.aliyuncs.com',
       'dashscope-result-sh.oss-cn-shanghai.aliyuncs.com',
-      'images.unsplash.com'
+      'images.unsplash.com',
+      'lh3.googleusercontent.com'
     ],
     unoptimized: true
   },
