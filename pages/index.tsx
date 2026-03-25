@@ -520,9 +520,9 @@ export default function Home() {
             {commonT('nav.blog')}
           </Link>
           <Link
-            href="/history"
+            href="/account"
             className="text-blue-600 hover:text-blue-800 transition-colors"
-            onClick={() => analytics.navigation.internal_link_click('/history')}
+            onClick={() => analytics.navigation.internal_link_click('/account')}
           >
             {commonT('nav.history')}
           </Link>
