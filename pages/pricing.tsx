@@ -120,6 +120,8 @@ export default function Pricing() {
           name="description"
           content="Choose a DressMeAI plan for AI virtual try-on. Basic, Pro, or Unlimited plans available."
         />
+        <link rel="icon" href="/icons/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
       </Head>
 
       <div className="container mx-auto px-4">
