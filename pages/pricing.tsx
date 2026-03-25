@@ -13,6 +13,7 @@ interface Plan {
   description: string;
   monthlyPrice: number; // cents
   annualPrice: number; // cents
+  annualMonthlyDisplay: number; // cents - what to show as "/month" for annual
   credits: number; // -1 = unlimited
   features: string[];
   badge?: string;
@@ -24,8 +25,9 @@ const plans: Plan[] = [
     id: "basic",
     name: "Basic",
     description: "For regular fashion enthusiasts",
-    monthlyPrice: 590,
-    annualPrice: 5880,
+    monthlyPrice: 790,
+    annualPrice: 6990,
+    annualMonthlyDisplay: 590, // $5.90/mo
     credits: 50,
     features: [
       "50 try-ons per month",
@@ -38,8 +40,9 @@ const plans: Plan[] = [
     id: "pro",
     name: "Pro",
     description: "For power users and creators",
-    monthlyPrice: 1290,
-    annualPrice: 11880,
+    monthlyPrice: 1590,
+    annualPrice: 15490,
+    annualMonthlyDisplay: 1290, // $12.90/mo
     credits: 200,
     badge: "Popular",
     features: [
@@ -54,8 +57,9 @@ const plans: Plan[] = [
     id: "unlimited",
     name: "Unlimited",
     description: "No limits, for businesses and teams",
-    monthlyPrice: 2990,
-    annualPrice: 29880,
+    monthlyPrice: 3990,
+    annualPrice: 35890,
+    annualMonthlyDisplay: 2990, // $29.90/mo
     credits: -1,
     badge: "Best Value",
     highlight: true,
@@ -174,7 +178,7 @@ export default function Pricing() {
               cadence === "annual" ? plan.annualPrice : plan.monthlyPrice;
             const monthlyEquiv =
               cadence === "annual"
-                ? Math.round(plan.annualPrice / 12)
+                ? plan.annualMonthlyDisplay
                 : plan.monthlyPrice;
 
             return (

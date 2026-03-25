@@ -21,8 +21,8 @@ export const PRICING_PLANS: PlanConfig[] = [
     id: "basic",
     name: "Basic",
     description: "For regular fashion enthusiasts",
-    monthlyAmount: 590, // $5.90/mo
-    annualAmount: 5880, // $58.80/yr ($4.90/mo)
+    monthlyAmount: 790, // $7.90/mo
+    annualAmount: 6990, // $69.90/yr ($5.90/mo)
     currency: appCurrency,
     credits: 50,
     features: [
@@ -36,8 +36,8 @@ export const PRICING_PLANS: PlanConfig[] = [
     id: "pro",
     name: "Pro",
     description: "For power users and creators",
-    monthlyAmount: 1290, // $12.90/mo
-    annualAmount: 11880, // $118.80/yr ($9.90/mo)
+    monthlyAmount: 1590, // $15.90/mo
+    annualAmount: 15490, // $154.90/yr ($12.90/mo)
     currency: appCurrency,
     badge: "Popular",
     credits: 200,
@@ -53,8 +53,8 @@ export const PRICING_PLANS: PlanConfig[] = [
     id: "unlimited",
     name: "Unlimited",
     description: "No limits, for businesses and teams",
-    monthlyAmount: 2990, // $29.90/mo
-    annualAmount: 29880, // $298.80/yr ($24.90/mo)
+    monthlyAmount: 3990, // $39.90/mo
+    annualAmount: 35890, // $358.90/yr ($29.90/mo)
     currency: appCurrency,
     badge: "Best Value",
     highlight: true,
