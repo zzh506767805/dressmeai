@@ -63,27 +63,6 @@
       }
     ]
   },
-  "howItWorks": {
-    "eyebrow": "Así funciona nuestro probador IA en 3 pasos",
-    "title": "Comienza tu viaje de moda con IA - sube tu foto y listo",
-    "steps": [
-      {
-        "title": "1. Crea tu perfil",
-        "description": "Sube tu foto y preferencias para personalizar la experiencia.",
-        "icon": "camera"
-      },
-      {
-        "title": "2. Explora estilos",
-        "description": "Revisa prendas o deja que la IA genere combinaciones perfectas.",
-        "icon": "sparkles"
-      },
-      {
-        "title": "3. Inspírate",
-        "description": "Recibe ideas diarias y pruébalas virtualmente.",
-        "icon": "lightBulb"
-      }
-    ]
-  },
   "testimonials": {
     "eyebrow": "Lo que opinan los amantes de la moda",
     "title": "Historias reales de éxito con el probador virtual",
@@ -143,18 +122,36 @@
       "beforeLabel": "Antes",
       "afterLabel": "Despues",
       "items": [
-        { "title": "Casual → Profesional", "description": "De un look casual a uno mas pulido." },
-        { "title": "Basico → Ajuste perfecto", "description": "Visualiza cambios de proporcion y fit." },
-        { "title": "Original → Cambio IA", "description": "Renueva el look con un render IA realista." }
+        {
+          "title": "Casual → Profesional",
+          "description": "De un look casual a uno mas pulido."
+        },
+        {
+          "title": "Basico → Ajuste perfecto",
+          "description": "Visualiza cambios de proporcion y fit."
+        },
+        {
+          "title": "Original → Cambio IA",
+          "description": "Renueva el look con un render IA realista."
+        }
       ]
     },
     "gallery": {
       "title": "Inspiracion de outfits",
       "description": "Algunos estilos listos para probar.",
       "items": [
-        { "title": "Business casual", "description": "Looks limpios para trabajo y reuniones." },
-        { "title": "Chic de fin de semana", "description": "Relajado pero con estilo." },
-        { "title": "Elegancia nocturna", "description": "Mas arreglado para noches y eventos." }
+        {
+          "title": "Business casual",
+          "description": "Looks limpios para trabajo y reuniones."
+        },
+        {
+          "title": "Chic de fin de semana",
+          "description": "Relajado pero con estilo."
+        },
+        {
+          "title": "Elegancia nocturna",
+          "description": "Mas arreglado para noches y eventos."
+        }
       ]
     }
   },
@@ -237,6 +234,75 @@
         "title": "Estilo personal",
         "description": "Construye tu armario",
         "image": "/images/landing/usecase-styling.jpg"
+      }
+    ]
+  },
+  "seoGuide": {
+    "title": "The Complete Guide to AI Virtual Try-On Technology",
+    "sections": [
+      {
+        "heading": "What Is Virtual Try-On Technology?",
+        "paragraphs": [
+          "Virtual try-on technology uses artificial intelligence to show you how clothes look on your body before you buy them. Instead of relying on product photos shot on models with different body types, AI virtual try-on generates a personalized preview using your own photo. DressMeAI delivers this virtual try-on experience directly in your browser — upload your photo and a clothing image, and see yourself wearing the outfit within seconds.",
+          "The core problem with online clothes shopping has always been uncertainty. You cannot touch the fabric, check the fit, or see how a color looks against your skin. This leads to return rates of 30–40% in fashion e-commerce, costing the industry billions annually. Shoppers order multiple sizes, return items that do not match expectations, and waste time on a process that should be effortless. Virtual try-on technology bridges the gap between physical fitting rooms and online stores, replacing guesswork with visual confidence and helping everyone make better purchasing decisions."
+        ]
+      },
+      {
+        "heading": "How Does AI Virtual Try-On Work?",
+        "paragraphs": [
+          "DressMeAI makes virtual try-on simple and fast. You start by uploading two images: a full-body photo of yourself and a photo of the clothing item you want to try on. The AI then goes to work, analyzing your body shape, proportions, and pose while simultaneously understanding the garment's cut, fabric, texture, and draping behavior.",
+          "The technology combines several advanced AI techniques behind the scenes. Pose estimation maps your body joints and posture. Semantic segmentation identifies different body regions and separates the clothing from its background. A diffusion-based image generation model then synthesizes these inputs into a single composite image — one that shows you wearing the garment naturally, with realistic folds, shadows, lighting, and fabric physics. This is not a simple photo overlay or cut-and-paste. The AI understands three-dimensional body structure and generates clothing placement that looks authentic and convincing.",
+          "Our virtual try-on models have been trained on millions of diverse fashion images spanning hundreds of clothing categories. This extensive training means the system handles everything from fitted t-shirts and tailored blazers to flowing dresses, oversized jackets, and layered outfits. Each model update brings improvements in realism, speed, and the range of supported garment types, making every virtual try-on result more accurate than the last."
+        ]
+      },
+      {
+        "heading": "Why Virtual Try-On Matters for Online Shopping",
+        "paragraphs": [
+          "The rise of e-commerce has made it easier than ever to browse and buy clothes, but it has also created a massive inefficiency: people frequently order items that do not fit or flatter them. Virtual try-on directly addresses this by letting shoppers preview outfits on their own body before committing to a purchase. When you use virtual try-on, you eliminate the biggest source of online shopping anxiety.",
+          "You can see whether a neckline suits you, whether a pattern works with your complexion, or whether a silhouette flatters your figure. This level of insight was previously only available in physical stores. Now, virtual try-on brings it to any device with a browser — making it especially valuable for busy professionals, remote shoppers, and anyone who wants a more efficient way to buy clothes online.",
+          "The benefits extend beyond individual shoppers. Fashion brands that implement virtual try-on see conversion rates increase by 20–30% and return rates drop significantly. Customer satisfaction scores improve because buyers receive exactly what they expected. The environmental impact is also notable — fewer returns mean less shipping, less packaging waste, and a smaller carbon footprint for the fashion supply chain. Virtual try-on is not just a convenience feature; it is becoming an essential component of responsible, efficient online retail."
+        ]
+      },
+      {
+        "heading": "Virtual Try-On for All Body Types and Styles",
+        "paragraphs": [
+          "Inclusivity is central to DressMeAI's virtual try-on technology. The AI has been trained to work accurately across every body type — petite, tall, plus-size, athletic, and everything in between. Regardless of your size or proportions, the system adapts to produce faithful representations of how garments will look on you specifically.",
+          "This is a significant improvement over traditional online shopping, where product photos typically feature a narrow range of body types. With virtual try-on, you see clothes on your own figure, not someone else's. You can confidently evaluate whether a piece will complement your shape without relying on imagination or generic size charts.",
+          "The technology also spans the full spectrum of fashion styles. Try on crisp business wear for the office, relaxed weekend casual, bold streetwear, elegant evening attire, or athletic leisure. Different fabrics, patterns, and colors are all rendered accurately. Whatever your personal aesthetic, virtual try-on gives you the visual information you need to curate a wardrobe that feels authentically yours."
+        ]
+      },
+      {
+        "heading": "Who Uses Virtual Try-On?",
+        "paragraphs": [
+          "Virtual try-on technology serves a wide range of users across the fashion ecosystem. Individual shoppers are the primary audience — whether you are refreshing your wardrobe, shopping for a specific event, or exploring new styles, virtual try-on lets you see outfits on your body before spending money. Compare multiple options side by side, test color combinations, and find the pieces that genuinely work for you, all from home.",
+          "Fashion content creators and social media influencers use virtual try-on to plan outfit content and preview looks before photo sessions. The AI-generated previews save time, reduce wardrobe costs, and help creators share more polished, intentional styling content with their audiences.",
+          "E-commerce retailers integrate virtual try-on into their product pages to boost customer confidence at the point of purchase. Shoppers who can see themselves in an item are more likely to click buy and less likely to initiate a return. For brands, this translates directly into higher revenue and lower operational costs.",
+          "Professional stylists leverage virtual try-on for remote client consultations. Instead of describing an outfit verbally or sending product links, stylists can generate images of their clients wearing recommended pieces — making the styling process visual, concrete, and far more persuasive."
+        ]
+      },
+      {
+        "heading": "Virtual Try-On vs. Traditional Online Shopping",
+        "paragraphs": [
+          "In a standard online clothing store, you view product photos taken on models or mannequins. You estimate whether the item might look similar on your body, select a size from a chart, and place your order hoping for the best. When the package arrives, the garment often looks different from what you imagined — different fit, different proportions, different vibe.",
+          "Virtual try-on replaces this guesswork with certainty. Instead of imagining how an item might appear on your body, you see it. The AI accounts for your height, build, skin tone, and pose, producing an image that reflects how the clothing would actually look when worn by you. This visual proof fundamentally changes the psychology of online shopping — from doubt to confidence.",
+          "The practical benefits are measurable. Shoppers who use virtual try-on report higher satisfaction with their purchases, spend less time deliberating, and return fewer items. On the retailer side, offering this technology reduces customer support inquiries about sizing and fit. It also contributes to sustainability by cutting the volume of shipped-and-returned packages. In every dimension — convenience, accuracy, cost, and environmental impact — virtual try-on outperforms the traditional product-photo-and-size-chart approach to online fashion."
+        ]
+      },
+      {
+        "heading": "Getting the Best Virtual Try-On Results",
+        "paragraphs": [
+          "Image quality is the most important factor for accurate virtual try-on output. Use a clear, well-lit photo with your full body visible from head to toe. Stand against a plain background in a natural pose. Avoid heavy shadows, unusual camera angles, and busy surroundings. The cleaner your input photo, the better the AI can analyze your body shape and generate a realistic result.",
+          "For the clothing image, product photos from online retailers produce the best outcomes. These images feature professional lighting, clean backgrounds, and clear garment details. If you want to use your own clothes, photograph them laid flat on a neutral surface or hanging on a plain hanger. Ensure the entire garment is visible and well-lit so the AI can capture its shape, color, and texture accurately.",
+          "Once you have quality images, take full advantage of the platform. Try multiple outfits, experiment with styles you have never worn, and compare different options. DressMeAI handles clothing from casual basics to formal wear, across all major garment categories. The more you explore, the more useful virtual try-on becomes in helping you define and refine your personal style."
+        ]
+      },
+      {
+        "heading": "The Future of Virtual Try-On",
+        "paragraphs": [
+          "Virtual try-on technology is advancing at a remarkable pace. Near-term developments include real-time try-on through live webcam feeds, where you can see clothing mapped onto your body as you move. Three-dimensional virtual try-on with 360-degree rotation is also emerging, allowing you to view outfits from every angle. Support for accessories — shoes, bags, hats, jewelry, and eyewear — is expanding rapidly as well.",
+          "Looking further ahead, video-based virtual try-on will let you see how garments move, flow, and drape in motion. Multi-item try-on will enable you to combine tops, bottoms, and outerwear in a single session to visualize complete outfits. As AI models grow more sophisticated, the gap between virtual try-on previews and actual photographs will continue to narrow.",
+          "DressMeAI is building toward this future. We update our AI models regularly, expand the range of supported clothing categories, and improve the overall experience based on user feedback. Our mission is clear: make virtual try-on the standard way people shop for clothes online. Smarter, faster, and more personal than anything traditional retail has ever offered — the future of fashion is here, and it starts with trying it on."
+        ]
       }
     ]
   }
