@@ -121,10 +121,12 @@ export default function Home() {
     description: string
   }
 
-  const howItWorks = landingT.raw('howItWorks') as {
-    eyebrow: string
+  const seoGuide = landingT.raw('seoGuide') as {
     title: string
-    steps: TimelineStep[]
+    sections: Array<{
+      heading: string
+      paragraphs: string[]
+    }>
   }
 
   const testimonials = landingT.raw('testimonials.items') as Testimonial[]
@@ -978,30 +980,21 @@ export default function Home() {
           <EzoicAd placementId={102} />
         </div>
 
-        {/* How It Works Section */}
-        <section id="how-it-works" className="py-20 sm:py-28 bg-gray-50">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-lg font-semibold leading-8 tracking-wide text-indigo-600 uppercase">{howItWorks.eyebrow}</h2>
-              <h3 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                {howItWorks.title}
-              </h3>
-            </div>
-            <div className="mx-auto mt-16 sm:mt-20">
-              <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-                {howItWorks.steps.map(step => {
-                  const Icon = iconMap[step.icon]
-                  return (
-                    <div className="text-center" key={step.title}>
-                      <div className="flex justify-center">
-                        <Icon className="h-16 w-16 text-indigo-600" />
-                      </div>
-                      <h4 className="mt-6 text-xl font-semibold text-gray-900">{step.title}</h4>
-                      <p className="mt-4 text-base leading-relaxed text-gray-600">{step.description}</p>
-                    </div>
-                  )
-                })}
-              </div>
+        {/* SEO Guide Section — Virtual Try-On Rich Content */}
+        <section id="virtual-try-on-guide" className="py-20 sm:py-28 bg-gray-50">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center mb-16">
+              {seoGuide.title}
+            </h2>
+            <div className="space-y-12">
+              {seoGuide.sections.map((section, index) => (
+                <div key={index}>
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-4">{section.heading}</h3>
+                  {section.paragraphs.map((paragraph, pIndex) => (
+                    <p key={pIndex} className="text-base leading-relaxed text-gray-600 mb-4">{paragraph}</p>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         </section>
