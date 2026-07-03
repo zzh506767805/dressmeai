@@ -239,6 +239,17 @@ AZURE_STORAGE_CONTAINER=tryon-images
 
 ## Recent Updates
 
+### 2026-07-04 (First-experience overhaul, see docs/activation-plan.md)
+- New users get 1 free credit on sign-up (`events.createUser` in lib/auth.ts, `FREE_SIGNUP_CREDITS=1`)
+- Free users (no paid Payment record) get watermarked results; original stored in `TryOnJob.originalImageUrl`, never served to free users
+- status API reworked: requires auth + jobId (ownership check), applies watermark via sharp, refunds credit on FAILED
+- update-job: ownership check + idempotent credit refund (`creditRefunded` flag); finalized jobs immutable
+- check-credits: auto-sweeps jobs stuck PENDING/PROCESSING >15min, refunds credits
+- Preset garment gallery: 12 AI-generated flat lays in `public/garments/`, manifest in `lib/garments.ts`
+- Saved model photos (max 3/user, `SavedModelImage` table) for one-click reuse; managed in /account
+- Upsell modal after watermarked result ($1 unlock primary CTA → create-payment → success → auto-regenerate unwatermarked)
+- New i18n namespace `landing.tryOnExtras` in all 9 locales; privacy policy model-photo clause added
+
 ### 2026-03-23
 - Added Google OAuth login (NextAuth v4 + PrismaAdapter)
 - Added Azure PostgreSQL database (Prisma v6)
