@@ -269,7 +269,7 @@ AZURE_STORAGE_CONTAINER=tryon-images
 ## Known Issues
 
 - Some pages missing keywords meta tag (about, faq, contact, try-on)
-- Non-English locales have `noindex` to avoid duplicate content issues
+- Non-English locales are indexable (an older note claimed they were `noindex` — not true in code); since 2026-07-04 they are included in the sitemap with hreflang alternates
 - `pages/api/stripe/portal.ts` exists but is unused (Manage Billing removed from UI)
 
 ## Contact

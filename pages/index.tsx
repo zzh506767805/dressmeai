@@ -604,6 +604,19 @@ export default function Home() {
     featureList: features.map(feature => feature.name)
   }
 
+  const faqStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqContent.items.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer
+      }
+    }))
+  }
+
 	  return (
 	    <div className="container mx-auto px-4">
 	      <div className="flex flex-col gap-4 py-4 mb-8 sm:flex-row sm:items-center sm:justify-between">
@@ -720,6 +733,11 @@ export default function Home() {
         id="structured-data"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <Script
+        id="faq-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
       />
 
       {/* Initialize Ezoic Ad Placements */}
