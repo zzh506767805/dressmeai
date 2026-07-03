@@ -85,24 +85,27 @@ async function applyWatermark(buffer: Buffer): Promise<Buffer> {
     .toBuffer();
 }
 
-// Watermark the DashScope result and persist it to our blob storage.
-// Retries once; on total failure falls back to the original image (availability
-// beats watermarking) and logs a searchable alert marker.
-async function watermarkAndStore(originalUrl: string): Promise<{ url: string; watermarked: boolean }> {
+// Persist the DashScope result to our own blob storage (the OSS URL is http-only
+// and expires within ~24h, so history entries would otherwise go dead), applying
+// a watermark for free users. Retries once; on total failure falls back to the
+// original image (availability beats watermarking) and logs a searchable marker.
+async function storeResult(originalUrl: string, watermark: boolean): Promise<{ url: string; watermarked: boolean }> {
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
       const download = await axios.get<ArrayBuffer>(originalUrl, {
         responseType: 'arraybuffer',
         timeout: 30000,
       });
-      const watermarkedBuffer = await applyWatermark(Buffer.from(download.data));
-      const url = await uploadImageBuffer(watermarkedBuffer, 'result-wm');
-      return { url, watermarked: true };
+      const buffer = watermark
+        ? await applyWatermark(Buffer.from(download.data))
+        : Buffer.from(download.data);
+      const url = await uploadImageBuffer(buffer, watermark ? 'result-wm' : 'result');
+      return { url, watermarked: watermark };
     } catch (error: any) {
-      console.error(`[WATERMARK_FAIL] attempt ${attempt}:`, error?.message || error);
+      console.error(`[RESULT_STORE_FAIL] attempt ${attempt}:`, error?.message || error);
     }
   }
-  console.error('[WATERMARK_FALLBACK] serving original image without watermark:', originalUrl);
+  console.error('[RESULT_STORE_FALLBACK] serving original DashScope URL:', originalUrl);
   return { url: originalUrl, watermarked: false };
 }
 
@@ -160,9 +163,7 @@ export default async function handler(
     if (taskStatus === 'SUCCEEDED' && data.output.image_url) {
       const originalUrl: string = data.output.image_url;
       const free = await isFreeUser(session.user.id);
-      const finalResult = free
-        ? await watermarkAndStore(originalUrl)
-        : { url: originalUrl, watermarked: false };
+      const finalResult = await storeResult(originalUrl, free);
 
       await prisma.tryOnJob.update({
         where: { id: job.id },

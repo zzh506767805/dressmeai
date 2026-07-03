@@ -266,6 +266,11 @@ export default function Pricing() {
             </p>
             <button
               onClick={async () => {
+                // Credits are granted to an account — require login before paying
+                if (!session?.user) {
+                  signIn("google");
+                  return;
+                }
                 setSingleLoading(true);
                 try {
                   const res = await fetch("/api/create-payment", {

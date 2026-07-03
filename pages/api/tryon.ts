@@ -1,5 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { prisma } from '@/lib/db';
 
 interface ErrorResponse {
   message: string;
@@ -33,22 +36,35 @@ export default async function handler(
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  try {
-    console.log('Processing try-on request...');
-    const { modelImageUrl, clothingImageUrl } = req.body;
+  const session = await getServerSession(req, res, authOptions);
+  if (!session?.user?.id) {
+    return res.status(401).json({ message: 'Not authenticated' });
+  }
 
-    if (!modelImageUrl || !clothingImageUrl) {
-      return res.status(400).json({ message: 'Both model and clothing image URLs are required' });
+  try {
+    const { jobId, modelImageUrl, clothingImageUrl } = req.body;
+
+    if (!jobId || !modelImageUrl || !clothingImageUrl) {
+      return res.status(400).json({ message: 'jobId, model and clothing image URLs are required' });
     }
 
-    // DashScope 端只需要公网可访问的 URL，这里保持原样（Azure Blob 默认 HTTPS）
-    const sanitizedModelUrl = modelImageUrl.trim();
-    const sanitizedClothingUrl = clothingImageUrl.trim();
-
-    console.log('Calling AI try-on API with URLs:', {
-      model: sanitizedModelUrl,
-      clothing: sanitizedClothingUrl
+    // The job is the proof a credit was deducted (use-credit creates it).
+    // It must belong to the caller and not have started an AI task yet.
+    const job = await prisma.tryOnJob.findFirst({
+      where: {
+        id: jobId,
+        userId: session.user.id,
+        status: { in: ['PENDING', 'PROCESSING'] },
+        taskId: null,
+      },
     });
+    if (!job) {
+      return res.status(403).json({ message: 'No eligible job for this request' });
+    }
+
+    const sanitizedModelUrl = String(modelImageUrl).trim();
+    const sanitizedClothingUrl = String(clothingImageUrl).trim();
+
     const response = await axiosInstance.post(`${API_HOST}${API_PATH}`, {
       model: "aitryon",
       input: {
@@ -66,11 +82,23 @@ export default async function handler(
       throw new Error(errorData.message || 'Failed to start try-on process');
     }
 
-    console.log('Try-on task created:', response.data.output?.task_id);
-    return res.status(200).json({ taskId: response.data.output.task_id });
+    const taskId: string = response.data.output.task_id;
+
+    // Record the task server-side so status polling never depends on the client
+    await prisma.tryOnJob.update({
+      where: { id: job.id },
+      data: {
+        taskId,
+        status: 'PROCESSING',
+        modelImageUrl: sanitizedModelUrl,
+        clothImageUrl: sanitizedClothingUrl,
+      },
+    });
+
+    return res.status(200).json({ taskId });
   } catch (error: any) {
     console.error('Try-on error:', error);
     const errorMessage = error.response?.data?.message || error.message || 'Failed to start try-on process';
     return res.status(500).json({ message: errorMessage });
   }
-} 
+}

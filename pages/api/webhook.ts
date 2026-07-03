@@ -4,16 +4,11 @@ import { buffer } from "micro";
 import { getStripe } from "@/lib/stripe";
 import { prisma } from "@/lib/db";
 import { getPlanById, planIdToSubscriptionStatus, PlanId, PRICING_PLANS } from "@/lib/pricing";
+import { processCheckoutSession } from "@/lib/payments";
 
 export const config = {
   api: { bodyParser: false },
 };
-
-function getExpiryDate(): Date {
-  const now = new Date();
-  now.setMonth(now.getMonth() + 1);
-  return now;
-}
 
 export default async function handler(
   req: NextApiRequest,
@@ -38,77 +33,10 @@ export default async function handler(
     switch (event.type) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
-
-        if (session.mode === "subscription") {
-          // Handle subscription checkout
-          const planId = (session.metadata?.planId ?? "basic") as PlanId;
-          const plan = getPlanById(planId);
-          const userId = session.metadata?.userId;
-          const cadence = session.metadata?.cadence ?? "monthly";
-
-          if (!plan || !userId) {
-            console.warn("Missing plan or userId in subscription checkout metadata");
-            break;
-          }
-
-          const subscriptionId = session.subscription?.toString() ?? null;
-          const newStatus = planIdToSubscriptionStatus(planId);
-
-          let subscriptionExpiry = getExpiryDate();
-          if (subscriptionId) {
-            try {
-              const sub = await stripe.subscriptions.retrieve(subscriptionId);
-              const periodEnd = (sub as any).current_period_end;
-              if (typeof periodEnd === "number" && periodEnd > 0) {
-                subscriptionExpiry = new Date(periodEnd * 1000);
-              }
-            } catch (e) {
-              console.warn("Failed to retrieve subscription:", e);
-            }
-          }
-
-          // Create payment record
-          await prisma.payment.create({
-            data: {
-              userId,
-              stripeSessionId: session.id,
-              stripeCustomerId: session.customer?.toString() ?? null,
-              stripeSubscriptionId: subscriptionId,
-              plan: plan.name,
-              mode: "subscription",
-              status: session.payment_status ?? "paid",
-              amount: plan.monthlyAmount,
-              currency: plan.currency,
-            },
-          });
-
-          // Update user subscription + grant credits
-          await prisma.user.update({
-            where: { id: userId },
-            data: {
-              subscriptionStatus: newStatus as any,
-              subscriptionExpiry,
-              credits: plan.credits === -1 ? 999999 : cadence === "annual" ? plan.credits * 12 : plan.credits,
-            },
-          });
-
-          const grantedCredits = plan.credits === -1 ? 'unlimited' : cadence === "annual" ? plan.credits * 12 : plan.credits;
-          console.log(`User ${userId} subscribed to ${newStatus} with ${grantedCredits} credits (${cadence})`);
-        } else if (session.mode === "payment") {
-          // Handle single try-on payment (guest user)
-          await prisma.payment.create({
-            data: {
-              stripeSessionId: session.id,
-              stripeCustomerId: session.customer?.toString() ?? null,
-              plan: "single",
-              mode: "payment",
-              status: session.payment_status ?? "paid",
-              amount: 100,
-              currency: "usd",
-            },
-          });
-          console.log("Single try-on payment completed:", session.id);
-        }
+        // Shared, idempotent processor (also used by verify-payment polling):
+        // grants credits/plan exactly once no matter which path runs first.
+        const result = await processCheckoutSession(session);
+        console.log(`[webhook] checkout.session.completed: ${result.status}`);
         break;
       }
 

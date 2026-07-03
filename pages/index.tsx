@@ -83,6 +83,7 @@ export default function Home() {
   const [clothingTab, setClothingTab] = useState<'upload' | 'gallery'>('upload')
   const [selectedGarment, setSelectedGarment] = useState<Garment | null>(null)
   const [resultImage, setResultImage] = useState<string | null>(null)
+  const [resultJobId, setResultJobId] = useState<string | null>(null)
   const [resultWatermarked, setResultWatermarked] = useState(false)
   const [showUpsell, setShowUpsell] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -379,19 +380,15 @@ export default function Home() {
 
     if (abortRef.current) return;
 
-    updateJob({ status: 'PROCESSING', modelImageUrl: modelUrl, clothImageUrl: clothingUrl });
-
     setGenerationStep('Initializing virtual try-on...');
+    // tryon verifies the job (credit deducted, owned by us) and records the
+    // taskId + image URLs server-side
     const tryonRes = await fetch('/api/tryon', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ modelImageUrl: modelUrl, clothingImageUrl: clothingUrl }),
+      body: JSON.stringify({ jobId, modelImageUrl: modelUrl, clothingImageUrl: clothingUrl }),
     });
     if (!tryonRes.ok) throw new Error('Failed to start try-on process');
-    const { taskId } = await tryonRes.json();
-
-    // Status polling reads taskId from the job record, so this write must land first
-    await updateJob({ taskId });
 
     let retryCount = 0;
     const maxRetries = 20;
@@ -403,6 +400,7 @@ export default function Home() {
 
       if (statusData.status === 'SUCCEEDED' && statusData.imageUrl) {
         setResultImage(statusData.imageUrl);
+        setResultJobId(jobId);
         setResultWatermarked(!!statusData.watermarked);
         if (statusData.watermarked) setShowUpsell(true);
         analytics.virtualTryOn.generate_success();
@@ -432,6 +430,7 @@ export default function Home() {
     setLoading(true);
     setError(null);
     setResultImage(null);
+    setResultJobId(null);
     setResultWatermarked(false);
     runGeneration(toImageInput(mStored), toImageInput(cStored))
       .then(() => {
@@ -485,6 +484,7 @@ export default function Home() {
     setLoading(true);
     setError(null);
     setResultImage(null);
+    setResultJobId(null);
     setResultWatermarked(false);
 
     try {
@@ -978,17 +978,17 @@ export default function Home() {
                   </p>
                 )}
                 <div className="mt-4 flex items-center justify-center gap-3">
-                  <a
-                    href={resultImage}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => analytics.virtualTryOn.save_result()}
-                    className="px-6 py-2 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors"
-                  >
-                    {tryOnT.downloadResult}
-                  </a>
+                  {resultJobId && (
+                    <a
+                      href={`/api/download-result?jobId=${resultJobId}`}
+                      onClick={() => analytics.virtualTryOn.save_result()}
+                      className="px-6 py-2 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors"
+                    >
+                      {tryOnT.downloadResult}
+                    </a>
+                  )}
                   <button
-                    onClick={() => { setResultImage(null); setResultWatermarked(false); setClothingImage(null); setSelectedGarment(null); setClothingTab('gallery'); }}
+                    onClick={() => { setResultImage(null); setResultJobId(null); setResultWatermarked(false); setClothingImage(null); setSelectedGarment(null); setClothingTab('gallery'); }}
                     className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
                   >
                     {tryOnT.tryAnother}
