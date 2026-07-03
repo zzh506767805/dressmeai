@@ -2,6 +2,31 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { refundJobCredit } from "@/lib/credits";
+
+const STALE_JOB_MINUTES = 15;
+
+// Sweep jobs whose polling client died: anything stuck in PENDING/PROCESSING
+// beyond the cutoff is failed and its credit refunded. Runs here because
+// check-credits is always called right before a new generation starts.
+async function sweepStaleJobs(userId: string) {
+  const cutoff = new Date(Date.now() - STALE_JOB_MINUTES * 60 * 1000);
+  const staleJobs = await prisma.tryOnJob.findMany({
+    where: {
+      userId,
+      status: { in: ["PENDING", "PROCESSING"] },
+      createdAt: { lt: cutoff },
+    },
+    select: { id: true },
+  });
+  for (const job of staleJobs) {
+    await prisma.tryOnJob.update({
+      where: { id: job.id },
+      data: { status: "FAILED", errorMessage: "Generation timed out, credit refunded" },
+    });
+    await refundJobCredit(job.id, userId);
+  }
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,6 +40,8 @@ export default async function handler(
   if (!session?.user?.id) {
     return res.status(401).json({ message: "Not authenticated" });
   }
+
+  await sweepStaleJobs(session.user.id);
 
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },

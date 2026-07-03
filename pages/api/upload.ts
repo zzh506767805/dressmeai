@@ -1,6 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import sharp from 'sharp';
-import { BlobServiceClient } from '@azure/storage-blob';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { prisma } from '@/lib/db';
+import { uploadImageBuffer, deleteBlobByUrl } from '@/lib/blob';
 
 export const config = {
   api: {
@@ -18,19 +21,22 @@ interface SuccessResponse {
   url: string;
 }
 
-const AZURE_STORAGE_ACCOUNT = process.env.AZURE_STORAGE_ACCOUNT;
-const AZURE_STORAGE_KEY = process.env.AZURE_STORAGE_KEY;
-const AZURE_STORAGE_CONTAINER = process.env.AZURE_STORAGE_CONTAINER;
+const MAX_SAVED_MODELS = 3;
 
-if (!AZURE_STORAGE_ACCOUNT || !AZURE_STORAGE_KEY || !AZURE_STORAGE_CONTAINER) {
-  throw new Error('Azure storage environment variables are not configured');
+// Keep the user's most recent model photos for one-click reuse, capped at
+// MAX_SAVED_MODELS (oldest entries and their blobs are evicted).
+async function saveModelImage(userId: string, imageUrl: string) {
+  await prisma.savedModelImage.create({ data: { userId, imageUrl } });
+  const excess = await prisma.savedModelImage.findMany({
+    where: { userId },
+    orderBy: { createdAt: 'desc' },
+    skip: MAX_SAVED_MODELS,
+  });
+  for (const item of excess) {
+    await prisma.savedModelImage.delete({ where: { id: item.id } });
+    await deleteBlobByUrl(item.imageUrl);
+  }
 }
-
-const connectionString = `DefaultEndpointsProtocol=https;AccountName=${AZURE_STORAGE_ACCOUNT};AccountKey=${AZURE_STORAGE_KEY};EndpointSuffix=core.windows.net`;
-const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
-const containerClient = blobServiceClient.getContainerClient(AZURE_STORAGE_CONTAINER);
-
-const ensureContainer = containerClient.createIfNotExists({ access: 'blob' });
 
 export default async function handler(
   req: NextApiRequest,
@@ -41,8 +47,7 @@ export default async function handler(
   }
 
   try {
-    console.log('Processing upload request...');
-    const { image } = req.body;
+    const { image, saveAsModel } = req.body;
 
     if (!image) {
       return res.status(400).json({ message: 'No image provided' });
@@ -52,7 +57,6 @@ export default async function handler(
     const base64Data = image.replace(/^data:image\/\w+;base64,/, '');
     const buffer = Buffer.from(base64Data, 'base64');
 
-    console.log('Compressing image...');
     const compressedBuffer = await sharp(buffer)
       .resize(1024, 1024, {
         fit: 'inside',
@@ -64,19 +68,18 @@ export default async function handler(
       })
       .toBuffer();
 
-    await ensureContainer;
+    const url = await uploadImageBuffer(compressedBuffer, 'tryon');
 
-    const fileName = `tryon-${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`;
-    const blockBlobClient = containerClient.getBlockBlobClient(fileName);
-
-    console.log('Uploading to Azure Blob Storage...', blockBlobClient.url);
-    await blockBlobClient.uploadData(compressedBuffer, {
-      blobHTTPHeaders: {
-        blobContentType: 'image/jpeg'
+    if (saveAsModel) {
+      const session = await getServerSession(req, res, authOptions);
+      if (session?.user?.id) {
+        await saveModelImage(session.user.id, url).catch((err) => {
+          console.error('Failed to save model image:', err);
+        });
       }
-    });
+    }
 
-    return res.status(200).json({ url: blockBlobClient.url });
+    return res.status(200).json({ url });
   } catch (error: any) {
     console.error('Upload error:', error);
     const errorMessage = error?.message || 'Failed to upload image';

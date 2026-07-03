@@ -305,5 +305,43 @@
         ]
       }
     ]
+  },
+  "tryOnExtras": {
+    "savedModelsTitle": "Mes photos de modèle",
+    "uploadTab": "Importer",
+    "galleryTab": "Galerie",
+    "galleryHint": "Choisissez un vêtement et essayez-le instantanément",
+    "freeBadge": "1 essayage gratuit pour les nouveaux utilisateurs",
+    "signInToGenerate": "Connectez-vous pour générer — votre premier essayage est gratuit",
+    "creditsRemaining": "{count} crédits restants",
+    "getMoreCredits": "Obtenir plus de crédits",
+    "tryAnother": "Essayer une autre tenue",
+    "downloadResult": "Télécharger",
+    "watermarkNote": "Cet aperçu gratuit comporte un filigrane.",
+    "refundNote": "Votre crédit a été remboursé.",
+    "upsell": {
+      "title": "Débloquez la HD sans filigrane",
+      "description": "Le résultat vous plaît ? Obtenez l'image en pleine qualité et continuez à essayer de nouvelles tenues.",
+      "featureHd": "Résolution Full HD",
+      "featureNoWatermark": "Sans filigrane",
+      "featureHistory": "Enregistré dans votre historique",
+      "payCta": "Débloquer pour 1 $",
+      "plansCta": "Voir les abonnements",
+      "laterCta": "Plus tard"
+    },
+    "garments": {
+      "dressFloral": "Robe fleurie",
+      "dressBlack": "Robe de soirée noire",
+      "topWhiteBlouse": "Chemisier en soie blanc",
+      "sweaterBeige": "Pull en maille beige",
+      "jacketDenim": "Veste en jean",
+      "coatCamel": "Manteau camel",
+      "shirtWhiteOxford": "Chemise oxford blanche",
+      "blazerNavy": "Blazer marine",
+      "tshirtGrey": "T-shirt gris",
+      "hoodieBlack": "Sweat à capuche noir",
+      "jacketLeather": "Veste en cuir",
+      "shirtLinenBlue": "Chemise en lin bleue"
+    }
   }
 }

@@ -13,10 +13,17 @@ interface TryOnRecord {
   createdAt: string;
 }
 
+interface SavedModel {
+  id: string;
+  imageUrl: string;
+  createdAt: string;
+}
+
 export default function Account() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [history, setHistory] = useState<TryOnRecord[]>([]);
+  const [savedModels, setSavedModels] = useState<SavedModel[]>([]);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -30,8 +37,19 @@ export default function Account() {
         .then((r) => r.json())
         .then((data) => setHistory(data.jobs || []))
         .catch(() => {});
+      fetch("/api/user/model-images")
+        .then((r) => r.json())
+        .then((data) => setSavedModels(data.images || []))
+        .catch(() => {});
     }
   }, [session]);
+
+  const handleDeleteModel = async (id: string) => {
+    const res = await fetch(`/api/user/model-images?id=${id}`, { method: "DELETE" });
+    if (res.ok) {
+      setSavedModels((prev) => prev.filter((m) => m.id !== id));
+    }
+  };
 
   if (status === "loading" || !session) {
     return (
@@ -131,6 +149,46 @@ export default function Account() {
                 </Link>
               </div>
             </div>
+          </div>
+
+          {/* Saved Model Photos Section */}
+          <div className="bg-white rounded-2xl shadow-sm ring-1 ring-gray-100 p-6 mb-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-1">
+              My Model Photos
+            </h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Your most recent model photos are saved for one-click reuse on the
+              try-on page. You can delete them anytime.
+            </p>
+            {savedModels.length === 0 ? (
+              <p className="text-gray-500 text-center py-6 text-sm">
+                No saved model photos yet.
+              </p>
+            ) : (
+              <div className="flex gap-4">
+                {savedModels.map((m) => (
+                  <div
+                    key={m.id}
+                    className="relative w-24 aspect-[3/4] rounded-lg overflow-hidden bg-gray-100 ring-1 ring-gray-200"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={m.imageUrl}
+                      alt="Saved model photo"
+                      className="w-full h-full object-cover"
+                    />
+                    <button
+                      onClick={() => handleDeleteModel(m.id)}
+                      className="absolute top-1 right-1 bg-black/50 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm transition-colors"
+                      title="Delete"
+                      aria-label="Delete saved model photo"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* History Section */}

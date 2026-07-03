@@ -18,7 +18,8 @@
           "Photos you upload for virtual try-on (model photos and clothing images)",
           "Usage data and analytics to improve our service",
           "Device information and browser type",
-          "IP address and general location data"
+          "IP address and general location data",
+          "Model photos you upload for virtual try-on — your 3 most recent are stored so you can reuse them; you can delete them anytime from your account page"
         ]
       },
       "dataUsage": {

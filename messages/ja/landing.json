@@ -305,5 +305,43 @@
         ]
       }
     ]
+  },
+  "tryOnExtras": {
+    "savedModelsTitle": "マイモデル写真",
+    "uploadTab": "アップロード",
+    "galleryTab": "ギャラリー",
+    "galleryHint": "服を選んですぐに試着できます",
+    "freeBadge": "新規登録で1回無料試着",
+    "signInToGenerate": "ログインして生成 — 初回の試着は無料です",
+    "creditsRemaining": "残り{count}クレジット",
+    "getMoreCredits": "クレジットを追加",
+    "tryAnother": "別の服を試す",
+    "downloadResult": "ダウンロード",
+    "watermarkNote": "無料プレビューにはウォーターマークが入ります。",
+    "refundNote": "使用したクレジットは返却されました。",
+    "upsell": {
+      "title": "ウォーターマークなしのHD画質を解除",
+      "description": "気に入りましたか？高画質画像を入手して、新しい服を試着し続けましょう。",
+      "featureHd": "フルHD解像度",
+      "featureNoWatermark": "ウォーターマークなし",
+      "featureHistory": "履歴に保存",
+      "payCta": "$1で解除",
+      "plansCta": "サブスクプランを見る",
+      "laterCta": "また今度"
+    },
+    "garments": {
+      "dressFloral": "花柄ワンピース",
+      "dressBlack": "黒のイブニングドレス",
+      "topWhiteBlouse": "白いシルクブラウス",
+      "sweaterBeige": "ベージュニットセーター",
+      "jacketDenim": "デニムジャケット",
+      "coatCamel": "キャメルウールコート",
+      "shirtWhiteOxford": "白いオックスフォードシャツ",
+      "blazerNavy": "ネイビーブレザー",
+      "tshirtGrey": "グレーTシャツ",
+      "hoodieBlack": "黒パーカー",
+      "jacketLeather": "レザージャケット",
+      "shirtLinenBlue": "ブルーリネンシャツ"
+    }
   }
 }

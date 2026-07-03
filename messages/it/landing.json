@@ -305,5 +305,43 @@
         ]
       }
     ]
+  },
+  "tryOnExtras": {
+    "savedModelsTitle": "Le mie foto modello",
+    "uploadTab": "Carica",
+    "galleryTab": "Galleria",
+    "galleryHint": "Scegli un capo e provalo all'istante",
+    "freeBadge": "1 prova gratuita per i nuovi utenti",
+    "signInToGenerate": "Accedi per generare — la tua prima prova è gratuita",
+    "creditsRemaining": "{count} crediti rimanenti",
+    "getMoreCredits": "Ottieni più crediti",
+    "tryAnother": "Prova un altro outfit",
+    "downloadResult": "Scarica",
+    "watermarkNote": "Questa anteprima gratuita include una filigrana.",
+    "refundNote": "Il tuo credito è stato rimborsato.",
+    "upsell": {
+      "title": "Sblocca HD senza filigrana",
+      "description": "Ti piace il risultato? Ottieni l'immagine in alta qualità e continua a provare nuovi capi.",
+      "featureHd": "Risoluzione Full HD",
+      "featureNoWatermark": "Senza filigrana",
+      "featureHistory": "Salvato nella cronologia",
+      "payCta": "Sblocca per 1 $",
+      "plansCta": "Vedi i piani di abbonamento",
+      "laterCta": "Forse più tardi"
+    },
+    "garments": {
+      "dressFloral": "Abito floreale",
+      "dressBlack": "Abito da sera nero",
+      "topWhiteBlouse": "Camicetta di seta bianca",
+      "sweaterBeige": "Maglione beige",
+      "jacketDenim": "Giacca di jeans",
+      "coatCamel": "Cappotto cammello",
+      "shirtWhiteOxford": "Camicia oxford bianca",
+      "blazerNavy": "Blazer blu navy",
+      "tshirtGrey": "T-shirt grigia",
+      "hoodieBlack": "Felpa nera",
+      "jacketLeather": "Giacca di pelle",
+      "shirtLinenBlue": "Camicia di lino blu"
+    }
   }
 }

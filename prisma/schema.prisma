@@ -39,10 +39,11 @@ model User {
   createdAt          DateTime           @default(now())
   updatedAt          DateTime           @updatedAt
 
-  accounts   Account[]
-  sessions   Session[]
-  payments   Payment[]
-  tryOnJobs  TryOnJob[]
+  accounts    Account[]
+  sessions    Session[]
+  payments    Payment[]
+  tryOnJobs   TryOnJob[]
+  modelImages SavedModelImage[]
 }
 
 model Account {
@@ -114,20 +115,33 @@ model Payment {
 }
 
 model TryOnJob {
-  id              String         @id @default(cuid())
-  userId          String?
-  stripeSessionId String?
-  taskId          String?        @unique
-  modelImageUrl   String?
-  clothImageUrl   String?
-  resultImageUrl  String?
-  status          TryOnJobStatus @default(PENDING)
-  errorMessage    String?
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
+  id               String         @id @default(cuid())
+  userId           String?
+  stripeSessionId  String?
+  taskId           String?        @unique
+  modelImageUrl    String?
+  clothImageUrl    String?
+  resultImageUrl   String?
+  originalImageUrl String?
+  status           TryOnJobStatus @default(PENDING)
+  errorMessage     String?
+  creditRefunded   Boolean        @default(false)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 
   user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   @@index([userId])
   @@index([taskId])
+}
+
+model SavedModelImage {
+  id        String   @id @default(cuid())
+  userId    String
+  imageUrl  String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }

@@ -22,9 +22,16 @@ import { useLocale, useTranslations } from 'next-intl'
 import LanguageSwitcher from '../components/shared/LanguageSwitcher'
 import UserMenu from '../components/UserMenu'
 import { useSession, signIn } from 'next-auth/react'
-import { analytics, trackConversion, setUserProperties } from '../utils/analytics'
+import { analytics, trackConversion, trackEvent, setUserProperties } from '../utils/analytics'
 import { safeSetItem, safeGetItem, safeRemoveItem } from '../utils/localStorage'
 import { defaultLocale, locales as supportedLocales, type Locale } from '../i18n/config'
+import { GARMENTS, garmentAbsoluteUrl, type Garment } from '../lib/garments'
+
+// Generation input: a freshly uploaded image (base64) or an already-hosted one (URL)
+type ImageInput = { b64?: string; url?: string }
+
+const toImageInput = (value: string): ImageInput =>
+  value.startsWith('http') ? { url: value } : { b64: value }
 
 type IconKey = 'camera' | 'sparkles' | 'lightBulb' | 'swatch'
 type UseCaseIconKey = 'shoppingBag' | 'pencilSquare' | 'storefront' | 'userGroup'
@@ -71,7 +78,13 @@ const useCaseIconMap: Record<UseCaseIconKey, typeof CameraIcon> = {
 export default function Home() {
   const [modelImage, setModelImage] = useState<File | null>(null)
   const [clothingImage, setClothingImage] = useState<File | null>(null)
+  const [selectedModelUrl, setSelectedModelUrl] = useState<string | null>(null)
+  const [savedModels, setSavedModels] = useState<{ id: string; imageUrl: string }[]>([])
+  const [clothingTab, setClothingTab] = useState<'upload' | 'gallery'>('upload')
+  const [selectedGarment, setSelectedGarment] = useState<Garment | null>(null)
   const [resultImage, setResultImage] = useState<string | null>(null)
+  const [resultWatermarked, setResultWatermarked] = useState(false)
+  const [showUpsell, setShowUpsell] = useState(false)
   const [loading, setLoading] = useState(false)
   const [generationStep, setGenerationStep] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
@@ -99,6 +112,32 @@ export default function Home() {
     generateButton: string
     generating: string
     resultTitle: string
+  }
+
+  const tryOnT = landingT.raw('tryOnExtras') as {
+    savedModelsTitle: string
+    uploadTab: string
+    galleryTab: string
+    galleryHint: string
+    freeBadge: string
+    signInToGenerate: string
+    creditsRemaining: string
+    getMoreCredits: string
+    tryAnother: string
+    downloadResult: string
+    watermarkNote: string
+    refundNote: string
+    upsell: {
+      title: string
+      description: string
+      featureHd: string
+      featureNoWatermark: string
+      featureHistory: string
+      payCta: string
+      plansCta: string
+      laterCta: string
+    }
+    garments: Record<string, string>
   }
 
   const seoContent = landingT.raw('seo') as {
@@ -276,49 +315,67 @@ export default function Home() {
     })
   }, [])
 
-  // Core generation flow: upload base64 images, call AI, poll result
-  const runGenerationFromBase64 = useCallback(async (modelB64: string, clothingB64: string, skipCredit?: boolean) => {
+  // Load the user's saved model photos for one-click reuse
+  const loadSavedModels = useCallback(async () => {
+    if (!session?.user) {
+      setSavedModels([])
+      return
+    }
+    try {
+      const res = await fetch('/api/user/model-images')
+      if (res.ok) {
+        const data = await res.json()
+        setSavedModels(data.images || [])
+      }
+    } catch {}
+  }, [session?.user])
+
+  useEffect(() => {
+    loadSavedModels()
+  }, [loadSavedModels])
+
+  // Core generation flow: resolve image URLs (uploading if needed), call AI, poll result
+  const runGeneration = useCallback(async (model: ImageInput, clothing: ImageInput) => {
     abortRef.current = false;
     let jobId: string | null = null;
 
-    const updateJob = (data: Record<string, string>) => {
-      if (jobId) fetch('/api/update-job', {
+    const updateJob = (data: Record<string, string>) =>
+      jobId
+        ? fetch('/api/update-job', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ jobId, ...data }),
+          }).catch(() => {})
+        : Promise.resolve();
+
+    const resolveImageUrl = async (input: ImageInput, saveAsModel = false): Promise<string> => {
+      if (input.url) return input.url;
+      const upRes = await fetch('/api/upload', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ jobId, ...data }),
-      }).catch(() => {});
+        body: JSON.stringify({ image: input.b64, ...(saveAsModel ? { saveAsModel: true } : {}) }),
+      });
+      if (!upRes.ok) throw new Error('Failed to upload image');
+      const { url } = await upRes.json();
+      return url;
     };
 
-    if (!skipCredit) {
-      setGenerationStep('Checking credits...');
-      const creditRes = await fetch('/api/use-credit', { method: 'POST' });
-      if (!creditRes.ok) {
-        const data = await creditRes.json();
-        throw new Error(data.message || 'Failed to use credit');
-      }
-      const creditData = await creditRes.json();
-      jobId = creditData.jobId;
+    setGenerationStep('Checking credits...');
+    const creditRes = await fetch('/api/use-credit', { method: 'POST' });
+    if (!creditRes.ok) {
+      const data = await creditRes.json();
+      throw new Error(data.message || 'Failed to use credit');
     }
+    const creditData = await creditRes.json();
+    jobId = creditData.jobId;
 
     setGenerationStep('Uploading model image...');
-    const modelUpRes = await fetch('/api/upload', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ image: modelB64 }),
-    });
-    if (!modelUpRes.ok) throw new Error('Failed to upload model image');
-    const { url: modelUrl } = await modelUpRes.json();
+    const modelUrl = await resolveImageUrl(model, true);
 
     if (abortRef.current) return;
 
     setGenerationStep('Uploading clothing image...');
-    const clothUpRes = await fetch('/api/upload', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ image: clothingB64 }),
-    });
-    if (!clothUpRes.ok) throw new Error('Failed to upload clothing image');
-    const { url: clothingUrl } = await clothUpRes.json();
+    const clothingUrl = await resolveImageUrl(clothing);
 
     if (abortRef.current) return;
 
@@ -333,23 +390,25 @@ export default function Home() {
     if (!tryonRes.ok) throw new Error('Failed to start try-on process');
     const { taskId } = await tryonRes.json();
 
-    updateJob({ taskId });
+    // Status polling reads taskId from the job record, so this write must land first
+    await updateJob({ taskId });
 
     let retryCount = 0;
     const maxRetries = 20;
     while (retryCount < maxRetries && !abortRef.current) {
       setGenerationStep('Generating try-on result...');
       await new Promise(r => setTimeout(r, 5000));
-      const statusRes = await fetch(`/api/status?taskId=${taskId}`);
+      const statusRes = await fetch(`/api/status?jobId=${jobId}`);
       const statusData = await statusRes.json();
 
       if (statusData.status === 'SUCCEEDED' && statusData.imageUrl) {
         setResultImage(statusData.imageUrl);
-        updateJob({ status: 'COMPLETED', resultImageUrl: statusData.imageUrl });
+        setResultWatermarked(!!statusData.watermarked);
+        if (statusData.watermarked) setShowUpsell(true);
         analytics.virtualTryOn.generate_success();
+        loadSavedModels();
         return;
       } else if (statusData.status === 'FAILED') {
-        updateJob({ status: 'FAILED', errorMessage: 'AI generation failed' });
         throw new Error('Try-on generation failed');
       }
       retryCount++;
@@ -358,7 +417,7 @@ export default function Home() {
       updateJob({ status: 'FAILED', errorMessage: 'Generation timed out' });
       throw new Error('Generation timed out');
     }
-  }, []);
+  }, [loadSavedModels]);
 
   // Auto-generate after single payment redirect
   useEffect(() => {
@@ -366,14 +425,15 @@ export default function Home() {
     if (!pending) return;
     localStorage.removeItem('pendingGeneration');
 
-    const mB64 = safeGetItem('modelImage');
-    const cB64 = safeGetItem('clothingImage');
-    if (!mB64 || !cB64) return;
+    const mStored = safeGetItem('modelImage');
+    const cStored = safeGetItem('clothingImage');
+    if (!mStored || !cStored) return;
 
     setLoading(true);
     setError(null);
     setResultImage(null);
-    runGenerationFromBase64(mB64, cB64)
+    setResultWatermarked(false);
+    runGeneration(toImageInput(mStored), toImageInput(cStored))
       .then(() => {
         safeRemoveItem('modelImage');
         safeRemoveItem('clothingImage');
@@ -386,10 +446,25 @@ export default function Home() {
         setLoading(false);
         setGenerationStep('');
       });
-  }, [runGenerationFromBase64]);
+  }, [runGeneration]);
+
+  // Current inputs as storable strings (base64 for uploads, URL for presets/saved)
+  const getInputStrings = useCallback(async (): Promise<{ model: string; clothing: string } | null> => {
+    const model = modelImage
+      ? await fileToBase64(modelImage)
+      : selectedModelUrl;
+    const clothing = clothingImage
+      ? await fileToBase64(clothingImage)
+      : selectedGarment
+      ? garmentAbsoluteUrl(selectedGarment)
+      : null;
+    if (!model || !clothing) return null;
+    return { model, clothing };
+  }, [modelImage, clothingImage, selectedModelUrl, selectedGarment]);
 
   const handleGenerate = useCallback(async () => {
-    if (!modelImage || !clothingImage) {
+    const inputs = await getInputStrings();
+    if (!inputs) {
       setError(commonT('errors.missingImages'));
       analytics.performance.error_occurred('missing_images', 'virtual_tryon')
       return;
@@ -398,10 +473,8 @@ export default function Home() {
     // Must be logged in
     if (!session?.user) {
       // Save images before redirect so they persist after login
-      const modelBase64 = await fileToBase64(modelImage);
-      const clothingBase64 = await fileToBase64(clothingImage);
-      safeSetItem('modelImage', modelBase64);
-      safeSetItem('clothingImage', clothingBase64);
+      safeSetItem('modelImage', inputs.model);
+      safeSetItem('clothingImage', inputs.clothing);
       safeSetItem('imageUploadTimestamp', Date.now().toString());
       signIn('google');
       return;
@@ -412,27 +485,24 @@ export default function Home() {
     setLoading(true);
     setError(null);
     setResultImage(null);
+    setResultWatermarked(false);
 
     try {
-      // Convert images to base64 once
-      const mB64 = await fileToBase64(modelImage);
-      const cB64 = await fileToBase64(clothingImage);
-
       // Check credits
       const creditCheck = await fetch('/api/check-credits');
       const creditData = await creditCheck.json();
 
       if (creditData.hasCredits) {
         // Has credits: generate directly (no localStorage needed)
-        await runGenerationFromBase64(mB64, cB64);
+        await runGeneration(toImageInput(inputs.model), toImageInput(inputs.clothing));
         // Clean up any stale localStorage images
         safeRemoveItem('modelImage');
         safeRemoveItem('clothingImage');
         safeRemoveItem('imageUploadTimestamp');
       } else {
         // No credits: save images to localStorage for after payment, then go to pricing
-        safeSetItem('modelImage', mB64);
-        safeSetItem('clothingImage', cB64);
+        safeSetItem('modelImage', inputs.model);
+        safeSetItem('clothingImage', inputs.clothing);
         safeSetItem('imageUploadTimestamp', Date.now().toString());
         router.push('/pricing');
       }
@@ -445,12 +515,49 @@ export default function Home() {
       setLoading(false);
       setGenerationStep('');
     }
-  }, [commonT, modelImage, clothingImage, session, router, runGenerationFromBase64]);
+  }, [commonT, getInputStrings, session, router, runGeneration]);
+
+  // Unlock HD: persist current inputs, then send the user through the $1 checkout.
+  // After payment, /success re-runs the generation without watermark (user is no longer free).
+  const handleUpsellPay = useCallback(async () => {
+    analytics.user.upgrade('single_unlock');
+    try {
+      const inputs = await getInputStrings();
+      if (inputs) {
+        safeSetItem('modelImage', inputs.model);
+        safeSetItem('clothingImage', inputs.clothing);
+        safeSetItem('imageUploadTimestamp', Date.now().toString());
+      }
+      const res = await fetch('/api/create-payment', { method: 'POST' });
+      const data = await res.json();
+      if (!data.url) throw new Error('No checkout URL');
+      window.location.href = data.url;
+    } catch (err) {
+      console.error('Checkout error:', err);
+      setError('Failed to start checkout, please try again');
+      setShowUpsell(false);
+    }
+  }, [getInputStrings]);
+
+  const handleSelectSavedModel = (url: string) => {
+    setSelectedModelUrl(url);
+    setModelImage(null);
+    trackEvent('saved_model_select', 'virtual_tryon');
+    if (error) setError(null);
+  };
+
+  const handleSelectGarment = (garment: Garment) => {
+    setSelectedGarment(garment);
+    setClothingImage(null);
+    trackEvent('garment_gallery_select', 'virtual_tryon', garment.id);
+    if (error) setError(null);
+  };
 
   // 处理图片上传的分析跟踪
   const handleModelImageUpload = (file: File | null) => {
     setModelImage(file)
     if (file) {
+      setSelectedModelUrl(null)
       analytics.virtualTryOn.upload_person()
     }
     // 清除错误信息当用户重新上传时
@@ -462,6 +569,7 @@ export default function Home() {
   const handleClothingImageUpload = (file: File | null) => {
     setClothingImage(file)
     if (file) {
+      setSelectedGarment(null)
       analytics.virtualTryOn.upload_clothes()
     }
     // 清除错误信息当用户重新上传时
@@ -632,35 +740,153 @@ export default function Home() {
               <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
                 {heroContent.description}
               </p>
+              {!session && (
+                <div className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-indigo-600/10 to-purple-600/10 ring-1 ring-indigo-200 px-4 py-1.5 text-sm font-semibold text-indigo-700">
+                  <SparklesIcon className="w-4 h-4" />
+                  {tryOnT.freeBadge}
+                </div>
+              )}
             </div>
 
             {/* Try-On Interface */}
             <div className="grid lg:grid-cols-3 gap-6 items-start">
               {/* Upload Model */}
               <div className="bg-white rounded-2xl p-6 shadow-lg">
-                <h4 className="text-lg font-semibold mb-4 text-center">{demoContent.model.title}</h4>
-                <ImageUpload
-                  label={demoContent.model.label}
-                  onImageSelect={handleModelImageUpload}
-                  maxSize={5}
-                  acceptedTypes={['image/jpeg', 'image/png', 'image/webp']}
-                />
+                <h4 className="text-lg font-semibold mb-4 flex items-center justify-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">1</span>
+                  {demoContent.model.title}
+                </h4>
+                {selectedModelUrl ? (
+                  <div className="relative w-full h-64 rounded-lg overflow-hidden bg-gray-50 border-2 border-green-300">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={selectedModelUrl}
+                      alt={demoContent.model.title}
+                      className="w-full h-full object-contain"
+                    />
+                    <button
+                      onClick={() => setSelectedModelUrl(null)}
+                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600 transition-colors"
+                      aria-label="Clear"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ) : (
+                  <ImageUpload
+                    label={demoContent.model.label}
+                    onImageSelect={handleModelImageUpload}
+                    maxSize={5}
+                    acceptedTypes={['image/jpeg', 'image/png', 'image/webp']}
+                  />
+                )}
+                {savedModels.length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-sm font-medium text-gray-600 mb-2">{tryOnT.savedModelsTitle}</p>
+                    <div className="flex gap-2">
+                      {savedModels.map(m => (
+                        <button
+                          key={m.id}
+                          onClick={() => handleSelectSavedModel(m.imageUrl)}
+                          className={`relative w-16 h-20 rounded-lg overflow-hidden transition-all ${
+                            selectedModelUrl === m.imageUrl
+                              ? 'ring-2 ring-indigo-600 ring-offset-2'
+                              : 'ring-1 ring-gray-200 hover:ring-indigo-400'
+                          }`}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={m.imageUrl} alt="" className="w-full h-full object-cover" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Upload Clothing */}
               <div className="bg-white rounded-2xl p-6 shadow-lg">
-                <h4 className="text-lg font-semibold mb-4 text-center">{demoContent.clothing.title}</h4>
-                <ImageUpload
-                  label={demoContent.clothing.label}
-                  onImageSelect={handleClothingImageUpload}
-                  maxSize={5}
-                  acceptedTypes={['image/jpeg', 'image/png', 'image/webp']}
-                />
+                <h4 className="text-lg font-semibold mb-4 flex items-center justify-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">2</span>
+                  {demoContent.clothing.title}
+                </h4>
+                <div className="flex rounded-lg bg-gray-100 p-1 mb-4">
+                  <button
+                    onClick={() => setClothingTab('upload')}
+                    className={`flex-1 rounded-md py-1.5 text-sm font-medium transition-colors ${
+                      clothingTab === 'upload' ? 'bg-white text-indigo-700 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    {tryOnT.uploadTab}
+                  </button>
+                  <button
+                    onClick={() => setClothingTab('gallery')}
+                    className={`flex-1 rounded-md py-1.5 text-sm font-medium transition-colors ${
+                      clothingTab === 'gallery' ? 'bg-white text-indigo-700 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    {tryOnT.galleryTab}
+                  </button>
+                </div>
+                {clothingTab === 'upload' ? (
+                  <div>
+                    {selectedGarment && (
+                      <div className="mb-3 flex items-center gap-2 rounded-lg bg-indigo-50 px-3 py-2 text-sm text-indigo-700">
+                        <span className="font-medium">{tryOnT.garments[selectedGarment.nameKey]}</span>
+                        <button
+                          onClick={() => setSelectedGarment(null)}
+                          className="ml-auto text-indigo-400 hover:text-indigo-600"
+                          aria-label="Clear"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    )}
+                    <ImageUpload
+                      key={selectedGarment ? `garment-${selectedGarment.id}` : 'upload'}
+                      label={demoContent.clothing.label}
+                      onImageSelect={handleClothingImageUpload}
+                      maxSize={5}
+                      acceptedTypes={['image/jpeg', 'image/png', 'image/webp']}
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <p className="text-xs text-gray-500 mb-2">{tryOnT.galleryHint}</p>
+                    <div className="grid grid-cols-3 gap-2 max-h-72 overflow-y-auto pr-1">
+                      {GARMENTS.map(garment => (
+                        <button
+                          key={garment.id}
+                          onClick={() => handleSelectGarment(garment)}
+                          className={`group relative aspect-[3/4] rounded-lg overflow-hidden bg-gray-50 transition-all ${
+                            selectedGarment?.id === garment.id
+                              ? 'ring-2 ring-indigo-600 ring-offset-1'
+                              : 'ring-1 ring-gray-200 hover:ring-indigo-400'
+                          }`}
+                          title={tryOnT.garments[garment.nameKey]}
+                        >
+                          <Image
+                            src={garment.image}
+                            alt={tryOnT.garments[garment.nameKey]}
+                            fill
+                            sizes="120px"
+                            className="object-cover"
+                          />
+                          {selectedGarment?.id === garment.id && (
+                            <span className="absolute top-1 right-1 flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600 text-xs text-white">✓</span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Result / Showcase */}
               <div className="bg-white rounded-2xl p-6 shadow-lg">
-                <h4 className="text-lg font-semibold mb-4 text-center">{demoContent.resultTitle}</h4>
+                <h4 className="text-lg font-semibold mb-4 flex items-center justify-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">3</span>
+                  {demoContent.resultTitle}
+                </h4>
                 {resultImage ? (
                   <div className="relative aspect-[3/4] rounded-xl overflow-hidden">
                     <Image
@@ -691,22 +917,22 @@ export default function Home() {
             <div className="mt-8 text-center">
               <button
                 onClick={handleGenerate}
-                disabled={loading || !modelImage || !clothingImage}
+                disabled={loading || (!modelImage && !selectedModelUrl) || (!clothingImage && !selectedGarment)}
                 className={`px-10 py-4 rounded-xl text-lg font-semibold text-white shadow-lg transition-all duration-200
-                  ${loading || !modelImage || !clothingImage
+                  ${loading || (!modelImage && !selectedModelUrl) || (!clothingImage && !selectedGarment)
                     ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-indigo-600 hover:bg-indigo-500 hover:shadow-xl'
+                    : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 hover:shadow-xl hover:-translate-y-0.5'
                   }`}
               >
                 {loading ? demoContent.generating : demoContent.generateButton}
               </button>
-              {!loading && modelImage && clothingImage && (
+              {!loading && (modelImage || selectedModelUrl) && (clothingImage || selectedGarment) && (
                 <p className="mt-2 text-sm text-gray-500">
                   {!session
-                    ? 'Sign in to generate'
+                    ? tryOnT.signInToGenerate
                     : session.user.credits > 0
-                    ? `${session.user.credits} credits remaining`
-                    : <Link href="/pricing" className="text-indigo-600 hover:underline">Get more credits</Link>
+                    ? tryOnT.creditsRemaining.replace('{count}', String(session.user.credits))
+                    : <Link href="/pricing" className="text-indigo-600 hover:underline">{tryOnT.getMoreCredits}</Link>
                   }
                 </p>
               )}
@@ -721,7 +947,12 @@ export default function Home() {
                 </div>
               )}
               {error && (
-                <p className="mt-4 text-red-500">{error}</p>
+                <div className="mt-4">
+                  <p className="text-red-500">{error}</p>
+                  {session && (error.includes('failed') || error.includes('timed out')) && (
+                    <p className="mt-1 text-sm text-gray-500">{tryOnT.refundNote}</p>
+                  )}
+                </div>
               )}
             </div>
 
@@ -738,12 +969,81 @@ export default function Home() {
                     unoptimized
                   />
                 </div>
-                <button
-                  onClick={() => { setResultImage(null); setModelImage(null); setClothingImage(null); }}
-                  className="mt-4 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                {resultWatermarked && (
+                  <p className="mt-3 text-sm text-gray-500">
+                    {tryOnT.watermarkNote}{' '}
+                    <button onClick={() => setShowUpsell(true)} className="text-indigo-600 font-medium hover:underline">
+                      {tryOnT.upsell.payCta}
+                    </button>
+                  </p>
+                )}
+                <div className="mt-4 flex items-center justify-center gap-3">
+                  <a
+                    href={resultImage}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => analytics.virtualTryOn.save_result()}
+                    className="px-6 py-2 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors"
+                  >
+                    {tryOnT.downloadResult}
+                  </a>
+                  <button
+                    onClick={() => { setResultImage(null); setResultWatermarked(false); setClothingImage(null); setSelectedGarment(null); setClothingTab('gallery'); }}
+                    className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                  >
+                    {tryOnT.tryAnother}
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Upsell modal after a watermarked (free) generation */}
+            {showUpsell && resultImage && (
+              <div
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+                onClick={() => setShowUpsell(false)}
+              >
+                <div
+                  className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl"
+                  onClick={e => e.stopPropagation()}
                 >
-                  Try Another
-                </button>
+                  <div className="text-center">
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-purple-600">
+                      <SparklesIcon className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="mt-4 text-xl font-bold text-gray-900">{tryOnT.upsell.title}</h3>
+                    <p className="mt-2 text-sm text-gray-600">{tryOnT.upsell.description}</p>
+                  </div>
+                  <ul className="mt-4 space-y-2 text-sm text-gray-700">
+                    {[tryOnT.upsell.featureHd, tryOnT.upsell.featureNoWatermark, tryOnT.upsell.featureHistory].map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-green-100 text-green-600 text-xs">✓</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-6 space-y-2">
+                    <button
+                      onClick={handleUpsellPay}
+                      className="w-full rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3 text-white font-semibold hover:from-indigo-500 hover:to-purple-500 transition-all"
+                    >
+                      {tryOnT.upsell.payCta}
+                    </button>
+                    <Link
+                      href="/pricing"
+                      onClick={() => analytics.user.upgrade('upsell_plans')}
+                      className="block w-full rounded-xl border border-gray-300 px-4 py-3 text-center text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+                    >
+                      {tryOnT.upsell.plansCta}
+                    </Link>
+                    <button
+                      onClick={() => setShowUpsell(false)}
+                      className="w-full py-1 text-sm text-gray-400 hover:text-gray-600 transition-colors"
+                    >
+                      {tryOnT.upsell.laterCta}
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
           </div>

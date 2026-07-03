@@ -3,6 +3,7 @@ import { NextAuthOptions, getServerSession } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "@/lib/db";
+import { FREE_SIGNUP_CREDITS } from "@/lib/pricing";
 
 function getEnv(name: string) {
   const value = process.env[name];
@@ -20,6 +21,14 @@ export const authOptions: NextAuthOptions = {
   ],
   session: {
     strategy: "database",
+  },
+  events: {
+    async createUser({ user }) {
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { credits: FREE_SIGNUP_CREDITS },
+      });
+    },
   },
   callbacks: {
     async session({ session, user }) {

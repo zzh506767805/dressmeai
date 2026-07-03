@@ -305,5 +305,43 @@
         ]
       }
     ]
+  },
+  "tryOnExtras": {
+    "savedModelsTitle": "Mis fotos de modelo",
+    "uploadTab": "Subir",
+    "galleryTab": "Galería",
+    "galleryHint": "Elige una prenda y pruébatela al instante",
+    "freeBadge": "Los nuevos usuarios tienen 1 prueba gratis",
+    "signInToGenerate": "Inicia sesión para generar — tu primera prueba es gratis",
+    "creditsRemaining": "{count} créditos restantes",
+    "getMoreCredits": "Obtener más créditos",
+    "tryAnother": "Probar otro conjunto",
+    "downloadResult": "Descargar",
+    "watermarkNote": "Esta vista previa gratuita incluye una marca de agua.",
+    "refundNote": "Tu crédito ha sido reembolsado.",
+    "upsell": {
+      "title": "Desbloquea HD sin marca de agua",
+      "description": "¿Te gusta el resultado? Obtén la imagen en máxima calidad y sigue probándote ropa nueva.",
+      "featureHd": "Resolución Full HD",
+      "featureNoWatermark": "Sin marca de agua",
+      "featureHistory": "Guardado en tu historial",
+      "payCta": "Desbloquear por $1",
+      "plansCta": "Ver planes de suscripción",
+      "laterCta": "Quizás más tarde"
+    },
+    "garments": {
+      "dressFloral": "Vestido floral",
+      "dressBlack": "Vestido de noche negro",
+      "topWhiteBlouse": "Blusa de seda blanca",
+      "sweaterBeige": "Suéter de punto beige",
+      "jacketDenim": "Chaqueta vaquera",
+      "coatCamel": "Abrigo camel",
+      "shirtWhiteOxford": "Camisa oxford blanca",
+      "blazerNavy": "Blazer azul marino",
+      "tshirtGrey": "Camiseta gris",
+      "hoodieBlack": "Sudadera negra",
+      "jacketLeather": "Chaqueta de cuero",
+      "shirtLinenBlue": "Camisa de lino azul"
+    }
   }
 }

@@ -305,5 +305,43 @@
         ]
       }
     ]
+  },
+  "tryOnExtras": {
+    "savedModelsTitle": "我的形象照",
+    "uploadTab": "上传",
+    "galleryTab": "服装库",
+    "galleryHint": "选择一件衣服，立即试穿",
+    "freeBadge": "新用户免费试穿 1 次",
+    "signInToGenerate": "登录即可生成——首次试穿免费",
+    "creditsRemaining": "剩余 {count} 次",
+    "getMoreCredits": "获取更多次数",
+    "tryAnother": "换一件试试",
+    "downloadResult": "下载",
+    "watermarkNote": "免费预览图带有水印。",
+    "refundNote": "本次消耗的次数已退回。",
+    "upsell": {
+      "title": "解锁高清无水印",
+      "description": "喜欢这个效果？解锁高清原图，继续试穿更多服装。",
+      "featureHd": "高清原图",
+      "featureNoWatermark": "无水印",
+      "featureHistory": "保存到历史记录",
+      "payCta": "$1 解锁",
+      "plansCta": "查看订阅方案",
+      "laterCta": "稍后再说"
+    },
+    "garments": {
+      "dressFloral": "碎花连衣裙",
+      "dressBlack": "黑色晚礼裙",
+      "topWhiteBlouse": "白色真丝衬衫",
+      "sweaterBeige": "米色针织毛衣",
+      "jacketDenim": "牛仔夹克",
+      "coatCamel": "驼色羊毛大衣",
+      "shirtWhiteOxford": "白色牛津衬衫",
+      "blazerNavy": "藏青西装外套",
+      "tshirtGrey": "灰色T恤",
+      "hoodieBlack": "黑色连帽卫衣",
+      "jacketLeather": "皮夹克",
+      "shirtLinenBlue": "浅蓝亚麻衬衫"
+    }
   }
 }

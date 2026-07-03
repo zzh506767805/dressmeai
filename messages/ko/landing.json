@@ -305,5 +305,43 @@
         ]
       }
     ]
+  },
+  "tryOnExtras": {
+    "savedModelsTitle": "내 모델 사진",
+    "uploadTab": "업로드",
+    "galleryTab": "갤러리",
+    "galleryHint": "옷을 선택하면 바로 입어볼 수 있어요",
+    "freeBadge": "신규 가입 시 무료 체험 1회",
+    "signInToGenerate": "로그인하고 생성하세요 — 첫 가상 피팅은 무료입니다",
+    "creditsRemaining": "남은 크레딧 {count}개",
+    "getMoreCredits": "크레딧 충전하기",
+    "tryAnother": "다른 옷 입어보기",
+    "downloadResult": "다운로드",
+    "watermarkNote": "무료 미리보기에는 워터마크가 포함됩니다.",
+    "refundNote": "사용한 크레딧이 환불되었습니다.",
+    "upsell": {
+      "title": "워터마크 없는 HD 화질 잠금 해제",
+      "description": "마음에 드시나요? 고화질 이미지를 받고 계속해서 새로운 옷을 입어보세요.",
+      "featureHd": "풀 HD 해상도",
+      "featureNoWatermark": "워터마크 없음",
+      "featureHistory": "히스토리에 저장",
+      "payCta": "$1로 잠금 해제",
+      "plansCta": "구독 플랜 보기",
+      "laterCta": "나중에"
+    },
+    "garments": {
+      "dressFloral": "플로럴 원피스",
+      "dressBlack": "블랙 이브닝 드레스",
+      "topWhiteBlouse": "화이트 실크 블라우스",
+      "sweaterBeige": "베이지 니트 스웨터",
+      "jacketDenim": "데님 재킷",
+      "coatCamel": "카멜 울 코트",
+      "shirtWhiteOxford": "화이트 옥스포드 셔츠",
+      "blazerNavy": "네이비 블레이저",
+      "tshirtGrey": "그레이 티셔츠",
+      "hoodieBlack": "블랙 후드티",
+      "jacketLeather": "레더 재킷",
+      "shirtLinenBlue": "블루 린넨 셔츠"
+    }
   }
 }

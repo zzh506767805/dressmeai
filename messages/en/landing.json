@@ -204,10 +204,22 @@
     "eyebrow": "Trusted by Fashion Lovers Worldwide",
     "title": "The Leading AI Virtual Try-On Platform",
     "items": [
-      { "value": "1M+", "label": "Virtual Try-Ons Completed" },
-      { "value": "40%", "label": "Fewer Returns" },
-      { "value": "9", "label": "Languages Supported" },
-      { "value": "24/7", "label": "AI Available" }
+      {
+        "value": "1M+",
+        "label": "Virtual Try-Ons Completed"
+      },
+      {
+        "value": "40%",
+        "label": "Fewer Returns"
+      },
+      {
+        "value": "9",
+        "label": "Languages Supported"
+      },
+      {
+        "value": "24/7",
+        "label": "AI Available"
+      }
     ]
   },
   "showcase": {
@@ -223,18 +235,36 @@
       "beforeLabel": "Before",
       "afterLabel": "After",
       "items": [
-        { "title": "Casual → Professional", "description": "Turn a casual look into a more polished style." },
-        { "title": "Basic → Perfect Fit", "description": "See how fit and proportions can change visually." },
-        { "title": "Original → AI Makeover", "description": "Refresh the look with a realistic AI try-on render." }
+        {
+          "title": "Casual → Professional",
+          "description": "Turn a casual look into a more polished style."
+        },
+        {
+          "title": "Basic → Perfect Fit",
+          "description": "See how fit and proportions can change visually."
+        },
+        {
+          "title": "Original → AI Makeover",
+          "description": "Refresh the look with a realistic AI try-on render."
+        }
       ]
     },
     "gallery": {
       "title": "Outfit Inspiration",
       "description": "Get inspired by ready-to-try styles powered by virtual try-on.",
       "items": [
-        { "title": "Business Casual", "description": "Clean, modern outfits for work and meetings." },
-        { "title": "Weekend Chic", "description": "Relaxed looks that still feel put-together." },
-        { "title": "Evening Elegance", "description": "Dressier styles for nights out and events." }
+        {
+          "title": "Business Casual",
+          "description": "Clean, modern outfits for work and meetings."
+        },
+        {
+          "title": "Weekend Chic",
+          "description": "Relaxed looks that still feel put-together."
+        },
+        {
+          "title": "Evening Elegance",
+          "description": "Dressier styles for nights out and events."
+        }
       ]
     }
   },
@@ -275,5 +305,43 @@
     "title": "Start Your AI Virtual Try-On Experience Today",
     "description": "See how any outfit looks on your body with DressMeAI's AI-powered virtual try-on technology.",
     "button": "Try Virtual Try-On Now"
+  },
+  "tryOnExtras": {
+    "savedModelsTitle": "My model photos",
+    "uploadTab": "Upload",
+    "galleryTab": "Gallery",
+    "galleryHint": "Pick a garment to try it on instantly",
+    "freeBadge": "New users get 1 free try-on",
+    "signInToGenerate": "Sign in to generate — your first try-on is free",
+    "creditsRemaining": "{count} credits remaining",
+    "getMoreCredits": "Get more credits",
+    "tryAnother": "Try Another Outfit",
+    "downloadResult": "Download",
+    "watermarkNote": "This free preview includes a watermark.",
+    "refundNote": "Your credit has been refunded.",
+    "upsell": {
+      "title": "Unlock HD without watermark",
+      "description": "Love the look? Get the full-quality image and keep trying on new outfits.",
+      "featureHd": "Full HD resolution",
+      "featureNoWatermark": "No watermark",
+      "featureHistory": "Saved to your history",
+      "payCta": "Unlock for $1",
+      "plansCta": "View subscription plans",
+      "laterCta": "Maybe later"
+    },
+    "garments": {
+      "dressFloral": "Floral Midi Dress",
+      "dressBlack": "Black Evening Dress",
+      "topWhiteBlouse": "White Silk Blouse",
+      "sweaterBeige": "Beige Knit Sweater",
+      "jacketDenim": "Denim Jacket",
+      "coatCamel": "Camel Wool Coat",
+      "shirtWhiteOxford": "White Oxford Shirt",
+      "blazerNavy": "Navy Blazer",
+      "tshirtGrey": "Grey T-Shirt",
+      "hoodieBlack": "Black Hoodie",
+      "jacketLeather": "Leather Jacket",
+      "shirtLinenBlue": "Blue Linen Shirt"
+    }
   }
 }

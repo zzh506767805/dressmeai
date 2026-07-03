@@ -18,7 +18,8 @@
           "Fotos que sube para el probador virtual (fotos de modelo e imágenes de ropa)",
           "Datos de uso y análisis para mejorar nuestro servicio",
           "Información del dispositivo y tipo de navegador",
-          "Dirección IP y datos de ubicación general"
+          "Dirección IP y datos de ubicación general",
+          "Las fotos de modelo que subes para la prueba virtual — se guardan las 3 más recientes para reutilizarlas; puedes eliminarlas en cualquier momento desde tu cuenta"
         ]
       },
       "dataUsage": {
