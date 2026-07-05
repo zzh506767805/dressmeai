@@ -57,7 +57,10 @@ export default async function handler(
     const base64Data = image.replace(/^data:image\/\w+;base64,/, '');
     const buffer = Buffer.from(base64Data, 'base64');
 
+    // .rotate() with no args applies the EXIF orientation before re-encoding
+    // strips it — otherwise phone portraits get stored physically sideways.
     const compressedBuffer = await sharp(buffer)
+      .rotate()
       .resize(1024, 1024, {
         fit: 'inside',
         withoutEnlargement: true
