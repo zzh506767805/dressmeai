@@ -2,7 +2,13 @@ import Stripe from "stripe";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import { getStripe } from "@/lib/stripe";
-import { getPlanById, planIdToSubscriptionStatus, PlanId } from "@/lib/pricing";
+import {
+  Cadence,
+  getPlanById,
+  getUnitAmount,
+  planIdToSubscriptionStatus,
+  PlanId,
+} from "@/lib/pricing";
 
 export type ProcessResult =
   | { status: "processed"; mode: "subscription" | "payment"; plan?: string }
@@ -30,7 +36,7 @@ export async function processCheckoutSession(
     const planId = (session.metadata?.planId ?? "basic") as PlanId;
     const plan = getPlanById(planId);
     const userId = session.metadata?.userId;
-    const cadence = session.metadata?.cadence ?? "monthly";
+    const cadence = (session.metadata?.cadence ?? "monthly") as Cadence;
 
     if (!plan || !userId) {
       return { status: "missing_metadata" };
@@ -48,7 +54,7 @@ export async function processCheckoutSession(
           plan: plan.name,
           mode: "subscription",
           status: "paid",
-          amount: plan.monthlyAmount,
+          amount: session.amount_total ?? getUnitAmount(plan, cadence),
           currency: plan.currency,
         },
       });

@@ -7,24 +7,28 @@ import { refundJobCredit } from "@/lib/credits";
 const STALE_JOB_MINUTES = 15;
 
 // Sweep jobs whose polling client died: anything stuck in PENDING/PROCESSING
-// beyond the cutoff is failed and its credit refunded. Runs here because
-// check-credits is always called right before a new generation starts.
-async function sweepStaleJobs(userId: string) {
+// beyond the cutoff is failed and its credit refunded. Sweeps across ALL users
+// (not just the caller) because a user who abandons a stuck job may never come
+// back to trigger their own sweep; any visitor's credit check cleans up for
+// everyone. refundJobCredit is idempotent, so concurrent sweeps are safe.
+async function sweepStaleJobs() {
   const cutoff = new Date(Date.now() - STALE_JOB_MINUTES * 60 * 1000);
   const staleJobs = await prisma.tryOnJob.findMany({
     where: {
-      userId,
       status: { in: ["PENDING", "PROCESSING"] },
       createdAt: { lt: cutoff },
     },
-    select: { id: true },
+    select: { id: true, userId: true },
+    take: 50,
   });
   for (const job of staleJobs) {
     await prisma.tryOnJob.update({
       where: { id: job.id },
       data: { status: "FAILED", errorMessage: "Generation timed out, credit refunded" },
     });
-    await refundJobCredit(job.id, userId);
+    if (job.userId) {
+      await refundJobCredit(job.id, job.userId);
+    }
   }
 }
 
@@ -41,7 +45,7 @@ export default async function handler(
     return res.status(401).json({ message: "Not authenticated" });
   }
 
-  await sweepStaleJobs(session.user.id);
+  await sweepStaleJobs();
 
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },

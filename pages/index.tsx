@@ -370,50 +370,59 @@ export default function Home() {
     const creditData = await creditRes.json();
     jobId = creditData.jobId;
 
-    setGenerationStep('Uploading model image...');
-    const modelUrl = await resolveImageUrl(model, true);
+    // From here the credit is spent: any failure must report FAILED so the
+    // server refunds it, otherwise the job is orphaned in PENDING forever.
+    try {
+      setGenerationStep('Uploading model image...');
+      const modelUrl = await resolveImageUrl(model, true);
 
-    if (abortRef.current) return;
+      if (abortRef.current) return;
 
-    setGenerationStep('Uploading clothing image...');
-    const clothingUrl = await resolveImageUrl(clothing);
+      setGenerationStep('Uploading clothing image...');
+      const clothingUrl = await resolveImageUrl(clothing);
 
-    if (abortRef.current) return;
+      if (abortRef.current) return;
 
-    setGenerationStep('Initializing virtual try-on...');
-    // tryon verifies the job (credit deducted, owned by us) and records the
-    // taskId + image URLs server-side
-    const tryonRes = await fetch('/api/tryon', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ jobId, modelImageUrl: modelUrl, clothingImageUrl: clothingUrl }),
-    });
-    if (!tryonRes.ok) throw new Error('Failed to start try-on process');
+      setGenerationStep('Initializing virtual try-on...');
+      // tryon verifies the job (credit deducted, owned by us) and records the
+      // taskId + image URLs server-side
+      const tryonRes = await fetch('/api/tryon', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jobId, modelImageUrl: modelUrl, clothingImageUrl: clothingUrl }),
+      });
+      if (!tryonRes.ok) throw new Error('Failed to start try-on process');
 
-    let retryCount = 0;
-    const maxRetries = 20;
-    while (retryCount < maxRetries && !abortRef.current) {
-      setGenerationStep('Generating try-on result...');
-      await new Promise(r => setTimeout(r, 5000));
-      const statusRes = await fetch(`/api/status?jobId=${jobId}`);
-      const statusData = await statusRes.json();
+      let retryCount = 0;
+      const maxRetries = 20;
+      while (retryCount < maxRetries && !abortRef.current) {
+        setGenerationStep('Generating try-on result...');
+        await new Promise(r => setTimeout(r, 5000));
+        const statusRes = await fetch(`/api/status?jobId=${jobId}`);
+        const statusData = await statusRes.json();
 
-      if (statusData.status === 'SUCCEEDED' && statusData.imageUrl) {
-        setResultImage(statusData.imageUrl);
-        setResultJobId(jobId);
-        setResultWatermarked(!!statusData.watermarked);
-        if (statusData.watermarked) setShowUpsell(true);
-        analytics.virtualTryOn.generate_success();
-        loadSavedModels();
-        return;
-      } else if (statusData.status === 'FAILED') {
-        throw new Error('Try-on generation failed');
+        if (statusData.status === 'SUCCEEDED' && statusData.imageUrl) {
+          setResultImage(statusData.imageUrl);
+          setResultJobId(jobId);
+          setResultWatermarked(!!statusData.watermarked);
+          if (statusData.watermarked) setShowUpsell(true);
+          analytics.virtualTryOn.generate_success();
+          loadSavedModels();
+          return;
+        } else if (statusData.status === 'FAILED') {
+          throw new Error('Try-on generation failed');
+        }
+        retryCount++;
       }
-      retryCount++;
-    }
-    if (!abortRef.current) {
-      updateJob({ status: 'FAILED', errorMessage: 'Generation timed out' });
-      throw new Error('Generation timed out');
+      if (!abortRef.current) {
+        throw new Error('Generation timed out');
+      }
+    } catch (err) {
+      await updateJob({
+        status: 'FAILED',
+        errorMessage: err instanceof Error ? err.message : 'Generation failed',
+      });
+      throw err;
     }
   }, [loadSavedModels]);
 
