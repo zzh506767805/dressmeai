@@ -239,6 +239,20 @@ AZURE_STORAGE_CONTAINER=tryon-images
 
 ## Recent Updates
 
+### 2026-07-11 (Locked preview + $1 unlocks the existing image)
+- Week-1 review of the 07-04 overhaul: activation 82% (28/34) but $1 unlock 0/22 — watermark was too light to motivate payment
+- Free preview redesigned in `pages/api/status.ts`: bottom 70% of the image is blurred + dark panel + lock icon + "Unlock the full image"; visible top 30% keeps a light DressMeAI tile. `watermarkNote` copy updated in all 9 locales
+- Free-user results now store the clean original in Azure Blob too (`result-orig` prefix); `TryOnJob.originalImageUrl` no longer points at the expiring DashScope OSS URL
+- $1 upsell payment now carries `jobId` metadata and unlocks the existing job (swaps `resultImageUrl` to the clean original) instead of granting a credit + regenerating; Payment plan recorded as `single_unlock`
+- Fallbacks: legacy jobs get their OSS original re-hosted at unlock time; if unlock is impossible the payment falls back to the old +1 credit flow
+- success.tsx routes unlock payments via `localStorage.unlockedJobId`; homepage displays the unlocked image directly. verify-payment returns `unlockedJobId` on both processed and already_processed
+- New GA event `upsell_shown` (fires when the upsell modal opens) to measure the unlock funnel
+
+### 2026-07-04 (Tooling: GA access migrated to Composio CLI)
+- rube MCP (Composio's old endpoint) is offline; removed from user-level MCP config
+- GA4 data now queried via Composio CLI: `~/.composio/composio execute GOOGLE_ANALYTICS_RUN_REPORT` (account zzh506767805@gmail.com, `google_analytics` toolkit linked)
+- `ga-report` skill (`~/.claude/skills/ga-report/SKILL.md`) rewritten for the CLI; dressmeai GA4 property: `properties/493402619`
+
 ### 2026-07-04 (First-experience overhaul, see docs/activation-plan.md)
 - New users get 1 free credit on sign-up (`events.createUser` in lib/auth.ts, `FREE_SIGNUP_CREDITS=1`)
 - Free users (no paid Payment record) get watermarked results; original stored in `TryOnJob.originalImageUrl`, never served to free users

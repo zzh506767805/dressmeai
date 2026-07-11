@@ -25,11 +25,23 @@ export default async function handler(
       case "not_paid":
         return res.status(200).json({ success: false, reason: "not_paid" });
       case "already_processed":
-        return res.status(200).json({ success: true, already_processed: true });
+        // Re-derive the unlock target from checkout metadata so a /success
+        // refresh still shows the unlocked image instead of trying to
+        // regenerate with a credit that was never granted.
+        return res.status(200).json({
+          success: true,
+          already_processed: true,
+          unlockedJobId: session.metadata?.jobId || undefined,
+        });
       case "missing_metadata":
         return res.status(200).json({ success: true, warning: "missing_metadata" });
       case "processed":
-        return res.status(200).json({ success: true, mode: result.mode, plan: result.plan });
+        return res.status(200).json({
+          success: true,
+          mode: result.mode,
+          plan: result.plan,
+          unlockedJobId: result.unlockedJobId,
+        });
     }
   } catch (error) {
     console.error("Payment verification failed:", error);

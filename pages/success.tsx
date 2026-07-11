@@ -29,6 +29,10 @@ export default function Success() {
         if (type === 'subscription') {
           // Subscription: go to account page
           router.replace('/account?subscription=success');
+        } else if (data.unlockedJobId) {
+          // $1 unlock: the existing result is now watermark-free, show it
+          localStorage.setItem('unlockedJobId', data.unlockedJobId);
+          router.replace('/#ai-fashion');
         } else {
           // Single payment: mark as paid and go back to homepage to generate
           // Images are already in localStorage from before payment redirect

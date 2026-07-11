@@ -405,7 +405,10 @@ export default function Home() {
           setResultImage(statusData.imageUrl);
           setResultJobId(jobId);
           setResultWatermarked(!!statusData.watermarked);
-          if (statusData.watermarked) setShowUpsell(true);
+          if (statusData.watermarked) {
+            setShowUpsell(true);
+            trackEvent('upsell_shown', 'conversion', 'watermarked_result');
+          }
           analytics.virtualTryOn.generate_success();
           loadSavedModels();
           return;
@@ -425,6 +428,35 @@ export default function Home() {
       throw err;
     }
   }, [loadSavedModels]);
+
+  // Show the just-unlocked (watermark-free) result after a $1 unlock payment.
+  // The unlock already swapped the job's resultImageUrl server-side.
+  useEffect(() => {
+    const jobId = typeof window !== 'undefined' && localStorage.getItem('unlockedJobId');
+    if (!jobId) return;
+    localStorage.removeItem('unlockedJobId');
+
+    setLoading(true);
+    setError(null);
+    fetch(`/api/status?jobId=${jobId}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'SUCCEEDED' && data.imageUrl) {
+          setResultImage(data.imageUrl);
+          setResultJobId(jobId);
+          setResultWatermarked(!!data.watermarked);
+          safeRemoveItem('modelImage');
+          safeRemoveItem('clothingImage');
+          safeRemoveItem('imageUploadTimestamp');
+        } else {
+          setError('Could not load your unlocked image. Please check your history.');
+        }
+      })
+      .catch(() => {
+        setError('Could not load your unlocked image. Please check your history.');
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
   // Auto-generate after single payment redirect
   useEffect(() => {
@@ -526,8 +558,10 @@ export default function Home() {
     }
   }, [commonT, getInputStrings, session, router, runGeneration]);
 
-  // Unlock HD: persist current inputs, then send the user through the $1 checkout.
-  // After payment, /success re-runs the generation without watermark (user is no longer free).
+  // Unlock HD: send the user through the $1 checkout tied to the current job.
+  // After payment, /success returns with the same image watermark-free (no
+  // regeneration). Inputs are still persisted so the credit-fallback path can
+  // regenerate if the unlock is impossible server-side.
   const handleUpsellPay = useCallback(async () => {
     analytics.user.upgrade('single_unlock');
     try {
@@ -537,7 +571,11 @@ export default function Home() {
         safeSetItem('clothingImage', inputs.clothing);
         safeSetItem('imageUploadTimestamp', Date.now().toString());
       }
-      const res = await fetch('/api/create-payment', { method: 'POST' });
+      const res = await fetch('/api/create-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jobId: resultJobId }),
+      });
       const data = await res.json();
       if (!data.url) throw new Error('No checkout URL');
       window.location.href = data.url;
@@ -546,7 +584,7 @@ export default function Home() {
       setError('Failed to start checkout, please try again');
       setShowUpsell(false);
     }
-  }, [getInputStrings]);
+  }, [getInputStrings, resultJobId]);
 
   const handleSelectSavedModel = (url: string) => {
     setSelectedModelUrl(url);

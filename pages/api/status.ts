@@ -57,56 +57,87 @@ async function retryOperation<T>(
   throw lastError;
 }
 
+// Free preview: only the top 30% stays visible (with a light tile so it is not
+// a clean deliverable), the rest is blurred out under a dark "unlock" panel.
 async function applyWatermark(buffer: Buffer): Promise<Buffer> {
   const image = sharp(buffer);
   const meta = await image.metadata();
   const width = meta.width ?? 768;
   const height = meta.height ?? 1024;
 
+  const coverTop = Math.round(height * 0.3);
+  const coverHeight = height - coverTop;
+
+  const blurred = await sharp(buffer)
+    .extract({ left: 0, top: coverTop, width, height: coverHeight })
+    .blur(30)
+    .toBuffer();
+
   const tileFontSize = Math.round(width / 11);
-  const brandFontSize = Math.round(width / 22);
-  const rows: string[] = [];
-  const stepY = tileFontSize * 4;
-  const stepX = tileFontSize * 8;
-  for (let y = -height; y < height * 2; y += stepY) {
-    for (let x = -width; x < width * 2; x += stepX) {
-      rows.push(`<text x="${x}" y="${y}" font-size="${tileFontSize}" fill="white" fill-opacity="0.16" font-family="Arial, sans-serif" font-weight="bold">DressMeAI</text>`);
+  const tiles: string[] = [];
+  for (let y = -height; y < height * 2; y += tileFontSize * 3) {
+    for (let x = -width; x < width * 2; x += tileFontSize * 7) {
+      tiles.push(`<text x="${x}" y="${y}" font-size="${tileFontSize}" fill="white" fill-opacity="0.18" font-family="Arial, sans-serif" font-weight="bold">DressMeAI</text>`);
     }
   }
 
+  const lockSize = Math.round(width / 14);
+  const lockX = width / 2;
+  const lockY = coverTop + coverHeight / 2 - lockSize;
+  const msgFontSize = Math.round(width / 20);
+  const brandFontSize = Math.round(width / 26);
+
   const svg = `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
-    <g transform="rotate(-30 ${width / 2} ${height / 2})">${rows.join('')}</g>
-    <text x="${width - 16}" y="${height - 20}" text-anchor="end" font-size="${brandFontSize}" fill="white" fill-opacity="0.9" font-family="Arial, sans-serif" font-weight="bold" stroke="black" stroke-opacity="0.25" stroke-width="1">DressMeAI.com</text>
+    <defs><clipPath id="visible"><rect x="0" y="0" width="${width}" height="${coverTop}"/></clipPath></defs>
+    <g clip-path="url(#visible)"><g transform="rotate(-30 ${width / 2} ${height / 2})">${tiles.join('')}</g></g>
+    <rect x="0" y="${coverTop}" width="${width}" height="${coverHeight}" fill="black" fill-opacity="0.5"/>
+    <g fill="none" stroke="white" stroke-width="${Math.max(3, Math.round(lockSize / 8))}">
+      <path d="M ${lockX - lockSize / 2.8} ${lockY} v ${-lockSize / 2.2} a ${lockSize / 2.8} ${lockSize / 2.8} 0 0 1 ${lockSize / 1.4} 0 v ${lockSize / 2.2}"/>
+    </g>
+    <rect x="${lockX - lockSize / 1.6}" y="${lockY}" width="${lockSize * 1.25}" height="${lockSize}" rx="${lockSize / 8}" fill="white"/>
+    <text x="${lockX}" y="${lockY + lockSize * 2}" text-anchor="middle" font-size="${msgFontSize}" fill="white" font-family="Arial, sans-serif" font-weight="bold">Unlock the full image</text>
+    <text x="${lockX}" y="${lockY + lockSize * 2 + msgFontSize * 1.5}" text-anchor="middle" font-size="${brandFontSize}" fill="white" fill-opacity="0.85" font-family="Arial, sans-serif">DressMeAI.com</text>
   </svg>`;
 
   return image
-    .composite([{ input: Buffer.from(svg) }])
+    .composite([
+      { input: blurred, top: coverTop, left: 0 },
+      { input: Buffer.from(svg), top: 0, left: 0 },
+    ])
     .jpeg({ quality: 90 })
     .toBuffer();
 }
 
 // Persist the DashScope result to our own blob storage (the OSS URL is http-only
 // and expires within ~24h, so history entries would otherwise go dead), applying
-// a watermark for free users. Retries once; on total failure falls back to the
-// original image (availability beats watermarking) and logs a searchable marker.
-async function storeResult(originalUrl: string, watermark: boolean): Promise<{ url: string; watermarked: boolean }> {
+// a watermark for free users. For watermarked results the clean original is also
+// stored in blob, so a later $1 unlock just swaps pointers instead of racing the
+// OSS expiry. Retries once; on total failure falls back to the original image
+// (availability beats watermarking) and logs a searchable marker.
+async function storeResult(
+  originalUrl: string,
+  watermark: boolean
+): Promise<{ url: string; originalUrl: string; watermarked: boolean }> {
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
       const download = await axios.get<ArrayBuffer>(originalUrl, {
         responseType: 'arraybuffer',
         timeout: 30000,
       });
-      const buffer = watermark
-        ? await applyWatermark(Buffer.from(download.data))
-        : Buffer.from(download.data);
-      const url = await uploadImageBuffer(buffer, watermark ? 'result-wm' : 'result');
-      return { url, watermarked: watermark };
+      const original = Buffer.from(download.data);
+      if (!watermark) {
+        const url = await uploadImageBuffer(original, 'result');
+        return { url, originalUrl: url, watermarked: false };
+      }
+      const cleanUrl = await uploadImageBuffer(original, 'result-orig');
+      const wmUrl = await uploadImageBuffer(await applyWatermark(original), 'result-wm');
+      return { url: wmUrl, originalUrl: cleanUrl, watermarked: true };
     } catch (error: any) {
       console.error(`[RESULT_STORE_FAIL] attempt ${attempt}:`, error?.message || error);
     }
   }
   console.error('[RESULT_STORE_FALLBACK] serving original DashScope URL:', originalUrl);
-  return { url: originalUrl, watermarked: false };
+  return { url: originalUrl, originalUrl, watermarked: false };
 }
 
 export default async function handler(
@@ -136,8 +167,14 @@ export default async function handler(
     }
 
     // Already finalized: return the stored result, never re-run watermarking.
+    // The watermarked flag is inferred from the blob name so a page refresh
+    // keeps the unlock affordance visible.
     if (job.status === 'COMPLETED' && job.resultImageUrl) {
-      return res.status(200).json({ status: 'SUCCEEDED', imageUrl: job.resultImageUrl });
+      return res.status(200).json({
+        status: 'SUCCEEDED',
+        imageUrl: job.resultImageUrl,
+        watermarked: job.resultImageUrl.includes('result-wm'),
+      });
     }
     if (job.status === 'FAILED') {
       return res.status(200).json({ status: 'FAILED' });
@@ -170,7 +207,7 @@ export default async function handler(
         data: {
           status: 'COMPLETED',
           resultImageUrl: finalResult.url,
-          originalImageUrl: originalUrl,
+          originalImageUrl: finalResult.originalUrl,
         },
       });
 
