@@ -326,6 +326,11 @@
       "featureHd": "Risoluzione Full HD",
       "featureNoWatermark": "Senza filigrana",
       "featureHistory": "Salvato nella cronologia",
+      "subBadge": "Più conveniente",
+      "subTitle": "Piano Unlimited",
+      "subDescription": "Prove illimitate, HD senza filigrana, cronologia completa. Disdici quando vuoi.",
+      "subCta": "Passa a Unlimited · {price}/mese",
+      "singleNote": "Vuoi solo questa immagine?",
       "payCta": "Sblocca per 1 $",
       "plansCta": "Vedi i piani di abbonamento",
       "laterCta": "Forse più tardi"

@@ -326,6 +326,11 @@
       "featureHd": "Resolución Full HD",
       "featureNoWatermark": "Sin marca de agua",
       "featureHistory": "Guardado en tu historial",
+      "subBadge": "La mejor oferta",
+      "subTitle": "Plan Unlimited",
+      "subDescription": "Pruebas ilimitadas, HD sin marca de agua, historial completo. Cancela cuando quieras.",
+      "subCta": "Suscribirse a Unlimited · {price}/mes",
+      "singleNote": "¿Solo quieres esta imagen?",
       "payCta": "Desbloquear por $1",
       "plansCta": "Ver planes de suscripción",
       "laterCta": "Quizás más tarde"

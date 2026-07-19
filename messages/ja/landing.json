@@ -326,6 +326,11 @@
       "featureHd": "フルHD解像度",
       "featureNoWatermark": "ウォーターマークなし",
       "featureHistory": "履歴に保存",
+      "subBadge": "一番お得",
+      "subTitle": "Unlimitedプラン",
+      "subDescription": "試着し放題、透かしなしの高画質、履歴もすべて保存。いつでも解約できます。",
+      "subCta": "Unlimitedに登録 · {price}/月",
+      "singleNote": "この1枚だけ欲しい場合は",
       "payCta": "$1で解除",
       "plansCta": "サブスクプランを見る",
       "laterCta": "また今度"

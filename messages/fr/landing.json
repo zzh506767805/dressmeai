@@ -326,6 +326,11 @@
       "featureHd": "Résolution Full HD",
       "featureNoWatermark": "Sans filigrane",
       "featureHistory": "Enregistré dans votre historique",
+      "subBadge": "Meilleure offre",
+      "subTitle": "Formule Unlimited",
+      "subDescription": "Essayages illimités, HD sans filigrane, historique complet. Annulable à tout moment.",
+      "subCta": "Passer à Unlimited · {price}/mois",
+      "singleNote": "Vous ne voulez que cette image ?",
       "payCta": "Débloquer pour 1 $",
       "plansCta": "Voir les abonnements",
       "laterCta": "Plus tard"

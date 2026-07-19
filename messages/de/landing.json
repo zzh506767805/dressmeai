@@ -326,6 +326,11 @@
       "featureHd": "Full-HD-Auflösung",
       "featureNoWatermark": "Kein Wasserzeichen",
       "featureHistory": "In deinem Verlauf gespeichert",
+      "subBadge": "Bestes Angebot",
+      "subTitle": "Unlimited-Tarif",
+      "subDescription": "Unbegrenzte Anproben, HD ohne Wasserzeichen, kompletter Verlauf. Jederzeit kündbar.",
+      "subCta": "Unlimited abonnieren · {price}/Monat",
+      "singleNote": "Nur dieses eine Bild?",
       "payCta": "Für 1 $ freischalten",
       "plansCta": "Abos ansehen",
       "laterCta": "Vielleicht später"

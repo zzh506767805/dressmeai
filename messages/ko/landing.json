@@ -326,6 +326,11 @@
       "featureHd": "풀 HD 해상도",
       "featureNoWatermark": "워터마크 없음",
       "featureHistory": "히스토리에 저장",
+      "subBadge": "최고 가성비",
+      "subTitle": "Unlimited 플랜",
+      "subDescription": "무제한 가상 피팅, 워터마크 없는 고화질, 전체 기록 저장. 언제든 해지 가능.",
+      "subCta": "Unlimited 구독 · 월 {price}",
+      "singleNote": "이 사진 한 장만 원하시나요?",
       "payCta": "$1로 잠금 해제",
       "plansCta": "구독 플랜 보기",
       "laterCta": "나중에"

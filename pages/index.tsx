@@ -26,6 +26,14 @@ import { analytics, trackConversion, trackEvent, setUserProperties } from '../ut
 import { safeSetItem, safeGetItem, safeRemoveItem } from '../utils/localStorage'
 import { defaultLocale, locales as supportedLocales, type Locale } from '../i18n/config'
 import { GARMENTS, garmentAbsoluteUrl, type Garment } from '../lib/garments'
+import { getPlanById } from '../lib/pricing'
+
+// Price shown on the upsell modal's featured subscription — sourced from the
+// plan config so it can't drift from the pricing page.
+const UNLIMITED_MONTHLY_PRICE = (() => {
+  const plan = getPlanById('unlimited')
+  return plan ? `$${(plan.monthlyAmount / 100).toFixed(2)}` : '$39.90'
+})()
 
 // Generation input: a freshly uploaded image (base64) or an already-hosted one (URL)
 type ImageInput = { b64?: string; url?: string }
@@ -135,6 +143,11 @@ export default function Home() {
       featureHd: string
       featureNoWatermark: string
       featureHistory: string
+      subBadge: string
+      subTitle: string
+      subDescription: string
+      subCta: string
+      singleNote: string
       payCta: string
       plansCta: string
       laterCta: string
@@ -593,6 +606,26 @@ export default function Home() {
       setShowUpsell(false);
     }
   }, [getInputStrings, resultJobId]);
+
+  // Featured subscription in the upsell modal: straight to Stripe checkout for
+  // the top plan (monthly), so high-intent users never get anchored on the $1.
+  const handleUpsellSubscribe = useCallback(async () => {
+    analytics.user.upgrade('upsell_subscribe_unlimited');
+    try {
+      const res = await fetch('/api/create-subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ planId: 'unlimited', cadence: 'monthly' }),
+      });
+      const data = await res.json();
+      if (!data.url) throw new Error('No checkout URL');
+      window.location.href = data.url;
+    } catch (err) {
+      console.error('Subscribe checkout error:', err);
+      setError('Failed to start checkout, please try again');
+      setShowUpsell(false);
+    }
+  }, []);
 
   const handleSelectSavedModel = (url: string) => {
     setSelectedModelUrl(url);
@@ -1096,16 +1129,32 @@ export default function Home() {
                     ))}
                   </ul>
                   <div className="mt-6 space-y-2">
+                    {/* Featured: top-tier subscription */}
+                    <div className="relative rounded-xl border-2 border-indigo-600 p-4 text-left">
+                      <span className="absolute -top-2.5 right-3 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-2.5 py-0.5 text-xs font-semibold text-white">
+                        {tryOnT.upsell.subBadge}
+                      </span>
+                      <p className="font-semibold text-gray-900">{tryOnT.upsell.subTitle}</p>
+                      <p className="mt-1 text-sm text-gray-600">{tryOnT.upsell.subDescription}</p>
+                      <button
+                        onClick={handleUpsellSubscribe}
+                        className="mt-3 w-full rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3 text-white font-semibold hover:from-indigo-500 hover:to-purple-500 transition-all"
+                      >
+                        {tryOnT.upsell.subCta.replace('{price}', UNLIMITED_MONTHLY_PRICE)}
+                      </button>
+                    </div>
+                    {/* Secondary: $1 unlock of this image */}
+                    <p className="pt-1 text-center text-xs text-gray-400">{tryOnT.upsell.singleNote}</p>
                     <button
                       onClick={handleUpsellPay}
-                      className="w-full rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3 text-white font-semibold hover:from-indigo-500 hover:to-purple-500 transition-all"
+                      className="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-gray-700 font-medium hover:bg-gray-50 transition-colors"
                     >
                       {tryOnT.upsell.payCta}
                     </button>
                     <Link
                       href="/pricing"
                       onClick={() => analytics.user.upgrade('upsell_plans')}
-                      className="block w-full rounded-xl border border-gray-300 px-4 py-3 text-center text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+                      className="block w-full py-1 text-center text-sm text-indigo-600 hover:underline"
                     >
                       {tryOnT.upsell.plansCta}
                     </Link>

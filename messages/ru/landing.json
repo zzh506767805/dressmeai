@@ -326,6 +326,11 @@
       "featureHd": "Разрешение Full HD",
       "featureNoWatermark": "Без водяного знака",
       "featureHistory": "Сохранение в истории",
+      "subBadge": "Выгоднее всего",
+      "subTitle": "Тариф Unlimited",
+      "subDescription": "Безлимитные примерки, HD без водяного знака, вся история сохраняется. Отмена в любой момент.",
+      "subCta": "Подключить Unlimited · {price}/мес",
+      "singleNote": "Нужно только это фото?",
       "payCta": "Разблокировать за $1",
       "plansCta": "Посмотреть тарифы",
       "laterCta": "Позже"

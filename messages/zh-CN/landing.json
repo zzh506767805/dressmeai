@@ -326,6 +326,11 @@
       "featureHd": "高清原图",
       "featureNoWatermark": "无水印",
       "featureHistory": "保存到历史记录",
+      "subBadge": "最超值",
+      "subTitle": "无限畅享版",
+      "subDescription": "不限次数试穿，无水印高清，保留全部历史记录，随时取消。",
+      "subCta": "开通无限版 · {price}/月",
+      "singleNote": "只想要这一张？",
       "payCta": "$1 解锁",
       "plansCta": "查看订阅方案",
       "laterCta": "稍后再说"

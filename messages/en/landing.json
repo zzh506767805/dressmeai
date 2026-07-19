@@ -326,6 +326,11 @@
       "featureHd": "Full HD resolution",
       "featureNoWatermark": "No watermark",
       "featureHistory": "Saved to your history",
+      "subBadge": "Best value",
+      "subTitle": "Unlimited plan",
+      "subDescription": "Unlimited try-ons, watermark-free HD, full history. Cancel anytime.",
+      "subCta": "Go Unlimited · {price}/mo",
+      "singleNote": "Just want this one image?",
       "payCta": "Unlock for $1",
       "plansCta": "View subscription plans",
       "laterCta": "Maybe later"
