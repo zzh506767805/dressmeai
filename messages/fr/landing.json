@@ -319,6 +319,7 @@
     "downloadResult": "Télécharger",
     "watermarkNote": "Aperçu gratuit : déverrouillez pour voir l'image complète.",
     "refundNote": "Votre crédit a été remboursé.",
+    "moderationError": "Cette photo n'a pas passé la modération de contenu. Essayez une photo nette, de face, en tenue de tous les jours — votre crédit a été remboursé.",
     "upsell": {
       "title": "Débloquez la HD sans filigrane",
       "description": "Le résultat vous plaît ? Obtenez l'image en pleine qualité et continuez à essayer de nouvelles tenues.",

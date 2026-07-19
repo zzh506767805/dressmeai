@@ -319,6 +319,7 @@
     "downloadResult": "Descargar",
     "watermarkNote": "Vista previa gratuita: desbloquea para ver la imagen completa.",
     "refundNote": "Tu crédito ha sido reembolsado.",
+    "moderationError": "Esta foto no pasó la revisión de contenido. Prueba con una foto nítida, de frente y con ropa de diario: tu crédito ha sido reembolsado.",
     "upsell": {
       "title": "Desbloquea HD sin marca de agua",
       "description": "¿Te gusta el resultado? Obtén la imagen en máxima calidad y sigue probándote ropa nueva.",

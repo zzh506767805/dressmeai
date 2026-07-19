@@ -319,6 +319,7 @@
     "downloadResult": "Herunterladen",
     "watermarkNote": "Kostenlose Vorschau: Freischalten, um das ganze Bild zu sehen.",
     "refundNote": "Dein Credit wurde zurückerstattet.",
+    "moderationError": "Dieses Foto hat die Inhaltsprüfung nicht bestanden. Bitte versuche es mit einem klaren Frontalfoto in Alltagskleidung – dein Guthaben wurde zurückerstattet.",
     "upsell": {
       "title": "HD ohne Wasserzeichen freischalten",
       "description": "Gefällt dir der Look? Erhalte das Bild in voller Qualität und probiere weiter neue Outfits an.",

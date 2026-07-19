@@ -319,6 +319,7 @@
     "downloadResult": "Download",
     "watermarkNote": "Free preview: unlock to see the full image.",
     "refundNote": "Your credit has been refunded.",
+    "moderationError": "This photo didn't pass the platform's content review. Please try a clear, front-facing photo in everyday clothing — your credit has been refunded.",
     "upsell": {
       "title": "Unlock HD without watermark",
       "description": "Love the look? Get the full-quality image and keep trying on new outfits.",

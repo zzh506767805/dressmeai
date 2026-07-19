@@ -128,6 +128,7 @@ export default function Home() {
     downloadResult: string
     watermarkNote: string
     refundNote: string
+    moderationError: string
     upsell: {
       title: string
       description: string
@@ -552,14 +553,18 @@ export default function Home() {
       }
     } catch (err) {
       console.error('Generation error:', err);
-      const errorMessage = err instanceof Error ? err.message : 'Generation failed, please try again';
-      setError(errorMessage);
-      analytics.virtualTryOn.generate_error(errorMessage)
+      const rawMessage = err instanceof Error ? err.message : 'Generation failed, please try again';
+      // DashScope content-moderation rejects (e.g. InvalidParameter.DataInspection)
+      // get an actionable, localized message instead of the raw API error; GA
+      // still receives the raw message for attribution.
+      const isModerationError = /datainspection|inappropriate|moderat/i.test(rawMessage);
+      setError(isModerationError ? tryOnT.moderationError : rawMessage);
+      analytics.virtualTryOn.generate_error(rawMessage)
     } finally {
       setLoading(false);
       setGenerationStep('');
     }
-  }, [commonT, getInputStrings, session, router, runGeneration]);
+  }, [commonT, getInputStrings, session, router, runGeneration, tryOnT.moderationError]);
 
   // Unlock HD: send the user through the $1 checkout tied to the current job.
   // After payment, /success returns with the same image watermark-free (no

@@ -319,6 +319,7 @@
     "downloadResult": "下载",
     "watermarkNote": "免费预览：解锁后可查看完整图片。",
     "refundNote": "本次消耗的次数已退回。",
+    "moderationError": "这张照片未通过平台内容审核。请换一张日常着装、正面清晰的照片重试，积分已退回。",
     "upsell": {
       "title": "解锁高清无水印",
       "description": "喜欢这个效果？解锁高清原图，继续试穿更多服装。",

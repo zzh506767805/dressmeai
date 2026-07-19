@@ -319,6 +319,7 @@
     "downloadResult": "Scarica",
     "watermarkNote": "Anteprima gratuita: sblocca per vedere l'immagine completa.",
     "refundNote": "Il tuo credito è stato rimborsato.",
+    "moderationError": "Questa foto non ha superato il controllo dei contenuti. Prova con una foto nitida, frontale e con abiti di tutti i giorni: il credito è stato rimborsato.",
     "upsell": {
       "title": "Sblocca HD senza filigrana",
       "description": "Ti piace il risultato? Ottieni l'immagine in alta qualità e continua a provare nuovi capi.",
