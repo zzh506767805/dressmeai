@@ -3,6 +3,7 @@ import axios from 'axios';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/db';
+import { refundJobCredit } from '@/lib/credits';
 
 interface ErrorResponse {
   message: string;
@@ -41,6 +42,8 @@ export default async function handler(
     return res.status(401).json({ message: 'Not authenticated' });
   }
 
+  let job: { id: string } | null = null;
+
   try {
     const { jobId, modelImageUrl, clothingImageUrl } = req.body;
 
@@ -50,7 +53,7 @@ export default async function handler(
 
     // The job is the proof a credit was deducted (use-credit creates it).
     // It must belong to the caller and not have started an AI task yet.
-    const job = await prisma.tryOnJob.findFirst({
+    job = await prisma.tryOnJob.findFirst({
       where: {
         id: jobId,
         userId: session.user.id,
@@ -98,7 +101,24 @@ export default async function handler(
     return res.status(200).json({ taskId });
   } catch (error: any) {
     console.error('Try-on error:', error);
-    const errorMessage = error.response?.data?.message || error.message || 'Failed to start try-on process';
+    // DashScope errors carry a code + message (e.g. InvalidParameter.DataInspection);
+    // keep both so failures can be attributed from the DB.
+    const dsError = error.response?.data;
+    const errorMessage = dsError?.code
+      ? `${dsError.code}: ${dsError.message || ''}`.trim()
+      : error.response?.data?.message || error.message || 'Failed to start try-on process';
+
+    // Finalize the job server-side so the real reason survives even if the
+    // client never reports back; refund is idempotent (creditRefunded flag).
+    if (job) {
+      await prisma.tryOnJob
+        .update({ where: { id: job.id }, data: { status: 'FAILED', errorMessage } })
+        .catch((e) => console.error('Failed to finalize job after try-on error:', e));
+      await refundJobCredit(job.id, session.user.id).catch((e) =>
+        console.error('Failed to refund credit after try-on error:', e)
+      );
+    }
+
     return res.status(500).json({ message: errorMessage });
   }
 }

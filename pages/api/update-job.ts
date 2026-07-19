@@ -42,7 +42,10 @@ export default async function handler(
       ...(modelImageUrl && { modelImageUrl }),
       ...(clothImageUrl && { clothImageUrl }),
       ...(taskId && { taskId }),
-      ...(errorMessage && { errorMessage }),
+      // errorMessage follows the same finalization rule: the server records the
+      // real failure reason (tryon/status APIs) and a stale client's generic
+      // message must not overwrite it.
+      ...(allowStatusChange && errorMessage && { errorMessage }),
     },
   });
 

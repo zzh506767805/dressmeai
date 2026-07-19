@@ -391,7 +391,10 @@ export default function Home() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ jobId, modelImageUrl: modelUrl, clothingImageUrl: clothingUrl }),
       });
-      if (!tryonRes.ok) throw new Error('Failed to start try-on process');
+      if (!tryonRes.ok) {
+        const data = await tryonRes.json().catch(() => null);
+        throw new Error(data?.message || 'Failed to start try-on process');
+      }
 
       let retryCount = 0;
       const maxRetries = 20;
@@ -413,7 +416,7 @@ export default function Home() {
           loadSavedModels();
           return;
         } else if (statusData.status === 'FAILED') {
-          throw new Error('Try-on generation failed');
+          throw new Error(statusData.message || 'Try-on generation failed');
         }
         retryCount++;
       }

@@ -15,6 +15,7 @@ interface SuccessResponse {
   status: string;
   imageUrl?: string;
   watermarked?: boolean;
+  message?: string;
 }
 
 // 阿里云 DashScope 配置
@@ -177,7 +178,7 @@ export default async function handler(
       });
     }
     if (job.status === 'FAILED') {
-      return res.status(200).json({ status: 'FAILED' });
+      return res.status(200).json({ status: 'FAILED', message: job.errorMessage || undefined });
     }
     if (!job.taskId) {
       return res.status(200).json({ status: 'PENDING' });
@@ -219,12 +220,14 @@ export default async function handler(
     }
 
     if (taskStatus === 'FAILED') {
+      // Keep the DashScope code + message so failures can be attributed from the DB
+      const failureMessage = [data.output.code, data.output.message].filter(Boolean).join(': ') || 'AI generation failed';
       await prisma.tryOnJob.update({
         where: { id: job.id },
-        data: { status: 'FAILED', errorMessage: data.output.message || 'AI generation failed' },
+        data: { status: 'FAILED', errorMessage: failureMessage },
       });
       await refundJobCredit(job.id, session.user.id);
-      return res.status(200).json({ status: 'FAILED' });
+      return res.status(200).json({ status: 'FAILED', message: failureMessage });
     }
 
     return res.status(200).json({ status: taskStatus });
