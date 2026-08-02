@@ -1,12 +1,12 @@
 {
   "pageHeading": "Tecnologia di prova virtuale - guarda come ti sta",
   "seo": {
-    "title": "Prova virtuale AI gratuita — Vedi i vestiti su di te | DressMeAI",
-    "description": "Prova virtuale AI gratuita con DressMeAI: carica la tua foto, scegli un capo e vedi il risultato in pochi secondi. Prima prova gratuita, senza app.",
+    "title": "Prova virtuale AI — Vedi i vestiti su di te | DressMeAI",
+    "description": "Prova virtuale AI con DressMeAI: carica la tua foto, scegli un capo e genera un risultato realistico per 1 $, senza abbonamento.",
     "keywordsPrimary": "prova virtuale, cabina AI, provare vestiti online, specchio virtuale, guardaroba virtuale",
-    "keywordsSecondary": "come provare vestiti online, app di prova virtuale, prova virtuale gratuita, assistente di stile IA",
+    "keywordsSecondary": "come provare vestiti online, app di prova virtuale, assistente di stile IA",
     "ogDescription": "Prova i tuoi outfit con l'IA e guarda il risultato immediatamente.",
-    "twitterTitle": "Prova virtuale AI gratuita | DressMeAI",
+    "twitterTitle": "Prova virtuale AI | DressMeAI",
     "twitterDescription": "Carica le immagini e ottieni il risultato in pochi secondi.",
     "schemaDescription": "Piattaforma di prova virtuale e raccomandazioni personalizzate basata su IA"
   },
@@ -168,8 +168,8 @@
         "answer": "La nostra tecnologia IA fornisce risultati altamente realistici che rappresentano accuratamente come i vestiti appariranno su di te. Sebbene le prove virtuali siano approssimazioni e la vestibilita effettiva possa variare leggermente, la nostra tecnologia ti aiuta a prendere decisioni di acquisto piu informate e riduce significativamente la probabilita di resi."
       },
       {
-        "question": "DressMeAI e gratuito?",
-        "answer": "DressMeAI offre sia opzioni gratuite che premium. Puoi provare gratuitamente le nostre funzionalita base di prova virtuale, con funzionalita premium disponibili per utenti avanzati e aziende."
+        "question": "Quanto costa DressMeAI?",
+        "answer": "Una prova virtuale costa 1 dollaro e non richiede un abbonamento. Sono disponibili anche piani per chi lo usa spesso."
       },
       {
         "question": "Quali tipi di foto funzionano meglio?",
@@ -311,8 +311,8 @@
     "uploadTab": "Carica",
     "galleryTab": "Galleria",
     "galleryHint": "Scegli un capo e provalo all'istante",
-    "freeBadge": "1 prova gratuita per i nuovi utenti",
-    "signInToGenerate": "Accedi per generare — la tua prima prova è gratuita",
+    "signInToGenerate": "Accedi, scegli un piano e genera",
+    "payToGenerate": "Continua alle opzioni",
     "creditsRemaining": "{count} crediti rimanenti",
     "getMoreCredits": "Ottieni più crediti",
     "tryAnother": "Prova un altro outfit",
@@ -320,6 +320,24 @@
     "watermarkNote": "Anteprima gratuita: sblocca per vedere l'immagine completa.",
     "refundNote": "Il tuo credito è stato rimborsato.",
     "moderationError": "Questa foto non ha superato il controllo dei contenuti. Prova con una foto nitida, frontale e con abiti di tutti i giorni: il credito è stato rimborsato.",
+    "paywall": {
+      "title": "Crea più di un solo look",
+      "description": "Le foto sono pronte. Inizia con Basic, genera questo look e prova altri outfit.",
+      "beforeLabel": "La tua foto",
+      "afterLabel": "Prova AI",
+      "featureResult": "50 prove HD senza filigrana ogni mese",
+      "featureRefund": "Se la generazione fallisce, la prova viene restituita automaticamente",
+      "featureHistory": "Risultato salvato in modo sicuro nel tuo account",
+      "subscriptionTitle": "Piano Basic",
+      "subscriptionDescription": "50 prove di alta qualità al mese. Disdici quando vuoi.",
+      "subscriptionCta": "Inizia con Basic",
+      "singleNote": "Ti serve un solo risultato?",
+      "singleCta": "Genera una volta per 1 $",
+      "secureNote": "Pagamento sicuro con Stripe",
+      "plansLink": "Confronta tutti i piani",
+      "closeLabel": "Chiudi",
+      "checkoutError": "Impossibile aprire il pagamento sicuro. Riprova."
+    },
     "upsell": {
       "title": "Sblocca HD senza filigrana",
       "description": "Ti piace il risultato? Ottieni l'immagine in alta qualità e continua a provare nuovi capi.",

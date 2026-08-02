@@ -69,11 +69,8 @@ export const PRICING_PLANS: PlanConfig[] = [
   },
 ];
 
-// Single try-on price for non-logged-in users
+// One-time purchase price for a single generated try-on.
 export const SINGLE_TRYON_PRICE = 100; // $1.00
-
-// Free credits granted once on sign-up (results are watermarked until first payment)
-export const FREE_SIGNUP_CREDITS = 1;
 
 export function getPlanById(id: string): PlanConfig | undefined {
   return PRICING_PLANS.find((plan) => plan.id === id);

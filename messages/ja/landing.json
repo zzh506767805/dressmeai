@@ -1,12 +1,12 @@
 {
   "pageHeading": "バーチャル試着テクノロジー - 体に合わせた見え方をチェック",
   "seo": {
-    "title": "無料AIバーチャル試着 — 服の着用イメージをオンラインで確認 | DressMeAI",
-    "description": "DressMeAIの無料AIバーチャル試着。写真をアップロードして服を選ぶだけで、数秒で着用イメージを確認。初回試着無料、アプリ不要。",
+    "title": "AIバーチャル試着 — 服の着用イメージをオンラインで確認 | DressMeAI",
+    "description": "DressMeAIのAIバーチャル試着。写真をアップロードして服を選び、1回1ドルでリアルな着用イメージを生成。サブスク不要。",
     "keywordsPrimary": "バーチャル試着, AI 試着室, オンライン試着, ファッション AI, 仮想クローゼット, 買う前に試す",
-    "keywordsSecondary": "オンラインで服を試す方法, バーチャル試着アプリ, 無料ドレッシングルーム, AI コーディネート",
-    "ogDescription": "無料の AI バーチャル試着でリアルな着用イメージを体験しよう。",
-    "twitterTitle": "AI バーチャル試着を無料体験 | DressMeAI",
+    "keywordsSecondary": "オンラインで服を試す方法, バーチャル試着アプリ, AI コーディネート",
+    "ogDescription": "1回1ドルのAIバーチャル試着でリアルな着用イメージを生成。",
+    "twitterTitle": "AI バーチャル試着 | DressMeAI",
     "twitterDescription": "人物写真と服をアップロードして数秒で結果を確認。",
     "schemaDescription": "AI 駆動のバーチャル試着とパーソナルスタイリングプラットフォーム"
   },
@@ -168,8 +168,8 @@
         "answer": "当社のAI技術は、服があなたに似合うかどうかを正確に表現する非常にリアルな結果を提供します。バーチャル試着は近似値であり、実際のフィット感は若干異なる場合がありますが、より賢い購入決定を下し、返品の可能性を大幅に減らすのに役立ちます。"
       },
       {
-        "question": "DressMeAIは無料で使えますか？",
-        "answer": "DressMeAIは無料とプレミアムの両方のオプションを提供しています。基本的なバーチャル試着機能は無料でお試しいただけ、プレミアム機能は上級ユーザーや企業向けにご利用いただけます。"
+        "question": "DressMeAIの料金はいくらですか？",
+        "answer": "バーチャル試着は1回1ドルで、サブスクリプションは不要です。頻繁に利用する方向けのプランもあります。"
       },
       {
         "question": "どのような写真が最適ですか？",
@@ -311,8 +311,8 @@
     "uploadTab": "アップロード",
     "galleryTab": "ギャラリー",
     "galleryHint": "服を選んですぐに試着できます",
-    "freeBadge": "新規登録で1回無料試着",
-    "signInToGenerate": "ログインして生成 — 初回の試着は無料です",
+    "signInToGenerate": "ログインしてプランを選び、生成",
+    "payToGenerate": "生成オプションへ進む",
     "creditsRemaining": "残り{count}クレジット",
     "getMoreCredits": "クレジットを追加",
     "tryAnother": "別の服を試す",
@@ -320,6 +320,24 @@
     "watermarkNote": "無料プレビュー：ロック解除すると画像全体を見られます。",
     "refundNote": "使用したクレジットは返却されました。",
     "moderationError": "この写真はプラットフォームのコンテンツ審査を通過できませんでした。普段着で正面から写った鮮明な写真でもう一度お試しください。クレジットは返金済みです。",
+    "paywall": {
+      "title": "1つだけでなく、もっと多くのコーデを",
+      "description": "写真の準備ができました。Basicでこのコーデを生成し、さらに多くの服を試せます。",
+      "beforeLabel": "元の写真",
+      "afterLabel": "AI試着",
+      "featureResult": "毎月50回の高画質・透かしなし試着",
+      "featureRefund": "生成失敗時は試着回数を自動返却",
+      "featureHistory": "結果をアカウントに安全に保存",
+      "subscriptionTitle": "Basicプラン",
+      "subscriptionDescription": "毎月50回の高品質試着。いつでも解約できます。",
+      "subscriptionCta": "Basicを始める",
+      "singleNote": "この1回だけ必要ですか？",
+      "singleCta": "1ドルで1回生成",
+      "secureNote": "Stripeによる安全な決済",
+      "plansLink": "すべてのプランを比較",
+      "closeLabel": "閉じる",
+      "checkoutError": "安全な決済を開けませんでした。もう一度お試しください。"
+    },
     "upsell": {
       "title": "ウォーターマークなしのHD画質を解除",
       "description": "気に入りましたか？高画質画像を入手して、新しい服を試着し続けましょう。",

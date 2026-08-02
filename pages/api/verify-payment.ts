@@ -32,6 +32,7 @@ export default async function handler(
           success: true,
           already_processed: true,
           unlockedJobId: session.metadata?.jobId || undefined,
+          source: session.metadata?.source || undefined,
         });
       case "missing_metadata":
         return res.status(200).json({ success: true, warning: "missing_metadata" });
@@ -41,6 +42,7 @@ export default async function handler(
           mode: result.mode,
           plan: result.plan,
           unlockedJobId: result.unlockedJobId,
+          source: session.metadata?.source || undefined,
         });
     }
   } catch (error) {

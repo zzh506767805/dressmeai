@@ -1,12 +1,12 @@
 {
   "pageHeading": "Virtuelle Anprobe – so sieht Kleidung an Ihnen aus",
   "seo": {
-    "title": "Kostenlose KI-Anprobe online — Kleidung virtuell anprobieren | DressMeAI",
-    "description": "Kostenlose KI-Anprobe mit DressMeAI: Foto hochladen, Kleidungsstück wählen und in Sekunden ein realistisches Ergebnis sehen. Erste Anprobe gratis, ohne App.",
+    "title": "KI-Anprobe online — Kleidung virtuell anprobieren | DressMeAI",
+    "description": "KI-Anprobe mit DressMeAI: Foto hochladen, Kleidungsstück wählen und für 1 $ ein realistisches Ergebnis erhalten — ohne Abo oder App.",
     "keywordsPrimary": "virtuelle Anprobe, AI Umkleidekabine, Kleidung online probieren, Fashion AI",
-    "keywordsSecondary": "Kleidung online testen, virtuelle Umkleide App, kostenloses virtuelles Anprobieren, AI Style Assistant",
+    "keywordsSecondary": "Kleidung online testen, virtuelle Umkleide App, AI Style Assistant",
     "ogDescription": "Probieren Sie Outfits per KI und sehen Sie sofort das Ergebnis.",
-    "twitterTitle": "Kostenlose AI-Anprobe online | DressMeAI",
+    "twitterTitle": "AI-Anprobe online | DressMeAI",
     "twitterDescription": "Foto hochladen und in wenigen Sekunden Ergebnisse erhalten.",
     "schemaDescription": "KI-gestützte Plattform für virtuelle Anprobe und persönliche Styling-Empfehlungen"
   },
@@ -168,8 +168,8 @@
         "answer": "Unsere KI-Technologie liefert hochrealistische Ergebnisse, die genau darstellen, wie Kleidung an Ihnen aussehen wird. Obwohl virtuelle Anproben Annaeherungen sind und die tatsaechliche Passform leicht variieren kann, hilft unsere Technologie Ihnen, fundiertere Kaufentscheidungen zu treffen und reduziert die Wahrscheinlichkeit von Retouren erheblich."
       },
       {
-        "question": "Ist DressMeAI kostenlos?",
-        "answer": "DressMeAI bietet sowohl kostenlose als auch Premium-Optionen. Sie koennen unsere grundlegenden virtuellen Anprobefunktionen kostenlos testen, mit Premium-Funktionen fuer fortgeschrittene Benutzer und Unternehmen."
+        "question": "Was kostet DressMeAI?",
+        "answer": "Eine einzelne virtuelle Anprobe kostet 1 US-Dollar und erfordert kein Abo. Fuer haeufige Nutzung stehen Abos zur Verfuegung."
       },
       {
         "question": "Welche Art von Fotos funktionieren am besten?",
@@ -311,8 +311,8 @@
     "uploadTab": "Hochladen",
     "galleryTab": "Galerie",
     "galleryHint": "Wähle ein Kleidungsstück und probiere es sofort an",
-    "freeBadge": "Neue Nutzer erhalten 1 Gratis-Anprobe",
-    "signInToGenerate": "Melde dich an — deine erste Anprobe ist kostenlos",
+    "signInToGenerate": "Anmelden, Tarif wählen und generieren",
+    "payToGenerate": "Weiter zu den Optionen",
     "creditsRemaining": "{count} Credits übrig",
     "getMoreCredits": "Mehr Credits erhalten",
     "tryAnother": "Anderes Outfit anprobieren",
@@ -320,6 +320,24 @@
     "watermarkNote": "Kostenlose Vorschau: Freischalten, um das ganze Bild zu sehen.",
     "refundNote": "Dein Credit wurde zurückerstattet.",
     "moderationError": "Dieses Foto hat die Inhaltsprüfung nicht bestanden. Bitte versuche es mit einem klaren Frontalfoto in Alltagskleidung – dein Guthaben wurde zurückerstattet.",
+    "paywall": {
+      "title": "Erstelle mehr als nur einen Look",
+      "description": "Deine Fotos sind bereit. Starte mit Basic, generiere diesen Look und probiere weitere Outfits aus.",
+      "beforeLabel": "Dein Foto",
+      "afterLabel": "KI-Anprobe",
+      "featureResult": "50 HD-Anproben ohne Wasserzeichen pro Monat",
+      "featureRefund": "Bei Fehlern wird die Anprobe automatisch zurückgegeben",
+      "featureHistory": "Das Ergebnis wird sicher im Konto gespeichert",
+      "subscriptionTitle": "Basic-Tarif",
+      "subscriptionDescription": "50 hochwertige Anproben pro Monat. Jederzeit kündbar.",
+      "subscriptionCta": "Basic starten",
+      "singleNote": "Nur ein Ergebnis benötigt?",
+      "singleCta": "Einmal für 1 $ generieren",
+      "secureNote": "Sichere Zahlung mit Stripe",
+      "plansLink": "Alle Tarife vergleichen",
+      "closeLabel": "Schließen",
+      "checkoutError": "Die sichere Zahlung konnte nicht geöffnet werden. Bitte erneut versuchen."
+    },
     "upsell": {
       "title": "HD ohne Wasserzeichen freischalten",
       "description": "Gefällt dir der Look? Erhalte das Bild in voller Qualität und probiere weiter neue Outfits an.",

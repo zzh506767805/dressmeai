@@ -18,8 +18,13 @@ export default async function handler(
     return res.status(401).json({ message: "Please sign in first" });
   }
 
-  const { planId, cadence = "annual" } = req.body as { planId: string; cadence?: Cadence };
+  const { planId, cadence = "annual", source } = req.body as {
+    planId: string;
+    cadence?: Cadence;
+    source?: string;
+  };
   const plan = getPlanById(planId);
+  const fromGenerationPaywall = source === "generation_paywall_subscription";
 
   if (!plan) {
     return res.status(400).json({ message: "Invalid plan" });
@@ -56,17 +61,21 @@ export default async function handler(
       payment_method_types: ["card"],
       mode: "subscription",
       success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&type=subscription`,
-      cancel_url: `${baseUrl}/pricing?subscription=cancelled`,
+      cancel_url: fromGenerationPaywall
+        ? `${baseUrl}/?payment=cancelled#ai-fashion`
+        : `${baseUrl}/pricing?subscription=cancelled`,
       metadata: {
         userId: session.user.id,
         planId: plan.id,
         cadence,
+        ...(fromGenerationPaywall ? { source } : {}),
       },
       subscription_data: {
         metadata: {
           userId: session.user.id,
           planId: plan.id,
           cadence,
+          ...(fromGenerationPaywall ? { source } : {}),
         },
       },
       line_items: [

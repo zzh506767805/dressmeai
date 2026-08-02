@@ -32,17 +32,28 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
     // 清理可能损坏的localStorage数据
     const cleanupLocalStorage = () => {
       try {
-        const keys = ['tryonHistory', 'generationResult', 'modelImage', 'clothingImage']
-        keys.forEach(key => {
+        const storedInputKeys = ['modelImage', 'clothingImage']
+        storedInputKeys.forEach(key => {
           const value = localStorage.getItem(key)
           if (value === 'undefined' || value === 'null' || value === '') {
             localStorage.removeItem(key)
+            sessionStorage.removeItem(key)
+          }
+        })
+
+        const jsonKeys = ['tryonHistory', 'generationResult']
+        jsonKeys.forEach(key => {
+          const value = localStorage.getItem(key)
+          if (value === 'undefined' || value === 'null' || value === '') {
+            localStorage.removeItem(key)
+            sessionStorage.removeItem(key)
           } else if (value) {
             try {
               JSON.parse(value)
-            } catch (error) {
+            } catch {
               console.warn(`Removing corrupted localStorage key: ${key}`)
               localStorage.removeItem(key)
+              sessionStorage.removeItem(key)
             }
           }
         })

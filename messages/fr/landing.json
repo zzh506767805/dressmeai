@@ -1,12 +1,12 @@
 {
   "pageHeading": "Technologie d'essayage virtuel - voyez le vêtement sur vous",
   "seo": {
-    "title": "Essayage virtuel IA gratuit — Voyez les vêtements sur vous | DressMeAI",
-    "description": "Essayage virtuel IA gratuit avec DressMeAI : téléchargez votre photo, choisissez un vêtement et voyez le résultat en quelques secondes. Premier essayage gratuit, sans application.",
+    "title": "Essayage virtuel IA — Voyez les vêtements sur vous | DressMeAI",
+    "description": "Essayage virtuel IA avec DressMeAI : téléchargez votre photo, choisissez un vêtement et générez un résultat réaliste pour 1 $, sans abonnement.",
     "keywordsPrimary": "essayage virtuel, cabine d'essayage AI, essayer des vêtements en ligne, mode AI, miroir virtuel",
-    "keywordsSecondary": "comment essayer des vêtements en ligne, application d'essayage virtuel, dressing virtuel gratuit, assistant de mode AI",
+    "keywordsSecondary": "comment essayer des vêtements en ligne, application d'essayage virtuel, assistant de mode AI",
     "ogDescription": "Essayez vos tenues grâce à l'IA et voyez le résultat immédiatement.",
-    "twitterTitle": "Essayage virtuel AI gratuit | DressMeAI",
+    "twitterTitle": "Essayage virtuel AI | DressMeAI",
     "twitterDescription": "Téléversez une photo et voyez le rendu instantanément.",
     "schemaDescription": "Plateforme d'essayage virtuel et de recommandations personnalisées propulsée par l'IA"
   },
@@ -168,8 +168,8 @@
         "answer": "Notre technologie IA fournit des resultats tres realistes qui representent avec precision l'apparence des vetements sur vous. Bien que les essayages virtuels soient des approximations et que l'ajustement reel puisse varier legerement, notre technologie vous aide a prendre des decisions d'achat plus eclairees et reduit considerablement la probabilite de retours."
       },
       {
-        "question": "DressMeAI est-il gratuit ?",
-        "answer": "DressMeAI propose des options gratuites et premium. Vous pouvez essayer gratuitement nos fonctionnalites de base d'essayage virtuel, avec des fonctionnalites premium disponibles pour les utilisateurs avances et les entreprises."
+        "question": "Combien coûte DressMeAI ?",
+        "answer": "Un essayage virtuel coûte 1 dollar, sans abonnement obligatoire. Des formules sont aussi disponibles pour un usage fréquent."
       },
       {
         "question": "Quels types de photos fonctionnent le mieux ?",
@@ -311,8 +311,8 @@
     "uploadTab": "Importer",
     "galleryTab": "Galerie",
     "galleryHint": "Choisissez un vêtement et essayez-le instantanément",
-    "freeBadge": "1 essayage gratuit pour les nouveaux utilisateurs",
-    "signInToGenerate": "Connectez-vous pour générer — votre premier essayage est gratuit",
+    "signInToGenerate": "Connectez-vous, choisissez une formule et générez",
+    "payToGenerate": "Continuer vers les options",
     "creditsRemaining": "{count} crédits restants",
     "getMoreCredits": "Obtenir plus de crédits",
     "tryAnother": "Essayer une autre tenue",
@@ -320,6 +320,24 @@
     "watermarkNote": "Aperçu gratuit : déverrouillez pour voir l'image complète.",
     "refundNote": "Votre crédit a été remboursé.",
     "moderationError": "Cette photo n'a pas passé la modération de contenu. Essayez une photo nette, de face, en tenue de tous les jours — votre crédit a été remboursé.",
+    "paywall": {
+      "title": "Créez plus qu’un seul look",
+      "description": "Vos photos sont prêtes. Commencez avec Basic, générez ce look et essayez encore plus de tenues.",
+      "beforeLabel": "Votre photo",
+      "afterLabel": "Essayage IA",
+      "featureResult": "50 essayages HD sans filigrane par mois",
+      "featureRefund": "En cas d’échec, votre essayage est automatiquement recrédité",
+      "featureHistory": "Résultat enregistré en toute sécurité dans votre compte",
+      "subscriptionTitle": "Formule Basic",
+      "subscriptionDescription": "50 essayages haute qualité par mois. Annulable à tout moment.",
+      "subscriptionCta": "Choisir Basic",
+      "singleNote": "Besoin d’un seul résultat ?",
+      "singleCta": "Générer une fois pour 1 $",
+      "secureNote": "Paiement sécurisé par Stripe",
+      "plansLink": "Comparer toutes les formules",
+      "closeLabel": "Fermer",
+      "checkoutError": "Impossible d’ouvrir le paiement sécurisé. Veuillez réessayer."
+    },
     "upsell": {
       "title": "Débloquez la HD sans filigrane",
       "description": "Le résultat vous plaît ? Obtenez l'image en pleine qualité et continuez à essayer de nouvelles tenues.",

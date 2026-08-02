@@ -47,9 +47,10 @@ export const safeRemoveItem = (key: string): boolean => {
   try {
     if (typeof window === 'undefined') return false
     localStorage.removeItem(key)
+    sessionStorage.removeItem(key)
     return true
   } catch (error) {
-    console.error(`Error removing localStorage item ${key}:`, error)
+    console.error(`Error removing stored item ${key}:`, error)
     return false
   }
 }
@@ -81,4 +82,4 @@ export const safeSetJSONItem = <T>(key: string, value: T): boolean => {
     console.error(`Error stringifying value for ${key}:`, error)
     return false
   }
-} 
+}

@@ -11,20 +11,18 @@
 - **前端框架**：Next.js + TypeScript + Tailwind CSS。
 - **存储与托管**：Azure Blob Storage 用于图片上传结果的公网访问；本地浏览器使用 `localStorage` 作为临时缓存。
 - **AI 服务**：DashScope Image2Image（`image-synthesis` 接口，开启 `X-DashScope-Async` 以异步方式获取 `task_id`）。
-- **支付**：Stripe Checkout，`success_url` 跳转到 `/success?session_id=...`，`cancel_url` 返回 `/cancel`。
+- **支付**：Stripe Checkout，单次试穿为 `$1`；`success_url` 跳转到 `/success?session_id=...`，取消后返回首页试衣区。
 
 ## 核心流程（端到端）
-1. **图片上传**：用户在首页上传模特/服装图片，数据以 base64 保存在浏览器 `localStorage` 中并记录 `imageUploadTimestamp`。
-2. **支付**：前端调用 `/api/create-payment` 生成 Stripe Checkout Session，引导用户完成支付。
-3. **支付回调页**：Stripe 成功回调 `/success?session_id=...`。
-4. **成功页处理**（`pages/success.tsx`）：
-   - 等待 `router.isReady` 后读取 `session_id`、`status`、`imageUrl`。
-   - 若 URL 已有 `status=completed` 且带 `imageUrl`，直接展示。
-   - 否则验证支付（`/api/verify-payment`）。
-   - 从 `localStorage` 取出 `modelImage`、`clothingImage`，上传到 `/api/upload`（Azure Blob，Sharp 压缩成 1024px、80% JPEG）。
-   - 调用 `/api/tryon`（DashScope 异步任务），拿到 `taskId` 后轮询 `/api/status`，最多 20 次、间隔 5 秒。
-   - 成功后写入 `tryonHistory` 与 `currentGeneration`（包含 `sessionId`）并将 URL 改写为 `status=completed&imageUrl=...`，便于刷新/分享。
-   - 无论成功与否，最后清理 `modelImage`、`clothingImage`。
+1. **选择图片**：用户上传或选择人物照与服装图。
+2. **登录续接**：未登录用户点击生成时，两张图片暂存到 `localStorage + sessionStorage`；Google 登录返回后恢复图片并自动打开付费墙。
+3. **生成前付费**：
+   - 有历史剩余次数的用户可直接生成；
+   - 没有次数的用户看到订阅优先的付费墙，主推 Basic 月订阅，`$1` 单次生成作为次级选项；
+   - `/api/create-payment` 仅允许登录用户创建 Stripe Checkout，并记录 `source` 用于归因。
+4. **支付回调**：`/success?session_id=...` 调用 `/api/verify-payment`；从生成付费墙购买单次或订阅后都会设置 `pendingGeneration`。
+5. **自动生成**：首页读取暂存图片，调用 `/api/use-credit` 创建 `TryOnJob`，再上传图片、调用 `/api/tryon` 并轮询 `/api/status?jobId=`。
+6. **结果与故障恢复**：成功结果写入 Azure Blob 与数据库；失败任务幂等退回次数。新注册用户不再自动获赠免费次数，已有用户的剩余次数保留。
 
 ## API 端点
 - `POST /api/upload`：
@@ -32,16 +30,20 @@
   - 处理：Sharp 压缩 + Azure Blob `BlockBlobClient.uploadData`。
   - 输出：`{ url }` 用于 DashScope。
 - `POST /api/tryon`：
-  - 输入：`{ modelImageUrl, clothingImageUrl }`。
+  - 输入：`{ jobId, modelImageUrl, clothingImageUrl }`。
   - 处理：调用 DashScope `aitryon`，使用 `axiosInstance`（120s 超时，开启异步），返回 `taskId`。
-- `GET /api/status?taskId=`：
-  - 处理：对 DashScope `/api/v1/tasks/:id` 进行带退避的重试，返回 `status` 和 `imageUrl`（当 `SUCCEEDED` 时）。
-- `POST /api/generate`：
-  - 早期一体化接口：压缩两张 base64、上传至 ImgBB、调用 DashScope、内部轮询，现主要用作备用方案。
+- `GET /api/status?jobId=`：
+  - 校验登录与任务归属，对 DashScope 任务进行带退避的重试；成功后持久化结果并返回 `imageUrl`。
+- `POST /api/create-payment`：
+  - 仅限登录用户；输入可带 `{ source, jobId? }`。
+  - 普通单次付款增加 1 次；历史水印结果可带 `jobId` 原地解锁。
+- `GET /api/check-credits` / `POST /api/use-credit`：
+  - 查询与原子扣减次数；超时或失败任务自动退回。
 
 ## 本地状态与历史
-- `localStorage` 键：`modelImage`、`clothingImage`、`imageUploadTimestamp`、`tryonHistory`、`currentGeneration`。
-- `currentGeneration` 结构：`{ imageUrl, timestamp, sessionId }`；仅当 `sessionId` 与当前页面一致时才复用。
+- 临时键：`modelImage`、`clothingImage`、`imageUploadTimestamp`、`pendingPaywall`、`pendingGeneration`、`unlockedJobId`。
+- 图片跨登录/支付跳转时同时写入 `localStorage` 和 `sessionStorage`，清理时必须同步删除两处。
+- 生成历史以数据库 `TryOnJob` 为准，不依赖浏览器历史缓存。
 
 ## 环境变量
 - `ALIYUN_API_KEY`：DashScope 鉴权。
@@ -52,5 +54,7 @@
 ## 设计要点与注意事项
 - 所有 API 路由仅接受对应的 HTTP 方法，未匹配时返回 405。
 - 图片上传与 AI 调用大量依赖外部网络，日志里记录每一步状态便于排查。
-- 成功页的缓存复用必须绑定 `sessionId`，防止不同订单读取旧图。
-- `localStorage` 清理放在 `finally` 中，确保异常情况下不会遗留大体积 base64。
+- 单次付费墙必须放在 AI 生成前，避免无付款生成成本。
+- 支付成功后必须能够自动恢复原图并继续生成；不得把 base64/URL 当 JSON 清理。
+- Stripe metadata 的 `source` 用于区分 `generation_paywall`、`generation_paywall_subscription`、`pricing_single`、`legacy_unlock`。
+- 付费墙演示图位于 `public/images/paywall-demo/`，由 Azure GPT Image 2 生成；界面明确作为效果演示，不使用用户图片。

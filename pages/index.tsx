@@ -21,8 +21,9 @@ import { useRouter } from 'next/router'
 import { useLocale, useTranslations } from 'next-intl'
 import LanguageSwitcher from '../components/shared/LanguageSwitcher'
 import UserMenu from '../components/UserMenu'
+import GenerationPaywall from '../components/GenerationPaywall'
 import { useSession, signIn } from 'next-auth/react'
-import { analytics, trackConversion, trackEvent, setUserProperties } from '../utils/analytics'
+import { analytics, trackEvent, setUserProperties } from '../utils/analytics'
 import { safeSetItem, safeGetItem, safeRemoveItem } from '../utils/localStorage'
 import { defaultLocale, locales as supportedLocales, type Locale } from '../i18n/config'
 import { GARMENTS, garmentAbsoluteUrl, type Garment } from '../lib/garments'
@@ -33,6 +34,11 @@ import { getPlanById } from '../lib/pricing'
 const UNLIMITED_MONTHLY_PRICE = (() => {
   const plan = getPlanById('unlimited')
   return plan ? `$${(plan.monthlyAmount / 100).toFixed(2)}` : '$39.90'
+})()
+
+const BASIC_MONTHLY_PRICE = (() => {
+  const plan = getPlanById('basic')
+  return plan ? `$${(plan.monthlyAmount / 100).toFixed(2)}` : '$7.90'
 })()
 
 // Generation input: a freshly uploaded image (base64) or an already-hosted one (URL)
@@ -87,6 +93,7 @@ export default function Home() {
   const [modelImage, setModelImage] = useState<File | null>(null)
   const [clothingImage, setClothingImage] = useState<File | null>(null)
   const [selectedModelUrl, setSelectedModelUrl] = useState<string | null>(null)
+  const [selectedClothingUrl, setSelectedClothingUrl] = useState<string | null>(null)
   const [savedModels, setSavedModels] = useState<{ id: string; imageUrl: string }[]>([])
   const [clothingTab, setClothingTab] = useState<'upload' | 'gallery'>('upload')
   const [selectedGarment, setSelectedGarment] = useState<Garment | null>(null)
@@ -94,6 +101,8 @@ export default function Home() {
   const [resultJobId, setResultJobId] = useState<string | null>(null)
   const [resultWatermarked, setResultWatermarked] = useState(false)
   const [showUpsell, setShowUpsell] = useState(false)
+  const [showPaywall, setShowPaywall] = useState(false)
+  const [checkoutLoading, setCheckoutLoading] = useState<'subscription' | 'single' | null>(null)
   const [loading, setLoading] = useState(false)
   const [generationStep, setGenerationStep] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
@@ -128,8 +137,8 @@ export default function Home() {
     uploadTab: string
     galleryTab: string
     galleryHint: string
-    freeBadge: string
     signInToGenerate: string
+    payToGenerate: string
     creditsRemaining: string
     getMoreCredits: string
     tryAnother: string
@@ -137,6 +146,24 @@ export default function Home() {
     watermarkNote: string
     refundNote: string
     moderationError: string
+    paywall: {
+      title: string
+      description: string
+      beforeLabel: string
+      afterLabel: string
+      featureResult: string
+      featureRefund: string
+      featureHistory: string
+      subscriptionTitle: string
+      subscriptionDescription: string
+      subscriptionCta: string
+      singleNote: string
+      singleCta: string
+      secureNote: string
+      plansLink: string
+      closeLabel: string
+      checkoutError: string
+    }
     upsell: {
       title: string
       description: string
@@ -349,10 +376,42 @@ export default function Home() {
     loadSavedModels()
   }, [loadSavedModels])
 
+  // Continue the exact flow the user started before Google sign-in. The two
+  // selected images stay in browser storage, are restored into the UI, and
+  // the one-time payment wall opens immediately after sign-in.
+  useEffect(() => {
+    if (!session?.user || !router.isReady || typeof window === 'undefined') return
+    const resumingAfterLogin = localStorage.getItem('pendingPaywall') === 'true'
+    const returningFromCancelledCheckout = router.query.payment === 'cancelled'
+    if (!resumingAfterLogin && !returningFromCancelledCheckout) return
+
+    const storedModel = safeGetItem('modelImage')
+    const storedClothing = safeGetItem('clothingImage')
+    safeRemoveItem('pendingPaywall')
+
+    if (!storedModel || !storedClothing) return
+
+    setModelImage(null)
+    setClothingImage(null)
+    setSelectedModelUrl(storedModel)
+    setSelectedClothingUrl(storedClothing)
+    setSelectedGarment(null)
+    setClothingTab('upload')
+    setShowPaywall(true)
+    trackEvent(
+      returningFromCancelledCheckout ? 'checkout_cancelled' : 'paywall_shown',
+      'conversion',
+      returningFromCancelledCheckout ? 'generation_paywall' : 'post_sign_in'
+    )
+  }, [session?.user, router.isReady, router.query.payment])
+
   // Core generation flow: resolve image URLs (uploading if needed), call AI, poll result
   const runGeneration = useCallback(async (model: ImageInput, clothing: ImageInput) => {
     abortRef.current = false;
     let jobId: string | null = null;
+
+    analytics.virtualTryOn.start()
+    analytics.virtualTryOn.generate_start()
 
     const updateJob = (data: Record<string, string>) =>
       jobId
@@ -512,12 +571,14 @@ export default function Home() {
       : selectedModelUrl;
     const clothing = clothingImage
       ? await fileToBase64(clothingImage)
+      : selectedClothingUrl
+      ? selectedClothingUrl
       : selectedGarment
       ? garmentAbsoluteUrl(selectedGarment)
       : null;
     if (!model || !clothing) return null;
     return { model, clothing };
-  }, [modelImage, clothingImage, selectedModelUrl, selectedGarment]);
+  }, [modelImage, clothingImage, selectedModelUrl, selectedClothingUrl, selectedGarment]);
 
   const handleGenerate = useCallback(async () => {
     const inputs = await getInputStrings();
@@ -529,16 +590,16 @@ export default function Home() {
 
     // Must be logged in
     if (!session?.user) {
-      // Save images before redirect so they persist after login
+      // Save the exact selection and resume at the payment wall after login.
       safeSetItem('modelImage', inputs.model);
       safeSetItem('clothingImage', inputs.clothing);
       safeSetItem('imageUploadTimestamp', Date.now().toString());
-      signIn('google');
+      safeSetItem('pendingPaywall', 'true');
+      trackEvent('paywall_sign_in', 'conversion', 'generation');
+      signIn('google', { callbackUrl: `${window.location.origin}${router.asPath.split('#')[0]}#ai-fashion` });
       return;
     }
 
-    analytics.virtualTryOn.start()
-    analytics.virtualTryOn.generate_start()
     setLoading(true);
     setError(null);
     setResultImage(null);
@@ -558,11 +619,13 @@ export default function Home() {
         safeRemoveItem('clothingImage');
         safeRemoveItem('imageUploadTimestamp');
       } else {
-        // No credits: save images to localStorage for after payment, then go to pricing
+        // No credit: preserve the user's exact inputs and ask for the $1
+        // one-time purchase before any external generation cost is incurred.
         safeSetItem('modelImage', inputs.model);
         safeSetItem('clothingImage', inputs.clothing);
         safeSetItem('imageUploadTimestamp', Date.now().toString());
-        router.push('/pricing');
+        setShowPaywall(true);
+        trackEvent('paywall_shown', 'conversion', 'generation');
       }
     } catch (err) {
       console.error('Generation error:', err);
@@ -577,7 +640,79 @@ export default function Home() {
       setLoading(false);
       setGenerationStep('');
     }
-  }, [commonT, getInputStrings, session, router, runGeneration, tryOnT.moderationError]);
+  }, [commonT, getInputStrings, session, router.asPath, runGeneration, tryOnT.moderationError]);
+
+  const handlePaywallCheckout = useCallback(async () => {
+    setCheckoutLoading('single')
+    setError(null)
+    trackEvent('paywall_checkout_click', 'conversion', 'generation_paywall', 1)
+
+    try {
+      const inputs = await getInputStrings()
+      if (!inputs) throw new Error(tryOnT.paywall.checkoutError)
+
+      safeSetItem('modelImage', inputs.model)
+      safeSetItem('clothingImage', inputs.clothing)
+      safeSetItem('imageUploadTimestamp', Date.now().toString())
+
+      const res = await fetch('/api/create-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ source: 'generation_paywall' }),
+      })
+      const data = await res.json()
+      if (!res.ok || !data.url) {
+        throw new Error(data.message || tryOnT.paywall.checkoutError)
+      }
+
+      trackEvent('checkout_created', 'conversion', 'generation_paywall', 1)
+      window.location.href = data.url
+    } catch (err) {
+      console.error('Checkout error:', err)
+      trackEvent('checkout_error', 'conversion', 'generation_paywall')
+      setError(tryOnT.paywall.checkoutError)
+      setShowPaywall(false)
+      setCheckoutLoading(null)
+    }
+  }, [getInputStrings, tryOnT.paywall.checkoutError])
+
+  const handlePaywallSubscribe = useCallback(async () => {
+    setCheckoutLoading('subscription')
+    setError(null)
+    trackEvent('paywall_subscription_click', 'conversion', 'generation_paywall_basic')
+
+    try {
+      const inputs = await getInputStrings()
+      if (!inputs) throw new Error(tryOnT.paywall.checkoutError)
+
+      safeSetItem('modelImage', inputs.model)
+      safeSetItem('clothingImage', inputs.clothing)
+      safeSetItem('imageUploadTimestamp', Date.now().toString())
+
+      const res = await fetch('/api/create-subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          planId: 'basic',
+          cadence: 'monthly',
+          source: 'generation_paywall_subscription',
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok || !data.url) {
+        throw new Error(data.message || tryOnT.paywall.checkoutError)
+      }
+
+      trackEvent('checkout_created', 'conversion', 'generation_paywall_subscription')
+      window.location.href = data.url
+    } catch (err) {
+      console.error('Subscription checkout error:', err)
+      trackEvent('checkout_error', 'conversion', 'generation_paywall_subscription')
+      setError(tryOnT.paywall.checkoutError)
+      setShowPaywall(false)
+      setCheckoutLoading(null)
+    }
+  }, [getInputStrings, tryOnT.paywall.checkoutError])
 
   // Unlock HD: send the user through the $1 checkout tied to the current job.
   // After payment, /success returns with the same image watermark-free (no
@@ -637,6 +772,7 @@ export default function Home() {
   const handleSelectGarment = (garment: Garment) => {
     setSelectedGarment(garment);
     setClothingImage(null);
+    setSelectedClothingUrl(null);
     trackEvent('garment_gallery_select', 'virtual_tryon', garment.id);
     if (error) setError(null);
   };
@@ -658,6 +794,7 @@ export default function Home() {
     setClothingImage(file)
     if (file) {
       setSelectedGarment(null)
+      setSelectedClothingUrl(null)
       analytics.virtualTryOn.upload_clothes()
     }
     // 清除错误信息当用户重新上传时
@@ -686,7 +823,7 @@ export default function Home() {
     operatingSystem: 'Web Browser',
     offers: {
       '@type': 'Offer',
-      price: '0',
+      price: '1',
       priceCurrency: 'USD'
     },
     featureList: features.map(feature => feature.name)
@@ -846,12 +983,6 @@ export default function Home() {
               <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
                 {heroContent.description}
               </p>
-              {!session && (
-                <div className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-indigo-600/10 to-purple-600/10 ring-1 ring-indigo-200 px-4 py-1.5 text-sm font-semibold text-indigo-700">
-                  <SparklesIcon className="w-4 h-4" />
-                  {tryOnT.freeBadge}
-                </div>
-              )}
             </div>
 
             {/* Try-On Interface */}
@@ -935,6 +1066,24 @@ export default function Home() {
                 </div>
                 {clothingTab === 'upload' ? (
                   <div>
+                    {selectedClothingUrl ? (
+                      <div className="relative h-64 w-full overflow-hidden rounded-lg border-2 border-green-300 bg-gray-50">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={selectedClothingUrl}
+                          alt={demoContent.clothing.title}
+                          className="h-full w-full object-contain"
+                        />
+                        <button
+                          onClick={() => setSelectedClothingUrl(null)}
+                          className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-sm text-white transition-colors hover:bg-red-600"
+                          aria-label="Clear"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ) : (
+                      <>
                     {selectedGarment && (
                       <div className="mb-3 flex items-center gap-2 rounded-lg bg-indigo-50 px-3 py-2 text-sm text-indigo-700">
                         <span className="font-medium">{tryOnT.garments[selectedGarment.nameKey]}</span>
@@ -954,6 +1103,8 @@ export default function Home() {
                       maxSize={5}
                       acceptedTypes={['image/jpeg', 'image/png', 'image/webp']}
                     />
+                      </>
+                    )}
                   </div>
                 ) : (
                   <div>
@@ -1023,22 +1174,22 @@ export default function Home() {
             <div className="mt-8 text-center">
               <button
                 onClick={handleGenerate}
-                disabled={loading || (!modelImage && !selectedModelUrl) || (!clothingImage && !selectedGarment)}
+                disabled={loading || (!modelImage && !selectedModelUrl) || (!clothingImage && !selectedClothingUrl && !selectedGarment)}
                 className={`px-10 py-4 rounded-xl text-lg font-semibold text-white shadow-lg transition-all duration-200
-                  ${loading || (!modelImage && !selectedModelUrl) || (!clothingImage && !selectedGarment)
+                  ${loading || (!modelImage && !selectedModelUrl) || (!clothingImage && !selectedClothingUrl && !selectedGarment)
                     ? 'bg-gray-400 cursor-not-allowed'
                     : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 hover:shadow-xl hover:-translate-y-0.5'
                   }`}
               >
                 {loading ? demoContent.generating : demoContent.generateButton}
               </button>
-              {!loading && (modelImage || selectedModelUrl) && (clothingImage || selectedGarment) && (
+              {!loading && (modelImage || selectedModelUrl) && (clothingImage || selectedClothingUrl || selectedGarment) && (
                 <p className="mt-2 text-sm text-gray-500">
                   {!session
                     ? tryOnT.signInToGenerate
                     : session.user.credits > 0
                     ? tryOnT.creditsRemaining.replace('{count}', String(session.user.credits))
-                    : <Link href="/pricing" className="text-indigo-600 hover:underline">{tryOnT.getMoreCredits}</Link>
+                    : tryOnT.payToGenerate
                   }
                 </p>
               )}
@@ -1094,13 +1245,28 @@ export default function Home() {
                     </a>
                   )}
                   <button
-                    onClick={() => { setResultImage(null); setResultJobId(null); setResultWatermarked(false); setClothingImage(null); setSelectedGarment(null); setClothingTab('gallery'); }}
+                    onClick={() => { setResultImage(null); setResultJobId(null); setResultWatermarked(false); setClothingImage(null); setSelectedClothingUrl(null); setSelectedGarment(null); setClothingTab('gallery'); }}
                     className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
                   >
                     {tryOnT.tryAnother}
                   </button>
                 </div>
               </div>
+            )}
+
+            {showPaywall && (
+              <GenerationPaywall
+                copy={tryOnT.paywall}
+                subscriptionPrice={BASIC_MONTHLY_PRICE}
+                checkoutLoading={checkoutLoading}
+                onSubscribe={handlePaywallSubscribe}
+                onSingleCheckout={handlePaywallCheckout}
+                onClose={() => {
+                  setShowPaywall(false)
+                  setCheckoutLoading(null)
+                  trackEvent('paywall_dismissed', 'conversion', 'generation_paywall')
+                }}
+              />
             )}
 
             {/* Upsell modal after a watermarked (free) generation */}

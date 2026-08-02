@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { trackEvent } from '../utils/analytics';
 
 export default function Success() {
   const router = useRouter();
@@ -26,9 +27,19 @@ export default function Success() {
           return;
         }
 
+        if (!data.already_processed) {
+          trackEvent('payment_success', 'conversion', data.source || type || 'single', 1);
+        }
+
         if (type === 'subscription') {
-          // Subscription: go to account page
-          router.replace('/account?subscription=success');
+          if (data.source === 'generation_paywall_subscription') {
+            // Subscription bought from the generation paywall: use the first
+            // included credit immediately with the photos already preserved.
+            localStorage.setItem('pendingGeneration', 'true');
+            router.replace('/#ai-fashion');
+          } else {
+            router.replace('/account?subscription=success');
+          }
         } else if (data.unlockedJobId) {
           // $1 unlock: the existing result is now watermark-free, show it
           localStorage.setItem('unlockedJobId', data.unlockedJobId);

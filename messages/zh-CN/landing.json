@@ -1,11 +1,11 @@
 {
   "pageHeading": "虚拟试衣技术 - 直观看到服装上身效果",
   "seo": {
-    "title": "免费 AI 虚拟试穿 — 在线查看衣服上身效果 | DressMeAI",
-    "description": "DressMeAI 免费 AI 虚拟试穿：上传照片、选择服装，几秒看到真实上身效果。首次试穿免费，无需下载 App。",
+    "title": "AI 虚拟试穿 — 在线查看衣服上身效果 | DressMeAI",
+    "description": "DressMeAI AI 虚拟试穿：上传照片、选择服装，单次 $1 生成真实上身效果，无需订阅或下载 App。",
     "keywordsPrimary": "虚拟试衣, 在线试衣, AI 试衣间, 虚拟试衣镜, 在线试衣间, AI 时尚助手, 试穿衣服, 虚拟衣橱, 先试后买, AI 试穿",
-    "keywordsSecondary": "如何在线试衣, 虚拟试衣 App, 免费虚拟试衣, AI 服装合成, 虚拟穿搭, 在线衣服模拟器, 虚拟搭配助手, 虚拟衣柜",
-    "ogDescription": "免费 AI 虚拟试衣，即刻看到真实上身效果。",
+    "keywordsSecondary": "如何在线试衣, 虚拟试衣 App, AI 服装合成, 虚拟穿搭, 在线衣服模拟器, 虚拟搭配助手, 虚拟衣柜",
+    "ogDescription": "单次 $1 AI 虚拟试衣，即刻生成真实上身效果。",
     "twitterTitle": "AI 虚拟试衣在线体验 | DressMeAI",
     "twitterDescription": "上传人物与服装照片，数秒生成拟真试衣效果。",
     "schemaDescription": "AI 驱动的虚拟试衣与个性化穿搭推荐平台"
@@ -168,8 +168,8 @@
         "answer": "我们的AI技术提供高度逼真的结果，准确呈现服装穿在您身上的效果。虽然虚拟试衣是近似值，实际合身度可能略有不同，但我们的技术帮助您做出更明智的购买决定，显著降低退货率。"
       },
       {
-        "question": "DressMeAI是免费的吗？",
-        "answer": "DressMeAI提供免费和高级选项。您可以免费试用我们的基本虚拟试衣功能，高级功能面向高级用户和企业开放。"
+        "question": "DressMeAI如何收费？",
+        "answer": "单次虚拟试衣为1美元，无需订阅。需要频繁使用的用户也可以选择订阅方案。"
       },
       {
         "question": "什么样的照片效果最好？",
@@ -311,8 +311,8 @@
     "uploadTab": "上传",
     "galleryTab": "服装库",
     "galleryHint": "选择一件衣服，立即试穿",
-    "freeBadge": "新用户免费试穿 1 次",
-    "signInToGenerate": "登录即可生成——首次试穿免费",
+    "signInToGenerate": "登录后选择方案并生成",
+    "payToGenerate": "继续选择生成方案",
     "creditsRemaining": "剩余 {count} 次",
     "getMoreCredits": "获取更多次数",
     "tryAnother": "换一件试试",
@@ -320,6 +320,24 @@
     "watermarkNote": "免费预览：解锁后可查看完整图片。",
     "refundNote": "本次消耗的次数已退回。",
     "moderationError": "这张照片未通过平台内容审核。请换一张日常着装、正面清晰的照片重试，积分已退回。",
+    "paywall": {
+      "title": "不只试这一套，继续探索更多穿搭",
+      "description": "照片已经准备好。开通基础版即可生成当前效果，并继续尝试更多服装。",
+      "beforeLabel": "原始照片",
+      "afterLabel": "AI 试穿",
+      "featureResult": "每月 50 次高清无水印试穿",
+      "featureRefund": "生成失败自动退回本次试穿",
+      "featureHistory": "结果安全保存到你的账户",
+      "subscriptionTitle": "基础版",
+      "subscriptionDescription": "每月 50 次高清试穿，随时可以取消。",
+      "subscriptionCta": "开通基础版",
+      "singleNote": "只需要生成这一次？",
+      "singleCta": "$1 单次生成",
+      "secureNote": "由 Stripe 提供安全支付",
+      "plansLink": "比较全部订阅方案",
+      "closeLabel": "关闭",
+      "checkoutError": "暂时无法打开安全支付，请重试。"
+    },
     "upsell": {
       "title": "解锁高清无水印",
       "description": "喜欢这个效果？解锁高清原图，继续试穿更多服装。",

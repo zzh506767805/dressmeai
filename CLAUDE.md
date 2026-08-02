@@ -239,6 +239,25 @@ AZURE_STORAGE_CONTAINER=tryon-images
 
 ## Recent Updates
 
+### 2026-08-02 (Generation-before-paywall restored, see docs/paywall-front-2026-08-02.md)
+- New signups no longer receive a free credit; existing balances are preserved
+- Flow is now select photos → Google sign-in → subscription-first animated paywall → Stripe → automatic generation
+- The paywall leads with the Basic monthly plan (50 try-ons); the $1 single generation remains a secondary option
+- Removed the homepage “One try-on · $1 · No subscription” promotional pill
+- Login and payment redirects preserve and restore both inputs through localStorage + sessionStorage; fixed the global cleanup that previously deleted data URLs as invalid JSON
+- Single-payment checkout now requires authentication, prefills the account email, returns cancellations to the try-on section, and records `source` metadata
+- Added `paywall_shown`, `paywall_sign_in`, `paywall_subscription_click`, `paywall_checkout_click`, `checkout_created`, `checkout_error`, `checkout_cancelled`, and `payment_success` events
+- Added a responsive scan/reveal paywall demo using four Azure GPT Image 2 assets in `public/images/paywall-demo/`
+- Updated all 9 locales and homepage SEO from “first try free” to paid generation; the paywall now favors subscription
+
+### 2026-08-02 (Conversion review, see docs/conversion-review-2026-08-02.md)
+- 2026-07-19 to 2026-08-01: 62 signups, 46 started generation (74.2%), 42 saw a successful result (67.7%), 0 paid
+- Activation remains far above the original 40% target, but 16 new users registered without starting generation; code review found the Google-login return flow saves inputs but does not restore or resume generation
+- 33 GA users saw the upsell, 5 clicked an upgrade entry, and 3 identifiable users opened 5 job-bound $1 Checkout Sessions; all expired unpaid
+- The subscription-first upsell produced 0 subscription Checkout Sessions; recommend restoring $1 unlock as the primary first-purchase offer
+- Only 1 of 54 recent jobs timed out (1.9% technical failure); 11 of 12 failures were content moderation rejects
+- Next priorities: fix login resume, show a fully judgeable low-resolution watermarked preview, reduce moderation failures, and add source-specific checkout/payment events
+
 ### 2026-07-11 (Locked preview + $1 unlocks the existing image)
 - Week-1 review of the 07-04 overhaul: activation 82% (28/34) but $1 unlock 0/22 — watermark was too light to motivate payment
 - Free preview redesigned in `pages/api/status.ts`: bottom 70% of the image is blurred + dark panel + lock icon + "Unlock the full image"; visible top 30% keeps a light DressMeAI tile. `watermarkNote` copy updated in all 9 locales

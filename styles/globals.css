@@ -57,4 +57,55 @@ h1, h2, h3, h4, h5, h6 {
 /* Utility classes */
 .text-balance {
   text-wrap: balance;
-} 
+}
+
+@keyframes paywall-result-reveal {
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+  18%,
+  78% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+@keyframes paywall-scan {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  45% {
+    top: 100%;
+    opacity: 1;
+  }
+  55%,
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.paywall-result-reveal {
+  animation: paywall-result-reveal 3.6s ease-in-out both;
+}
+
+.paywall-scan-line {
+  animation: paywall-scan 3.6s ease-in-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paywall-result-reveal {
+    animation: none;
+    clip-path: inset(0);
+  }
+
+  .paywall-scan-line {
+    display: none;
+  }
+}

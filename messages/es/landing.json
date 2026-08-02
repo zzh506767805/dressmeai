@@ -1,12 +1,12 @@
 {
   "pageHeading": "Tecnología de probador virtual: mira cómo te queda la ropa",
   "seo": {
-    "title": "Prueba virtual de ropa con IA gratis — Ve la ropa en tu cuerpo | DressMeAI",
-    "description": "Prueba virtual de ropa con IA gratis en DressMeAI: sube tu foto, elige una prenda y ve el resultado en segundos. Primera prueba gratis, sin app.",
+    "title": "Prueba virtual de ropa con IA — Ve la ropa en tu cuerpo | DressMeAI",
+    "description": "Prueba virtual de ropa con IA en DressMeAI: sube tu foto, elige una prenda y genera un resultado realista por 1 $, sin suscripción.",
     "keywordsPrimary": "probador virtual, IA de moda, probar ropa online, espejo virtual, armario virtual",
-    "keywordsSecondary": "cómo probar ropa online, app de probador virtual, probador gratuito, asistente de moda IA",
+    "keywordsSecondary": "cómo probar ropa online, app de probador virtual, asistente de moda IA",
     "ogDescription": "Prueba tus looks con IA y ve el resultado de inmediato.",
-    "twitterTitle": "Probador virtual AI gratis | DressMeAI",
+    "twitterTitle": "Probador virtual AI | DressMeAI",
     "twitterDescription": "Sube una foto y descubre el resultado en segundos.",
     "schemaDescription": "Plataforma de probador virtual y recomendaciones personalizadas basada en IA"
   },
@@ -168,8 +168,8 @@
         "answer": "Nuestra tecnologia de IA proporciona resultados muy realistas que representan con precision como se vera la ropa en ti. Si bien las pruebas virtuales son aproximaciones y el ajuste real puede variar ligeramente, nuestra tecnologia te ayuda a tomar decisiones de compra mas informadas y reduce significativamente la probabilidad de devoluciones."
       },
       {
-        "question": "Es gratuito DressMeAI?",
-        "answer": "DressMeAI ofrece opciones gratuitas y premium. Puedes probar nuestras funciones basicas de probador virtual gratis, con funciones premium disponibles para usuarios avanzados y empresas."
+        "question": "Cuanto cuesta DressMeAI?",
+        "answer": "Una prueba virtual cuesta 1 dolar y no requiere suscripcion. Tambien hay planes para quienes necesitan usarlo con frecuencia."
       },
       {
         "question": "Que tipo de fotos funcionan mejor?",
@@ -311,8 +311,8 @@
     "uploadTab": "Subir",
     "galleryTab": "Galería",
     "galleryHint": "Elige una prenda y pruébatela al instante",
-    "freeBadge": "Los nuevos usuarios tienen 1 prueba gratis",
-    "signInToGenerate": "Inicia sesión para generar — tu primera prueba es gratis",
+    "signInToGenerate": "Inicia sesión, elige un plan y genera",
+    "payToGenerate": "Continuar a las opciones",
     "creditsRemaining": "{count} créditos restantes",
     "getMoreCredits": "Obtener más créditos",
     "tryAnother": "Probar otro conjunto",
@@ -320,6 +320,24 @@
     "watermarkNote": "Vista previa gratuita: desbloquea para ver la imagen completa.",
     "refundNote": "Tu crédito ha sido reembolsado.",
     "moderationError": "Esta foto no pasó la revisión de contenido. Prueba con una foto nítida, de frente y con ropa de diario: tu crédito ha sido reembolsado.",
+    "paywall": {
+      "title": "Crea más de un solo look",
+      "description": "Tus fotos están listas. Empieza con Basic, genera este look y sigue probando nuevos conjuntos.",
+      "beforeLabel": "Tu foto",
+      "afterLabel": "Prueba con IA",
+      "featureResult": "50 pruebas HD sin marca de agua al mes",
+      "featureRefund": "Si falla la generación, recuperas automáticamente la prueba",
+      "featureHistory": "El resultado se guarda de forma segura en tu cuenta",
+      "subscriptionTitle": "Plan Basic",
+      "subscriptionDescription": "50 pruebas de alta calidad al mes. Cancela cuando quieras.",
+      "subscriptionCta": "Empezar con Basic",
+      "singleNote": "¿Solo necesitas un resultado?",
+      "singleCta": "Generar una vez por 1 $",
+      "secureNote": "Pago seguro con Stripe",
+      "plansLink": "Comparar todos los planes",
+      "closeLabel": "Cerrar",
+      "checkoutError": "No se pudo abrir el pago seguro. Inténtalo de nuevo."
+    },
     "upsell": {
       "title": "Desbloquea HD sin marca de agua",
       "description": "¿Te gusta el resultado? Obtén la imagen en máxima calidad y sigue probándote ropa nueva.",

@@ -137,8 +137,8 @@ export default function Pricing() {
             Choose Your Plan
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-            Upgrade for more try-ons and premium features. No account needed for
-            single try-ons at $1 each.
+            Upgrade for more try-ons and premium features, or sign in for a
+            single try-on at $1.
           </p>
 
           {/* Cadence Toggle */}
@@ -276,6 +276,7 @@ export default function Pricing() {
                   const res = await fetch("/api/create-payment", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ source: "pricing_single" }),
                   });
                   const data = await res.json();
                   if (data.url) {
