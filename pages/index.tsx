@@ -1781,12 +1781,20 @@ export default function Home() {
             Dreamfinityx.com
           </a>
           <a
-            href="https://charactereadcanon.pro"
+            href="https://characterheadcanon.pro"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-800 underline transition-colors"
           >
-            Charactereadcanon.pro
+            Characterheadcanon.pro
+          </a>
+          <a
+            href="https://englishspeakingapp.com"
+            target="_blank"
+            rel="noopener"
+            className="text-blue-600 hover:text-blue-800 underline transition-colors"
+          >
+            English Speaking App
           </a>
           <a
             href="https://elfname.pro"
