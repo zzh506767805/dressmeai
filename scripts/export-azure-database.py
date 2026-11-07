@@ -17,6 +17,21 @@ r=subprocess.run(['psql','-X','-q','-A','-t','-f','-'],input=sql,env=env,capture
 if r.returncode:raise SystemExit('Read-only export failed (credentials withheld)')
 snapshot=json.loads(r.stdout.strip());target=out/'database.json';target.write_text(json.dumps(snapshot,ensure_ascii=False));target.chmod(0o600)
 r=subprocess.run(['pg_dump','--format=custom','--file',str(out/'postgres.dump')],env=env,capture_output=True,text=True)
-if r.returncode:raise SystemExit('JSON saved, PostgreSQL backup failed (credentials withheld)')
-(out/'postgres.dump').chmod(0o600)
-print(json.dumps({'snapshot_utc':snapshot['snapshot_utc'],'tables':{t:len(snapshot['tables'][t]) for t in tables},'backup_directory':str(out)},ensure_ascii=False))
+backup_format='postgres_custom_dump'
+if r.returncode:
+    # Older local pg_dump cannot read a newer Azure server. Preserve a complete,
+    # restorable schema + data script instead of leaving a misleading empty dump.
+    schema=subprocess.run(['npx','prisma','migrate','diff','--from-empty','--to-schema-datamodel','prisma/azure-schema.prisma','--script'],capture_output=True,text=True,check=True).stdout
+    def literal(value):
+        if value is None:return 'NULL'
+        if isinstance(value,bool):return 'TRUE' if value else 'FALSE'
+        if isinstance(value,(int,float)):return str(value)
+        return "'"+str(value).replace("'","''")+"'"
+    restore=schema+'\n'
+    for table in tables:
+        for row in snapshot['tables'][table]:
+            restore+='INSERT INTO "'+table+'" ('+','.join('"'+key+'"' for key in row)+') VALUES ('+','.join(literal(value) for value in row.values())+');\n'
+    target=out/'postgres-restore.sql';target.write_text(restore);target.chmod(0o600)
+    backup_format='schema_and_data_sql'
+else:(out/'postgres.dump').chmod(0o600)
+print(json.dumps({'snapshot_utc':snapshot['snapshot_utc'],'tables':{t:len(snapshot['tables'][t]) for t in tables},'backup_format':backup_format,'backup_directory':str(out)},ensure_ascii=False))
