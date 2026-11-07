@@ -1,0 +1,43 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dressmeai-preview",
+  "main": "cloudflare-worker.ts",
+  "compatibility_date": "2026-11-07",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "dressmeai-preview",
+      "database_id": "9184c862-0cc0-493d-8052-f1a47dce233d",
+      "migrations_dir": "prisma/d1-migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "IMAGES_BUCKET",
+      "bucket_name": "dressmeai-preview-images"
+    }
+  ],
+  "vars": {
+    "NEXT_PUBLIC_BASE_URL": "http://localhost:8787",
+    "NEXTAUTH_URL": "http://localhost:8787",
+    "DEPLOYMENT_STAGE": "preview"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "triggers": {
+    "crons": [
+      "*/5 * * * *"
+    ]
+  },
+  "account_id": "2fd40fedbf8b53361c2f2f8cfd49ba8d"
+}

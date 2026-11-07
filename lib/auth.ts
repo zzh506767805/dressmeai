@@ -1,8 +1,8 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
+import { D1AuthAdapter } from "./auth-adapter";
 import { NextAuthOptions, getServerSession } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
-import { prisma } from "@/lib/db";
+
 
 function getEnv(name: string) {
   const value = process.env[name];
@@ -11,7 +11,7 @@ function getEnv(name: string) {
 }
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma) as Adapter,
+  adapter: D1AuthAdapter() as Adapter,
   providers: [
     GoogleProvider({
       clientId: getEnv("GOOGLE_CLIENT_ID"),

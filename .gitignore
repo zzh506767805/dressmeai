@@ -40,3 +40,9 @@ next-env.d.ts *.backup
 
 /doc
 /generated/prisma
+
+# Cloudflare runtime and private migration backups
+.open-next/
+.wrangler/
+.dev.vars*
+.migration/

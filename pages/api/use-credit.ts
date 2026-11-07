@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { prisma } from "@/lib/db";
+import { getUser } from "@/lib/db";
+import { reserveCredit } from '@/lib/atomic';
+import { getCloudflareEnv } from '@/lib/cloudflare';
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,33 +18,19 @@ export default async function handler(
     return res.status(401).json({ message: "Not authenticated" });
   }
 
-  const user = await prisma.user.findUnique({
-    where: { id: session.user.id },
-    select: { credits: true, subscriptionStatus: true },
-  });
-
-  if (!user || user.credits <= 0) {
+  const requestKey = req.headers['idempotency-key'];
+  if (typeof requestKey !== 'string' || !/^[a-zA-Z0-9-]{16,80}$/.test(requestKey)) {
+    return res.status(400).json({ message: 'Missing generation request key' });
+  }
+  const jobId = await reserveCredit(getCloudflareEnv().DB, session.user.id, requestKey);
+  if (!jobId) {
     return res.status(403).json({ message: "No credits remaining" });
   }
-
-  // Deduct 1 credit atomically
-  const updated = await prisma.user.updateMany({
-    where: { id: session.user.id, credits: { gt: 0 } },
-    data: { credits: { decrement: 1 } },
-  });
-
-  if (updated.count === 0) {
-    return res.status(403).json({ message: "No credits remaining" });
-  }
-
-  // Create TryOnJob record
-  const job = await prisma.tryOnJob.create({
-    data: { userId: session.user.id, status: "PENDING" },
-  });
+  const user = await getUser(session.user.id);
 
   res.status(200).json({
     success: true,
-    jobId: job.id,
-    remainingCredits: user.credits - 1,
+    jobId,
+    remainingCredits: user?.credits ?? 0,
   });
 }

@@ -58,3 +58,14 @@
 - 支付成功后必须能够自动恢复原图并继续生成；不得把 base64/URL 当 JSON 清理。
 - Stripe metadata 的 `source` 用于区分 `generation_paywall`、`generation_paywall_subscription`、`pricing_single`、`legacy_unlock`。
 - 付费墙演示图位于 `public/images/paywall-demo/`，由 Azure GPT Image 2 生成；界面明确作为效果演示，不使用用户图片。
+
+## Cloudflare 迁移状态（2026-11-07）
+- 代码在 `codex/cloudflare-migration` 分支，已适配 Workers + OpenNext、D1 和私有 R2；Azure 正式站尚未切换。
+- 当前分支 `/api/upload` 接收浏览器压缩后的 JPEG 二进制（最多 1MB），要求登录及 `X-Job-Id` / `X-Image-Kind`；不再接收 base64 JSON。
+- `lib/atomic.ts` 用 D1 原子批处理处理扣次数/创建任务、失败/退次数、付款/发放权益；业务读写及登录使用原生 D1，不加载 Prisma 运行时。不能改回 Prisma 交互式事务。
+- 图片通过 `/api/image?key=` 校验归属；AI 使用 1 小时签名，历史锁定原图不可通过普通图片权限获取。
+- `/api/internal/recover` 由每 5 分钟任务调用，必须携带 `RECOVERY_SECRET`；存储失败保持可重试，不能把临时 AI URL 当作最终保存结果。
+- 详细执行、验证、部署阻碍见 `docs/cloudflare-migration-progress-2026-11-07.md`；私有备份在 `.migration/`，不得提交。
+- Cloudflare 账户尚未授权，线上 CPU、免费图片转换及真实 Google/Stripe 回调尚待云端验收；不能把本地模拟成功描述为已完成上线。
+
+- 为免费算力预算，预渲染页面、页面数据、RSS 和 sitemap 直接作为静态资源响应；只有 API 使用服务端运行时。部署包构建后必须执行页面/RSS 物化脚本。

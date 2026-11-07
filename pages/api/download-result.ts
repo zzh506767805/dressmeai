@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
+import { readImageResponse, readImageBytes } from '@/lib/blob';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { prisma } from '@/lib/db';
+import { getJob } from '@/lib/db';
 
 // Proxies a try-on result as a real file download. Needed because result images
 // live on external hosts (Azure Blob / DashScope OSS) where a plain link either
@@ -25,20 +25,14 @@ export default async function handler(
     return res.status(400).json({ message: 'Job ID is required' });
   }
 
-  const job = await prisma.tryOnJob.findFirst({
-    where: { id: jobId, userId: session.user.id },
-    select: { resultImageUrl: true },
-  });
+  const job = await getJob(jobId, session.user.id);
   if (!job?.resultImageUrl) {
     return res.status(404).json({ message: 'Result not found' });
   }
 
   try {
-    const download = await axios.get<ArrayBuffer>(job.resultImageUrl, {
-      responseType: 'arraybuffer',
-      timeout: 30000,
-    });
-    const buffer = Buffer.from(download.data);
+    const download = await readImageResponse(job.resultImageUrl);
+    const buffer = await readImageBytes(download);
     res.setHeader('Content-Type', 'image/jpeg');
     res.setHeader('Content-Disposition', `attachment; filename="dressmeai-tryon-${jobId}.jpg"`);
     res.setHeader('Content-Length', buffer.length);

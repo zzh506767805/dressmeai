@@ -1,91 +1,51 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import sharp from 'sharp';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { prisma } from '@/lib/db';
-import { uploadImageBuffer, deleteBlobByUrl } from '@/lib/blob';
+import { getJob, addSavedModel, getSavedModels, removeSavedModel, imageReferences } from '@/lib/db';
+import { imageUrlForKey, deleteBlobByUrl } from '@/lib/blob';
+import { getCloudflareEnv } from '@/lib/cloudflare';
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '10mb',
-    },
-  },
-};
+export const config = { api: { bodyParser: false } };
+const MAX_BYTES = 1024 * 1024;
 
-interface ErrorResponse {
-  message: string;
-}
-
-interface SuccessResponse {
-  url: string;
-}
-
-const MAX_SAVED_MODELS = 3;
-
-// Keep the user's most recent model photos for one-click reuse, capped at
-// MAX_SAVED_MODELS (oldest entries and their blobs are evicted).
-async function saveModelImage(userId: string, imageUrl: string) {
-  await prisma.savedModelImage.create({ data: { userId, imageUrl } });
-  const excess = await prisma.savedModelImage.findMany({
-    where: { userId },
-    orderBy: { createdAt: 'desc' },
-    skip: MAX_SAVED_MODELS,
-  });
-  for (const item of excess) {
-    await prisma.savedModelImage.delete({ where: { id: item.id } });
-    await deleteBlobByUrl(item.imageUrl);
-  }
-}
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<SuccessResponse | ErrorResponse>
-) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
-  }
-
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== 'POST') return res.status(405).json({ message: 'Method not allowed' });
+  const session = await getServerSession(req, res, authOptions);
+  if (!session?.user?.id) return res.status(401).json({ message: 'Not authenticated' });
+  const jobId = req.headers['x-job-id'];
+  const kind = req.headers['x-image-kind'];
+  if (typeof jobId !== 'string' || !['model', 'clothing'].includes(String(kind))) return res.status(400).json({ message: 'Generation job and image slot are required' });
+  const job = await getJob(jobId, session.user.id);
+  if (!job || job.status !== 'PENDING') return res.status(403).json({ message: 'No pending generation job' });
+  const key = `users/${session.user.id}/tryon-${jobId}-${kind}.jpg`;
+  const url = imageUrlForKey(key);
+  const bucket = getCloudflareEnv().IMAGES_BUCKET;
+  if (await bucket.head(key)) return res.status(200).json({ url });
+  if (req.headers['content-type'] !== 'image/jpeg') return res.status(415).json({ message: 'Please upload a JPEG image' });
+  if (Number(req.headers['content-length']) > MAX_BYTES) return res.status(413).json({ message: 'Image is too large' });
   try {
-    const { image, saveAsModel } = req.body;
-
-    if (!image) {
-      return res.status(400).json({ message: 'No image provided' });
+    const parts: Buffer[] = [];
+    let size = 0;
+    for await (const part of req) {
+      size += part.length;
+      if (size > MAX_BYTES) return res.status(413).json({ message: 'Image is too large' });
+      parts.push(Buffer.from(part));
     }
-
-    // Remove data:image/xxx;base64, prefix if exists
-    const base64Data = image.replace(/^data:image\/\w+;base64,/, '');
-    const buffer = Buffer.from(base64Data, 'base64');
-
-    // .rotate() with no args applies the EXIF orientation before re-encoding
-    // strips it — otherwise phone portraits get stored physically sideways.
-    const compressedBuffer = await sharp(buffer)
-      .rotate()
-      .resize(1024, 1024, {
-        fit: 'inside',
-        withoutEnlargement: true
-      })
-      .jpeg({
-        quality: 80,
-        progressive: true
-      })
-      .toBuffer();
-
-    const url = await uploadImageBuffer(compressedBuffer, 'tryon');
-
-    if (saveAsModel) {
-      const session = await getServerSession(req, res, authOptions);
-      if (session?.user?.id) {
-        await saveModelImage(session.user.id, url).catch((err) => {
-          console.error('Failed to save model image:', err);
-        });
+    const image = Buffer.concat(parts);
+    if (image.length < 4 || image[0] !== 0xff || image[1] !== 0xd8 || image[2] !== 0xff) return res.status(400).json({ message: 'Invalid JPEG image' });
+    await bucket.put(key, image, { httpMetadata: { contentType: 'image/jpeg' } });
+    if (req.headers['x-save-as-model'] === 'true') {
+      await addSavedModel(session.user.id, url);
+      const excess = (await getSavedModels(session.user.id)).slice(3);
+      for (const entry of excess) {
+        const references = await imageReferences(entry.imageUrl);
+        await removeSavedModel(entry.id, session.user.id);
+        if (!references) await deleteBlobByUrl(entry.imageUrl);
       }
     }
-
     return res.status(200).json({ url });
-  } catch (error: any) {
-    console.error('Upload error:', error);
-    const errorMessage = error?.message || 'Failed to upload image';
-    return res.status(500).json({ message: errorMessage });
+  } catch (error) {
+    console.error('Image upload failed', error instanceof Error ? error.message : 'unknown');
+    return res.status(500).json({ message: 'Failed to upload image' });
   }
 }

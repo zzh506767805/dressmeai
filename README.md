@@ -142,3 +142,28 @@ dressmeai/
 - AI fashion assistant
 - Digital wardrobe
 - Virtual fitting room 
+
+## Cloudflare 迁移分支
+
+当前分支已适配 Cloudflare Workers + 原生 D1 + 私有 R2，正式域名仍由 Azure 提供服务。公开页面/RSS/sitemap 构建后作为静态资源，API 使用 D1 原生查询；Prisma 仅用于类型和 schema 工具，不在请求时加载。
+本地验证不等于线上迁移完成，状态见 [执行记录](docs/cloudflare-migration-progress-2026-11-07.md)。
+
+本地命令：
+
+```bash
+npm ci
+npm run cf:build
+npx wrangler deploy --dry-run --outdir .wrangler/dry-run
+npm run test:cloudflare
+npm run test:integration
+npx wrangler d1 migrations apply dressmeai-preview --local
+npm run cf:preview
+```
+
+- `.dev.vars` 配置本地服务密钥，仅使用测试数据；该文件已忽略，不提交。浏览器压缩图片后以 JPEG 二进制上传。
+- 服务端图片地址和 Stripe 返回地址使用运行时 `NEXTAUTH_URL`，前端 SEO 使用构建时 `NEXT_PUBLIC_BASE_URL`。
+- 绑定：`DB`（D1）、`IMAGES_BUCKET`（私有 R2）、`ASSETS`（静态文件）。配置中的数据库 ID 是本地占位符，正式发布前必须替换成账户内实际 ID。
+- 密钥：`GOOGLE_CLIENT_ID`、`GOOGLE_CLIENT_SECRET`、`NEXTAUTH_SECRET`、`STRIPE_SECRET_KEY`、`STRIPE_WEBHOOK_SECRET`、`ALIYUN_API_KEY`、`RECOVERY_SECRET`。
+- 需先登录 Cloudflare、确认 R2 已启用、创建独立预发布资源，迁移备份，再做云端 CPU、图片转换和回调验收后切换域名。
+- 旧 PostgreSQL 数据结构保存在 `prisma/azure-schema.prisma`；原 Azure 版本应从迁移前 Git 版本恢复，不要直接部署本分支到 Azure。
+- 数据库/图片备份脚本为 `scripts/export-azure-database.py` 和 `scripts/export-azure-images.mjs`；导入准备为 `scripts/prepare-d1-import.py`。备份含非公开数据，保存在忽略目录 `.migration/`。

@@ -1,3 +1,4 @@
+import { prepareImage } from '@/utils/prepare-image';
 import Head from 'next/head'
 import { useState, useCallback, useEffect, useRef } from 'react'
 import Script from 'next/script'
@@ -426,8 +427,8 @@ export default function Home() {
       if (input.url) return input.url;
       const upRes = await fetch('/api/upload', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ image: input.b64, ...(saveAsModel ? { saveAsModel: true } : {}) }),
+        headers: { 'Content-Type': 'image/jpeg', 'X-Save-As-Model': String(saveAsModel), 'X-Job-Id': jobId!, 'X-Image-Kind': saveAsModel ? 'model' : 'clothing' },
+        body: await prepareImage(await (await fetch(input.b64!)).blob()),
       });
       if (!upRes.ok) throw new Error('Failed to upload image');
       const { url } = await upRes.json();
@@ -435,7 +436,7 @@ export default function Home() {
     };
 
     setGenerationStep('Checking credits...');
-    const creditRes = await fetch('/api/use-credit', { method: 'POST' });
+    const creditRes = await fetch('/api/use-credit', { method: 'POST', headers: { 'Idempotency-Key': crypto.randomUUID() } });
     if (!creditRes.ok) {
       const data = await creditRes.json();
       throw new Error(data.message || 'Failed to use credit');
@@ -537,12 +538,12 @@ export default function Home() {
   // Auto-generate after single payment redirect
   useEffect(() => {
     const pending = typeof window !== 'undefined' && localStorage.getItem('pendingGeneration');
-    if (!pending) return;
-    localStorage.removeItem('pendingGeneration');
+    if (!pending || !session?.user?.id) return;
 
     const mStored = safeGetItem('modelImage');
     const cStored = safeGetItem('clothingImage');
     if (!mStored || !cStored) return;
+    localStorage.removeItem('pendingGeneration');
 
     setLoading(true);
     setError(null);
@@ -562,7 +563,7 @@ export default function Home() {
         setLoading(false);
         setGenerationStep('');
       });
-  }, [runGeneration]);
+  }, [runGeneration, session?.user?.id]);
 
   // Current inputs as storable strings (base64 for uploads, URL for presets/saved)
   const getInputStrings = useCallback(async (): Promise<{ model: string; clothing: string } | null> => {
@@ -591,8 +592,10 @@ export default function Home() {
     // Must be logged in
     if (!session?.user) {
       // Save the exact selection and resume at the payment wall after login.
-      safeSetItem('modelImage', inputs.model);
-      safeSetItem('clothingImage', inputs.clothing);
+      if (!safeSetItem('modelImage', inputs.model) || !safeSetItem('clothingImage', inputs.clothing)) {
+        setError('Could not save the selected photos. Please select smaller photos and try again.');
+        return;
+      }
       safeSetItem('imageUploadTimestamp', Date.now().toString());
       safeSetItem('pendingPaywall', 'true');
       trackEvent('paywall_sign_in', 'conversion', 'generation');
@@ -621,8 +624,7 @@ export default function Home() {
       } else {
         // No credit: preserve the user's exact inputs and ask for the $1
         // one-time purchase before any external generation cost is incurred.
-        safeSetItem('modelImage', inputs.model);
-        safeSetItem('clothingImage', inputs.clothing);
+        if (!safeSetItem('modelImage', inputs.model) || !safeSetItem('clothingImage', inputs.clothing)) throw new Error('Could not save the selected photos. Please try again.');
         safeSetItem('imageUploadTimestamp', Date.now().toString());
         setShowPaywall(true);
         trackEvent('paywall_shown', 'conversion', 'generation');
@@ -651,8 +653,7 @@ export default function Home() {
       const inputs = await getInputStrings()
       if (!inputs) throw new Error(tryOnT.paywall.checkoutError)
 
-      safeSetItem('modelImage', inputs.model)
-      safeSetItem('clothingImage', inputs.clothing)
+      if (!safeSetItem('modelImage', inputs.model) || !safeSetItem('clothingImage', inputs.clothing)) throw new Error('Could not save the selected photos. Please try again.')
       safeSetItem('imageUploadTimestamp', Date.now().toString())
 
       const res = await fetch('/api/create-payment', {
@@ -685,8 +686,7 @@ export default function Home() {
       const inputs = await getInputStrings()
       if (!inputs) throw new Error(tryOnT.paywall.checkoutError)
 
-      safeSetItem('modelImage', inputs.model)
-      safeSetItem('clothingImage', inputs.clothing)
+      if (!safeSetItem('modelImage', inputs.model) || !safeSetItem('clothingImage', inputs.clothing)) throw new Error('Could not save the selected photos. Please try again.')
       safeSetItem('imageUploadTimestamp', Date.now().toString())
 
       const res = await fetch('/api/create-subscription', {
@@ -723,8 +723,7 @@ export default function Home() {
     try {
       const inputs = await getInputStrings();
       if (inputs) {
-        safeSetItem('modelImage', inputs.model);
-        safeSetItem('clothingImage', inputs.clothing);
+        if (!safeSetItem('modelImage', inputs.model) || !safeSetItem('clothingImage', inputs.clothing)) throw new Error('Could not save the selected photos. Please try again.');
         safeSetItem('imageUploadTimestamp', Date.now().toString());
       }
       const res = await fetch('/api/create-payment', {

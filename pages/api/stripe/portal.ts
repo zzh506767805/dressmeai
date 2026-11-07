@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getStripe } from "@/lib/stripe";
-import { prisma } from "@/lib/db";
+import { getCustomerPayment } from "@/lib/db";
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,10 +17,7 @@ export default async function handler(
     return res.status(401).json({ message: "Not authenticated" });
   }
 
-  const payment = await prisma.payment.findFirst({
-    where: { userId: session.user.id, stripeCustomerId: { not: null } },
-    orderBy: { createdAt: "desc" },
-  });
+  const payment = await getCustomerPayment(session.user.id);
 
   if (!payment?.stripeCustomerId) {
     return res.status(400).json({ message: "No billing information found" });
@@ -28,7 +25,7 @@ export default async function handler(
 
   try {
     const stripe = getStripe();
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://dressmeai.com";
+    const baseUrl = process.env.NEXTAUTH_URL || "https://dressmeai.com";
 
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: payment.stripeCustomerId,

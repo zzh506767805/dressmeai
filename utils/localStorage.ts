@@ -31,28 +31,19 @@ export const safeGetItem = (key: string): string | null => {
 }
 
 export const safeSetItem = (key: string, value: string): boolean => {
-  try {
-    if (typeof window === 'undefined') return false
-    localStorage.setItem(key, value)
-    // 同时保存到sessionStorage作为备份
-    sessionStorage.setItem(key, value)
-    return true
-  } catch (error) {
-    console.error(`Error setting localStorage item ${key}:`, error)
-    return false
-  }
+  if (typeof window === 'undefined') return false
+  let saved = false
+  try { localStorage.setItem(key, value); saved = true } catch { /* Try the redirect-safe backup independently. */ }
+  try { sessionStorage.setItem(key, value); saved = true } catch { /* Local storage may still have succeeded. */ }
+  return saved
 }
 
 export const safeRemoveItem = (key: string): boolean => {
-  try {
-    if (typeof window === 'undefined') return false
-    localStorage.removeItem(key)
-    sessionStorage.removeItem(key)
-    return true
-  } catch (error) {
-    console.error(`Error removing stored item ${key}:`, error)
-    return false
-  }
+  if (typeof window === 'undefined') return false
+  let removed = true
+  try { localStorage.removeItem(key) } catch { removed = false }
+  try { sessionStorage.removeItem(key) } catch { removed = false }
+  return removed
 }
 
 export const safeParseJSON = <T>(value: string | null, defaultValue: T): T => {

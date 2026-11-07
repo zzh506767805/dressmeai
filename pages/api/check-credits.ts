@@ -1,76 +1,18 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { prisma } from "@/lib/db";
-import { refundJobCredit } from "@/lib/credits";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { getUser, getDatabase, dbDate } from '@/lib/db';
 
-const STALE_JOB_MINUTES = 15;
-
-// Sweep jobs whose polling client died: anything stuck in PENDING/PROCESSING
-// beyond the cutoff is failed and its credit refunded. Sweeps across ALL users
-// (not just the caller) because a user who abandons a stuck job may never come
-// back to trigger their own sweep; any visitor's credit check cleans up for
-// everyone. refundJobCredit is idempotent, so concurrent sweeps are safe.
-async function sweepStaleJobs() {
-  const cutoff = new Date(Date.now() - STALE_JOB_MINUTES * 60 * 1000);
-  const staleJobs = await prisma.tryOnJob.findMany({
-    where: {
-      status: { in: ["PENDING", "PROCESSING"] },
-      createdAt: { lt: cutoff },
-    },
-    select: { id: true, userId: true },
-    take: 50,
-  });
-  for (const job of staleJobs) {
-    await prisma.tryOnJob.update({
-      where: { id: job.id },
-      data: { status: "FAILED", errorMessage: "Generation timed out, credit refunded" },
-    });
-    if (job.userId) {
-      await refundJobCredit(job.id, job.userId);
-    }
-  }
-}
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method !== "GET") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
-
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== 'GET') return res.status(405).end();
   const session = await getServerSession(req, res, authOptions);
-  if (!session?.user?.id) {
-    return res.status(401).json({ message: "Not authenticated" });
+  if (!session?.user?.id) return res.status(401).json({ message: 'Not authenticated' });
+  let user = await getUser(session.user.id);
+  if (!user) return res.status(404).json({ message: 'User not found' });
+  if (user.subscriptionStatus !== 'FREE' && user.subscriptionExpiry && user.subscriptionExpiry < new Date()) {
+    // A renewal arriving after the read must not be erased by an expired snapshot.
+    await getDatabase().prepare("UPDATE User SET subscriptionStatus='FREE',subscriptionExpiry=NULL,credits=0,updatedAt=? WHERE id=? AND subscriptionExpiry IS NOT NULL AND subscriptionExpiry<?").bind(dbDate(), user.id, dbDate()).run();
+    user = (await getUser(user.id))!;
   }
-
-  await sweepStaleJobs();
-
-  const user = await prisma.user.findUnique({
-    where: { id: session.user.id },
-    select: { credits: true, subscriptionStatus: true, subscriptionExpiry: true },
-  });
-
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
-  }
-
-  // Check if subscription is expired
-  const isExpired =
-    user.subscriptionExpiry && new Date(user.subscriptionExpiry) < new Date();
-
-  if (isExpired && user.subscriptionStatus !== "FREE") {
-    await prisma.user.update({
-      where: { id: session.user.id },
-      data: { subscriptionStatus: "FREE", subscriptionExpiry: null, credits: 0 },
-    });
-    return res.status(200).json({ credits: 0, subscriptionStatus: "FREE", hasCredits: false });
-  }
-
-  res.status(200).json({
-    credits: user.credits,
-    subscriptionStatus: user.subscriptionStatus,
-    hasCredits: user.credits > 0,
-  });
+  return res.status(200).json({ credits: user.credits, subscriptionStatus: user.subscriptionStatus, hasCredits: user.credits > 0 });
 }

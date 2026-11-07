@@ -1,3 +1,4 @@
+require('@opennextjs/cloudflare').initOpenNextCloudflareForDev()
 const i18nSettings = require('./i18n/settings.json')
 
 const locales = i18nSettings.locales.map(locale => locale.code)

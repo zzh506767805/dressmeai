@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getStripe } from "@/lib/stripe";
-import { prisma } from "@/lib/db";
+import { getUser, getJob } from "@/lib/db";
 import { SINGLE_TRYON_PRICE } from "@/lib/pricing";
 
 const ALLOWED_SOURCES = new Set(["generation_paywall", "pricing_single", "legacy_unlock"]);
@@ -22,15 +22,12 @@ export default async function handler(
     }
 
     const stripe = getStripe();
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://dressmeai.com";
+    const baseUrl = process.env.NEXTAUTH_URL || "https://dressmeai.com";
     const requestedSource = typeof req.body?.source === "string" ? req.body.source : "";
     const source = ALLOWED_SOURCES.has(requestedSource)
       ? requestedSource
       : "pricing_single";
-    const user = await prisma.user.findUnique({
-      where: { id: session.user.id },
-      select: { email: true },
-    });
+    const user = await getUser(session.user.id);
 
     // Optional: unlock an existing watermarked result instead of granting a
     // credit. Only honored when the job belongs to the caller and has a clean
@@ -38,11 +35,8 @@ export default async function handler(
     const jobId = typeof req.body?.jobId === "string" ? req.body.jobId : null;
     let unlockJobId: string | null = null;
     if (jobId) {
-      const job = await prisma.tryOnJob.findFirst({
-        where: { id: jobId, userId: session.user.id, status: "COMPLETED" },
-        select: { id: true, originalImageUrl: true },
-      });
-      if (job?.originalImageUrl) unlockJobId = job.id;
+      const job = await getJob(jobId, session.user.id);
+      if (job?.status === 'COMPLETED' && job.originalImageUrl) unlockJobId = job.id;
     }
 
     const checkoutSession = await stripe.checkout.sessions.create({

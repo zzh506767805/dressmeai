@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getStripe } from "@/lib/stripe";
 import { getPlanById, getUnitAmount, getStripeInterval, Cadence } from "@/lib/pricing";
-import { prisma } from "@/lib/db";
+import { getUser, getCustomerPayment } from "@/lib/db";
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,15 +32,12 @@ export default async function handler(
 
   try {
     const stripe = getStripe();
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://dressmeai.com";
+    const baseUrl = process.env.NEXTAUTH_URL || "https://dressmeai.com";
 
-    const user = await prisma.user.findUnique({ where: { id: session.user.id } });
+    const user = await getUser(session.user.id);
     let customerId: string | undefined;
 
-    const existingPayment = await prisma.payment.findFirst({
-      where: { userId: session.user.id, stripeCustomerId: { not: null } },
-      orderBy: { createdAt: "desc" },
-    });
+    const existingPayment = await getCustomerPayment(session.user.id);
 
     if (existingPayment?.stripeCustomerId) {
       customerId = existingPayment.stripeCustomerId;

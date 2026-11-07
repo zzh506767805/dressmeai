@@ -26,6 +26,6 @@ export const GARMENTS: Garment[] = [
 ];
 
 export function garmentAbsoluteUrl(garment: Garment): string {
-  const base = process.env.NEXT_PUBLIC_BASE_URL || 'https://dressmeai.com';
+  const base = typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_BASE_URL || 'https://dressmeai.com';
   return `${base}${garment.image}`;
 }

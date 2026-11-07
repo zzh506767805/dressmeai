@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
+import { prepareImage } from '@/utils/prepare-image'
 import { useLocale, useTranslations } from 'next-intl'
 
 interface ImageUploadProps {
@@ -16,79 +17,6 @@ function formatFileSize(bytes: number): string {
   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-}
-
-type TranslateFn = ReturnType<typeof useTranslations>
-
-// 图片压缩函数
-async function compressImage(file: File, maxSize: number, t: TranslateFn): Promise<File> {
-  // 如果文件已经很小，直接返回
-  if (file.size <= maxSize * 1024 * 1024 * 0.8) { // 80% of max size
-    return file;
-  }
-
-  return new Promise((resolve, reject) => {
-    const image = document.createElement('img');
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-
-    if (!ctx) {
-      reject(new Error(t('errors.canvas')))
-      return;
-    }
-
-    image.onload = () => {
-      // 计算压缩后的尺寸
-      let { width, height } = image;
-      const maxDimension = 1024; // 最大尺寸限制
-      
-      if (width > height && width > maxDimension) {
-        height = (height * maxDimension) / width;
-        width = maxDimension;
-      } else if (height > maxDimension) {
-        width = (width * maxDimension) / height;
-        height = maxDimension;
-      }
-
-      canvas.width = width;
-      canvas.height = height;
-      
-      // 绘制压缩后的图片
-      ctx.drawImage(image, 0, 0, width, height);
-      
-      // 动态调整质量以满足大小要求
-      let quality = 0.8;
-      const tryCompress = (currentQuality: number) => {
-        canvas.toBlob(
-          (blob) => {
-            if (blob) {
-              if (blob.size <= maxSize * 1024 * 1024 || currentQuality <= 0.1) {
-                resolve(new File([blob], file.name, { 
-                  type: 'image/jpeg',
-                  lastModified: Date.now()
-                }));
-              } else {
-                // 如果还是太大，继续降低质量
-                tryCompress(currentQuality - 0.1);
-              }
-            } else {
-              reject(new Error(t('errors.compress')))
-            }
-          },
-          'image/jpeg',
-          currentQuality
-        );
-      };
-      
-      tryCompress(quality);
-    };
-
-    image.onerror = () => {
-      reject(new Error(t('errors.load')))
-    }
-
-    image.src = URL.createObjectURL(file);
-  });
 }
 
 export default function ImageUpload({ 
@@ -155,22 +83,8 @@ export default function ImageUpload({
       // 3. 显示原始文件信息
       setFileInfo(t('info.originalSize', { size: formatFileSize(file.size) }));
 
-      let processedFile = file;
-
-      // 4. 如果文件超过限制，尝试压缩
-      if (file.size > maxSizeBytes) {
-        setFileInfo(t('info.compressing', { size: formatFileSize(file.size) }));
-        processedFile = await compressImage(file, maxSize, t);
-        
-        if (processedFile.size > maxSizeBytes) {
-          throw new Error(
-            t('errors.stillTooLarge', {
-              compressed: formatFileSize(processedFile.size),
-              max: formatFileSize(maxSizeBytes)
-            })
-          )
-        }
-      }
+      const normalized = await prepareImage(file);
+      const processedFile = new File([normalized], file.name.replace(/\.[^.]+$/, '') + '.jpg', { type: 'image/jpeg' });
 
       // 5. 创建预览
       const reader = new FileReader();
