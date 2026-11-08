@@ -167,3 +167,5 @@ npm run cf:preview
 - 需先登录 Cloudflare、确认 R2 已启用、创建独立预发布资源，迁移备份，再做云端 CPU、图片转换和回调验收后切换域名。
 - 旧 PostgreSQL 数据结构保存在 `prisma/azure-schema.prisma`；原 Azure 版本应从迁移前 Git 版本恢复，不要直接部署本分支到 Azure。
 - 数据库/图片备份脚本为 `scripts/export-azure-database.py` 和 `scripts/export-azure-images.mjs`；导入准备为 `scripts/prepare-d1-import.py`。备份含非公开数据，保存在忽略目录 `.migration/`。
+
+2026-11-08 真实验证发现原 aitryon 已不可用（原站 10 月 13 日已有同类失败）。迁移分支默认改用阿里云 wan2.7-image 异步编辑，直接提交私有图片数据，支持长期结果保存；公开价格约 0.20 元/张，站内收费保持原样。可用 TRYON_MODEL 显式配置兼容模型。

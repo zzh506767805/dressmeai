@@ -5,6 +5,17 @@ import { failJob } from './atomic';
 import { imageUrlForKey, readImageResponse, readImageBytes, signImageUrl } from './blob';
 import { isFreeUser } from './credits';
 
+export function outputImageUrl(output: any): string | null {
+  if (typeof output?.image_url === 'string') return output.image_url;
+  const result = output?.results?.find((item: any) => typeof item?.url === 'string');
+  if (result) return result.url;
+  for (const choice of output?.choices || []) {
+    const image = choice?.message?.content?.find((item: any) => typeof item?.image === 'string');
+    if (image) return image.image;
+  }
+  return null;
+}
+
 export async function dashscope(path: string, body?: unknown) {
   if (!process.env.ALIYUN_API_KEY) throw new Error('Missing AI service configuration');
   const response = await fetch(`https://dashscope.aliyuncs.com${path}`, {
@@ -32,13 +43,14 @@ export async function refreshJob(jobId: string, userId: string) {
     await failJob(getCloudflareEnv().DB, jobId, userId, message);
     return { status: 'FAILED', message };
   }
-  if (output.task_status !== 'SUCCEEDED' || !output.image_url) return { status: output.task_status };
+  const resultUrl = outputImageUrl(output);
+  if (output.task_status !== 'SUCCEEDED' || !resultUrl) return { status: output.task_status };
   const env = getCloudflareEnv();
   const free = await isFreeUser(userId);
   const key = `users/${userId}/${free ? 'result-orig' : 'result'}-${jobId}.jpg`;
   const originalUrl = imageUrlForKey(key);
   if (!(await env.IMAGES_BUCKET.head(key))) {
-    const original = await readImageResponse(output.image_url);
+    const original = await readImageResponse(resultUrl);
     await env.IMAGES_BUCKET.put(key, await readImageBytes(original), { httpMetadata: { contentType: original.headers.get('content-type') || 'image/jpeg' } });
   }
   let imageUrl = originalUrl;

@@ -24,7 +24,7 @@ test('built Worker: login session, image isolation, paid result, webhook replay 
     compatibilityDate: '2026-11-07', compatibilityFlags: ['nodejs_compat'],
     d1Databases: ['DB'], r2Buckets: ['IMAGES_BUCKET'],
     assets: { directory: path.resolve('.open-next/assets'), binding: 'ASSETS', run_worker_first: false, assetConfig: { html_handling: 'none', not_found_handling: 'none' } },
-    bindings: { NEXT_PUBLIC_BASE_URL: 'https://example.test', NEXTAUTH_URL: 'https://example.test', NEXTAUTH_SECRET: 'runtime-test-secret', GOOGLE_CLIENT_ID: 'test-client', GOOGLE_CLIENT_SECRET: 'test-google-secret', STRIPE_SECRET_KEY: 'sk_test_synthetic', STRIPE_WEBHOOK_SECRET: 'whsec_synthetic', ALIYUN_API_KEY: 'synthetic-ai-key', RECOVERY_SECRET: 'synthetic-recovery-secret', DEPLOYMENT_STAGE: 'preview' },
+    bindings: { NEXT_PUBLIC_BASE_URL: 'https://example.test', NEXTAUTH_URL: 'https://example.test', NEXTAUTH_SECRET: 'runtime-test-secret', GOOGLE_CLIENT_ID: 'test-client', GOOGLE_CLIENT_SECRET: 'test-google-secret', STRIPE_SECRET_KEY: 'sk_test_synthetic', STRIPE_WEBHOOK_SECRET: 'whsec_synthetic', ALIYUN_API_KEY: 'synthetic-ai-key', RECOVERY_SECRET: 'synthetic-recovery-secret', DEPLOYMENT_STAGE: 'preview', TRYON_MODEL: 'wan2.7-image' },
     outboundService: async request => {
       const url = new URL(request.url);
       if (url.hostname === 'accounts.google.com') return json({ issuer: 'https://accounts.google.com', authorization_endpoint: 'https://accounts.google.com/o/oauth2/v2/auth', token_endpoint: 'https://oauth2.googleapis.com/token', userinfo_endpoint: 'https://openidconnect.googleapis.com/v1/userinfo', jwks_uri: 'https://www.googleapis.com/oauth2/v3/certs', response_types_supported: ['code'], subject_types_supported: ['public'], id_token_signing_alg_values_supported: ['RS256'], token_endpoint_auth_methods_supported: ['client_secret_post', 'client_secret_basic'], code_challenge_methods_supported: ['S256'] });
@@ -40,10 +40,13 @@ test('built Worker: login session, image isolation, paid result, webhook replay 
         if (request.method === 'POST') {
           aiSubmissions++;
           const body: any = await request.json();
-          assert.match(body.input.person_image_url, /signature=/);
+          const inputs = body.input.messages[0].content.filter((item: any) => item.image);
+          assert.equal(inputs.length, 2);
+          assert.ok(inputs.every((item: any) => item.image.startsWith('data:image/jpeg;base64,')));
+          assert.equal(body.model, 'wan2.7-image');
           return json({ output: { task_id: `task_${aiSubmissions}` } });
         }
-        return json({ output: { task_status: 'SUCCEEDED', image_url: 'https://dashscope-result-hz.oss-cn-hangzhou.aliyuncs.com/test.jpg' } });
+        return json({ output: { task_status: 'SUCCEEDED', choices: [{ message: { content: [{ type: 'image', image: 'https://dashscope-result-hz.oss-cn-hangzhou.aliyuncs.com/test.jpg' }] } }] } });
       }
       if (url.hostname.startsWith('dashscope-result-')) return failDownload ? new Response('temporarily unavailable', { status: 503 }) : new Response(image, { headers: { 'Content-Type': 'image/jpeg' } });
       if (url.hostname === 'example.test') {

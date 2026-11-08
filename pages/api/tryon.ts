@@ -4,8 +4,8 @@ import { authOptions } from '@/lib/auth';
 import { getJob, claimJob, recordTask, ownsSavedModel } from '@/lib/db';
 import { getCloudflareEnv } from '@/lib/cloudflare';
 import { failJob } from '@/lib/atomic';
-import { dashscope } from '@/lib/jobs';
-import { signImageUrl, storedImageKey } from '@/lib/blob';
+import { submitTryon } from '@/lib/tryon-provider';
+import { storedImageKey } from '@/lib/blob';
 
 async function validateInput(raw: unknown, userId: string): Promise<string> {
   if (typeof raw !== 'string' || raw.length > 2048) throw new Error('Invalid input image');
@@ -36,10 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const clothingUrl = await validateInput(clothingImageUrl, session.user.id);
     if (!(await claimJob(jobId, session.user.id, modelUrl, clothingUrl))) return res.status(202).json({ status: 'PROCESSING' });
     claimed = true;
-    const response = await dashscope('/api/v1/services/aigc/image2image/image-synthesis', {
-      model: 'aitryon', input: { person_image_url: await signImageUrl(modelUrl), top_garment_url: await signImageUrl(clothingUrl) },
-      parameters: { resolution: -1, restore_face: true },
-    });
+    const response = await submitTryon(modelUrl, clothingUrl);
     const taskId = response.output?.task_id;
     if (typeof taskId !== 'string') throw new Error('AI did not return a task ID');
     await recordTask(jobId, taskId);

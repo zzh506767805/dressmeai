@@ -33,8 +33,10 @@ export default async function handler(
   try {
     const download = await readImageResponse(job.resultImageUrl);
     const buffer = await readImageBytes(download);
-    res.setHeader('Content-Type', 'image/jpeg');
-    res.setHeader('Content-Disposition', `attachment; filename="dressmeai-tryon-${jobId}.jpg"`);
+    const contentType = download.headers.get('Content-Type') || 'image/jpeg';
+    const extension = contentType.includes('png') ? 'png' : contentType.includes('webp') ? 'webp' : 'jpg';
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Content-Disposition', `attachment; filename="dressmeai-tryon-${jobId}.${extension}"`);
     res.setHeader('Content-Length', buffer.length);
     return res.status(200).send(buffer);
   } catch (error: any) {

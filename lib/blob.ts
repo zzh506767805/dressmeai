@@ -55,7 +55,7 @@ export async function readImageResponse(url: string): Promise<Response> {
     return new Response(object.body as unknown as ReadableStream, { headers: { 'Content-Type': object.httpMetadata?.contentType || 'image/jpeg' } });
   }
   const parsed = new URL(url);
-  const allowed = parsed.hostname === 'dressmeaiupload.blob.core.windows.net' || /^dashscope-result-[a-z0-9-]+\.oss-cn-[a-z0-9-]+\.aliyuncs\.com$/.test(parsed.hostname);
+  const allowed = parsed.hostname === 'dressmeaiupload.blob.core.windows.net' || (/^dashscope-result-[a-z0-9-]+\.oss-cn-[a-z0-9-]+\.aliyuncs\.com$/.test(parsed.hostname) || /^dashscope-[a-z0-9-]+\.oss-accelerate\.aliyuncs\.com$/.test(parsed.hostname));
   if (!allowed || !['http:', 'https:'].includes(parsed.protocol)) throw new Error('Untrusted image source');
   const response = await fetch(url, { signal: AbortSignal.timeout(30000), redirect: 'manual' });
   if (!response.ok || !response.body) throw new Error(`Image download failed: ${response.status}`);
