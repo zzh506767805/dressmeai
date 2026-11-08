@@ -142,3 +142,12 @@
 - 完整真实保护/恢复/解锁验收通过：恢复入口无需浏览器轮询即可保存保护预览，原图解锁前 403、解锁后 200；重复签名测试付款通知只处理一次，测试账户余额 0。解锁前后原图 SHA256 相同（5,321,757 字节），没有真实客户扣款或额外 AI 生成。
 - 临时图片验证 Worker 已删除，公开演示验证桶 r2.dev 已关闭；客户生产图片始终私有。
 - 构建、类型检查、集成测试通过。当前只剩域名所在账户授权及切换前新快照/正式导入和流量切换，Azure 正式站仍运行。真实验证比较图已保存 .migration/real-tryon-qa/real-validation-comparison.jpg。
+
+## SpaceShip 域名接入准备
+
+- 用户确认域名注册商为 SpaceShip；无需转移注册商或重新购买。现有权威 NS 为 cass/troy.cloudflare.com，解析当前在旧 Cloudflare 账户。
+- 已在当前账户发起 Connect domain 并选择 Free $0。未改变注册商或现有 NS；DNS 扫描出现 8 个旧 Cloudflare 代理 A/AAAA，不宜作为新源站，2 个 TXT 与公网快照一致。
+- 保存公网 DNS 快照 .migration/dns-before-spaceship.json，未查到主域 MX/CAA/DNSKEY/父区 DS；已确认现有 Azure 源站 agreeable-pebble-077a7dc10.3.azurestaticapps.net，需在 NS 切换前准备好新解析与回滚路径。
+
+- 当前账户已创建 pending 的 Free 域名 zone 7b105612e344c277d866ca0f35765872，新 NS 为 mario.ns.cloudflare.com / paloma.ns.cloudflare.com。旧生产 NS cass/troy 未改。
+- 扫描记录已备份为可导入 BIND 文件 .migration/scanned-dns-backup.bind；确认页中的 8 个旧代理 A/AAAA 还未清理，不能直接让注册商切换到这个未修正配置。浏览器操作因 Mac 锁屏停止，尚未修改或删除 DNS 记录；需用户解锁并登录 SpaceShip 后继续。
