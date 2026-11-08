@@ -4,9 +4,16 @@ import nextWorker from './.open-next/worker.js';
 
 const worker = {
   async fetch(request: Request, env: CloudflareEnv, ctx: unknown) {
+    if (env.MAINTENANCE_MODE === '1') {
+      return new Response('We are updating the service. Please try again shortly.', {
+        status: 503,
+        headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Retry-After': '60', 'Cache-Control': 'no-store' },
+      });
+    }
     const url = new URL(request.url);
-    if (url.hostname === 'www.dressmeai.com') {
-      url.hostname = 'dressmeai.com'; url.protocol = 'https:';
+    if (url.hostname === 'www.dressmeai.com' || url.protocol === 'http:') {
+      if (url.hostname === 'www.dressmeai.com') url.hostname = 'dressmeai.com';
+      url.protocol = 'https:';
       return Response.redirect(url.toString(), 308);
     }
     if (!url.pathname.startsWith('/api/')) {
@@ -33,7 +40,7 @@ const worker = {
     return nextWorker.fetch(request, env, ctx);
   },
   scheduled(_event: unknown, env: CloudflareEnv, ctx: { waitUntil(promise: Promise<unknown>): void }) {
-    if (!env.RECOVERY_SECRET) return;
+    if (env.MAINTENANCE_MODE === '1' || !env.RECOVERY_SECRET) return;
     ctx.waitUntil(nextWorker.fetch(new Request('https://internal/api/internal/recover', {
       method: 'POST', headers: { 'X-Recovery-Secret': env.RECOVERY_SECRET },
     }), env, ctx).then((response: Response) => {

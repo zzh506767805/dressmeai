@@ -115,6 +115,11 @@ test('built Worker: login session, image isolation, paid result, webhook replay 
       const response = await call('/api/webhook', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Stripe-Signature': `t=${t},v1=${sig}` }, body });
       assert.equal(response.status, 200, await response.clone().text());
     };
+    await sendEvent('checkout.session.completed', 'evt_other_project', { id: 'cs_other_project', mode: 'payment', payment_status: 'paid', metadata: { userId: 'alice', project: 'another-app' } });
+    await sendEvent('checkout.session.completed', 'evt_foreign_user', { id: 'cs_foreign_user', mode: 'payment', payment_status: 'paid', metadata: { userId: 'foreign-user' } });
+    await sendEvent('customer.subscription.updated', 'evt_foreign_sub', { id: 'sub_foreign', status: 'active', metadata: { userId: 'foreign-user' } });
+    assert.equal((await db.prepare("SELECT credits FROM User WHERE id='alice'").first<any>()).credits, 3);
+    assert.equal((await db.prepare("SELECT count(*) AS n FROM Payment WHERE stripeSessionId IN ('cs_other_project','cs_foreign_user')").first<any>()).n, 0);
     const bobReserved: any = await (await call('/api/use-credit', { method: 'POST', headers: { 'Idempotency-Key': 'runtime-free-preview-0001' } }, 'bob')).json();
     const bobUpload = await call('/api/upload', { method: 'POST', headers: { 'Content-Type': 'image/jpeg', 'X-Job-Id': bobReserved.jobId, 'X-Image-Kind': 'model' }, body: image }, 'bob');
     assert.equal(bobUpload.status, 200);

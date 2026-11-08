@@ -62,6 +62,7 @@ export default async function handler(
         ? `${baseUrl}/?payment=cancelled#ai-fashion`
         : `${baseUrl}/pricing?subscription=cancelled`,
       metadata: {
+        project: "dressmeai",
         userId: session.user.id,
         planId: plan.id,
         cadence,
@@ -69,6 +70,7 @@ export default async function handler(
       },
       subscription_data: {
         metadata: {
+          project: "dressmeai",
           userId: session.user.id,
           planId: plan.id,
           cadence,

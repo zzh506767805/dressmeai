@@ -1,17 +1,16 @@
 name: Azure Static Web Apps CI/CD
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      restore_azure:
+        description: "仅在恢复 Azure 原版本并同步数据后填写 RESTORE"
+        required: true
+        type: string
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: github.event_name == 'workflow_dispatch' && inputs.restore_azure == 'RESTORE'
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:

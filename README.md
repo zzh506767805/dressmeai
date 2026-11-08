@@ -143,10 +143,10 @@ dressmeai/
 - Digital wardrobe
 - Virtual fitting room 
 
-## Cloudflare 迁移分支
+## Cloudflare 正式部署
 
-当前分支已适配 Cloudflare Workers + 原生 D1 + 私有 R2，正式域名仍由 Azure 提供服务。公开页面/RSS/sitemap 构建后作为静态资源，API 使用 D1 原生查询；Prisma 仅用于类型和 schema 工具，不在请求时加载。
-本地验证不等于线上迁移完成，状态见 [执行记录](docs/cloudflare-migration-progress-2026-11-07.md)。
+当前分支已适配 Cloudflare Workers + 原生 D1 + 私有 R2，正式域名已在 2026-11-08 切换 Cloudflare。公开页面/RSS/sitemap 构建后作为静态资源，API 使用 D1 原生查询；Prisma 仅用于类型和 schema 工具，不在请求时加载。
+已完成正式域名真实 Google 登录、试衣/下载及支付验签，状态见 [执行记录](docs/cloudflare-migration-progress-2026-11-07.md)。
 
 本地命令：
 
@@ -162,9 +162,11 @@ npm run cf:preview
 
 - `.dev.vars` 配置本地服务密钥，仅使用测试数据；该文件已忽略，不提交。浏览器压缩图片后以 JPEG 二进制上传。
 - 服务端图片地址和 Stripe 返回地址使用运行时 `NEXTAUTH_URL`，前端 SEO 使用构建时 `NEXT_PUBLIC_BASE_URL`。
-- 绑定：`DB`（D1）、`IMAGES_BUCKET`（私有 R2）、`ASSETS`（静态文件）。当前配置指向预发布 D1；R2 桶需先开通并创建，正式发布前必须替换为正式资源绑定。
+- 绑定：`DB`（D1）、`IMAGES_BUCKET`（私有 R2）、`ASSETS`（静态文件）。默认配置指向预发布；正式发布必须明确使用 wrangler.production.jsonc。
 - 密钥：`GOOGLE_CLIENT_ID`、`GOOGLE_CLIENT_SECRET`、`NEXTAUTH_SECRET`、`STRIPE_SECRET_KEY`、`STRIPE_WEBHOOK_SECRET`、`ALIYUN_API_KEY`、`RECOVERY_SECRET`。
-- 需先登录 Cloudflare、确认 R2 已启用、创建独立预发布资源，迁移备份，再做云端 CPU、图片转换和回调验收后切换域名。
+- 正式发布：`npm run cf:build`，再执行 `npx wrangler deploy --config wrangler.production.jsonc`。秘密从本地私有文件上传，不写入仓库。
+- 当前使用免费 Workers/D1/Images，R2 基础费用 0；AI 按量收费。免费 Worker 冷启动可能超过 CPU 限额，需按实际错误评估。
+- Azure 暂留回滚会继续计费；回滚必须先同步新站增量，恢复原版本并解除旧库只读，不能直接改 DNS。
 - 旧 PostgreSQL 数据结构保存在 `prisma/azure-schema.prisma`；原 Azure 版本应从迁移前 Git 版本恢复，不要直接部署本分支到 Azure。
 - 数据库/图片备份脚本为 `scripts/export-azure-database.py` 和 `scripts/export-azure-images.mjs`；导入准备为 `scripts/prepare-d1-import.py`。备份含非公开数据，保存在忽略目录 `.migration/`。
 

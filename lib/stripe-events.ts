@@ -1,6 +1,6 @@
 import type Stripe from 'stripe';
 import type { D1Database } from '@cloudflare/workers-types';
-import { getPaymentBySubscription } from './db';
+import { getPaymentBySubscription, getUser } from './db';
 import { getCloudflareEnv } from './cloudflare';
 import { processCheckoutSession } from './payments';
 import { getPlanById, planIdToSubscriptionStatus, PRICING_PLANS } from './pricing';
@@ -18,7 +18,12 @@ export async function applyStripeEvent(db: D1Database, eventId: string, mutation
 }
 
 export async function processStripeEvent(event: Stripe.Event) {
+  const incoming: any = event.data.object;
+  if (incoming.metadata?.project && incoming.metadata.project !== 'dressmeai') return;
   if (event.type === 'checkout.session.completed') {
+    const belongs = incoming.metadata?.userId && await getUser(incoming.metadata.userId);
+    if (!belongs && incoming.metadata?.project !== 'dressmeai') return;
+    if (!belongs) throw new Error('DressMeAI checkout user is not linked yet');
     const result = await processCheckoutSession(event.data.object as Stripe.Checkout.Session);
     if (result.status === 'missing_metadata') throw new Error('Paid checkout metadata missing');
     return;
@@ -30,7 +35,10 @@ export async function processStripeEvent(event: Stripe.Event) {
   if (!subscriptionId) return;
   const payment = await getPaymentBySubscription(subscriptionId);
   const userId = payment?.userId || object.metadata?.userId;
-  if (!userId) throw new Error('Subscription user is not linked yet');
+  if (!userId || !await getUser(userId)) {
+    if (object.metadata?.project === 'dressmeai') throw new Error('Subscription user is not linked yet');
+    return;
+  }
   const now = new Date().toISOString().replace('Z', '+00:00');
   const mutations: EventMutation[] = [];
   if (event.type === 'customer.subscription.deleted') {

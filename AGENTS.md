@@ -59,15 +59,18 @@
 - Stripe metadata 的 `source` 用于区分 `generation_paywall`、`generation_paywall_subscription`、`pricing_single`、`legacy_unlock`。
 - 付费墙演示图位于 `public/images/paywall-demo/`，由 Azure GPT Image 2 生成；界面明确作为效果演示，不使用用户图片。
 
-## Cloudflare 迁移状态（2026-11-07）
-- 代码在 `codex/cloudflare-migration` 分支，已适配 Workers + OpenNext、D1 和私有 R2；Azure 正式站尚未切换。
+## Cloudflare 正式运行状态（2026-11-08）
+- 代码在 `codex/cloudflare-migration` 分支，已适配 Workers + OpenNext、D1 和私有 R2；正式域名已切换 Cloudflare，旧 Azure 数据库只读保留供回滚。
 - 当前分支 `/api/upload` 接收浏览器压缩后的 JPEG 二进制（最多 1MB），要求登录及 `X-Job-Id` / `X-Image-Kind`；不再接收 base64 JSON。
 - `lib/atomic.ts` 用 D1 原子批处理处理扣次数/创建任务、失败/退次数、付款/发放权益；业务读写及登录使用原生 D1，不加载 Prisma 运行时。不能改回 Prisma 交互式事务。
-- 图片通过 `/api/image?key=` 校验归属；AI 使用 1 小时签名，历史锁定原图不可通过普通图片权限获取。
+- 图片通过 `/api/image?key=` 校验归属；现代 AI 直接使用私有图片数据，旧兼容模型可用 1 小时签名；历史锁定原图不可通过普通图片权限获取。
 - `/api/internal/recover` 由每 5 分钟任务调用，必须携带 `RECOVERY_SECRET`；存储失败保持可重试，不能把临时 AI URL 当作最终保存结果。
 - 详细执行、验证、部署阻碍见 `docs/cloudflare-migration-progress-2026-11-07.md`；私有备份在 `.migration/`，不得提交。
-- Cloudflare 账户尚未授权，线上 CPU、免费图片转换及真实 Google/Stripe 回调尚待云端验收；不能把本地模拟成功描述为已完成上线。
+- 已完成真实 Google 登录、正式 Stripe 结账创建/验签、真实试衣/下载与图片权限验证；免费 Worker 冷启动仍有 CPU 超限风险。
 
 - 为免费算力预算，预渲染页面、页面数据、RSS 和 sitemap 直接作为静态资源响应；只有 API 使用服务端运行时。部署包构建后必须执行页面/RSS 物化脚本。
 
-- 2026-11-08：原 aitryon 在生产 10 月 13 日已报模型不存在。迁移分支默认使用 wan2.7-image 当前异步图像编辑接口，TRYON_MODEL 可显式选择兼容模型，私有输入直接以图片数据发送；支持新 choices 图片结果。正式站仍未切换，替代模型不自动在 Azure 生效。
+- 2026-11-08：原 aitryon 在生产 10 月 13 日已报模型不存在。正式 Cloudflare 默认使用 wan2.7-image 当前异步图像编辑接口，TRYON_MODEL 可显式选择兼容模型，私有输入直接以图片数据发送；支持新 choices 图片结果。
+
+- 正式配置在 wrangler.production.jsonc。MAINTENANCE_MODE=1 时临时返回 503 和 Retry-After；仅数据及支付回调验收完成后关闭。不要把预发布测试数据或密钥用到正式数据库。
+- 生产付款/订阅 metadata.project=dressmeai；共享 Stripe 账户只处理本项目用户/订阅，保留旧记录兼容。旧 Azure CI 仅手动 RESTORE，不能将当前分支部署 Azure。

@@ -1,0 +1,50 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dressmeai",
+  "main": "cloudflare-worker.ts",
+  "workers_dev": true,
+  "routes": [
+    { "pattern": "dressmeai.com/*", "zone_name": "dressmeai.com" },
+    { "pattern": "www.dressmeai.com/*", "zone_name": "dressmeai.com" }
+  ],
+  "compatibility_date": "2026-11-07",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "dressmeai-production",
+      "database_id": "8a764d44-310c-457c-abaa-aad6bb97d196",
+      "migrations_dir": "prisma/d1-migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "IMAGES_BUCKET",
+      "bucket_name": "dressmeai-images"
+    }
+  ],
+  "vars": {
+    "NEXT_PUBLIC_BASE_URL": "https://dressmeai.com",
+    "NEXTAUTH_URL": "https://dressmeai.com",
+    "DEPLOYMENT_STAGE": "production",
+    "TRYON_MODEL": "wan2.7-image",
+    "MAINTENANCE_MODE": "0"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "triggers": {
+    "crons": [
+      "*/5 * * * *"
+    ]
+  },
+  "account_id": "2fd40fedbf8b53361c2f2f8cfd49ba8d"
+}

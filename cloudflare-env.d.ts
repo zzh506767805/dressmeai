@@ -7,4 +7,5 @@ interface CloudflareEnv {
   NEXT_PUBLIC_BASE_URL: string;
   NEXTAUTH_URL: string;
   DEPLOYMENT_STAGE: string;
+  MAINTENANCE_MODE?: string;
 }

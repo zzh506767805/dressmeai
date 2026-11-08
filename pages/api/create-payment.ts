@@ -62,6 +62,7 @@ export default async function handler(
       mode: "payment",
       customer_email: user?.email || undefined,
       metadata: {
+        project: "dressmeai",
         userId: session.user.id,
         source: unlockJobId ? "legacy_unlock" : source,
         ...(unlockJobId ? { jobId: unlockJobId } : {}),
