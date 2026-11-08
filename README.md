@@ -166,7 +166,7 @@ npm run cf:preview
 - 密钥：`GOOGLE_CLIENT_ID`、`GOOGLE_CLIENT_SECRET`、`NEXTAUTH_SECRET`、`STRIPE_SECRET_KEY`、`STRIPE_WEBHOOK_SECRET`、`ALIYUN_API_KEY`、`RECOVERY_SECRET`。
 - 正式发布：`npm run cf:build`，再执行 `npx wrangler deploy --config wrangler.production.jsonc`。秘密从本地私有文件上传，不写入仓库。
 - 当前使用免费 Workers/D1/Images，R2 基础费用 0；AI 按量收费。免费 Worker 冷启动可能超过 CPU 限额，需按实际错误评估。
-- Azure 暂留回滚会继续计费；回滚必须先同步新站增量，恢复原版本并解除旧库只读，不能直接改 DNS。
+- 用户已授权删除旧 Azure 网站、数据库与图片存储。离线备份保留在 .migration/；如需恢复旧环境必须重新建立资源并同步新站增量，不能直接改 DNS。主域 Proxied A 192.0.2.1 仅作 Worker 路由占位，实际请求不访问源站。
 - 旧 PostgreSQL 数据结构保存在 `prisma/azure-schema.prisma`；原 Azure 版本应从迁移前 Git 版本恢复，不要直接部署本分支到 Azure。
 - 数据库/图片备份脚本为 `scripts/export-azure-database.py` 和 `scripts/export-azure-images.mjs`；导入准备为 `scripts/prepare-d1-import.py`。备份含非公开数据，保存在忽略目录 `.migration/`。
 

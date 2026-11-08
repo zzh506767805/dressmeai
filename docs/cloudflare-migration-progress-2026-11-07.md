@@ -1,6 +1,6 @@
 # Cloudflare 迁移执行记录
 
-状态：2026-11-08 已切换 Cloudflare 正式站并完成验收。代码在 codex/cloudflare-migration 分支。旧 Azure 资源暂留供回滚，旧数据库已设为只读。
+状态：2026-11-08 已切换 Cloudflare 正式站并完成验收。代码在 codex/cloudflare-migration 分支。用户授权的 DressMeAI 旧 Azure 三项资源已全部删除；离线备份保留在 .migration/。
 
 ## 第一阶段
 
@@ -191,3 +191,13 @@
 - Azure 资源暂留供 3–7 天人工观察/回滚，未删除，仍可能计费。本轮未安排自动删除或监控。回滚必须先同步 D1/R2 上线后增量，再恢复迁移前代码与旧数据库写权限，不能仅改域名。
 - GitHub 旧 Azure 工作流已实际禁用（disabled_manually），不仅修改本地配置；防止后续提交触发旧环境部署。QA 测试账号、会话、任务、模拟付款及 3 张测试图片均已清理，验收资料私存 .migration/production-validation。
 - 清理后复核：999 用户、1005 账户、965 会话（真实 Google 登录新增 1 条）、15 付款、178 任务、142 人物照，总剩余次数 886。最后的 HTTPS 包装变更再次通过已构建 Worker 集成测试。正式版本 1b7034b1-80f8-463e-af3f-4b49fdb4b046；发布分支保存在 Git，未合并 main。
+
+## 用户授权关闭并删除旧 Azure（2026-11-08）
+
+- 用户先授权停旧库/降旧站，网站已降为 Free，数据库停止中；随后明确要求“删吧”。已按精确名称发起删除 dressmeai（出海去）、dressmeai-db 和 dressmeaiupload（dressmeai-rg），不删除资源组或其他项目。
+- 删除前重新核对 537 张本地图片 SHA256 全部一致，锁定快照 999 用户及完整 SQL 恢复备份存在。
+- 发现 4 条旧任务人物图片地址在原 Azure 已返回 404，与迁移导入报告的 4 条缺失一致；不是本轮删除造成。其余历史及人物照地址已切换 R2。
+- 旧图片存储删除已完成，旧数据库/网站删除仍在执行。Cloudflare 正式站继续返回 200。
+- 旧网站删除已完成；主域 DNS 从 Azure CNAME 改为 Proxied A 192.0.2.1（Worker 无源站占位），www 保留指向主域，业务由现有完整 Worker 路由响应。主域与登录提供方接口仍 200，www 跳转 308；不再保留 Azure 域名引用。数据库删除进行中。
+- 删除网站和存储后，真实 Google 会话账户页正常显示原 201 次。额外导出当前正式 D1 至 .migration/production-validation/post-shutdown-cloudflare.sql，备份和临时导出日志权限设为 600；离线原 PostgreSQL 与图片备份继续保留。旧 PostgreSQL 当前 Dropping，等待删除完成后才报告全部关闭。
+- 最终三个删除命令均成功，资源列表复核 dressmeai-rg 为空，出海去仅保留其他项目的身份/邮件资源。DressMeAI 旧网站、数据库、图片存储已全部不存在；未删除资源组、账户或其他项目。最后检查主站 200、登录提供方接口 200、www 308。Azure 在线回滚资源已移除，恢复只能使用离线备份重建并同步新站增量。

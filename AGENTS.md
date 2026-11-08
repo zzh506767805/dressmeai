@@ -60,7 +60,7 @@
 - 付费墙演示图位于 `public/images/paywall-demo/`，由 Azure GPT Image 2 生成；界面明确作为效果演示，不使用用户图片。
 
 ## Cloudflare 正式运行状态（2026-11-08）
-- 代码在 `codex/cloudflare-migration` 分支，已适配 Workers + OpenNext、D1 和私有 R2；正式域名已切换 Cloudflare，旧 Azure 数据库只读保留供回滚。
+- 代码在 `codex/cloudflare-migration` 分支，已适配 Workers + OpenNext、D1 和私有 R2；正式域名已切换 Cloudflare，用户已授权删除旧 Azure 三项资源。离线数据库/图片备份在 .migration/，恢复需重新建资源及同步增量。
 - 当前分支 `/api/upload` 接收浏览器压缩后的 JPEG 二进制（最多 1MB），要求登录及 `X-Job-Id` / `X-Image-Kind`；不再接收 base64 JSON。
 - `lib/atomic.ts` 用 D1 原子批处理处理扣次数/创建任务、失败/退次数、付款/发放权益；业务读写及登录使用原生 D1，不加载 Prisma 运行时。不能改回 Prisma 交互式事务。
 - 图片通过 `/api/image?key=` 校验归属；现代 AI 直接使用私有图片数据，旧兼容模型可用 1 小时签名；历史锁定原图不可通过普通图片权限获取。
